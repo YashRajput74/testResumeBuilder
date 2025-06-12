@@ -73,66 +73,131 @@
 
 
 
+// export default function ResumeRenderer({ template, data }) {
+
+//     const groupedSections = {};
+
+//     template.sections.forEach((section) => {
+//         if (!groupedSections[section.style.order]) {
+//             groupedSections[section.style.order] = [];
+//         }
+//         groupedSections[section.style.order].push(section);
+//     });
+
+//     const renderContent = (sectionName, sectionData) => {
+//         if (Array.isArray(sectionData)) {
+//             return sectionData.map((item, i) => (
+//                 <div key={i} style={{ marginBottom: "1rem" }}>
+//                     {Object.entries(item).map(([field, value]) => (
+//                         <p key={field}><strong>{field}:</strong> {value}</p>
+//                     ))}
+//                 </div>
+//             ));
+//         } 
+//         else {
+//             return <p>{sectionData}</p>;
+//         }
+//     };
+
+//     return (
+//         <div
+//             style={{
+//                 fontFamily: template.fontFamily,
+//                 display: "flex",
+//                 flexDirection: "column",
+//                 gap: "1rem",
+//                 padding: "1rem",
+//                 maxWidth: "900px",
+//                 margin: "auto"
+//             }}
+//         >
+//             {Object.entries(groupedSections).map(([order, sections]) => (
+//                 <div
+//                     key={order}
+//                     style={{
+//                         display: "flex",
+//                         gap: "1rem",
+//                         width: "100%",
+//                     }}
+//                 >
+//                     {sections.map((section) => (
+//                         <div
+//                             key={section.name}
+//                             style={{
+//                                 ...section.style,
+//                                 flex: section.style.width === "100%" ? "1 1 100%" : `1 1 ${section.style.width}`,
+//                             }}
+//                         >
+//                             <h3 style={template.headingStyle}>
+//                                 {section.name.charAt(0).toUpperCase() + section.name.slice(1)}
+//                             </h3>
+//                             {renderContent(section.name, data[section.name])}
+//                         </div>
+//                     ))}
+//                 </div>
+//             ))}
+//         </div>
+//     );
+// }
+
+
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import {WorkExperience} from "./components/WorkExperience";
+import Education from "./components/Education";
+import PersonalInfo from "./components/PersonalInfo";
+import "./ResumeRenderer.css";
+
+const sectionComponents = {
+    personalInfo: PersonalInfo,
+    education: Education,
+    WorkExperience: WorkExperience,
+    skills: Skills,
+    projects: Projects,
+};
+
 export default function ResumeRenderer({ template, data }) {
+    const { grid, fontFamily, fontSize, colorScheme } = template.layout;
 
-    const groupedSections = {};
+    const renderSection = (sectionName) => {
+        const SectionComponent = sectionComponents[sectionName];
+        return SectionComponent ? <SectionComponent data={data} /> : null;
+    };
 
-    template.sections.forEach((section) => {
-        if (!groupedSections[section.style.order]) {
-            groupedSections[section.style.order] = [];
+    const numRows = grid.templateRows.split(" ").length;
+    const numCols = grid.templateColumns.split(" ").length;
+
+    const gridMatrix = Array.from({ length: numRows }, () => Array(numCols).fill("."));
+
+    grid.areas.forEach((area) => {
+        for (let row = area.rowStart - 1; row < area.rowEnd - 1; row++) {
+            for (let col = area.colStart - 1; col < area.colEnd - 1; col++) {
+                gridMatrix[row][col] = area.name;
+            }
         }
-        groupedSections[section.style.order].push(section);
     });
 
-    const renderContent = (sectionName, sectionData) => {
-        if (Array.isArray(sectionData)) {
-            return sectionData.map((item, i) => (
-                <div key={i} style={{ marginBottom: "1rem" }}>
-                    {Object.entries(item).map(([field, value]) => (
-                        <p key={field}><strong>{field}:</strong> {value}</p>
-                    ))}
-                </div>
-            ));
-        } 
-        else {
-            return <p>{sectionData}</p>;
-        }
-    };
+    const gridTemplateAreas = gridMatrix.map(row => `"${row.join(" ")}"`).join(" ");
 
     return (
         <div
+            id="resume-view"
             style={{
-                fontFamily: template.fontFamily,
-                display: "flex",
-                flexDirection: "column",
+                fontFamily,
+                fontSize,
+                background: colorScheme.background,
+                color: colorScheme.text,
+                display: "grid",
+                gridTemplateColumns: grid.templateColumns,
+                gridTemplateRows: grid.templateRows,
                 gap: "1rem",
-                padding: "1rem",
-                maxWidth: "900px",
-                margin: "auto"
+                gridTemplateAreas,
             }}
         >
-            {Object.entries(groupedSections).map(([order, sections]) => (
-                <div
-                    key={order}
-                    style={{
-                        display: "flex",
-                        gap: "1rem",
-                        width: "100%",
-                    }}
-                >
-                    {sections.map((section) => (
-                        <div
-                            key={section.name}
-                            style={{
-                                ...section.style,
-                                flex: section.style.width === "100%" ? "1 1 100%" : `1 1 ${section.style.width}`,
-                            }}
-                        >
-                            <h3 style={template.headingStyle}>
-                                {section.name.charAt(0).toUpperCase() + section.name.slice(1)}
-                            </h3>
-                            {renderContent(section.name, data[section.name])}
-                        </div>
+            {grid.areas.map((area, index) => (
+                <div key={index} style={{ gridArea: area.name }}>
+                    {area.sections.map((section) => (
+                        <div key={section}>{renderSection(section)}</div>
                     ))}
                 </div>
             ))}

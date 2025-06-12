@@ -51,20 +51,17 @@
 
 
 
-import {BrowserRouter as Router, Routes, Route,Link} from 'react-router-dom'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './Pages/Home'
- import ResumePage from './Pages/ResumePages'
+import ResumePage from './Pages/ResumePages'
 
+export default function App() {
 
-
-export default function App(){
-
-    return(
+    return (
         <Router>
             <Routes>
-                <Route path='/' element={<Home/>}/>
-                <Route path='/resume/:templateId' element={<ResumePage/>}/>
+                <Route path='/' element={<Home />} />
+                <Route path='/resume/:templateId' element={<ResumePage />} />
             </Routes>
         </Router>
     )

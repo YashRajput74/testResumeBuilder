@@ -6,12 +6,7 @@
     padding: 1rem;
 } 
 
-/* .templateGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* smaller */
-  gap: 0.75rem; /* smaller gap */
-  padding: 1rem;
-} */
+
 
 .templateCard {
     transition: transform 0.2s;
@@ -22,6 +17,9 @@
 .templateCard:hover {
     transform: scale(1.03);
 }
+
+
+
 
 
 /* .templateCard{

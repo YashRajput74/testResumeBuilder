@@ -1,0 +1,25 @@
+#resume-view {
+    width: 210mm;
+    height: 297mm;
+    margin: auto;
+    padding: 20mm;
+    box-sizing: border-box;
+    display: grid;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.personalInfo{
+    font-size: 1rem;
+}
+.skills{
+    font-size: 1rem;
+}
+.education{
+    font-size: 1rem;
+}
+.workExperience{
+    font-size: 1rem;
+}
+.projects{
+    font-size: 1rem;
+}

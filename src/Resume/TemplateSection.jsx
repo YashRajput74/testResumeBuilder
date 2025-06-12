@@ -27,7 +27,7 @@
 // }
 
 
-import MiniTemplatePreview from './MiniTemplatePreview'; 
+// import MiniTemplatePreview from './MiniTemplatePreview'; 
 import mockUserData from '../data1/MockData';
 
 
@@ -50,7 +50,7 @@ export default function TemplateSection({ templates, onSelectTemplate }) {
                              height: "auto",
                         }}
                     >
-                      <MiniTemplatePreview template={template} data={mockUserData} />
+                      {/* <MiniTemplatePreview template={template} data={mockUserData} /> */}
 
                         <p style={{ textAlign: "center", marginTop: "0.5rem" }}>{template.name}</p>
                     </div>
