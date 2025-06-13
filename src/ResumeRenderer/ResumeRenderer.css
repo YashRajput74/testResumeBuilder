@@ -1,6 +1,6 @@
 #resume-view {
     width: 210mm;
-    height: 297mm;
+    height: 150mm;
     margin: auto;
     padding: 20mm;
     box-sizing: border-box;
@@ -10,6 +10,7 @@
 }
 .personalInfo{
     font-size: 1rem;
+    background-color: grey;
 }
 .skills{
     font-size: 1rem;

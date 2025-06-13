@@ -14,4 +14,3 @@ export default function WorkExperience({ data }) {
         </div>
     );
 }
-

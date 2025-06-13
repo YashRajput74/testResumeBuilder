@@ -8,3 +8,5 @@ export default function PersonalInfo({ data }) {
         </div>
     );
 }
+
+

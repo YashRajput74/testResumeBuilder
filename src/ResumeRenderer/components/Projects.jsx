@@ -12,3 +12,6 @@ export default function Projects({ data }) {
         </div>
     );
 }
+
+
+
