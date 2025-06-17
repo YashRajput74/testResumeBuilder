@@ -1,16 +1,31 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { templates } from "./data/templates";
-import mockUserData from "./data/mockUserData";
 import ResumeRenderer from "./ResumeRenderer/ResumeRenderer";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
+import mockUserData from "./data/mockUserData";
 import jsPDF from "jspdf";
 
 export default function ResumePage() {
     const { templateId } = useParams();
-    const template = templates[templateId];
     const navigate = useNavigate();
     const resumeRef = useRef();
+
+
+    const[templates, setTemplates] = useState([]);
+    const[userData, setUserData] = useState(null);
+
+    useEffect(()=>{
+        fetch('/api/templates')
+        .then((res) => res.json())
+        .then((data) => setTemplates(data.templates));
+
+        fetch('/api/user-data')
+        .then((res) => res.json())
+        .then((data) => setUserData(data.data))
+    },[])
+
+
+    const template = templates[templateId];
 
     if (!template) return <p>Template not found</p>;
 
@@ -61,7 +76,7 @@ export default function ResumePage() {
                     cursor: "pointer",
                 }}
             >
-                 Download PDF
+                Download PDF
             </button>
         </div>
     );

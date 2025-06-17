@@ -1,4 +1,4 @@
-#resume-view {
+/* #resume-view {
     width: 210mm;
     height: 150mm;
     margin: auto;
@@ -10,7 +10,7 @@
 }
 .personalInfo{
     font-size: 1rem;
-    background-color: grey;
+    background-color: rgb(193, 190, 190);
 }
 .skills{
     font-size: 1rem;
@@ -23,4 +23,361 @@
 }
 .projects{
     font-size: 1rem;
+} */
+/* === Root Resume Container === */
+/* #resume-view {
+    width: 210mm;
+    height: 20mm; 
+    margin: auto;
+    padding: 15mm;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    grid-template-areas:
+        "header header"
+        "leftColumn rightColumn";
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.header {
+    grid-area: header;
+    padding: 16px;
+    background-color: #3498DB;
+    color: black;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.leftColumn {
+    grid-area: leftColumn;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rightColumn {
+    grid-area: rightColumn;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.section {
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #3498DB;
+    border-radius: 4px;
+}
+
+.personalInfo {
+    font-size: 1rem;
+}
+
+.skills, .education, .workExperience, .projects {
+    font-size: 1rem;
+}
+.skills, .workExperience, ul {
+    list-style: none;
+}
+.skills ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+.skills li{
+    border: 1px solid grey;
+    padding: 0.7rem;
+
+}
+
+.section h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 4px;
+}
+
+
+.section ul {
+  list-style-position: outside;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.section li {
+ margin-bottom: 4px;
+  line-height: 1.5;
+  text-align: justify; 
+}
+
+ */
+
+/* ResumeRenderer.css */
+
+/* .resume-view {
+    padding: 2rem;
+    border-radius: 12px;
+} */
+/* 
+Template-specific
+.Modern-Blue {
+    background-color: #ffffff;
+    color: #333333;
+    font-family: 'Lato', sans-serif;
+} */
+
+/* Layout areas */
+/* .header {
+    grid-area: header;
+    background-color: #3498db;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 8px;
+} */
+
+/* .leftColumn {
+    grid-area: leftColumn;
+    background-color: #f4faff;
+    padding: 1rem;
+    border-radius: 8px;
+} */
+
+/* .rightColumn {
+    grid-area: rightColumn;
+    background-color: #eef7fb;
+    padding: 1rem;
+    border-radius: 8px;
+} */
+
+/* Section wrapper */
+/* .section {
+    margin-bottom: 1rem;
+} */
+
+/* Section-specific styling */
+/* .personalInfo {
+    font-weight: bold;
+    font-size: 1.2em;
+} */
+
+/* .education,
+.workExperience,
+.skills,
+.projects {
+  border-left: 4px solid #3498db;
+  padding-left: 10px;
+} */
+
+.Classic-Gray,
+h2 {
+    color: #1f4e79;
+
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+
+}
+
+/* ul li{
+    list-style: none;
+} */
+.skills ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.skills li {
+    border: 1px solid;
+    padding: .5rem;
+    margin: .4rem;
+    background-color: #1f4e79;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.education-section {
+    margin-top: 30px;
+}
+
+
+
+.education-item {
+    /* margin-bottom: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.degree {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.school {
+    font-weight: normal;
+    color: #555;
+}
+
+.location-date {
+    font-size: 14px;
+    color: #777;
+    margin: 4px 0;
+}
+
+.work-experience-section {
+    margin-top: 30px;
+}
+
+.experience-item {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.role {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.description-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 1.5rem;
+}
+/* ..........project */
+.projects-section {
+    margin-top: 30px;
+}
+
+.project-item {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.project-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.project-links {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.link-button {
+    text-decoration: none;
+    color: white;
+    background-color: #1f4e79;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: background-color 0.2s ease;
+}
+
+.project-description {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.tech-stack {
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+}
+
+
+/* /// personal infosec */
+.personal-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.left-info {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.name {
+    font-size: 28px;
+    font-weight: bold;
+    color:  #1f4e79 ;
+    margin-bottom: 5px;
+}
+
+.role1 {
+    font-size: 16px;
+    color: #22222299;
+    margin-bottom: 8px;
+}
+
+.summary {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+    text-align: left;
+    margin-top: 0;
+}
+
+.right-info {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.right-info p {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+    text-align: right;
+}
+
+.right-info .text {
+    flex: 1;
+}
+
+.icon {
+    color:#1f4e79;
+    order: 2;
+}
+
+

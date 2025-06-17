@@ -38,8 +38,23 @@ export default function ResumeRenderer({ template, data }) {
     const gridTemplateAreas = gridMatrix.map(row => `"${row.join(" ")}"`).join(" ");
 
     return (
+        // <div
+        //     id="resume-view"
+        //     style={{
+        //         fontFamily,
+        //         fontSize,
+        //         background: colorScheme.background,
+        //         color: colorScheme.text,
+        //         display: "grid",
+        //         gridTemplateColumns: grid.templateColumns,
+        //         gridTemplateRows: grid.templateRows,
+        //         gap: "1rem",
+        //         gridTemplateAreas,
+        //     }}
+        // >
         <div
             id="resume-view"
+            className={`resume-view ${template.name.replace(/\s+/g, "-")}`}
             style={{
                 fontFamily,
                 fontSize,
@@ -52,10 +67,20 @@ export default function ResumeRenderer({ template, data }) {
                 gridTemplateAreas,
             }}
         >
-            {grid.areas.map((area, index) => (
+
+            {/* {grid.areas.map((area, index) => (
                 <div key={index} style={{ gridArea: area.name }}>
                     {area.sections.map((section) => (
                         <div key={section}>{renderSection(section)}</div>
+                    ))}
+                </div>
+            ))} */}
+            {grid.areas.map((area, index) => (
+                <div key={index} className={area.name}>
+                    {area.sections.map((section) => (
+                        <div key={section} className={`${section} section`}>
+                            {renderSection(section)}
+                        </div>
                     ))}
                 </div>
             ))}
