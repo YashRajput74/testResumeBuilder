@@ -138,95 +138,6 @@ html {
   margin: 0 auto; 
 }
 
- /* #templates h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #333;
-}
-
-.templateGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-    justify-items: center;
-}
-
-.templateCard {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 1rem;
-    width: 100%;
-    max-width: 300px;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-}
-
-.templateCard:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    transform: translateY(-4px);
-}
-
-.templatePreview {
-    width: 100%;
-    height: 180px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f1f1f1;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    overflow: hidden;
-}
-
-.templatePreview div {
-    height: 12px;
-    margin: 2px 0;
-    border-radius: 2px;
-}
-
-.templateCard p {
-    font-weight: 600;
-    color: #444;
-    font-size: 1rem;
-}
-
-
-.templateSection {
-  padding: 6rem 2rem;
-  text-align: center;
-  color: black;
-}
-
-.templateIntro {
-  margin-bottom: 3rem;
-}
-
-.templateIntro .uprpara {
-  border: 1px solid white;
-  display: inline-block;
-  padding: 0.7rem 1.2rem;
-  font-size: 17px;
-  font-weight: 600;
-  border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  margin-bottom: 1rem;
-}
-
-.templateIntro h2 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.templateIntro p {
-  font-size: 1.1rem;
-  color: #444;
-  margin-bottom: 2rem;
-} */
 
 .ctaButtons {
   display: flex;
@@ -267,90 +178,32 @@ html {
   transform: translateY(-2px);
 }
 
-
-
 .templateSection {
-  padding: 4rem 2rem;
-  background: transparent;
+  padding: 5rem 2rem 4rem;
   text-align: center;
+  background: transparent;
   color: black;
 }
 
-.templateIntro {
-  margin-bottom: 3rem;
-}
 
-.templateIntro .uprpara {
-  border: 1px solid white;
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  font-size: 17px;
-  font-weight: 600;
-  border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  margin-bottom: 1rem;
-}
-
-.templateIntro h2 {
-  font-size: 2.5rem;
+.templateSection h2 {
+  font-size: 2.6rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  margin-right: 15rem;  
+  font-family: 'Gill Sans';
 }
 
 .templateIntro p {
   font-size: 1.1rem;
   color: #444;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
-.templateGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  justify-items: center;
-}
-
-.templateCard {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid #ddd;
-  border-radius: 16px;
-  padding: 1.5rem;
-  width: 100%;
-  max-width: 300px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.templateCard:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  transform: translateY(-4px);
-}
-
-.templatePreview {
-  width: 100%;
-  height: 180px;
-  border-radius: 12px;
-  background-color: #f7f7f7;
-  border: 1px solid #ccc;
-  margin-bottom: 1rem;
-  overflow: hidden;
+.templateScroll {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-}
-
-.templatePreview div {
-  height: 12px;
-  border-radius: 4px;
-  background-color: #ccc;
-  margin: 6px auto;
-}
-
-.templateCard p {
-  font-weight: 600;
-  font-size: 1rem;
-  color: #333;
+  gap: 2rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
 }

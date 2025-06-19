@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Routes, Route,Link} from 'react-router-dom'
 import "./App.css"
-import HomePage from "./HomePage"
-import ResumePage from './ResumePage'
+import HomePage from "./Pages/HomePage"
+import ResumePage from './Pages/ResumePage'
 
 export default function App() {
     

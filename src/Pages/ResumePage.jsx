@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
-import ResumeRenderer from "./ResumeRenderer/ResumeRenderer";
+import ResumeRenderer from "../ResumeRenderer/ResumeRenderer";
 import { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
-import mockUserData from "./data/mockUserData";
+import mockUserData from "../data/mockUserData";
 import jsPDF from "jspdf";
 
 export default function ResumePage() {
