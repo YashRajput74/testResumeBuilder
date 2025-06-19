@@ -1,0 +1,356 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right, #d3bae7, #fdda7c);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+.headerr {
+  padding: 2rem 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  gap: 19rem;
+   padding: 1rem 2rem;
+  margin: 1rem auto;
+}
+
+.navbar-inner {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: black;
+  margin-right: 1rem;
+}
+
+.navBar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+   background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+   border: 1px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.navBar a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.navBar a.active {
+  background-color: white;
+  font-weight: bold;
+}
+
+.navBar .signup {
+  background-color: black;
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  font-weight: bold;
+}
+
+
+.hero {
+  padding: 6rem 2rem;
+  text-align: center;
+  color: black;
+}
+
+.heroContent h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.heroContent p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #444;
+}
+
+
+.heroContent button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.heroContent button:first-child {
+  background-color: #fddb60;
+  color: black;
+  font-weight: 600;
+}
+
+.heroContent button:last-child {
+  background-color: white;
+  color: black;
+  border: 1px solid #ddd;
+}
+
+.uprpara {
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.7rem;
+  font-size: 17px;
+    font-weight: 600;
+  width: 35%; 
+  border-radius: 25px;
+  margin: 0 auto; 
+}
+
+ /* #templates h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.templateGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+
+.templateCard {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1rem;
+    width: 100%;
+    max-width: 300px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.templateCard:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.templatePreview {
+    width: 100%;
+    height: 180px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f1f1f1;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+.templatePreview div {
+    height: 12px;
+    margin: 2px 0;
+    border-radius: 2px;
+}
+
+.templateCard p {
+    font-weight: 600;
+    color: #444;
+    font-size: 1rem;
+}
+
+
+.templateSection {
+  padding: 6rem 2rem;
+  text-align: center;
+  color: black;
+}
+
+.templateIntro {
+  margin-bottom: 3rem;
+}
+
+.templateIntro .uprpara {
+  border: 1px solid white;
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  margin-bottom: 1rem;
+}
+
+.templateIntro h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.templateIntro p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 2rem;
+} */
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  background-color: #fddb60;
+  color: black;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnPrimary:hover {
+  background-color: #ffea95;
+  transform: translateY(-2px);
+}
+
+.btnSecondary {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnSecondary:hover {
+  background-color: #f1f1f1;
+  transform: translateY(-2px);
+}
+
+
+
+.templateSection {
+  padding: 4rem 2rem;
+  background: transparent;
+  text-align: center;
+  color: black;
+}
+
+.templateIntro {
+  margin-bottom: 3rem;
+}
+
+.templateIntro .uprpara {
+  border: 1px solid white;
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  margin-bottom: 1rem;
+}
+
+.templateIntro h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.templateIntro p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+.templateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.templateCard {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 300px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.templateCard:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+}
+
+.templatePreview {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.templatePreview div {
+  height: 12px;
+  border-radius: 4px;
+  background-color: #ccc;
+  margin: 6px auto;
+}
+
+.templateCard p {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}

@@ -1,5 +1,6 @@
-import Header from "./Components/Header";
+import Header from "./Components/Header/Header";
 import Hero from "./Components/Hero";
+import Footer from "./Components/Footer/Footer";
 import TemplateSection from "./Components/TemplateSection";
 import { templates } from "./data/templates";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +23,7 @@ export default function HomePage() {
                 templates={templates}
                 onSelectTemplate={handleSelectTemplate}
             />
+            <Footer/>
         </>
     );
 }
