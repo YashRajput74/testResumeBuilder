@@ -19,7 +19,6 @@
 // }
 
 
-import './Header/Header.css';
 
 // export default function HeroSectionWithTemplates({ templates, onSelectTemplate }) {
 //   return (
@@ -52,17 +51,58 @@ import './Header/Header.css';
 //   );
 // }
 
-import React from 'react';
 // import './HeroSectionWithTemplates.css';
 
-export default function TemplateSection({ templates, onSelectTemplate, onSeeAll }) {
+// export default function TemplateSection({ templates, onSelectTemplate, onSeeAll }) {
+//      const navigate = useNavigate();
+//   return (
+//     <section id="templates" className="templateSection">
+      
+// <h2 className='heading'>Choose a Resume Template</h2>
+//       <div className="templateScroll">
+//         {templates.map((template, index) => (
+//           <div key={index} className="templateCard" onClick={() => onSelectTemplate(template)}>
+//             <div className="templatePreview">
+//               <div className="line long"></div>
+//               <div className="line medium"></div>
+//               <div className="line short"></div>
+//             </div>
+//             <p>{template.name}</p>
+//           </div>
+//         ))}
+//       </div>
+
+//       <div className="seeAllWrapper">
+//         <button className="btnPrimary" onClick={() => navigate("/all-templates")}>
+//           View All Templates
+//         </button>
+//       </div>
+//     </section>
+//   );
+// }
+
+import './Header/Header.css';
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+export default function TemplateSection({ templates }) {
+  const navigate = useNavigate();
+
+  const handleSelectTemplate = (templateId) => {
+    navigate(`/resume/${templateId}`);
+  };
+
   return (
     <section id="templates" className="templateSection">
-      
-<h2 className='heading'>Choose a Resume Template</h2>
+      <h2 className='heading'>Choose a Resume Template</h2>
       <div className="templateScroll">
         {templates.map((template, index) => (
-          <div key={index} className="templateCard" onClick={() => onSelectTemplate(template)}>
+          <div
+            key={index}
+            className="templateCard"
+            onClick={() => handleSelectTemplate(template.id)}
+          >
             <div className="templatePreview">
               <div className="line long"></div>
               <div className="line medium"></div>
@@ -74,7 +114,7 @@ export default function TemplateSection({ templates, onSelectTemplate, onSeeAll 
       </div>
 
       <div className="seeAllWrapper">
-        <button className="btnPrimary" onClick={onSeeAll}>
+        <button className="btnPrimary" onClick={() => navigate("/all-templates")}>
           View All Templates
         </button>
       </div>

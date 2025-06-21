@@ -32,7 +32,7 @@ import './Header.css';
 export default function Header() {
   return (
     <header className="headerr">
-        <div className="logo">Heitech</div>
+        <div className="logo">Heitech.</div>
         <nav className="navBar">
           <a href="#home" className="active">Home</a>
           <a href="#solutions">About ▾</a>
@@ -42,20 +42,5 @@ export default function Header() {
           <a className="signup" href="#signup">Sign Up</a>
         </nav>
     </header>
-//     <header class="navbar">
-//   <div class="logo">Heitech.ai</div>
-//   <nav class="nav-links">
-//     <a href="#">About us</a>
-//     <a href="#">Pricing</a>
-//     <a href="#">Testimonials</a>
-//     <a href="#">News</a>
-//   </nav>
-//   <div class="nav-actions">
-//     <button class="btn-outline">Log In</button>
-//     <button class="btn-primary">Sign Up</button>
-//   </div>
-// </header>
-
-
   );
 }

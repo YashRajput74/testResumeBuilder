@@ -1,71 +1,3 @@
-// import React from 'react';
-// import './Footer.css';
-// import { FaFacebookF, FaLinkedinIn, FaTwitter, FaInstagram } from 'react-icons/fa';
-
-// export default function Footer() {
-//   return (
-//     <footer className="footer">
-//       <div className="social-icons">
-//         <FaFacebookF />
-//         <FaLinkedinIn />
-//         <FaTwitter />
-//         <FaInstagram />
-//       </div>
-
-//       <div className="footer-columns">
-//         <div className="footer-col">
-//           <h4>Heitech</h4>
-//           <ul>
-//             <li><a href="#">Homepage</a></li>
-//             <li><a href="#">Resume Templates</a></li>
-//             <li><a href="#">CV Templates</a></li>
-//             <li><a href="#">Cover Letters</a></li>
-//             <li><a href="#">Resume Builder</a></li>
-//             <li><a href="#">CV Maker</a></li>
-//             <li><a href="#">Cover Letter Maker</a></li>
-//           </ul>
-//         </div>
-
-//         <div className="footer-col">
-//           <h4>Learn</h4>
-//           <ul>
-//             <li><a href="#">Career Blog</a></li>
-//             <li><a href="#">How to Write a Resume</a></li>
-//             <li><a href="#">How to Write CV</a></li>
-//             <li><a href="#">How to Write a Cover Letter</a></li>
-//             <li><a href="#">Resume Examples</a></li>
-//             <li><a href="#">Cover Letter Examples</a></li>
-//           </ul>
-//         </div>
-
-//         <div className="footer-col">
-//           <h4>Other</h4>
-//           <ul>
-//             <li><a href="#">Pricing</a></li>
-//             <li><a href="#">About Us</a></li>
-//             <li><a href="#">eBook Store</a></li>
-//             <li><a href="#">Media Kit</a></li>
-//             <li><a href="#">Help Center</a></li>
-//           </ul>
-//         </div>
-
-//         <div className="footer-col">
-//           <h4>Legal/Contact</h4>
-//           <ul>
-//             <li><a href="#">Terms of Use</a></li>
-//             <li><a href="#">Privacy Policy</a></li>
-//             <li><a href="#">Cookie Policy</a></li>
-//             <li><a href="mailto:contact@heitechresume.com">contact@heitechresume.com</a></li>
-//           </ul>
-//         </div>
-//       </div>
-
-//       <div className="footer-bottom">
-//         <p>© {new Date().getFullYear()} Heitech Resume Builder. Powered by Let's Grow Together.</p>
-//       </div>
-//     </footer>
-//   );
-// }
 
 import React from 'react';
 import './Footer.css';
@@ -108,7 +40,7 @@ export default function Footer() {
         <div className="link-col contact-box">
           <h4>Contact Us</h4>
           <p>Email: <a href="mailto:hello@heitechresume.com">hello@heitechresume.com</a></p>
-          <p>Support Time: 9AM - 6PM IST</p>
+          {/* <p>Support Time: 9AM - 6PM IST</p> */}
         </div>
       </div>
 

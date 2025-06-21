@@ -1,51 +1,32 @@
-// export default function Projects({ data }) {
-//     return (
-//         <div className="projects">
-//             <h2>Projects</h2>
-//             {data.projects.map((project, index) => (
-//                 <div key={index}>
-//                     <h3>{project.Title}</h3>
-//                     <p>{project.Description}</p>
-//                     <a href={project.Link} target="_blank" rel="noopener noreferrer">{project.Link}</a>
-//                 </div>
-//             ))}
-//         </div>
-//     );
-// }
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { useResume } from '../../context/ResumeContext';
 
-export default function Projects({ data }) {
+export default function Projects() {
+    const { data, style } = useResume();
     return (
-        <div className="projects-section">
-            <h2 className="section-title">PROJECTS</h2>
+        <div className="projects" style={style?.projects?.box}>
+            <h2 style={style?.projects?.heading}>Projects</h2>
             {data.projects.map((project, index) => (
-                <div key={index} className="project-item">
-                    <h3 className="project-title">{project.Title}</h3>
+                <div className="eachProject" key={index} style={style?.projects?.eachProject}>
+                    <h3 style={style?.projects?.title}>{project.Title}
+                        <a href={project.Link} target="_blank" rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon" size="sm"  style={style?.projects?.icon}/>
+                        </a>
+                    </h3>
 
-                    <div className="project-links">
-                        {project.GitHub && (
-                            <a href={project.GitHub} target="_blank" rel="noopener noreferrer" className="link-button">
-                                GitHub
-                            </a>
-                        )}
-                        {project.LiveDemo && (
-                            <a href={project.LiveDemo} target="_blank" rel="noopener noreferrer" className="link-button">
-                                Live Demo
-                            </a>
-                        )}
-                    </div>
-
-                    <p className="project-description">{project.Description}</p>
-
-                    {project.TechStack && (
-                        <p className="tech-stack">
-                            <strong>Tech Stack:</strong> {project.TechStack}
-                        </p>
+                    {Array.isArray(project.Description) ? (
+                        <ul style={style?.projects?.list}>
+                            {project.Description.map((point, i) => (
+                                <li key={i} style={style?.projects?.listItem}>{point}</li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p style={style?.projects?.description}>{project.Description}</p>
                     )}
                 </div>
             ))}
         </div>
     );
 }
-
-

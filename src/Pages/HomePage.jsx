@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom";
 export default function HomePage() {
     const navigate = useNavigate();
 
-    const handleSelectTemplate = (template) => {
-        const index = templates.indexOf(template);
-        if (index !== -1) {
-            navigate(`/resume/${index}`);
+   const handleSelectTemplate = (templateId) => {
+        const template = templates.find(t => t.id === templateId);
+        if (template) {
+            navigate(`/resume/${template.id}`);
         }
     };
+
 
     return (
         <>
@@ -21,7 +22,6 @@ export default function HomePage() {
             <Hero />
             <TemplateSection
                 templates={templates}
-                onSelectTemplate={handleSelectTemplate}
             />
             <Footer/>
         </>

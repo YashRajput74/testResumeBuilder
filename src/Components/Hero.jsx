@@ -10,7 +10,10 @@ export default function Hero(){
         <div className="heroContent">
           <div  className='uprpara'>Allow customization and optimization for different job roles</div>
           <h1>Build your Resume Instantly</h1>
-          <p>Create a professional resume using beautiful templates and your own data</p>
+          <p>
+          Create a <span className="highlighted">professional</span> resume using
+          beautiful templates and your own data
+        </p>
            <div className="ctaButtons">
           <button className="btnPrimary">Get Started</button>
           <button className="btnSecondary">Browse Templates</button>
@@ -18,14 +21,6 @@ export default function Hero(){
           {/* <button onClick={handleScroll}>Choose a Template</button> */}
         </div>
       </section>
-    //      <section className="hero">
-    //     <div className="hero-text">
-    //       <h1>Design Your Dream Resume</h1>
-    //       <p>Choose from modern, classic, and creative templates to build a standout resume in minutes.</p>
-    //     </div>
-    //     <div className="hero-img">
-    //       <img src='' alt="Resume Preview" />
-    //     </div>
-    //   </section>
+   
     )
 }

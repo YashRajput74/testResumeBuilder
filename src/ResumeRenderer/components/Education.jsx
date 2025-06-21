@@ -1,18 +1,18 @@
 
-export default function Education({ data }) {
+import { useResume } from "../../context/ResumeContext";
+
+export default function Education() {
+    const { data, style } = useResume();
     return (
-        <div className="education-section">
-            <h2 className="section-title">EDUCATION</h2>
+        <div className="education" style={style?.education?.box}>
+            <h2 style={style?.education?.heading}>Education</h2>
             {data.education.map((edu, index) => (
-                <div key={index} className="education-item">
-                    <h3 className="degree">{edu.Degree} <span className="school"> {edu.School}</span></h3>
-                    <p className="location-date">
-                        {edu["Start Date"]} – {edu["End Date"]}
-                    </p>
-                    {/* {edu.Description && <p className="description">{edu.Description}</p>} */}
+                <div className="school" key={index} style={style?.education?.eachSchool}>
+                    <h3 style={style?.education?.name}>{edu.Degree} - {edu.School}</h3>
+                    <p style={style?.education?.city}>{edu.City} | {edu["Start Date"]} - {edu["End Date"]}</p>
+                    <p style={style?.education?.description}>{edu.Description}</p>
                 </div>
             ))}
         </div>
     );
 }
-

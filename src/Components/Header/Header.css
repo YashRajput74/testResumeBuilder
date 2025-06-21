@@ -23,9 +23,9 @@ html {
   top: 0;
   z-index: 100;
   background: transparent;
-  gap: 19rem;
+  gap: 17rem;
    padding: 1rem 2rem;
-  margin: 1rem auto;
+  margin: 0.7rem 0.7rem 0.7rem 1.2rem;
 }
 
 .navbar-inner {
@@ -84,6 +84,8 @@ html {
 }
 
 
+
+
 .hero {
   padding: 6rem 2rem;
   text-align: center;
@@ -94,8 +96,8 @@ html {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
-
 .heroContent p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
@@ -133,11 +135,10 @@ html {
   padding: 0.7rem;
   font-size: 17px;
     font-weight: 600;
-  width: 35%; 
+  width: fit-content;
   border-radius: 25px;
   margin: 0 auto; 
 }
-
 
 .ctaButtons {
   display: flex;
@@ -207,3 +208,156 @@ html {
   padding-bottom: 1rem;
   scrollbar-width: none;
 }
+
+
+
+.templateCard {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 1.5rem;
+  min-width: 260px;
+  max-width: 280px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideUp 0.6s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.templateCard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.templateCard:hover::before {
+  opacity: 1;
+}
+
+.templateCard:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px) scale(1.02);
+  border-color: #fddb60;
+}
+
+.templateCard p {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.templateCard:hover p {
+  color: #000;
+}
+.templatePreview {
+  width: 100%;
+  height: 180px;
+  border-radius: 16px;
+  background: linear-gradient(to bottom right, #f7f7f7, #ffffff);
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.templatePreview .line {
+  height: 12px;
+  border-radius: 6px;
+  background: #d2d2d2;
+  margin: 6px 0;
+}
+
+.line.long {
+  width: 90%;
+  background-color: #e2e2e2;
+}
+
+.line.medium {
+  width: 65%;
+  background-color: #cfcfcf;
+}
+
+.line.short {
+  width: 75%;
+  background-color: #e8e8e8;
+}
+
+
+.templateCard p {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+  margin: 0;
+}
+
+.seeAllWrapper {
+  margin-top: 3rem;
+}
+
+.btnPrimary {
+  background-color: #fddb60;
+  color: black;
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btnPrimary:hover {
+  background-color: #ffe88c;
+  transform: translateY(-2px);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+
+
+
+
+.highlighted {
+  font-weight: bold;
+  color: #a277ff;
+  animation: fadeColor 2s ease-in-out infinite alternate;
+}
+
+@keyframes fadeColor {
+  from { color: #4b3087; }
+  to { color: #b69835; }
+}
+
+
+
+
+
+
+
