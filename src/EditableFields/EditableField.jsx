@@ -54,7 +54,6 @@ export default function EditableField({ section, field, tag = 'p', type = 'text'
     else updateField(field, null, e.target.value);
   };
 
-  // ✅ This makes input look like plain text
   const baseStyle = {
     fontSize: "inherit",
     fontWeight: "inherit",
@@ -65,7 +64,7 @@ export default function EditableField({ section, field, tag = 'p', type = 'text'
     outline: "none",
     padding: 0,
     margin: 0,
-    width: "100%", // optional if inside flex or grid
+    width: "100%",
   };
 
   return editMode ? (

@@ -71,8 +71,8 @@ export default function Skills() {
       {editMode ? (
         <EditableArrayField
           section="skills"
-          style={style?.skills?.everySkillBox}       // container of skills
-          itemStyle={style?.skills?.eachSkillBox}    // style for each input field
+          style={style?.skills?.everySkillBox}       
+          itemStyle={style?.skills?.eachSkillBox}    
         />
       ) : (
         <div

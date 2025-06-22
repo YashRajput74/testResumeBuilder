@@ -15,7 +15,7 @@ import Summary from "./components/Summary";
 import "./ResumeRenderer.css";
 
 import { useResume } from "../context/ResumeContext";
-import templateStyles from "../data/templateStyle"; // ✅ Make sure this import is correct
+import templateStyles from "../data/templateStyle"; 
 
 const sectionComponents = {
   personalInfo: PersonalInfo,
@@ -25,17 +25,16 @@ const sectionComponents = {
   projects: Projects,
   contact: Contact,
   summary: Summary,
-  // strengths: Strengths,
 };
 
 export default function ResumeRenderer({ template }) {
-  const { data, style } = useResume(); // ✅ Context style (e.g., contact, skills...)
+  const { data, style } = useResume();
 
   const { grid, fontFamily, fontSize, colorScheme } = template.layout;
 
   const templateId = String(template.id);
-  const templateStyle = templateStyles[templateId] || {}; // ✅ Fixed name
-  const cssVariables = templateStyle.vars || {};          // ✅ Use templateStyle, not context style
+  const templateStyle = templateStyles[templateId] || {}; 
+  const cssVariables = templateStyle.vars || {};         
 
   const renderSection = (sectionName) => {
     const SectionComponent = sectionComponents[sectionName];
@@ -73,7 +72,7 @@ export default function ResumeRenderer({ template }) {
         columnGap: grid.columnGap,
         display: "grid",
         gridTemplateAreas,
-        ...cssVariables, // ✅ This only applies --variables from templateStyles
+        ...cssVariables, 
       }}
     >
       {grid.areas.map((area, index) => (
