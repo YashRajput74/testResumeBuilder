@@ -1,67 +1,53 @@
 
 
-
-// import {
-//     FaEnvelope,
-//     FaPhoneAlt,
-//     FaMapMarkerAlt,
-//     FaLinkedin,
-//     FaGithub,
-// } from "react-icons/fa";
-
-// export default function PersonalInfo({ data }) {
-//     return (
-//         <div className="personal-info-container">
-//             <div className="left-info">
-//                 <h1 className="name">{data.name}</h1>
-//                 <h3 className="role1">Frontend Developer</h3>
-//                 <p className="summary">{data.summary}</p>
-//             </div>
-
-//             <div className="right-info">
-//                 <p>
-//                     <span className="text">{data.email}</span>
-//                     <FaEnvelope className="icon" />
-//                 </p>
-//                 <p>
-//                     <span className="text">{data.phoneNo}</span>
-//                     <FaPhoneAlt className="icon" />
-//                 </p>
-//                 <p>
-//                     <span className="text">{data.address}</span>
-//                     <FaMapMarkerAlt className="icon" />
-//                 </p>
-//                 <p>
-//                     <span className="text">
-//                         <a href={data.linkedin} target="_blank" rel="noopener noreferrer">
-//                             LinkedIn
-//                         </a>
-//                     </span>
-//                     <FaLinkedin className="icon" />
-//                 </p>
-//                 <p>
-//                     <span className="text">
-//                         <a href={data.github} target="_blank" rel="noopener noreferrer">
-//                             GitHub
-//                         </a>
-//                     </span>
-//                     <FaGithub className="icon" />
-//                 </p>
-//             </div>
-//         </div>
-//     );
-// }
-
 import { useResume } from "../../context/ResumeContext";
 
 export default function PersonalInfo() {
-    const { data, style } = useResume();
-    return (
-        <div className="personalInfo" style={style?.personalInfo?.box}>
-            <h1 style={style?.personalInfo?.name}>{data.firstName} {data.lastName}</h1>
-            <h3 style={style?.personalInfo?.position}>{data.position}</h3>
-            <p style={style?.personalInfo?.summary}>{data.summary}</p>
-        </div>
-    );
-}
+  const { data, style, editMode, updateField } = useResume();
 
+  const handleBlur = (field, e) => {
+    const value = e.target.innerText.trim();
+    updateField(null, field, value); // top-level field
+  };
+
+  return (
+    <div className="personalInfo" style={style?.personalInfo?.box}>
+      <h1
+        style={style?.personalInfo?.name}
+      >
+        <span
+          contentEditable={editMode}
+          suppressContentEditableWarning
+          onBlur={(e) => handleBlur("firstName", e)}
+        >
+          {data.firstName}
+        </span>{" "}
+        <span
+          contentEditable={editMode}
+          suppressContentEditableWarning
+          onBlur={(e) => handleBlur("lastName", e)}
+        >
+          {data.lastName}
+        </span>
+      </h1>
+
+      <h3
+        contentEditable={editMode}
+        suppressContentEditableWarning
+        onBlur={(e) => handleBlur("position", e)}
+        style={style?.personalInfo?.position}
+      >
+        {data.position}
+      </h3>
+
+      <p
+        contentEditable={editMode}
+        suppressContentEditableWarning
+        onBlur={(e) => handleBlur("summary", e)}
+        style={style?.personalInfo?.summary}
+      >
+        {data.summary}
+      </p>
+    </div>
+  );
+}

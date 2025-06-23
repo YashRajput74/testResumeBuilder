@@ -1,66 +1,59 @@
+
 import { createContext, useContext, useState } from "react";
 
 export const ResumeContext = createContext();
 
 export const useResume = () => useContext(ResumeContext);
 
-export function ResumeProvider({children, initialData, style }) {
+export function ResumeProvider({ children, initialData, style, editModeFromURL }) {
+  const [data, setData] = useState(() => {
+    const saved = localStorage.getItem("resumeData");
+    return saved ? JSON.parse(saved) : initialData;
+  });
 
-    const [data, setData] = useState(initialData);
-    const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(editModeFromURL || false);
 
-
-    const save = () => {
+  const save = () => {
+    localStorage.setItem("resumeData", JSON.stringify(data));
     setEditMode(false);
-
-    console.log("Saving data:", data);
+    console.log("Saved data:", data);
   };
-const updateField = (section, key, value) => {
-  if (key === null) {
-    setData(prev => ({
-      ...prev,
-      [section]: value
-    }));
-  } else {
-    setData(prev => ({
-      ...prev,
-      [section]: {
-        ...prev[section],
-        [key]: value
-      }
-    }));
-  }
+  const updateField = (section, key, value) => {
+  setData((prev) => {
+    if (key === null && section) {
+      return {
+        ...prev,
+        [section]: value,
+      };
+    }
+
+    if (key && section) {
+      return {
+        ...prev,
+        [section]: {
+          ...prev[section],
+          [key]: value,
+        },
+      };
+    }
+
+    if (!section && key) {
+      return {
+        ...prev,
+        [key]: value,
+      };
+    }
+
+    return prev;
+  });
 };
 
-     return (
-    <ResumeContext.Provider value={{  data, setData, style, editMode, setEditMode, save, updateField  }}>
+
+  return (
+    <ResumeContext.Provider
+      value={{ data, setData, style, editMode, setEditMode, save, updateField }}
+    >
       {children}
     </ResumeContext.Provider>
   );
 }
-
-
-
-
-// import { createContext, useContext, useState } from "react";
-
-// export const ResumeContext = createContext();
-
-// export function ResumeProvider({initialData, children}){
-//       const [data, setData] = useState(initialData);
-//         const [editMode, setEditMode] = useState(false);
-//         const save = () => {
-//     localStorage.setItem('resumeData', JSON.stringify(data));
-//     setEditMode(false);
-//   };
-//  return (
-//     <ResumeContext.Provider
-//       value={{ data, setData, editMode, setEditMode, save }}
-//     >
-//       {children}
-//     </ResumeContext.Provider>
-//   );
-
-// }
-
-// export const useResume = () => useContext(ResumeContext);

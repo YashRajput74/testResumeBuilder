@@ -55,7 +55,7 @@
     display: inline;
 }
 
-.skills {     
+.skills {
     text-align: var(--left-align);
 }
 
@@ -111,11 +111,12 @@
     padding-left: var(--basic-font-size);
     list-style: inside;
 }
+
 .projects h2 {
     text-decoration: underline;
 }
 
-.projects {  
+.projects {
     border-left: var(--basic-black-border);
     padding-left: var(--basic-font-size);
     text-align: var(--left-align);
@@ -151,7 +152,7 @@
     text-decoration: underline;
 }
 
-.education { 
+.education {
     border-left: var(--basic-black-border);
     padding-left: var(--basic-font-size);
     text-align: var(--left-align);
@@ -176,19 +177,123 @@
     list-style: inside;
 }
 
-.organizations{
-    color: black;
-}
-.organizations h2{
+.organizations {
     color: black;
 }
 
-.summary{
+.organizations h2 {
+    color: black;
+}
+
+.summary {
     text-align: left;
 }
 
-.contactItem {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; 
+.profile-card {
+    width: 300px;
+    text-align: center;
+    background: linear-gradient(135deg, #5b7bb0 50%, white 50%);
+    padding: 2rem 1rem 1.5rem;
+    font-family: sans-serif;
+    color: #5b7bb0;
+    position: relative;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border: 6px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1rem;
+    background: white;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+    color: black;
+}
+
+.position {
+    font-size: 1rem;
+    color: #a0a0a0;
+    margin-top: 0.5rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 30px;
+    border-left: 3px solid black;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-item .dot {
+    width: 12px;
+    height: 12px;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    left: -37px;
+}
+
+
+.languages {
+    text-align: var(--left-align);
+}
+
+.languages h2 {
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.individualLanguage {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--basic-font-size);
+}
+
+.individualLanguage div {
+    padding: 0.5rem;
+    border: var(--basic-black-border);
+}
+
+.languages ul {
+    padding-left: var(--basic-font-size);
+}
+
+.languages ul li {
+    padding-bottom: 0.5rem;
+}
+
+.hover-image {
+  position: relative;
+}
+
+.edit-overlay {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px;
+  border-radius: 50%;
+  display: none; /* hidden by default */
+  cursor: pointer;
+}
+
+.hover-image:hover .edit-overlay {
+  display: flex; /* only show on hover */
 }

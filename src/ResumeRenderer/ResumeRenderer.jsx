@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import WorkExperience from "./components/WorkExperience";
@@ -12,19 +7,31 @@ import Education from "./components/Education";
 import PersonalInfo from "./components/PersonalInfo";
 import Contact from "./components/Contact";
 import Summary from "./components/Summary";
+import Avatar from "./components/Avatar";
+import Strengths from "./components/Strength";
+import Achievements from "./components/Achivements";
+import Language from "./components/Language";
+import Awards from "./components/Awards";
+
 import "./ResumeRenderer.css";
 
 import { useResume } from "../context/ResumeContext";
 import templateStyles from "../data/templateStyle"; 
 
 const sectionComponents = {
-  personalInfo: PersonalInfo,
-  education: Education,
-  workExperience: WorkExperience,
-  skills: Skills,
-  projects: Projects,
-  contact: Contact,
-  summary: Summary,
+ personalInfo: PersonalInfo,
+    education: Education,
+    workExperience: WorkExperience,
+    skills: Skills,
+    projects: Projects,
+    contact: Contact,
+    summary: Summary,
+    strengths: Strengths,
+    achievements: Achievements,
+    // organizations: Organizations,
+    avatar: Avatar,
+    language: Language,
+    awards: Awards
 };
 
 export default function ResumeRenderer({ template }) {
@@ -85,3 +92,5 @@ export default function ResumeRenderer({ template }) {
     </div>
   );
 }
+
+

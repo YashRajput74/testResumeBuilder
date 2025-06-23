@@ -40,7 +40,6 @@ export default function Footer() {
         <div className="link-col contact-box">
           <h4>Contact Us</h4>
           <p>Email: <a href="mailto:hello@heitechresume.com">hello@heitechresume.com</a></p>
-          {/* <p>Support Time: 9AM - 6PM IST</p> */}
         </div>
       </div>
 

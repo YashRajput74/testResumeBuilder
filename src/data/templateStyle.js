@@ -1,4 +1,3 @@
-
 const sharedStyles = {
     "2": {
         heading: {
@@ -18,6 +17,30 @@ const sharedStyles = {
         content: {
             color: "var(--content-color)",
             marginBottom: "2rem"
+        }
+    },
+    "4": {
+        heading: {
+            fontSize: "24px",
+            color: "var(--content-color)",
+            textDecoration: "none",
+            borderBottom: "2px solid var(--secondary-heading-color)"
+        },
+        box: {
+            margin: "25px 0px"
+        },
+    },
+    "5": {
+        heading: {
+            borderBottom: "2px solid var(--secondary-color)",
+            textDecoration: "none"
+        },
+    },
+    "7": {
+        heading: {
+            textDecoration: 'none',
+            borderBottom: '2px solid var(--primary-color)',
+            paddingLeft: '10px'
         }
     }
 };
@@ -280,7 +303,524 @@ const templateStyles = {
         },
     },
     "4": {
-        
+        vars: {
+            "--heading-color": "#333",
+            "--secondary-heading-color": "#608abf",
+            "--content-color": "#636466",
+        },
+        avatar: {
+            card: {
+                background: "linear-gradient(135deg, var(--secondary-heading-color) 50%, white 50%)"
+            },
+            heading: {
+                color: "#333"
+            }
+        },
+        contact: {
+            visibleFields: ["phoneNo", "email", "address"],
+            box: {
+                ...sharedStyles["4"].box
+            },
+            heading: {
+                ...sharedStyles["4"].heading
+            },
+        },
+        summary: {
+            box: {
+                ...sharedStyles["4"].box
+            },
+            heading: {
+                ...sharedStyles["4"].heading,
+                marginBottom: "10px"
+            }
+        },
+        skills: {
+            box: {
+                ...sharedStyles["4"].box
+            },
+            heading: {
+                ...sharedStyles["4"].heading
+            }
+        },
+        education: {
+            box: {
+                ...sharedStyles["4"].box,
+                border: "none"
+            },
+            heading: {
+                ...sharedStyles["4"].heading
+            },
+            sideline: "true",
+            timeline: {
+                borderLeft: "3px solid var(--secondary-heading-color)"
+            },
+            dot: {
+                backgroundColor: "var(--secondary-heading-color)"
+            },
+            name: {
+                color: "var(--content-color)"
+            },
+            city: {
+                color: "var(--content-color)"
+            },
+            description: {
+                color: "var(--content-color)"
+            }
+        },
+        workExpe: {
+            box: {
+                ...sharedStyles["4"].box,
+                border: "none"
+            },
+            heading: {
+                ...sharedStyles["4"].heading
+            },
+            sideline: "true",
+            timeline: {
+                borderLeft: "3px solid var(--secondary-heading-color)"
+            },
+            dot: {
+                backgroundColor: "var(--secondary-heading-color)"
+            },
+            role: {
+                color: "var(--content-color)"
+            },
+            organization: {
+                color: "var(--content-color)"
+            },
+            dates: {
+                color: "var(--content-color)"
+            },
+            wholeList: {
+                color: "var(--content-color)"
+            }
+        }
+    },
+    "5": {
+        vars: {
+            '--primary-color': '#163853',
+            '--secondary-color': '#333',
+            '--text-color': 'white',
+        },
+        avatar: {
+            position: {
+                display: "none"
+            },
+            heading: {
+                display: "none"
+            },
+            card: {
+                background: "var(--primary-color)",
+                paddingTop: "0rem",
+                paddingBottom: "0rem"
+            },
+            imageDiv: {
+                position: "relative",
+                background: "white",
+                width: "160px",
+                height: "160px",
+                top: "5rem",
+                marginTop: "0px",
+                border: "6px solid white",
+                boxShadow: "0 0 0 10px var(--primary-color)"
+            }
+        },
+        personalInfo: {
+            box: {
+                border: 'none',
+                color: "var(--text-color)"
+            },
+            position: {
+                marginBottom: "5px"
+            }
+        },
+        education: {
+            box: {
+                border: "none",
+                paddingLeft: "0rem",
+                paddingRight: "2rem"
+            },
+            heading: {
+                ...sharedStyles["5"].heading,
+                marginBottom: "1rem"
+            }
+        },
+        skills: {
+            box: {
+                paddingRight: "2rem"
+            },
+            heading: {
+                ...sharedStyles["5"].heading,
+                marginBottom: "1rem"
+            },
+            list: "true",
+            wholeList: {
+                marginLeft: "1rem"
+            }
+        },
+        workExpe: {
+            box: {
+                border: "none",
+                paddingLeft: "0rem"
+            },
+            heading: {
+                ...sharedStyles["5"].heading,
+                marginBottom: "1rem"
+            },
+            sideline: true,
+            timeline: {
+                borderLeft: "2px solid black"
+            },
+            dot: {
+                width: "0px",
+                height: "0px"
+            }
+        },
+        contact: {
+            heading: {
+                ...sharedStyles["5"].heading,
+                marginBottom: "1rem"
+            },
+            visibleFields: ["phoneNo", "email", "address"],
+        },
+        language: {
+            box: {
+                paddingRight: "2rem",
+                marginBottom: "1rem"
+            },
+            heading: {
+                ...sharedStyles["5"].heading,
+                marginBottom: "1rem"
+            },
+            list: "true",
+            wholeList: {
+                marginLeft: "1rem"
+            }
+        },
+    },
+    "6": {
+        vars: {
+            "--primary-color": "#3e465b",
+            "--secondary-color": "#fff"
+        },
+        avatar: {
+            position: {
+                display: "none"
+            },
+            heading: {
+                display: "none"
+            },
+            card: {
+                background: "none",
+            },
+            imageDiv: {
+                border: "none"
+            }
+        },
+        contact: {
+            visibleFields: ["phoneNo", "email", "portfolio", "address"],
+            box: {
+                paddingRight: "1rem",
+                paddingLeft: "1rem"
+            },
+            heading: {
+                color: "var(--secondary-color)",
+                textDecoration: "none",
+                borderBottom: "2px solid var(--secondary-color)"
+            },
+            innerBox: {
+                color: "var(--secondary-color)"
+            },
+            anchor: {
+                color: "var(--secondary-color)"
+            }
+        },
+        summary: {
+            box: {
+                paddingRight: "1rem",
+                paddingLeft: "1rem"
+            },
+            heading: {
+                color: "var(--secondary-color)",
+                textDecoration: "none",
+                borderBottom: "2px solid var(--secondary-color)"
+            },
+            content: {
+                marginTop: "5px",
+                marginBottom: "10px",
+                color: "var(--secondary-color)"
+            }
+        },
+        language: {
+            box: {
+                paddingRight: "1rem",
+                paddingLeft: "1rem"
+            },
+            list: "true",
+            heading: {
+                color: "var(--secondary-color)",
+                textDecoration: "none",
+                borderBottom: "2px solid var(--secondary-color)"
+            },
+            wholeList: {
+                marginTop: "5px",
+                marginBottom: "10px",
+                color: "var(--secondary-color)",
+            }
+        },
+        skills: {
+            box: {
+                paddingRight: "1rem",
+                paddingLeft: "1rem"
+            },
+            heading: {
+                color: "var(--secondary-color)",
+                textDecoration: "none",
+                borderBottom: "2px solid var(--secondary-color)",
+                marginBottom: "5px"
+            },
+            eachSkillBox: {
+                color: "var(--secondary-color)",
+                border: "1px solid var(--secondary-color)"
+            }
+        },
+        personalInfo: {
+            box: {
+                color: "var(--primary-color)",
+                marginTop: "2rem",
+                fontSize: "20px",
+                marginBottom: "1rem",
+                border: "none"
+            },
+            position: {
+                marginRight: "16rem",
+                paddingBottom: "5px",
+                borderBottom: "3px solid var(--primary-color)"
+            },
+            summary: {
+                display: "none"
+            }
+        },
+        education: {
+            box: {
+                color: "var(--primary-color)",
+                border: "none",
+                paddingTop: "1rem",
+                padding: "0rem"
+            },
+            heading: {
+                color: "var(--primary-color)",
+                textDecoration: "none",
+                borderBottom: "2px solid var(--primary-color)",
+                marginBottom: "5px"
+            }
+        },
+        workExpe: {
+            box: {
+                color: "var(--primary-color)",
+                border: "none",
+                paddingTop: "1.5rem",
+                padding: "0rem"
+            },
+            heading: {
+                color: "var(--primary-color)",
+                textDecoration: "none",
+                borderBottom: "2px solid var(--primary-color)",
+                marginBottom: "5px"
+            }
+        }
+    },
+    "7": {
+        vars: {
+            "--primary-color": '#2EBCB0',
+        },
+        avatar: {
+            card: {
+                background: "none",
+                width: "300px",
+                height: '150px',
+            },
+            imageDiv: {
+                marginLeft: '0px'
+            },
+            nextLine: {
+                display: 'none'
+            },
+            sideBox: 'true',
+            innerBox: {
+                position: 'relative',
+                left: '125px',
+                top: '-130px',
+                textAlign: 'left'
+            },
+            heading: {
+                color: '#333',
+                fontSize: '32px',
+            },
+            position: {
+                fontSize: '18px',
+                color: 'var(--primary-color)'
+            }
+        },
+        contact: {
+            visibleFields: ["email", "phoneNo", "address", "linkedin"],
+            box: {
+                marginTop: '2rem'
+            },
+            heading: {
+                display: 'none',
+            },
+            innerBox: {
+                display: "flex",
+                justifyContent: "flex-start",
+                flexDirection: "row-reverse"
+            },
+            icon: {
+                color: "var(--primary-color)",
+                marginLeft: "10px",
+                marginRight: '20px'
+            }
+        },
+        summary: {
+            box: {
+                margin: '0px 20px 0px 10px'
+            },
+            heading: {
+                display: 'none'
+            }
+        },
+        workExpe: {
+            box: {
+                border: 'none',
+            },
+            heading: {
+                ...sharedStyles["7"].heading
+            },
+            dates: {
+                color: 'var(--primary-color)'
+            },
+            wholeList: {
+                marginTop: '5px',
+                padding: '4px',
+                borderLeft: '1px solid var(--primary-color)',
+                borderRight: '1px solid var(--primary-color)',
+                backgroundImage: 'linear-gradient(to right, var(--primary-color) 2%, white 2%, white 98%, var(--primary-color) 98%), linear-gradient(to right, var(--primary-color) 2%, white 2%, white 98%, var(--primary-color) 98%)',
+                backgroundSize: '100% 1px',
+                backgroundPosition: 'top, bottom',
+                backgroundRepeat: 'no-repeat',
+               
+            },
+            bulletIcon: {
+                type: "fontawesome",
+                icon: "faWindowMinimize",
+                color: "var(--primary-color)",
+                size: "0.5rem",
+                marginRight: "0.5rem",
+            },
+            eachWorkPlace: {
+                paddingLeft: '10px'
+            },
+            sideline: 'false',
+            timeline: {
+                borderLeft: '1px solid var(--primary-color)',
+                paddingLeft: '13px'
+            },
+            dot: {
+                backgroundColor: 'var(--primary-color)',
+                top: '0px',
+                left: '-19px'
+            }
+        },
+        education: {
+            box: {
+                border: 'none'
+            },
+            heading: {
+                ...sharedStyles["7"].heading
+            },
+            eachSchool: {
+                paddingLeft: '10px'
+            },
+            sideline: 'true',
+            timeline: {
+                border: 'none',
+                paddingLeft: '10px'
+            },
+            dot: {
+                backgroundColor: 'var(--primary-color)',
+                top: '7px',
+                left: '-20px'
+            }
+        },
+        skills: {
+            box: {
+                marginBottom: '2rem'
+            },
+            heading: {
+                ...sharedStyles["7"].heading
+            },
+            everySkillBox: {
+                paddingLeft: '10px',
+                rowGap: '10px'
+            },
+            eachSkillBox: {
+                color: 'white',
+                backgroundColor: 'var(--primary-color)',
+                border: 'none',
+                borderRadius: '5px',
+                padding: '6px 8px'
+            }
+        },
+        organiz: {
+            box: {
+                border: 'none',
+                marginBottom: '1rem'
+            },
+            heading: {
+                ...sharedStyles["7"].heading,
+                textAlign: 'left',
+                marginBottom: '10px',
+                color: '#333',
+            },
+            innerBox: {
+                textAlign: 'left',
+                paddingLeft: '10px'
+            },
+            eachOrganiz: {
+                marginBottom: '10px'
+            }
+        },
+        award: {
+            box: {
+                border: 'none',
+                marginBottom: '1rem'
+            },
+            heading: {
+                ...sharedStyles["7"].heading,
+                textAlign: 'left',
+                marginBottom: '10px',
+                color: '#333',
+            },
+            innerBox: {
+                textAlign: 'left',
+                paddingLeft: '10px'
+            },
+            date: {
+                fontStyle: 'italic'
+            },
+            eachAward: {
+                marginBottom: '5px'
+            }
+        },
+        language: {
+            heading: {
+                ...sharedStyles["7"].heading,
+            },
+            list: 'true',
+            wholeList: {
+                paddingLeft: '35px'
+            }
+        }
     }
 }
 

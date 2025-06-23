@@ -95,77 +95,108 @@
 //   );
 // }
 
+// import { useResume } from "../context/ResumeContext";
+
+// export default function EditableArrayField({ section, style = {}, itemStyle = {} }) {
+//   const { data, updateField, editMode } = useResume();
+
+//   const values = data[section];
+
+//   if (!Array.isArray(values)) {
+//     console.error(`❌ data["${section}"] is not an array:`, values);
+//     return <p style={{ color: "red" }}>⚠️ "{section}" must be an array</p>;
+//   }
+
+//   const handleChange = (index, value) => {
+//     const updated = [...values];
+//     updated[index] = value;
+//     updateField(section, null, updated);
+//   };
+
+//   const handleAdd = () => {
+//     const updated = [...values, ""];
+//     updateField(section, null, updated);
+//   };
+
+//   const handleRemove = (index) => {
+//     const updated = values.filter((_, i) => i !== index);
+//     updateField(section, null, updated);
+//   };
+
+//   // ✅ Match item input with non-edit style
+//   const inputStyle = {
+//     fontSize: "inherit",
+//     fontWeight: "inherit",
+//     fontFamily: "inherit",
+//     color: "inherit",
+//     border: "none",
+//     background: "transparent",
+//     outline: "none",
+//     padding: 0,
+//     margin: 0,
+//     width: "100%",
+//   };
+
+//   return (
+//     <div style={style}>
+//       {values.map((item, index) => (
+//         <div
+//           key={index}
+//           style={{
+//             display: "flex",
+//             gap: "0.5rem",
+//             alignItems: "center",
+//             marginBottom: "4px",
+//           }}
+//         >
+//           {editMode ? (
+//             <>
+//               <input
+//                 type="text"
+//                 value={item}
+//                 onChange={(e) => handleChange(index, e.target.value)}
+//                 style={{ ...inputStyle, ...itemStyle }}
+//               />
+//               <button onClick={() => handleRemove(index)}>❌</button>
+//             </>
+//           ) : (
+//             <span style={{ ...inputStyle, ...itemStyle }}>{item}</span>
+//           )}
+//         </div>
+//       ))}
+//       {editMode && <button onClick={handleAdd}>+ Add</button>}
+//     </div>
+//   );
+// }
+
+
 import { useResume } from "../context/ResumeContext";
 
-export default function EditableArrayField({ section, style = {}, itemStyle = {} }) {
-  const { data, updateField, editMode } = useResume();
+export default function EditableArrayField({ items, onChange, style, inputStyle }) {
+  const { editMode } = useResume();
 
-  const values = data[section];
-
-  if (!Array.isArray(values)) {
-    console.error(`❌ data["${section}"] is not an array:`, values);
-    return <p style={{ color: "red" }}>⚠️ "{section}" must be an array</p>;
-  }
-
-  const handleChange = (index, value) => {
-    const updated = [...values];
+  const handleItemChange = (index, value) => {
+    const updated = [...items];
     updated[index] = value;
-    updateField(section, null, updated);
-  };
-
-  const handleAdd = () => {
-    const updated = [...values, ""];
-    updateField(section, null, updated);
-  };
-
-  const handleRemove = (index) => {
-    const updated = values.filter((_, i) => i !== index);
-    updateField(section, null, updated);
-  };
-
-  // ✅ Match item input with non-edit style
-  const inputStyle = {
-    fontSize: "inherit",
-    fontWeight: "inherit",
-    fontFamily: "inherit",
-    color: "inherit",
-    border: "none",
-    background: "transparent",
-    outline: "none",
-    padding: 0,
-    margin: 0,
-    width: "100%",
+    onChange(updated);
   };
 
   return (
-    <div style={style}>
-      {values.map((item, index) => (
-        <div
-          key={index}
-          style={{
-            display: "flex",
-            gap: "0.5rem",
-            alignItems: "center",
-            marginBottom: "4px",
-          }}
-        >
+    <ul style={style}>
+      {items.map((item, idx) => (
+        <li key={idx}>
           {editMode ? (
-            <>
-              <input
-                type="text"
-                value={item}
-                onChange={(e) => handleChange(index, e.target.value)}
-                style={{ ...inputStyle, ...itemStyle }}
-              />
-              <button onClick={() => handleRemove(index)}>❌</button>
-            </>
+            <input
+              type="text"
+              value={item}
+              onChange={(e) => handleItemChange(idx, e.target.value)}
+              style={inputStyle}
+            />
           ) : (
-            <span style={{ ...inputStyle, ...itemStyle }}>{item}</span>
+            item
           )}
-        </div>
+        </li>
       ))}
-      {editMode && <button onClick={handleAdd}>+ Add</button>}
-    </div>
+    </ul>
   );
 }
-

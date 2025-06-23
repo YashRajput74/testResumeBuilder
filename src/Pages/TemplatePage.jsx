@@ -34,6 +34,15 @@ export default function AllTemplatesPage() {
                 <div className="line short"></div>
               </div>
               <p>{template.name}</p>
+              <button
+    className="customizeBtn"
+    onClick={(e) => {
+      e.stopPropagation();
+      navigate(`/resume/${template.id}?edit=true`);
+    }}
+  >
+    Customize
+  </button>
             </div>
           ))}
         </div>
