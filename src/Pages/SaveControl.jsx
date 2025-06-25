@@ -20,7 +20,7 @@ export default function SaveControls() {
           <button
             onClick={save}
             style={{
-              background: "linear-gradient(to right, #d3bae7,rgb(103, 82, 24))",
+              background: "linear-gradient(to right, #c6a9e3, #1a1a1a)",
               color: "#fff",
               padding: "8px 16px",
               borderRadius: "8px",
@@ -47,11 +47,11 @@ export default function SaveControls() {
         <button
           onClick={() => setEditMode(true)}
           style={{
-            background: "#e0f7fa",
-            color: "#00796b",
+            background: "linear-gradient(to right, #c6a9e3, #1a1a1a)",
+            color: "#ffff",
             padding: "8px 16px",
             borderRadius: "8px",
-            border: "1px solid #b2dfdb",
+            border: "none",
             fontWeight: "600",
           }}
         >

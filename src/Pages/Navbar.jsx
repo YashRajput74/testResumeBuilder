@@ -32,7 +32,7 @@ export default function Navbar({ onDownload }) {
           className="btnPrimary"
           onClick={onDownload}
           style={{
-            background: "#00c897",
+           background: "linear-gradient(to right, #c6a9e3, #1a1a1a)",
             color: "white",
             padding: "0.5rem 1.2rem",
             fontWeight: "600",

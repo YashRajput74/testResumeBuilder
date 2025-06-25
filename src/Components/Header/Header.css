@@ -117,8 +117,8 @@ html {
 }
 
 .heroContent button:first-child {
-    background-color: #fddb60;
-    color: black;
+  background: linear-gradient(to right, #c6a9e3, #1a1a1a);
+    color: white;
     font-weight: 600;
 }
 
@@ -145,8 +145,8 @@ html {
 }
 
 .btnPrimary {
-    background-color: #a86cf0;
-    color: black;
+   background: linear-gradient(to right, #c6a9e3, #1a1a1a);
+    color: white;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
     border-radius: 999px;
@@ -516,4 +516,6 @@ html {
 .hide-scroll::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+
 

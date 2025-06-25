@@ -39,35 +39,59 @@ export default function Toolbar() {
     document.execCommand(command, false, value);
   };
 
-  const toolbarStyle = {
-    position: "fixed",
-    top: '70px',
-    left:  '606px',
-    right: 0,
-    zIndex: 999,
-    width: "50%",
-    background: "linear-gradient(to right, #fef6ff, #fff3f3)",
-    backdropFilter: "blur(10px)",
-    borderBottom: "1px solid #cda1e2;",
-    padding: "10px 20px",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: "10px",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.08)",
-    borderRadius: "13px 36px 13px 36px",
+  // const toolbarStyle = {
+  //   position: "fixed",
+  //   top: '120px',
+  //   left:  '606px',
+  //   right: 0,
+  //   zIndex: 999,
+  //   width: "50%",
+  //   background: "linear-gradient(to right, #fef6ff, #fff3f3)",
+  //   backdropFilter: "blur(10px)",
+  //   borderBottom: "1px solid #cda1e2;",
+  //   padding: "10px 20px",
+  //   display: "flex",
+  //   flexWrap: "wrap",
+  //   justifyContent: "center",
+  //   gap: "10px",
+  //   boxShadow: "0 4px 10px rgba(0, 0, 0, 0.08)",
+  //   borderRadius: "13px 36px 13px 36px",
    
-  };
+  // };
+  const toolbarStyle = {
+  position: "fixed",
+  top: "120px",
+  left: "606px",
+  right: 0,
+  zIndex: 999,
+  width: "50%",
+  background: "linear-gradient(to right, #1e1e1e, #2a2a2a)", // subtle black gradient
+  backdropFilter: "blur(8px)",
+  padding: "10px 20px",
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  gap: "10px",
+
+  // 🟣 Softer, professional styling
+  borderRadius: "6px",
+  color: "white",
+  boxShadow: "0 0 8px #c6a9e3", // soft purple glow
+  border: "1px solid #333", // subtle border to separate from background
+};
+
 
   const buttonStyle = {
     padding: "8px 12px",
-    background: "#fff8f1",
-    border: "1px solid #f0d9ff",
     borderRadius: "8px",
     fontSize: "14px",
     fontWeight: "500",
     cursor: "pointer",
     color: "#6a1b9a",
+     background: "#3a3a3a",               // hover darken
+  borderColor: "#c6a9e3",              // purple border on hover
+  color: "#ffffff",                    // text white on hover
+  boxShadow: "0 0 6px #c6a9e3",  
     transition: "all 0.2s",
   };
 if (!editMode) return null;
