@@ -12,6 +12,9 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL }
   });
 
   const [editMode, setEditMode] = useState(editModeFromURL || false);
+const [selectedSection, setSelectedSection] = useState(null);
+
+  
 
   const save = () => {
     localStorage.setItem("resumeData", JSON.stringify(data));
@@ -50,9 +53,20 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL }
 
 
   return (
-    <ResumeContext.Provider
-      value={{ data, setData, style, editMode, setEditMode, save, updateField }}
-    >
+   <ResumeContext.Provider
+  value={{
+    data,
+    setData,
+    style,
+    editMode,
+    setEditMode,
+    save,
+    updateField,
+    selectedSection,
+    setSelectedSection
+
+  }}
+>
       {children}
     </ResumeContext.Provider>
   );

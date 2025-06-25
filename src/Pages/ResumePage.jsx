@@ -1,4 +1,143 @@
 
+// import { useParams, useNavigate } from "react-router-dom";
+// import { ResumeProvider } from "../context/ResumeContext";
+// import ResumeRenderer from "../ResumeRenderer/ResumeRenderer";
+// import { useRef, useState, useEffect } from "react";
+// import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
+// import { useSearchParams } from "react-router-dom";
+// import Toolbar from "./SaveControl"; 
+// import templateStyles from "../data/templateStyle";
+// import { templates } from "../data/templates";
+// import Toolbarr from "./Toolbarr";
+
+// export default function ResumePage() {
+//   const { templateId } = useParams();
+//   const navigate = useNavigate();
+//   const resumeRef = useRef();
+//   const [searchParams] = useSearchParams();
+//   const editModeFromURL = searchParams.get("edit") === "true";
+
+//   const [selectedTemplate, setSelectedTemplate] = useState(null);
+//   const [userData, setUserData] = useState(null);
+
+//   useEffect(() => {
+//     fetch("/api/templates")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const found = data.templates.find((t) => t.id === Number(templateId));
+//         setSelectedTemplate(found);
+//       });
+
+//     fetch("/api/user-data")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         setUserData(data.data);
+//       });
+//   }, [templateId]);
+
+//   const handleTemplateSwitch = (newId) => {
+//     const newTemplate = templates.find((t) => t.id === newId);
+//     if (newTemplate) {
+//       setSelectedTemplate(newTemplate);
+//     }
+//   };
+
+//   const handleDownload = () => {
+//     const input = resumeRef.current;
+//     html2canvas(input).then((canvas) => {
+//       const imgData = canvas.toDataURL("image/png");
+//       const pdf = new jsPDF("p", "mm", "a4");
+//       const pdfWidth = pdf.internal.pageSize.getWidth();
+//       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+//       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+//       pdf.save("my-resume.pdf");
+//     });
+//   };
+
+//   if (!selectedTemplate || !userData) {
+//     return <p style={{ textAlign: "center", paddingTop: "2rem" }}>Loading template...</p>;
+//   }
+
+//   const dynamicStyle = templateStyles[selectedTemplate.id] || {};
+//   const savedData = JSON.parse(localStorage.getItem("resumeData"));
+//   const resumeData = savedData || userData;
+
+//   return (
+//     <ResumeProvider
+//       initialData={resumeData}
+//       style={dynamicStyle}
+//       editModeFromURL={editModeFromURL}
+//     >
+//       <div className="templateSectionn" style={{ display: "flex" }}>
+//         <div
+//           style={{
+//             width: "40%",
+//             padding: "1rem",
+//             borderRight: "1px solid #ccc",
+//             height: "auto",
+
+//             backdropFilter: "blur(10px)",
+//           }}
+//         >
+//           <h3 style={{ marginBottom: "1rem" }}>Templates</h3>
+//           {templates.map((tpl) => (
+//             <div
+//               key={tpl.id}
+//               className="templateCardd"
+//               style={{
+//                 border:
+//                   tpl.id === selectedTemplate.id
+//                     ? "2px solid #fddb60"
+//                     : "1px solid rgba(255,255,255,0.6)",
+//               }}
+//               onClick={() => handleTemplateSwitch(tpl.id)}
+//             >
+//               <img
+//                 src={tpl.thumbnail}
+//                 alt={tpl.name}
+//                 className="templatePreview"
+//               />
+//               <p>{tpl.name}</p>
+//             </div>
+//           ))}
+//         </div>
+
+//         <div style={{ flexGrow: 1, padding: "2rem", textAlign: "center" }}>
+//           <button
+//             onClick={() => navigate("/")}
+//             className="btnSecondary"
+//             style={{ marginBottom: "1rem" }}
+//           >
+//             ↩️ 
+//           </button>
+
+//           <Toolbarr />
+//           <Toolbar/>
+
+
+//           <div
+//             ref={resumeRef}
+//             style={{ margin: "2rem auto", width: "fit-content" }}
+//           >
+//             <ResumeRenderer template={selectedTemplate}    />
+//           </div>
+
+//           <button
+//             onClick={handleDownload}
+//             className="btnPrimary"
+//             style={{ marginTop: "1rem" }}
+//           >
+//             Download PDF
+//           </button>
+//         </div>
+//       </div>
+//     </ResumeProvider>
+//   );
+// }
+
+
+
 import { useParams, useNavigate } from "react-router-dom";
 import { ResumeProvider } from "../context/ResumeContext";
 import ResumeRenderer from "../ResumeRenderer/ResumeRenderer";
@@ -6,132 +145,172 @@ import { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useSearchParams } from "react-router-dom";
-import Toolbar from "./Toolbar"; 
-import templateStyles from "../data/templateStyle";
 import { templates } from "../data/templates";
-import Toolbarr from "./Toolbarr";
+import Toolbar from "./Toolbar";
+import { supabase } from "../supabaseClient";
+import SaveControls from "./SaveControl";
+import templateStyles from "../data/templateStyle";
+import Footer from "../Components/Footer/Footer";
+import Navbar from "./Navbar";
 
 export default function ResumePage() {
-  const { templateId } = useParams();
-  const navigate = useNavigate();
-  const resumeRef = useRef();
-  const [searchParams] = useSearchParams();
-  const editModeFromURL = searchParams.get("edit") === "true";
+    const [user, setUser] = useState(null);
 
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
-  const [userData, setUserData] = useState(null);
+    useEffect(() => {
+        supabase.auth.getUser().then(({ data: { user } }) => {
+            setUser(user);
+        });
+    }, []);
 
-  useEffect(() => {
-    fetch("/api/templates")
-      .then((res) => res.json())
-      .then((data) => {
-        const found = data.templates.find((t) => t.id === Number(templateId));
-        setSelectedTemplate(found);
-      });
+    const { templateId } = useParams();
+    const navigate = useNavigate();
+    const resumeRef = useRef();
+    const [searchParams] = useSearchParams();
+    const editModeFromURL = searchParams.get("edit") === "true";
 
-    fetch("/api/user-data")
-      .then((res) => res.json())
-      .then((data) => {
-        setUserData(data.data);
-      });
-  }, [templateId]);
+    const [selectedTemplate, setSelectedTemplate] = useState(null);
+    const [userData, setUserData] = useState(null);
 
-  const handleTemplateSwitch = (newId) => {
-    const newTemplate = templates.find((t) => t.id === newId);
-    if (newTemplate) {
-      setSelectedTemplate(newTemplate);
+    useEffect(() => {
+        fetch("/api/templates")
+            .then((res) => res.json())
+            .then((data) => {
+                const found = data.templates.find((t) => t.id === Number(templateId));
+                setSelectedTemplate(found);
+            });
+
+        fetch("/api/user-data")
+            .then((res) => res.json())
+            .then((data) => {
+                setUserData(data.data);
+            });
+    }, [templateId]);
+
+    const handleTemplateSwitch = (newId) => {
+        const newTemplate = templates.find((t) => t.id === newId);
+        if (newTemplate) {
+            setSelectedTemplate(newTemplate);
+        }
+    };
+
+    const handleDownload = () => {
+        if (!user) {
+            navigate("/auth");
+            return;
+        }
+
+        const input = resumeRef.current;
+        html2canvas(input).then((canvas) => {
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+            pdf.save("my-resume.pdf");
+        });
+    };
+
+    if (!selectedTemplate || !userData) {
+        return <p style={{ textAlign: "center", paddingTop: "2rem" }}>Loading template...</p>;
     }
-  };
 
-  const handleDownload = () => {
-    const input = resumeRef.current;
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("my-resume.pdf");
-    });
-  };
+    const dynamicStyle = templateStyles[selectedTemplate.id] || {};
+    const savedData = JSON.parse(localStorage.getItem("resumeData"));
+    const resumeData = savedData || userData;
 
-  if (!selectedTemplate || !userData) {
-    return <p style={{ textAlign: "center", paddingTop: "2rem" }}>Loading template...</p>;
-  }
-
-  const dynamicStyle = templateStyles[selectedTemplate.id] || {};
-  const savedData = JSON.parse(localStorage.getItem("resumeData"));
-  const resumeData = savedData || userData;
-
-  return (
-    <ResumeProvider
-      initialData={resumeData}
-      style={dynamicStyle}
-      editModeFromURL={editModeFromURL}
-    >
-      <div className="templateSectionn" style={{ display: "flex" }}>
-        <div
-          style={{
-            width: "40%",
-            padding: "1rem",
-            borderRight: "1px solid #ccc",
-            height: "auto",
-          
-            backdropFilter: "blur(10px)",
-          }}
-        >
-          <h3 style={{ marginBottom: "1rem" }}>Templates</h3>
-          {templates.map((tpl) => (
-            <div
-              key={tpl.id}
-              className="templateCardd"
-              style={{
-                border:
-                  tpl.id === selectedTemplate.id
-                    ? "2px solid #fddb60"
-                    : "1px solid rgba(255,255,255,0.6)",
-              }}
-              onClick={() => handleTemplateSwitch(tpl.id)}
+    return (
+        <>
+            <ResumeProvider
+                initialData={resumeData}
+                style={dynamicStyle}
+                editModeFromURL={editModeFromURL}
             >
-              <img
-                src={tpl.thumbnail}
-                alt={tpl.name}
-                className="templatePreview"
-              />
-              <p>{tpl.name}</p>
-            </div>
-          ))}
-        </div>
+                <Navbar onDownload={handleDownload} />
+                <div className="templateSectionn" style={{ display: "flex", height: "100vh", overflow: "hidden", margin: "4rem 0 0 0" }}>
+                    <div
+                        style={{
+                            width: "30%",
+                            padding: "1rem",
+                            overflowY: "auto",
+                            height: "100%",
+                            backdropFilter: "blur(10px)",
+                        }}
+                        className="hide-scroll"
+                    >
+                        <h3 style={{ marginBottom: "1rem" }}>Templates</h3>
+                        {templates.map((tpl) => (
+                            <div
+                                key={tpl.id}
+                                className="templateCardd"
+                                style={{
+                                    border:
+                                        tpl.id === selectedTemplate.id
+                                            ? "2px solid #fddb60"
+                                            : "1px solid rgb(249, 247, 247)",
+                                }}
+                                onClick={() => handleTemplateSwitch(tpl.id)}
+                            >
+                                <p style={{ marginTop: "0.5rem", textAlign: "center" }}>{tpl.name}</p>
+                                <div style={{
+                                    height: "300px",
+                                    overflow: "hidden",
+                                    borderRadius: "10px",
 
-        <div style={{ flexGrow: 1, padding: "2rem", textAlign: "center" }}>
-          <button
-            onClick={() => navigate("/")}
-            className="btnSecondary"
-            style={{ marginBottom: "1rem" }}
-          >
-            ← Back to Templates
-          </button>
-
-          <Toolbarr />
-          <Toolbar/>
+                                }} >
+                                    <iframe
+                                        src={`${tpl.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
+                                        width="100%"
+                                        height="300px"
+                                        style={{ pointerEvents: "none", border: "none" }}
+                                    />
+                                </div>
 
 
-          <div
-            ref={resumeRef}
-            style={{ margin: "2rem auto", width: "fit-content" }}
-          >
-            <ResumeRenderer template={selectedTemplate} />
-          </div>
 
-          <button
-            onClick={handleDownload}
-            className="btnPrimary"
-            style={{ marginTop: "1rem" }}
-          >
-            Download PDF
-          </button>
-        </div>
-      </div>
-    </ResumeProvider>
-  );
+                            </div>
+                        ))}
+                    </div>
+
+                    <div
+                        style={{
+                            flexGrow: 1,
+                            padding: "2rem",
+                            overflowY: "auto",
+                            height: "100%",
+                            textAlign: "center",
+                            width: "70%"
+                        }}
+                        className="hide-scroll"
+                    >
+                        {/* <button
+                        onClick={() => navigate("/")}
+                        className="btnSecondary"
+                        style={{ marginBottom: "1rem" }}
+                    >
+                        ← Back to Templates
+                    </button> */}
+
+                        <Toolbar />
+                        <SaveControls />
+
+                        <div
+                            ref={resumeRef}
+                            style={{ margin: "2rem auto", width: "fit-content" }}
+                        >
+                            <ResumeRenderer template={selectedTemplate} />
+                        </div>
+
+                        <button
+                            onClick={handleDownload}
+                            className="btnPrimary"
+                            style={{ marginTop: "1rem" }}
+                        >
+                            Download PDF
+                        </button>
+                    </div>
+                </div>
+            </ResumeProvider>
+            <Footer />
+        </>
+    );
 }

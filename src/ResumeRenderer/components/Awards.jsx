@@ -14,27 +14,23 @@ export default function Awards() {
 
   return (
     <div className="awards" style={style?.award?.box}>
-      <h2 style={style?.award?.heading}>Honours & Awards</h2>
+      <h2 contentEditable={editMode}
+        suppressContentEditableWarning
+        onBlur={(e) => handleBlur(index, "Title", e)} style={style?.award?.heading}>Honours & Awards</h2>
       <div style={style?.award?.innerBox}>
         {data.awards.map((awr, index) => (
           <div key={index} style={style?.award?.eachAward}>
-            <p style={style?.award?.title}>
-              <span
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                onBlur={(e) => handleBlur(index, "Title", e)}
-              >
-                {awr.Title}
-              </span>
+            <p contentEditable={editMode}
+              suppressContentEditableWarning
+              onBlur={(e) => handleBlur(index, "Title", e)} style={style?.award?.title}>
+
+              {awr.Title}
             </p>
-            <p style={style?.award?.date}>
-              <span
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                onBlur={(e) => handleBlur(index, "Date", e)}
-              >
-                {awr.Date}
-              </span>
+            <p contentEditable={editMode}
+              suppressContentEditableWarning
+              onBlur={(e) => handleBlur(index, "Title", e)} style={style?.award?.date}>
+
+              {awr.Date}
             </p>
           </div>
         ))}

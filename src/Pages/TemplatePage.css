@@ -1,4 +1,4 @@
-.allTemplatesPage {
+/* .allTemplatesPage {
   padding: 6rem 2rem;
   background: linear-gradient(to right, #d3bae7, #fdda7c);
   font-family: 'Segoe UI', sans-serif;
@@ -40,3 +40,20 @@
   justify-items: center;
   padding-top: 1rem;
 }
+
+
+
+.templateCard {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+.templateCard:hover {
+  transform: translateY(-3px);
+}
+.templatePreview {
+  margin-bottom: 1rem;
+} */

@@ -1,6 +1,7 @@
 export const template1 = {
     id: 1,
     name: "Modern Grid",
+    pdf: "/templates/template1.pdf",
     layout: {
         grid: {
             templateColumns: "2fr 3fr",
@@ -42,6 +43,7 @@ export const template1 = {
 const template2 = {
     id: 2,
     name: "Clean Classic",
+     pdf: "/templates/template2.pdf",
     layout: {
         grid: {
             templateRows: "1fr 1fr 1fr 1fr 1fr",
@@ -108,6 +110,7 @@ const template2 = {
 const template3 = {
     id: 3,
     name: "Basic Two Columns",
+     pdf: "/templates/template3.pdf",
     layout: {
         grid: {
             templateRows: "1fr 0.1fr 12fr",
@@ -161,6 +164,7 @@ const template3 = {
 const template4 = {
     id: 4,
     name: "Avatar template",
+    pdf: "/templates/template4.pdf",
     layout: {
         grid: {
             templateRows: "auto",

@@ -1,19 +1,22 @@
 
-import { useResume } from '../../context/ResumeContext';
-import EditableRichTextArea from '../../EditableFields/EditableRichTextArea';
+import { useResume } from "../../context/ResumeContext"
 
 export default function Summary() {
-  const { style } = useResume();
+  const { data, style, updateField, editMode } = useResume();
+  const handleBlur = (key, e) => {
+    const newValue = e.target.textContent;
+    updateField('summary', key, newValue);
+  };
+
 
   return (
-    <div style={style?.summary?.box}>
-      <h2 style={style?.summary?.heading}>Summary</h2>
-      <EditableRichTextArea
-        section={null}            // ✅ Since summary is a string at root
-        field="summary"
-        rows={5}
-        style={style?.summary?.content} // ✅ match this with your template style key
-      />
+    <div className="summary" style={style?.summary?.box}>
+      <h2 contentEditable={editMode}
+        suppressContentEditableWarning={true}
+        onBlur={(e) => handleBlur(index, e)} style={style?.summary?.heading}>Summary</h2>
+      <p contentEditable={editMode}
+        suppressContentEditableWarning={true}
+        onBlur={(e) => handleBlur(index, e)} style={style?.summary?.content}>{data.summary}</p>
     </div>
-  );
+  )
 }

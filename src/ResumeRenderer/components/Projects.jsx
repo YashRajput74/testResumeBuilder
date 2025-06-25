@@ -1,56 +1,221 @@
 
 
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+// import { useResume } from '../../context/ResumeContext';
+// import FloatingToolbarPro from '../../Pages/FloatingToolbarPro';
+
+// export default function Projects() {
+//   const { data, style, editMode, updateField,selectedSection, setSelectedSection  } = useResume();
+
+//   const showToolbar = selectedSection === 'Projects';
+
+//   const handleBlur = (index, key, e) => {
+//     const updated = [...data.project];
+//     updated[index][key] = e.target.innerText.trim();
+//     updateField('project', null, updated);
+//   };
+//   return (
+//     <div className="projects" style={style?.projects?.box}
+//      onClick={() => setSelectedSection("Projects")}
+//     >
+//       <h2 contentEditable={editMode}
+//         suppressContentEditableWarning
+//         onBlur={(e) => handleBlur(index, "Title", e)} style={style?.projects?.heading}>Projects</h2>
+        
+//         {showToolbar && (
+//           <FloatingToolbarPro sectionKey="Projects" position={{ top: "-45px", right: "20px" }} />
+//         )}
+//       {data.projects.map((project, index) => (
+//         <div className="eachProject" key={index} style={style?.projects?.eachProject}>
+//           <h3 contentEditable={editMode}
+//             suppressContentEditableWarning
+//             onBlur={(e) => handleBlur(index, "Title", e)} style={style?.projects?.title}>{project.Title}
+//             <a contentEditable={editMode}
+//               suppressContentEditableWarning
+//               onBlur={(e) => handleBlur(index, "Title", e)} href={project.Link} target="_blank" rel="noopener noreferrer">
+//               <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon" size="sm" style={style?.projects?.icon} />
+//             </a>
+//           </h3>
+
+//           {Array.isArray(project.Description) ? (
+//             <ul style={style?.projects?.list}>
+//               {project.Description.map((point, i) => (
+//                 <li contentEditable={editMode}
+//                   suppressContentEditableWarning
+//                   onBlur={(e) => handleBlur(index, "Title", e)} key={i} style={style?.projects?.listItem}>{point}</li>
+//               ))}
+//             </ul>
+//           ) : (
+//             <p contentEditable={editMode}
+//               suppressContentEditableWarning
+//               onBlur={(e) => handleBlur(index, "Title", e)} style={style?.projects?.description}>{project.Description}</p>
+//           )}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+// import { useResume } from '../../context/ResumeContext';
+// import FloatingToolbarPro from '../../Pages/FloatingToolbarPro';
+// export default function Projects() {
+//   const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();
+
+//   const showToolbar = selectedSection === "projects";
+
+//   const handleBlur = (index, key, e) => {
+//     const updated = [...data.project];
+//     updated[index][key] = e.target.innerText.trim();
+//     updateField("projects", null, updated);
+//   };
+
+//   return (
+//     <div
+//       className="projects resumeSection"
+//       style={style?.projects?.box}
+//       onClick={() => setSelectedSection("projects")}
+//     >
+//       <h2
+//         contentEditable={editMode}
+//         suppressContentEditableWarning
+//         onBlur={(e) => handleBlur(0, "Title", e)}
+//         style={style?.projects?.heading}
+//       >
+//         Projects
+//       </h2>
+
+//       {showToolbar && (
+//         <FloatingToolbarPro sectionKey="projects" position={{ top: "-45px", right: "20px" }} />
+//       )}
+
+//       {data.projects.map((project, index) => (
+//         <div className="eachProject" key={index} style={style?.projects?.eachProject}>
+//           <h3
+//             contentEditable={editMode}
+//             suppressContentEditableWarning
+//             onBlur={(e) => handleBlur(index, "Title", e)}
+//             style={style?.projects?.title}
+//           >
+//             {project.Title}
+//             <a
+//               contentEditable={editMode}
+//               suppressContentEditableWarning
+//               onBlur={(e) => handleBlur(index, "Link", e)}
+//               href={project.Link}
+//               target="_blank"
+//               rel="noopener noreferrer"
+//             >
+//               <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon" size="sm" style={style?.projects?.icon} />
+//             </a>
+//           </h3>
+// {selectedSection === "projects" && <div style={{position: "absolute", top: "-30px", right: "0", background: "red", color: "#fff", padding: "5px 10px"}}>Toolbar Test ✅</div>}
+
+//           {Array.isArray(project.Description) ? (
+//             <ul style={style?.projects?.list}>
+//               {project.Description.map((point, i) => (
+//                 <li
+//                   key={i}
+//                   contentEditable={editMode}
+//                   suppressContentEditableWarning
+//                   onBlur={(e) => {
+//                     const updated = [...data.projects];
+//                     updated[index].Description[i] = e.target.innerText.trim();
+//                     updateField("projects", null, updated);
+//                   }}
+//                   style={style?.projects?.listItem}
+//                 >
+//                   {point}
+//                 </li>
+//               ))}
+//             </ul>
+//           ) : (
+//             <p
+//               contentEditable={editMode}
+//               suppressContentEditableWarning
+//               onBlur={(e) => handleBlur(index, "Description", e)}
+//               style={style?.projects?.description}
+//             >
+//               {project.Description}
+//             </p>
+//           )}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { useResume } from '../../context/ResumeContext';
+import FloatingToolbarPro from '../../Pages/FloatingToolbarPro';
 
 export default function Projects() {
-  const { data, updateField, editMode, style } = useResume();
-
-  const handleChange = (index, key, value) => {
-    const updated = [...data.projects];
-    updated[index][key] = value;
-    updateField("projects", null, updated);
-  };
+  const {
+    data,
+    style,
+    editMode,
+    updateField,
+    selectedSection,
+    setSelectedSection,
+  } = useResume();
 
   const handleBlur = (index, key, e) => {
-    let value = e.target.innerText.trim();
-    if (key === "Description" && value.includes("\n")) {
-      value = value.split("\n");
-    }
-    handleChange(index, key, value);
-  };
-
-  const handleAdd = () => {
-    const updated = [...data.projects, { Title: "New Project", Link: "", Description: "" }];
+    const updated = [...data.projects];
+    updated[index][key] = e.target.innerText.trim();
     updateField("projects", null, updated);
   };
 
-  const handleRemove = (index) => {
-    const updated = data.projects.filter((_, i) => i !== index);
+  const handleDescBlur = (index, i, e) => {
+    const updated = [...data.projects];
+    updated[index].Description[i] = e.target.innerText.trim();
     updateField("projects", null, updated);
   };
 
   return (
-    <div className="projects" style={style?.projects?.box}>
-      <h2 style={style?.projects?.heading}>Projects</h2>
+    <div
+      className="projects resumeSection"
+      style={{ ...style?.projects?.box, position: "relative" }}
+      onClick={() => setSelectedSection("projects")}
+    >
+      <h2
+        contentEditable={editMode}
+        suppressContentEditableWarning
+        style={style?.projects?.heading}
+      >
+        Projects
+      </h2>
+
+      {/* ✅ Floating Toolbar */}
+      {selectedSection === "projects" && (
+        <FloatingToolbarPro
+          sectionKey="projects"
+          position={{ top: "-45px", right: "20px" }}
+        />
+      )}
 
       {data.projects.map((project, index) => (
-        <div key={index} className="eachProject" style={style?.projects?.eachProject}>
-          <h3 style={style?.projects?.title}>
-            <span
-              contentEditable={editMode}
-              suppressContentEditableWarning
-              onBlur={(e) => handleBlur(index, "Title", e)}
-            >
-              {project.Title}
-            </span>
-
+        <div
+          className="eachProject"
+          key={index}
+          style={style?.projects?.eachProject}
+        >
+          <h3
+            contentEditable={editMode}
+            suppressContentEditableWarning
+            onBlur={(e) => handleBlur(index, "Title", e)}
+            style={style?.projects?.title}
+          >
+            {project.Title}
             <a
               href={project.Link}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ marginLeft: "10px" }}
+              style={{ marginLeft: "8px" }}
             >
               <FontAwesomeIcon
                 icon={faArrowUpRightFromSquare}
@@ -61,62 +226,32 @@ export default function Projects() {
             </a>
           </h3>
 
-          {editMode ? (
-            <>
-              <p
-                contentEditable
-                suppressContentEditableWarning
-                onBlur={(e) => handleBlur(index, "Link", e)}
-                style={{ ...style?.projects?.title }}
-              >
-                {project.Link}
-              </p>
-
-              <div
-                contentEditable
-                suppressContentEditableWarning
-                onBlur={(e) => handleBlur(index, "Description", e)}
-                style={{ ...style?.projects?.description, whiteSpace: "pre-wrap" }}
-              >
-                {Array.isArray(project.Description)
-                  ? project.Description.join("\n")
-                  : project.Description}
-              </div>
-
-             
-            </>
+          {Array.isArray(project.Description) ? (
+            <ul style={style?.projects?.list}>
+              {project.Description.map((point, i) => (
+                <li
+                  key={i}
+                  contentEditable={editMode}
+                  suppressContentEditableWarning
+                  onBlur={(e) => handleDescBlur(index, i, e)}
+                  style={style?.projects?.listItem}
+                >
+                  {point}
+                </li>
+              ))}
+            </ul>
           ) : (
-            <>
-              {Array.isArray(project.Description) ? (
-                <ul style={style?.projects?.list}>
-                  {project.Description.map((point, i) => (
-                    <li key={i} style={style?.projects?.listItem}>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p style={style?.projects?.description}>{project.Description}</p>
-              )}
-            </>
+            <p
+              contentEditable={editMode}
+              suppressContentEditableWarning
+              onBlur={(e) => handleBlur(index, "Description", e)}
+              style={style?.projects?.description}
+            >
+              {project.Description}
+            </p>
           )}
         </div>
       ))}
-
-      {editMode && (
-        <button
-          onClick={handleAdd}
-          style={{
-            marginTop: "10px",
-            border: "1px dashed gray",
-            background: "none",
-            padding: "5px 10px",
-            cursor: "pointer"
-          }}
-        >
-          + Add Project
-        </button>
-      )}
     </div>
   );
 }

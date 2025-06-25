@@ -152,10 +152,10 @@
 
 
 const mockUserData = {
-   firstName: "Ayesha",
-    lastName: "Takia",
+   firstName: "Yash",
+    lastName: "Rajput",
     position: "Web Developer",
-    profilePhoto: "https://media-public.canva.com/rmBDc/MAEiuyrmBDc/1/s.jpg",
+    profilePhoto: "https://media-public.canva.com/p7zgk/MAEugcp7zgk/1/t.jpg",
     summary: 'yash Rajput is a very good coder no one can beat him !',
    contact:{
     

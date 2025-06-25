@@ -1,5 +1,5 @@
 
-
+import { useEffect } from "react";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import WorkExperience from "./components/WorkExperience";
@@ -12,7 +12,7 @@ import Strengths from "./components/Strength";
 import Achievements from "./components/Achivements";
 import Language from "./components/Language";
 import Awards from "./components/Awards";
-
+import Organizations from "./components/Organizations";
 import "./ResumeRenderer.css";
 
 import { useResume } from "../context/ResumeContext";
@@ -28,15 +28,28 @@ const sectionComponents = {
     summary: Summary,
     strengths: Strengths,
     achievements: Achievements,
-    // organizations: Organizations,
+    organizations: Organizations,
     avatar: Avatar,
     language: Language,
     awards: Awards
 };
 
 export default function ResumeRenderer({ template }) {
-  const { data, style } = useResume();
+  const { data, style,setSelectedSection } = useResume();
 
+
+useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (!e.target.closest(".resumeSection")) {
+      setSelectedSection(null);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
   const { grid, fontFamily, fontSize, colorScheme } = template.layout;
 
   const templateId = String(template.id);
