@@ -259,7 +259,7 @@ const template5 = {
 const template6 = {
     id: 6,
     name: "Simple Tactical",
-    pdf: "/templates/template1.pdf",
+    pdf: "/templates/template6.pdf",
     layout: {
         grid: {
             templateRows: "auto",
@@ -298,7 +298,7 @@ const template6 = {
 const template7 = {
     id: 7,
     name: 'Premium Template',
-    pdf: "/templates/template1.pdf",
+    pdf: "/templates/template7.pdf",
     layout: {
         grid: {
             templateRows: "1fr 0.2fr 12fr",

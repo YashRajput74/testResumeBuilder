@@ -543,7 +543,7 @@ html {
   font-size: 1.2rem;
   font-weight: bold;
   background: linear-gradient(90deg, #fddb60, #fff0a1);
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 6px rgba(253, 219, 96, 0.6);
   transition: transform 0.3s ease;
