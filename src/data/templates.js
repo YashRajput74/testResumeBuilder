@@ -203,6 +203,7 @@ const template4 = {
 const template5 = {
     id: 5,
     name: "Spacious Two Column",
+    pdf: "/templates/template5.pdf",
     layout: {
         grid: {
             templateRows: "3fr 9fr",
@@ -258,6 +259,7 @@ const template5 = {
 const template6 = {
     id: 6,
     name: "Simple Tactical",
+    pdf: "/templates/template1.pdf",
     layout: {
         grid: {
             templateRows: "auto",
@@ -296,6 +298,7 @@ const template6 = {
 const template7 = {
     id: 7,
     name: 'Premium Template',
+    pdf: "/templates/template1.pdf",
     layout: {
         grid: {
             templateRows: "1fr 0.2fr 12fr",
@@ -354,4 +357,4 @@ const template7 = {
     }
 }
 
-export const templates = [template1, template2, template3, template4, template5, template6, template7];
+export const templates = [template1, template2, template3, template4, template6, template7];

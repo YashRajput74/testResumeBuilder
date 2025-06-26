@@ -290,10 +290,10 @@
   background-color: rgba(0, 0, 0, 0.6);
   padding: 6px;
   border-radius: 50%;
-  display: none; /* hidden by default */
+  display: none; 
   cursor: pointer;
 }
 
 .hover-image:hover .edit-overlay {
-  display: flex; /* only show on hover */
+  display: flex; 
 }

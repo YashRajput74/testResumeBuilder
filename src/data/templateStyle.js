@@ -524,15 +524,15 @@ const templateStyles = {
                 paddingLeft: "1rem"
             },
             heading: {
-                color: "var(--secondary-color)",
+                color: "var(--primary-color)",
                 textDecoration: "none",
-                borderBottom: "2px solid var(--secondary-color)"
+                borderBottom: "2px solid var(--primary-color)"
             },
             innerBox: {
-                color: "var(--secondary-color)"
+                color: "var(--primary-color)"
             },
             anchor: {
-                color: "var(--secondary-color)"
+                color: "var(--primary-color)"
             }
         },
         summary: {
@@ -541,14 +541,14 @@ const templateStyles = {
                 paddingLeft: "1rem"
             },
             heading: {
-                color: "var(--secondary-color)",
+                color: "var(--primary-color)",
                 textDecoration: "none",
-                borderBottom: "2px solid var(--secondary-color)"
+                borderBottom: "2px solid var(--primary-color)"
             },
             content: {
                 marginTop: "5px",
                 marginBottom: "10px",
-                color: "var(--secondary-color)"
+                color: "var(--primary-color)"
             }
         },
         language: {
@@ -558,14 +558,14 @@ const templateStyles = {
             },
             list: "true",
             heading: {
-                color: "var(--secondary-color)",
+                color: "var(--primary-color)",
                 textDecoration: "none",
-                borderBottom: "2px solid var(--secondary-color)"
+                borderBottom: "2px solid var(--primary-color)"
             },
             wholeList: {
                 marginTop: "5px",
                 marginBottom: "10px",
-                color: "var(--secondary-color)",
+                color: "var(--primary-color)",
             }
         },
         skills: {
@@ -574,14 +574,14 @@ const templateStyles = {
                 paddingLeft: "1rem"
             },
             heading: {
-                color: "var(--secondary-color)",
+                color: "var(--primary-color)",
                 textDecoration: "none",
-                borderBottom: "2px solid var(--secondary-color)",
+                borderBottom: "2px solid var(--primary-color)",
                 marginBottom: "5px"
             },
             eachSkillBox: {
-                color: "var(--secondary-color)",
-                border: "1px solid var(--secondary-color)"
+                color: "var(--primary-color)",
+                border: "1px solid var(--primary-color)"
             }
         },
         personalInfo: {
@@ -665,7 +665,7 @@ const templateStyles = {
         contact: {
             visibleFields: ["email", "phoneNo", "address", "linkedin"],
             box: {
-                marginTop: '2rem'
+                marginTop: '2rem',
             },
             heading: {
                 display: 'none',
@@ -825,3 +825,4 @@ const templateStyles = {
 }
 
 export default templateStyles;
+

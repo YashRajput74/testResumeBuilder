@@ -28,7 +28,7 @@ export default function SaveControls() {
               fontWeight: "600",
             }}
           >
-            💾 Save
+             Save
           </button>
           <button
             onClick={() => setEditMode(false)}
@@ -40,7 +40,7 @@ export default function SaveControls() {
               fontWeight: "600",
             }}
           >
-            ❌ Cancel
+            Cancel
           </button>
         </>
       ) : (

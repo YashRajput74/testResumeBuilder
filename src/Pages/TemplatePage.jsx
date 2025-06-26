@@ -4,6 +4,7 @@ import Header from '../Components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { templates } from '../data/templates';
 import Footer from '../Components/Footer/Footer';
+import { useState } from 'react';
 
 export default function AllTemplatesPage() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function AllTemplatesPage() {
   const handleSelectTemplate = (template) => {
     navigate(`/resume/${template.id}`);
   };
+  
 
   return (
     <>
@@ -43,7 +45,12 @@ export default function AllTemplatesPage() {
       </div>
     </div>
   </div>
-</div>
+</div> 
+
+ 
+
+   
+
 
 
       {templates.length === 0 ? (

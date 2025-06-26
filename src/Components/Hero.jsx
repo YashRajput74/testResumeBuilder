@@ -8,7 +8,7 @@ export default function Hero(){
     return (
        <section className="hero">
         <div className="heroContent">
-          <div  className='uprpara'>Allow customization and optimization for different job roles</div>
+          <div  className='center'>Allow customization and optimization for different job roles</div>
           <h1>Build your Resume Instantly</h1>
           <p>
           Create a <span className="highlighted">professional</span> resume using

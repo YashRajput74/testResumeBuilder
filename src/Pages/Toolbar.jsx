@@ -39,61 +39,43 @@ export default function Toolbar() {
     document.execCommand(command, false, value);
   };
 
-  // const toolbarStyle = {
-  //   position: "fixed",
-  //   top: '120px',
-  //   left:  '606px',
-  //   right: 0,
-  //   zIndex: 999,
-  //   width: "50%",
-  //   background: "linear-gradient(to right, #fef6ff, #fff3f3)",
-  //   backdropFilter: "blur(10px)",
-  //   borderBottom: "1px solid #cda1e2;",
-  //   padding: "10px 20px",
-  //   display: "flex",
-  //   flexWrap: "wrap",
-  //   justifyContent: "center",
-  //   gap: "10px",
-  //   boxShadow: "0 4px 10px rgba(0, 0, 0, 0.08)",
-  //   borderRadius: "13px 36px 13px 36px",
-   
-  // };
-  const toolbarStyle = {
+  
+const toolbarStyle = {
   position: "fixed",
   top: "120px",
   left: "606px",
   right: 0,
   zIndex: 999,
   width: "50%",
-  background: "linear-gradient(to right, #1e1e1e, #2a2a2a)", // subtle black gradient
-  backdropFilter: "blur(8px)",
-  padding: "10px 20px",
+  background: "linear-gradient(to right, #f3e5f5, #fff3e0)", 
+  backdropFilter: "blur(12px)",
+  padding: "12px 20px",
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "center",
   gap: "10px",
-
-  // 🟣 Softer, professional styling
-  borderRadius: "6px",
-  color: "white",
-  boxShadow: "0 0 8px #c6a9e3", // soft purple glow
-  border: "1px solid #333", // subtle border to separate from background
+  borderRadius: "12px",
+  color: "#333",
+  boxShadow: "0 4px 12px rgba(211, 176, 235, 0.4)",
+  border: "1px solid rgba(255, 255, 255, 0.3)",
 };
 
 
-  const buttonStyle = {
-    padding: "8px 12px",
-    borderRadius: "8px",
-    fontSize: "14px",
-    fontWeight: "500",
-    cursor: "pointer",
-    color: "#6a1b9a",
-     background: "#3a3a3a",               // hover darken
-  borderColor: "#c6a9e3",              // purple border on hover
-  color: "#ffffff",                    // text white on hover
-  boxShadow: "0 0 6px #c6a9e3",  
-    transition: "all 0.2s",
-  };
+
+ const buttonStyle = {
+  padding: "8px 14px",
+  background: "linear-gradient(to right, #d5bce3, #fddb7c)", 
+  border: "1px solid #e8d0f5",
+  borderRadius: "8px",
+  fontSize: "14px",
+  fontWeight: "500",
+  cursor: "pointer",
+  color: "#1f1f1f",
+  boxShadow: "0 2px 6px rgba(198, 169, 227, 0.3)",
+  transition: "all 0.2s ease-in-out",
+};
+
+
 if (!editMode) return null;
   return (
     <div className="toolbar" style={toolbarStyle}>
@@ -113,7 +95,6 @@ if (!editMode) return null;
       </button>
       <button style={buttonStyle} onClick={() => exec("undo")}>↩️ Undo</button>
       <button style={buttonStyle} onClick={() => exec("redo")}>↪️ Redo</button>
-      <button style={buttonStyle} onClick={() => exec("removeFormat")}>🧹 Clear</button>
     </div>
   );
 }
