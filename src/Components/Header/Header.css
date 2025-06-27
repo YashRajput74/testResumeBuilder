@@ -194,19 +194,14 @@ html {
 }
 
 .allTemplatesGrid {
-    display: flex;
+   display: flex;
     flex-wrap: wrap;
     margin: 3rem;
-    gap: 4rem;
+    gap: 2rem;
     justify-content: center;
     align-items: center;
-}
-
-.allTemplatesGrid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
+    scroll-behavior: smooth;
+    z-index: 1;
 }
 
 .templateScroll {
@@ -459,6 +454,8 @@ html {
     display: flex;
     justify-content: center;
     margin: 40px 0;
+    
+
 }
 
 .filterBar {
@@ -472,6 +469,13 @@ html {
     width: 90%;
     max-width: 900px;
     gap: 20px;
+}
+.filterBar {
+  position: sticky;
+  top: 120px;
+  width: 100%;
+  transition: top 0.3s ease;
+  z-index: 10;
 }
 
 .filterLeft,
@@ -552,6 +556,29 @@ html {
 .templateCardd:hover .templateName {
   transform: scale(1.05);
 }
+
+.filterLeft .barBtn {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 7 5-7z' fill='%23666'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 7px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.filterLeft .barBtn:focus {
+  border-color: #ac3ca8;
+  outline: none;
+}
+
 
 
 

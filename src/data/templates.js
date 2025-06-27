@@ -2,6 +2,8 @@ export const template1 = {
     id: 1,
     name: "Modern Grid",
     pdf: "/templates/template1.pdf",
+    filteredColumn: "2",
+    isAvatar: "false",
     layout: {
         grid: {
             templateColumns: "2fr 3fr",
@@ -44,6 +46,8 @@ const template2 = {
     id: 2,
     name: "Clean Classic",
      pdf: "/templates/template2.pdf",
+      filteredColumn: "1",
+    isAvatar: "false",
     layout: {
         grid: {
             templateRows: "1fr 1fr 1fr 1fr 1fr",
@@ -111,6 +115,8 @@ const template3 = {
     id: 3,
     name: "Basic Two Columns",
      pdf: "/templates/template3.pdf",
+      filteredColumn: "2",
+    isAvatar: "false",
     layout: {
         grid: {
             templateRows: "1fr 0.1fr 12fr",
@@ -165,6 +171,8 @@ const template4 = {
     id: 4,
     name: "Avatar template",
     pdf: "/templates/template4.pdf",
+     filteredColumn: "2",
+    isAvatar: "true",
     layout: {
         grid: {
             templateRows: "auto",
@@ -204,6 +212,8 @@ const template5 = {
     id: 5,
     name: "Spacious Two Column",
     pdf: "/templates/template5.pdf",
+     filteredColumn: "2",
+    isAvatar: "true",
     layout: {
         grid: {
             templateRows: "3fr 9fr",
@@ -260,6 +270,8 @@ const template6 = {
     id: 6,
     name: "Simple Tactical",
     pdf: "/templates/template6.pdf",
+     filteredColumn: "2",
+    isAvatar: "true",
     layout: {
         grid: {
             templateRows: "auto",
@@ -299,6 +311,8 @@ const template7 = {
     id: 7,
     name: 'Premium Template',
     pdf: "/templates/template7.pdf",
+     filteredColumn: "2",
+    isAvatar: "true",
     layout: {
         grid: {
             templateRows: "1fr 0.2fr 12fr",
