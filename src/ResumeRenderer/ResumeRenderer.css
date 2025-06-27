@@ -297,3 +297,6 @@
 .hover-image:hover .edit-overlay {
   display: flex; 
 }
+.resumeSection {
+  pointer-events: auto; /* ✅ required */
+}
