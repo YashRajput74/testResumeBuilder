@@ -8,7 +8,7 @@ export default function Awards() {
 
     const handleBlur = (index, key, e) => {
         const updated = [...data.awards];
-        updated[index][key] = e.target.innerText.trim();
+        updated[index][key] = e.target.innerHTML.trim();
         updateField("awards", null, updated);
     };
 
@@ -41,16 +41,16 @@ export default function Awards() {
                             suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, "Title", e)}
                             style={style?.award?.title}
+                            dangerouslySetInnerHTML={{__html: awr.Title}}
                         >
-                            {awr.Title}
                         </p>
                         <p
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, "Date", e)}
                             style={style?.award?.date}
+                            dangerouslySetInnerHTML={{__html: awr.Date}}
                         >
-                            {awr.Date}
                         </p>
                     </div>
                 ))}

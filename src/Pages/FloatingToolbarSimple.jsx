@@ -76,3 +76,5 @@ export default function FloatingToolbarSimple({ sectionKey, position = {} }) {
         </motion.div>
     );
 }
+
+

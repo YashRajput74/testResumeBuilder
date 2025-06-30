@@ -1,8 +1,16 @@
+
 import FloatingToolbarPro from "../../Pages/FloatingToolbarPro";
 import { useResume } from "../../context/ResumeContext";
 
 export default function Education() {
-    const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();
+    const {
+        data,
+        style,
+        editMode,
+        updateField,
+        selectedSection,
+        setSelectedSection,
+    } = useResume();
 
     const handleBlur = (index, key, e) => {
         const updated = [...data.education];
@@ -12,7 +20,7 @@ export default function Education() {
 
     const handleDescBlur = (index, i, e) => {
         const updated = [...data.education];
-        updated[index].Description[i].text = e.target.innerText.trim();
+        updated[index].Description[i].text = e.target.innerHTML.trim();
         updateField("education", null, updated);
     };
 
@@ -29,10 +37,7 @@ export default function Education() {
             >
                 Education
                 {selectedSection === "education" && (
-                    <FloatingToolbarPro
-                        sectionKey="education"
-                        
-                    />
+                    <FloatingToolbarPro sectionKey="education" />
                 )}
             </h2>
 
@@ -90,9 +95,8 @@ export default function Education() {
                                 suppressContentEditableWarning
                                 onBlur={(e) => handleDescBlur(index, i, e)}
                                 style={style?.education?.listItem}
-                            >
-                                {point.text}
-                            </li>
+                                dangerouslySetInnerHTML={{ __html: point.text }}
+                            />
                         ))}
                     </ul>
                 </div>

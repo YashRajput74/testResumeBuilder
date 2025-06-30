@@ -7,7 +7,7 @@ export default function Language() {
     if (!data?.language) return null;
 
     const handleBlur = (index, e) => {
-        const newValue = e.target.textContent.trim();
+        const newValue = e.target.innerHTML.trim();
         const updatedLanguages = [...data.language];
         updatedLanguages[index] = newValue;
         updateField("language", null, updatedLanguages);
@@ -52,8 +52,8 @@ export default function Language() {
                         suppressContentEditableWarning
                         onBlur={(e) => handleBlur(index, e)}
                         style={itemStyle}
+                        dangerouslySetInnerHTML={ {__html: lang}}
                     >
-                        {lang}
                     </ItemWrapper>
                 ))}
             </Wrapper>

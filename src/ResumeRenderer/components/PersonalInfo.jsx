@@ -6,7 +6,7 @@ export default function PersonalInfo() {
   const { data, style, editMode, updateField } = useResume();
 
   const handleBlur = (field, e) => {
-    const value = e.target.innerText.trim();
+    const value = e.target.innerHTML.trim();
     updateField(null, field, value); 
   };
 
@@ -19,15 +19,15 @@ export default function PersonalInfo() {
           contentEditable={editMode}
           suppressContentEditableWarning
           onBlur={(e) => handleBlur("firstName", e)}
+          dangerouslySetInnerHTML={{__html : data.firstName}}
         >
-          {data.firstName}
         </span>{" "}
         <span
           contentEditable={editMode}
           suppressContentEditableWarning
           onBlur={(e) => handleBlur("lastName", e)}
+           dangerouslySetInnerHTML={{__html : data.lastName}}
         >
-          {data.lastName}
         </span>
       </h1>
 
@@ -36,8 +36,8 @@ export default function PersonalInfo() {
         suppressContentEditableWarning
         onBlur={(e) => handleBlur("position", e)}
         style={style?.personalInfo?.position}
+         dangerouslySetInnerHTML={{__html : data.position}}
       >
-        {data.position}
       </h3>
 
       <p
@@ -45,8 +45,8 @@ export default function PersonalInfo() {
         suppressContentEditableWarning
         onBlur={(e) => handleBlur("summary", e)}
         style={style?.personalInfo?.summary}
+         dangerouslySetInnerHTML={{__html : data.summary}}
       >
-        {data.summary}
       </p>
     </div>
   );

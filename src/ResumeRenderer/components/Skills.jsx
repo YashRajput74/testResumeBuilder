@@ -1,3 +1,4 @@
+
 import { useResume } from "../../context/ResumeContext";
 import FloatingToolbarSimple from "../../Pages/FloatingToolbarSimple";
 
@@ -5,7 +6,7 @@ export default function Skills() {
     const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();//ye
 
     const handleBlur = (index, e) => {
-        const newValue = e.target.textContent.trim();
+        const newValue = e.target.innerHTML.trim();
         const updatedSkills = [...data.skills];
         updatedSkills[index] = newValue;
         updateField("skills", null, updatedSkills);
@@ -34,6 +35,7 @@ export default function Skills() {
                             suppressContentEditableWarning={true}
                             onBlur={(e) => handleBlur(index, e)}
                             style={style?.skills?.listItem}
+                            dangerouslySetInnerHTML={{ __html: skill }} 
                         >
                             {skill}
                         </li>
@@ -62,8 +64,8 @@ export default function Skills() {
                             suppressContentEditableWarning={true}
                             onBlur={(e) => handleBlur(index, e)}
                             style={style?.skills?.eachSkillBox}
+                            dangerouslySetInnerHTML={{ __html: skill }} 
                         >
-                            {skill}
                         </div>
                     ))}
                 </div>

@@ -6,7 +6,7 @@ export default function Achievements() {
 
     const handleBlur = (index, key, e) => {
         const updated = [...data.achievements];
-        updated[index][key] = e.target.innerText.trim();
+        updated[index][key] = e.target.innerHTML.trim();
         updateField("achievements", null, updated);
     };
 
@@ -24,7 +24,6 @@ export default function Achievements() {
                 Achievements
             </h2>
 
-            {/* ✅ Floating Toolbar */}
             {selectedSection === "achievements" && editMode && (
                 <FloatingToolbarSimple
                     sectionKey="achievements"
@@ -39,16 +38,16 @@ export default function Achievements() {
                         suppressContentEditableWarning
                         onBlur={(e) => handleBlur(index, "Title", e)}
                         style={style?.achieve?.title}
+                        dangerouslySetInnerHTML={{__html: achievement.Title}}
                     >
-                        {achievement.Title}
                     </h3>
                     <p
                         contentEditable={editMode}
                         suppressContentEditableWarning
                         onBlur={(e) => handleBlur(index, "Description", e)}
                         style={style?.achieve?.content}
+                        dangerouslySetInnerHTML={{__html: achievement.Description}}
                     >
-                        {achievement.Description}
                     </p>
                 </div>
             ))}

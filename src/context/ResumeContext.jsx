@@ -1,18 +1,17 @@
 
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const ResumeContext = createContext();
 
 export const useResume = () => useContext(ResumeContext);
 
 export function ResumeProvider({ children, initialData, style, editModeFromURL }) {
- const defaultGrid = style?.layout?.areas || [];
-
-  const [gridAreas, setGridAreas] = useState(() => {
-    const saved = localStorage.getItem("gridAreas");
-    return saved ? JSON.parse(saved) : defaultGrid;
-  });
+const defaultOrder = (style?.layout?.areas || []).map(a => a.name);
+const [sectionOrder, setSectionOrder] = useState(() => {
+  const savedOrder = localStorage.getItem("resumeSectionOrder");
+  return savedOrder ? JSON.parse(savedOrder) : defaultOrder;
+});
 
   
   const [data, setData] = useState(() => {
@@ -23,7 +22,13 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL }
   const [editMode, setEditMode] = useState(editModeFromURL || false);
 const [selectedSection, setSelectedSection] = useState(null);
 
-  
+  useEffect(() => {
+  localStorage.setItem("resumeData", JSON.stringify(data));
+}, [data]);
+useEffect(() => {
+  localStorage.setItem("resumeSectionOrder", JSON.stringify(sectionOrder));
+}, [sectionOrder]);
+
 
   const save = () => {
     localStorage.setItem("resumeData", JSON.stringify(data));
@@ -74,9 +79,8 @@ const [selectedSection, setSelectedSection] = useState(null);
     updateField,
     selectedSection,
     setSelectedSection,
-    gridAreas,
-    setGridAreas
-
+     sectionOrder,
+    setSectionOrder,
   }}
 >
       {children}

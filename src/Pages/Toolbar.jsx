@@ -39,7 +39,8 @@ export default function Toolbar() {
     document.execCommand(command, false, value);
   };
 
-  
+
+
 const toolbarStyle = {
   position: "fixed",
   top: "120px",

@@ -6,7 +6,7 @@ export default function Organizations() {
 
   const handleBlur = (index, key, e) => {
     const updated = [...data.organizations];
-    updated[index][key] = e.target.innerText.trim();
+    updated[index][key] = e.target.innerHTML.trim();
     updateField("organizations", null, updated);
   };
 
@@ -31,16 +31,17 @@ export default function Organizations() {
               suppressContentEditableWarning
               onBlur={(e) => handleBlur(index, "Title", e)}
               style={style?.organiz?.title}
+              dangerouslySetInnerHTML={{ __html: org.Title}}
+              
             >
-              {org.Title}
             </p>
             <p
               contentEditable={editMode}
               suppressContentEditableWarning
               onBlur={(e) => handleBlur(index, "Date", e)}
               style={style?.organiz?.date}
+                  dangerouslySetInnerHTML={{ __html: org.Date}}
             >
-              {org.Date}
             </p>
           </div>
         ))}

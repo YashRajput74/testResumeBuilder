@@ -1,23 +1,44 @@
-// components/DraggableSection.jsx
 import { useDrag, useDrop } from "react-dnd";
+import { useResume } from "../context/ResumeContext";
+import sectionComponents from "./sectionComponents"" // 👈 we will explain this below
 
-const ITEM_TYPE = "SECTION";
+const TYPE = "SECTION";
 
-export default function DraggableSection({ id, index, moveSection, children }) {
-  const [, refDrop] = useDrop({
-    accept: ITEM_TYPE,
-    hover(item) {
-      if (item.index !== index) {
-        moveSection(item.index, index);
-        item.index = index;
+export default function DraggableSection({ name, index, moveSection }) {
+  const { selectedSection, setSelectedSection } = useResume();
+
+  const [, dragRef] = useDrag({
+    type: TYPE,
+    item: { name, index },
+  });
+
+  const [, dropRef] = useDrop({
+    accept: TYPE,
+    hover: (draggedItem) => {
+      if (draggedItem.index !== index) {
+        moveSection(draggedItem.index, index);
+        draggedItem.index = index;
       }
     },
   });
 
-  const [, refDrag] = useDrag({
-    type: ITEM_TYPE,
-    item: { id, index },
-  });
+  const SectionComponent = sectionComponents[name];
+  if (!SectionComponent) return null;
 
-  return <div ref={(node) => refDrag(refDrop(node))}>{children}</div>;
+  return (
+    <div
+      ref={(node) => dropRef(dragRef(node))}
+      className="resumeSection"
+      onClick={() => setSelectedSection(name)}
+      style={{
+        border:
+          selectedSection === name ? "2px solid white" : "1px dashed transparent",
+        padding: "4px",
+        cursor: "move",
+        borderRadius: "8px",
+      }}
+    >
+      <SectionComponent />
+    </div>
+  );
 }
