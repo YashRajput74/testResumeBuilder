@@ -1,5 +1,5 @@
 import Header from "../Components/Header/Header";
-import Hero from "../Components/Hero";
+import Hero from "../Components/Hero/Hero";
 import Footer from "../Components/Footer/Footer";
 import TemplateSection from "../Components/TemplateSection";
 import { templates } from "../data/templates";
