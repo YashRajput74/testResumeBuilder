@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import UserAvatar from '../UserAvatar';
 
-export default function Header() {
+export default function Header({ onLoginClick }) {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -55,7 +55,8 @@ export default function Header() {
                     </div>
                 ) : (
                     <>
-                        <Link to="/auth">Log in</Link>
+                        {/* <Link to="/auth">Log in</Link> */}
+                        <div onClick={onLoginClick} style={{cursor: 'pointer' }}>Log In</div>
                         <Link to="/auth" className="signup">Sign Up</Link>
                     </>
                 )}

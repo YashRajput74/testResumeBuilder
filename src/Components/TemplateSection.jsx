@@ -24,14 +24,16 @@ export default function TemplateSection({ templates }) {
           >
             <div className="templatePreview">
               <iframe
-              src={`${template.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
+                src={`${template.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
                 width="100%"
-                height="auto"
+                height="100%"
                 title={template.name}
                 style={{
                   border: '1px solid #ccc',
                   borderRadius: '8px',
                   boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                  pointerEvents: 'none',
+                  
                 }}
               />
             </div>
