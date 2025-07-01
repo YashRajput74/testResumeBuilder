@@ -1,5 +1,5 @@
 
-import './Header/Header'
+import '../Header/Header'
 export default function Hero(){
     function handleScroll(){
         const section=document.getElementById("templates");
