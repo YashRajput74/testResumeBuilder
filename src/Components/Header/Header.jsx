@@ -1,5 +1,3 @@
-
-import './Header.css';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
@@ -7,6 +5,7 @@ import UserAvatar from '../UserAvatar';
 
 export default function Header() {
     const [user, setUser] = useState(null);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -27,7 +26,16 @@ export default function Header() {
     return (
         <header className="headerr">
             <div className="logo">Heitech.</div>
-            <div className="navWrapper">
+
+            <button
+                className="menuToggle"
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Toggle navigation"
+            >
+                ☰
+            </button>
+
+            <div className={`navWrapper ${menuOpen ? "open" : ""}`}>
                 <nav className="navBar">
                     <a href="#home" className="active">Home</a>
                     <a href="#solutions">About ▾</a>
@@ -42,14 +50,7 @@ export default function Header() {
                                     await supabase.auth.signOut();
                                     setUser(null);
                                 }}
-                                style={{
-                                    background: "black",
-                                    color: "white",
-                                    padding: "0.4rem 1rem",
-                                    borderRadius: "20px",
-                                    border: "none",
-                                    cursor: "pointer"
-                                }}
+                                className="logoutBtn"
                             >
                                 Logout
                             </button>
@@ -63,6 +64,5 @@ export default function Header() {
                 </nav>
             </div>
         </header>
-
     );
 }
