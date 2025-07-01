@@ -61,34 +61,39 @@
 //   );
 // }
 
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../supabaseClient"; // Adjust path if needed
+import { supabase } from "../supabaseClient";
 
 export default function Navbar({ onDownload }) {
   const navigate = useNavigate();
-  const [userName, setUserName] = useState("");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const getUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (user?.email) {
-        const name = user.email.split("@")[0];
-        setUserName(name);
-      }
+      setUser(user);
     };
     getUser();
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => {
+      listener?.subscription?.unsubscribe();
+    };
   }, []);
 
-  const getInitials = (name) => {
-    if (!name) return "U";
+  const getInitials = (email) => {
+    if (!email) return "U";
+    const name = email.split("@")[0];
     return name
-      .split(/[._\s]/) // split by dot/underscore/space
+      .split(/[._\s]/)
       .map((part) => part[0])
       .join("")
       .toUpperCase()
-      .slice(0, 2); // limit to 2 letters
+      .slice(0, 2);
   };
 
   return (
@@ -132,23 +137,39 @@ export default function Navbar({ onDownload }) {
           Download
         </button>
 
-        <div
-          title={userName || "Not logged in"}
-          style={{
-            width: "36px",
-            height: "36px",
-            borderRadius: "50%",
-            background: "#444",
-            color: "#fff",
-            fontSize: "0.9rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textTransform: "uppercase",
-          }}
-        >
-          {getInitials(userName)}
-        </div>
+        {user ? (
+          <div
+            title={user.email}
+            style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "50%",
+              background: "#444",
+              color: "#fff",
+              fontSize: "0.9rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textTransform: "uppercase",
+            }}
+          >
+            {getInitials(user.email)}
+          </div>
+        ) : (
+          <button
+            onClick={() => navigate("/auth")}
+            style={{
+              background: "transparent",
+              border: "2px solid #000",
+              borderRadius: "8px",
+              padding: "0.4rem 0.8rem",
+              cursor: "pointer",
+              fontWeight: "600",
+            }}
+          >
+            Log In
+          </button>
+        )}
       </div>
     </header>
   );
