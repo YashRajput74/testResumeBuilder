@@ -124,6 +124,7 @@ html {
     justify-content: center;
     align-items: center;
     margin: 1rem;
+    text-align: center;
 }
 
 .center {
@@ -557,13 +558,39 @@ html {
 }
 
 .menuToggle {
+    width: 55px;
+    height: 22px;
     display: none;
-    font-size: 1.5rem;
+    flex-direction: column;
+    justify-content: space-between;
     background: none;
     border: none;
     cursor: pointer;
-    color: black;
+    padding: 0;
     z-index: 110;
+}
+
+.menuToggle span {
+    display: block;
+    margin-bottom: 2px;
+    height: 4.2px;
+    width: 100%;
+    background: black;
+    border: 1px solid;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.menuToggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(2px, 2px);
+}
+
+.menuToggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.menuToggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
 }
 
 @media (max-width: 900px) {
@@ -582,16 +609,15 @@ html {
     .menuToggle {
         display: block;
         position: absolute;
-        top: 1.2rem;
+        top: 0.8rem;
         right: 2rem;
     }
 
     .navWrapper {
         position: absolute;
         top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0.9);
+        left: 20px;
+        width: 90%;
         backdrop-filter: blur(10px);
         transform: translateY(-200%);
         transition: transform 0.3s ease;
@@ -606,15 +632,29 @@ html {
         flex-direction: column;
         padding: 1rem;
         gap: 1rem;
-        border-radius: 0;
+        border-radius: 10px;
         box-shadow: none;
+        align-items: center;
+        justify-content: center;
     }
 
     .navBar a,
     .navBar .signup,
     .logoutBtn {
-        width: 100%;
-        text-align: center;
+        margin: 0 auto;
+        max-width: 90%;
+    }
+
+    .filterWrapper{
+        margin: 20px 0;
+    }
+
+    .filterBar {
+        flex-direction: column;
+        margin: 0px 15px;
+    }
+    .allTemplatesGrid{
+        margin: 0rem 3rem 3rem 3rem;
     }
 }
 
@@ -622,7 +662,24 @@ html {
     .center {
         font-size: 0.7rem;
     }
-    
+
+    .navWrapper {
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .navWrapper.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .menuToggle {
+        padding: 0.5rem 1rem;
+        font-size: 2rem;
+    }
+
     .hero {
         padding: 1rem 2rem;
     }
@@ -631,16 +688,17 @@ html {
         font-size: 2rem;
     }
 
-    .ctaButtons{
+    .ctaButtons {
         gap: 0rem;
         flex-wrap: nowrap;
     }
 
-    .btnPrimary,.btnSecondary{
+    .btnPrimary,
+    .btnSecondary {
         white-space: nowrap;
     }
 
-    .heroContent button{
+    .heroContent button {
         font-size: 0.9rem;
     }
 }
