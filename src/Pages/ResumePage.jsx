@@ -91,7 +91,6 @@ export default function ResumePage() {
             overflow: "hidden",
           }}
         >
-          {/* 🧩 LEFT: Mini previews */}
           <div
             style={{
               width: "45%",
@@ -105,7 +104,7 @@ export default function ResumePage() {
             }}
             className="hide-scroll"
           >
-            <h3 style={{ width: "100%", marginBottom: "1rem" }}>Templates</h3>
+            <h3 style={{ width: "100%", marginBottom: "1rem", fontSize: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Templates</h3>
 
             {templates.map((tpl) => (
               <div
@@ -123,20 +122,21 @@ export default function ResumePage() {
                   boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
                 }}
               >
-                {/* ✅ Mini scaled renderer */}
                 <div
                   style={{
                     width: "100%",
-                    height: "220px",
+                    height: "300px",
                     overflow: "hidden",
                     position: "relative",
                     borderRadius: "6px",
-                    background: "#f9f9f9",
+                    // background: "#f9f9f9",
+                    top: '0.8rem',
+                    left: '1rem'
                   }}
                 >
                   <div
                     style={{
-                      transform: "scale(0.18)",
+                      transform: "scale(0.26)",
                       transformOrigin: "top left",
                       width: "210mm",
                       height: "297mm",
@@ -160,7 +160,6 @@ export default function ResumePage() {
             ))}
           </div>
 
-          {/* 🧩 RIGHT: Main resume + toolbar */}
           <div
             style={{
               flexGrow: 1,
