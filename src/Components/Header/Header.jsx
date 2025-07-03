@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import UserAvatar from '../UserAvatar';
 
-export default function Header() {
+export default function Header({ onLoginClick }) {
     const [user, setUser] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
     const navRef = useRef();
@@ -86,6 +86,8 @@ export default function Header() {
                         <>
                             <Link to="/auth" onClick={handleNavClick}>Log in</Link>
                             <Link to="/auth" className="signup" onClick={handleNavClick}>Sign Up</Link>
+                            {/* Optional fallback for old login handler */}
+                            {/* <div onClick={onLoginClick} style={{cursor: 'pointer' }}>Log In</div> */}
                         </>
                     )}
                 </nav>
