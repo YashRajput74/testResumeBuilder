@@ -1,12 +1,13 @@
-
-import './Header.css';
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import UserAvatar from '../UserAvatar';
 
 export default function Header() {
     const [user, setUser] = useState(null);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const navRef = useRef();
+    const toggleRef = useRef();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -24,15 +25,48 @@ export default function Header() {
         };
     }, []);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                menuOpen &&
+                navRef.current &&
+                !navRef.current.contains(event.target) &&
+                toggleRef.current &&
+                !toggleRef.current.contains(event.target)
+            ) {
+                setMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [menuOpen]);
+
+    const handleNavClick = () => {
+        setMenuOpen(false);
+    };
+
     return (
         <header className="headerr">
             <div className="logo">Heitech.</div>
-            <div className="navWrapper">
+
+            <button
+                ref={toggleRef}
+                className={`menuToggle ${menuOpen ? "open" : ""}`}
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Toggle navigation"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div ref={navRef} className={`navWrapper ${menuOpen ? "open" : ""}`}>
                 <nav className="navBar">
-                    <a href="#home" className="active">Home</a>
-                    <a href="#solutions">About ▾</a>
-                    <a href="#features">Features ▾</a>
-                    <a href="#templates">Templates</a>
+                    <a href="/" className="active" onClick={handleNavClick}>Home</a>
+                    <a href="#solutions" onClick={handleNavClick}>About ▾</a>
+                    <a href="#features" onClick={handleNavClick}>Features ▾</a>
+                    <a href="#templates" onClick={handleNavClick}>Templates</a>
 
                     {user ? (
                         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
@@ -41,28 +75,21 @@ export default function Header() {
                                 onClick={async () => {
                                     await supabase.auth.signOut();
                                     setUser(null);
+                                    setMenuOpen(false); // Close menu after logout
                                 }}
-                                style={{
-                                    background: "black",
-                                    color: "white",
-                                    padding: "0.4rem 1rem",
-                                    borderRadius: "20px",
-                                    border: "none",
-                                    cursor: "pointer"
-                                }}
+                                className="logoutBtn"
                             >
                                 Logout
                             </button>
                         </div>
                     ) : (
                         <>
-                            <Link to="/auth">Log in</Link>
-                            <Link to="/auth" className="signup">Sign Up</Link>
+                            <Link to="/auth" onClick={handleNavClick}>Log in</Link>
+                            <Link to="/auth" className="signup" onClick={handleNavClick}>Sign Up</Link>
                         </>
                     )}
                 </nav>
             </div>
         </header>
-
     );
 }
