@@ -18,7 +18,7 @@ export default function Summary() {
       <p contentEditable={editMode}
         suppressContentEditableWarning={true}
         onBlur={(e) => handleBlur(index, e)} style={style?.summary?.content}
-    dangerouslySetInnerHTML={{__html: data.Summary}}        
+    dangerouslySetInnerHTML={{__html: data.summary}}        
         >
           
           </p>

@@ -1,6 +1,5 @@
 
 import './Header.css';
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import UserAvatar from '../UserAvatar';
@@ -55,9 +54,7 @@ export default function Header({ onLoginClick }) {
                     </div>
                 ) : (
                     <>
-                        {/* <Link to="/auth">Log in</Link> */}
                         <div onClick={onLoginClick} style={{cursor: 'pointer' }}>Log In</div>
-                        <Link to="/auth" className="signup">Sign Up</Link>
                     </>
                 )}
             </nav>
