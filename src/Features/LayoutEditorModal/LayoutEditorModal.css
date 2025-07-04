@@ -1,0 +1,55 @@
+.layoutEditorModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modalContent {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.sectionList {
+    margin-top: 1rem;
+    border: 1px dashed #ccc;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.sectionItem {
+    background: #f0f0ff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectionItem.hidden {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+.unusedSections {
+    margin-top: 1rem;
+}
+
+.modalButtons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
