@@ -1,55 +1,90 @@
 .layoutEditorModal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 .modalContent {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 500px;
 }
 
-.sectionList {
-    margin-top: 1rem;
-    border: 1px dashed #ccc;
-    padding: 1rem;
-    border-radius: 6px;
+.gridAreaPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.gridAreaBox h4 {
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 16px;
+  color: #222;
+}
+
+.droppableZone {
+  background: #f4f4f4;
+  padding: 0.5rem;
+  border-radius: 6px;
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .sectionItem {
-    background: #f0f0ff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 8px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: #e9e9ff;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: grab;
+  transition: background 0.2s;
 }
 
-.sectionItem.hidden {
-    opacity: 0.5;
-    text-decoration: line-through;
-}
-
-.unusedSections {
-    margin-top: 1rem;
+.sectionItem:hover {
+  background: #d7d7fa;
 }
 
 .modalButtons {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.unusedSections {
+  margin-top: 2rem;
+}
+
+.unusedSections h4 {
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+}
+
+.unusedSections button {
+  margin: 0.25rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 13px;
+  cursor: pointer;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.unusedSections button:hover {
+  background: #e2e2e2;
 }

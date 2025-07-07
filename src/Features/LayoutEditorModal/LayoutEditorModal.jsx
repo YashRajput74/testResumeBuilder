@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./LayoutEditorModal.css";
 import { useResume } from "../../context/ResumeContext";
@@ -9,28 +8,61 @@ const allSections = [
     "projects", "organizations", "awards", "language", "strengths", "achievements"
 ];
 
+const formatAreaName = (name) => {
+    return name
+        .replace(/([A-Z])/g, " $1")
+        .replace(/^./, str => str.toUpperCase());
+};
+
 export default function LayoutEditorModal({ isOpen, onClose }) {
     const { style, setSectionOrder, sectionOrder } = useResume();
 
-    const layoutSections = style?.layout?.grid?.areas?.flatMap(a => a.sections) || [];
-    const [sections, setSections] = useState(sectionOrder.length ? sectionOrder : layoutSections);
+    const originalGridAreas = style?.layout?.grid?.areas || [];
+    const [gridAreas, setGridAreas] = useState(() => {
+        const copy = JSON.parse(JSON.stringify(originalGridAreas));
+        const used = copy.flatMap(a => a.sections);
+        const unused = allSections.filter(s => !used.includes(s));
+
+        return [...copy, { name: "unused", sections: unused }];
+    });
 
     if (!isOpen || !style?.layout?.grid) return null;
 
     const onDragEnd = (result) => {
-        if (!result.destination) return;
-        const items = Array.from(sections);
-        const [moved] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, moved);
-        setSections(items);
+        const { source, destination } = result;
+        if (!destination) return;
+
+        const updated = [...gridAreas];
+        const sourceArea = updated.find(a => a.name === source.droppableId);
+        const destArea = updated.find(a => a.name === destination.droppableId);
+
+        const [moved] = sourceArea.sections.splice(source.index, 1);
+        destArea.sections.splice(destination.index, 0, moved);
+
+        setGridAreas(updated);
     };
 
     const handleApply = () => {
-        setSectionOrder(sections);
+        const newSectionOrder = gridAreas
+            .filter(a => a.name !== "unused")
+            .flatMap(a => a.sections);
+        setSectionOrder(newSectionOrder);
         onClose();
     };
 
-    const unusedSections = allSections.filter((s) => !sections.includes(s));
+    const StrictModeDroppable = ({ children, ...props }) => {
+        const [enabled, setEnabled] = useState(false);
+
+        useEffect(() => {
+            const animation = requestAnimationFrame(() => setEnabled(true));
+            return () => cancelAnimationFrame(animation);
+        }, []);
+
+        if (!enabled) return null;
+        return <Droppable {...props}>{children}</Droppable>;
+    };
+
+    const usedSections = gridAreas.flatMap(a => a.sections);
 
     return (
         <div className="layoutEditorModal">
@@ -38,39 +70,40 @@ export default function LayoutEditorModal({ isOpen, onClose }) {
                 <h2>Edit Layout</h2>
 
                 <DragDropContext onDragEnd={onDragEnd}>
-                    <Droppable droppableId="sections">
-                        {(provided) => (
-                            <div className="sectionList" {...provided.droppableProps} ref={provided.innerRef}>
-                                {sections.map((section, index) => (
-                                    <Draggable key={section} draggableId={section} index={index}>
-                                        {(provided) => (
-                                            <div
-                                                className="sectionItem"
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <span>{section}</span>
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                ))}
-                                {provided.placeholder}
+                    <div className="gridAreaPreview">
+                        {gridAreas.map((area) => (
+                            <div key={area.name} className="gridAreaBox">
+                                <h4>{formatAreaName(area.name)}</h4>
+                                <StrictModeDroppable droppableId={area.name}>
+                                    {(provided) => (
+                                        <div
+                                            className="droppableZone"
+                                            {...provided.droppableProps}
+                                            ref={provided.innerRef}
+                                        >
+                                            {area.sections.map((section, index) => (
+                                                <Draggable key={section} draggableId={String(section)} index={index}>
+                                                    {(provided) => (
+                                                        <div
+                                                            className="sectionItem"
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                        >
+                                                            {section}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </StrictModeDroppable>
                             </div>
-                        )}
-                    </Droppable>
-                </DragDropContext>
-
-                {unusedSections.length > 0 && (
-                    <div className="unusedSections">
-                        <h4>Add Sections:</h4>
-                        {unusedSections.map((section) => (
-                            <button key={section} onClick={() => setSections([...sections, section])}>
-                                ➕ {section}
-                            </button>
                         ))}
                     </div>
-                )}
+
+                </DragDropContext>
 
                 <div className="modalButtons">
                     <button onClick={handleApply}>✅ Apply</button>
