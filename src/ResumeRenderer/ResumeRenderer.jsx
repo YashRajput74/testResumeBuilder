@@ -35,8 +35,7 @@ const sectionComponents = {
 };
 
 export default function ResumeRenderer({ template }) {
-    const { data, style, setSelectedSection, sectionOrder } = useResume();
-
+    const { data, style, customLayoutAreas, setSelectedSection, sectionOrder } = useResume();
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -50,9 +49,16 @@ export default function ResumeRenderer({ template }) {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
-    const { grid, fontFamily, fontSize, colorScheme } = template.layout;
 
-    const templateId = String(template.id);
+    const layout = style?.layout || template?.layout || {};
+    const grid = layout.grid || { templateRows: "", templateColumns: "", rowGap: "", columnGap: "", areas: [] };
+    const fontFamily = layout.fontFamily || "sans-serif";
+    const fontSize = layout.fontSize || "12px";
+    const colorScheme = layout.colorScheme || { background: "#fff", text: "#000" };
+
+    const layoutAreas = customLayoutAreas || grid.areas || [];
+
+    const templateId = style?.templateId || template?.id || "default";
     const templateStyle = templateStyles[templateId] || {};
     const cssVariables = templateStyle.vars || {};
 
@@ -73,7 +79,7 @@ export default function ResumeRenderer({ template }) {
         Array(numCols).fill(".")
     );
 
-    grid.areas.forEach((area) => {
+    layoutAreas.forEach((area) => {
         for (let row = area.rowStart - 1; row < area.rowEnd - 1; row++) {
             for (let col = area.colStart - 1; col < area.colEnd - 1; col++) {
                 gridMatrix[row][col] = area.name;
@@ -82,8 +88,6 @@ export default function ResumeRenderer({ template }) {
     });
 
     const gridTemplateAreas = gridMatrix.map((row) => `"${row.join(" ")}"`).join(" ");
-
-    console.log("grid.areas:", grid.areas);
 
     return (
         <div
@@ -102,7 +106,7 @@ export default function ResumeRenderer({ template }) {
                 ...cssVariables,
             }}
         >
-            {grid.areas.map((area, index) => {
+            {layoutAreas.map((area, index) => {
                 console.log("Checking area:", area.name);
                 console.log("Area.sections:", area.sections);
                 console.log("SectionOrder:", sectionOrder);
