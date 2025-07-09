@@ -78,8 +78,8 @@ export default function ResumeRenderer({ template }) {
         return <SectionComponent />;
     };
 
-    const numRows = grid.templateRows.split(" ").length;
-    const numCols = grid.templateColumns.split(" ").length;
+    const numRows = (grid.templateRows || "").split(" ").length;
+    const numCols = (grid.templateColumns || "").split(" ").length;
 
     const gridMatrix = Array.from({ length: numRows }, () =>
         Array(numCols).fill(".")
