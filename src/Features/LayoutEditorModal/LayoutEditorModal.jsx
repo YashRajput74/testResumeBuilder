@@ -91,43 +91,48 @@ export default function LayoutEditorModal({ isOpen, onClose }) {
 
                 <DragDropContext onDragEnd={onDragEnd}>
                     <div className="gridAreaPreview">
-                        {gridAreas.map((area) => (
-                            <div key={area.name} className="gridAreaBox">
-                                <h4>{formatAreaName(area.name)}</h4>
-                                <StrictModeDroppable droppableId={area.name}>
-                                    {(provided) => (
-                                        <div
-                                            className="droppableZone"
-                                            {...provided.droppableProps}
-                                            ref={provided.innerRef}
-                                        >
-                                            {area.sections.map((section, index) => (
-                                                <Draggable key={section} draggableId={String(section)} index={index}>
-                                                    {(provided) => (
-                                                        <div
-                                                            className="sectionItem"
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                        >
-                                                            {section}
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            ))}
-                                            {provided.placeholder}
-                                        </div>
-                                    )}
-                                </StrictModeDroppable>
-                            </div>
-                        ))}
+                        {["leftColumn", "rightColumn", "unused"].map((areaName) => {
+                            const area = gridAreas.find((a) => a.name === areaName);
+                            if (!area) return null;
+
+                            return (
+                                <div key={area.name} className="gridAreaBox">
+                                    <h4>{formatAreaName(area.name)}</h4>
+                                    <StrictModeDroppable droppableId={area.name}>
+                                        {(provided) => (
+                                            <div
+                                                className="droppableZone"
+                                                {...provided.droppableProps}
+                                                ref={provided.innerRef}
+                                            >
+                                                {area.sections.map((section, index) => (
+                                                    <Draggable key={section} draggableId={String(section)} index={index}>
+                                                        {(provided) => (
+                                                            <div
+                                                                className="sectionItem"
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                            >
+                                                                {section}
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                ))}
+                                                {provided.placeholder}
+                                            </div>
+                                        )}
+                                    </StrictModeDroppable>
+                                </div>
+                            );
+                        })}
                     </div>
 
                 </DragDropContext>
 
                 <div className="modalButtons">
-                    <button onClick={handleApply}>✅ Apply</button>
-                    <button onClick={onClose}>❌ Cancel</button>
+                    <button onClick={handleApply}> Apply</button>
+                    <button onClick={onClose}> Cancel</button>
                 </div>
             </div>
         </div>
