@@ -15,9 +15,9 @@ const formatAreaName = (name) => {
 };
 
 export default function LayoutEditorModal({ isOpen, onClose }) {
-    const { style, setSectionOrder, sectionOrder, setCustomLayoutAreas } = useResume();
+    const { style, setSectionOrder, sectionOrder, customLayoutAreas, setCustomLayoutAreas } = useResume();
 
-    const originalGridAreas = style?.layout?.grid?.areas || [];
+    const originalGridAreas = customLayoutAreas || style?.layout?.grid?.areas || [];
     const [gridAreas, setGridAreas] = useState(() => {
         const copy = JSON.parse(JSON.stringify(originalGridAreas));
         const allowedNames = ["leftColumn", "rightColumn"];
@@ -50,15 +50,21 @@ export default function LayoutEditorModal({ isOpen, onClose }) {
     };
 
     const handleApply = () => {
-        const editedAreas = gridAreas.filter(a => a.name === "leftColumn" || a.name === "rightColumn");
-
+        const editedAreas = gridAreas.filter(a =>
+            ["leftColumn", "rightColumn"].includes(a.name)
+        );
         const untouchedAreas = originalGridAreas.filter(
             a => !["leftColumn", "rightColumn"].includes(a.name)
         );
 
-        const newLayout = [...untouchedAreas, ...editedAreas];
-
-        const newSectionOrder = newLayout.flatMap(a => a.sections);
+        const unusedArea = gridAreas.find(a => a.name === "unused");
+        const newLayout = [
+            ...untouchedAreas,
+            ...editedAreas,
+            ...(unusedArea ? [unusedArea] : [])
+        ];
+        const newSectionsInLayout = newLayout.flatMap(a => a.sections);
+        const newSectionOrder = Array.from(new Set([...sectionOrder, ...newSectionsInLayout]));
         setSectionOrder(newSectionOrder);
         setCustomLayoutAreas(newLayout);
         onClose();

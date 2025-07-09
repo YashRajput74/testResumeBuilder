@@ -3,7 +3,6 @@ import { useResume } from "../../context/ResumeContext"
 
 export default function Summary() {
     const { data, style, updateField, editMode } = useResume();
-    console.log("Summary:", data.summary);
     const handleBlur = (e) => {
         const newValue = e.target.innerHTML;
         updateField("summary", null, newValue);

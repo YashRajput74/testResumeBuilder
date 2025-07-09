@@ -50,7 +50,14 @@ export default function ResumeRenderer({ template }) {
         };
     }, []);
 
-    const layout = style?.layout || template?.layout || {};
+    const layout = {
+        ...style?.layout,
+        grid: {
+            ...style?.layout?.grid,
+            areas: customLayoutAreas || style?.layout?.grid?.areas || []
+        }
+    };
+
     const grid = layout.grid || { templateRows: "", templateColumns: "", rowGap: "", columnGap: "", areas: [] };
     const fontFamily = layout.fontFamily || "sans-serif";
     const fontSize = layout.fontSize || "12px";
@@ -64,7 +71,6 @@ export default function ResumeRenderer({ template }) {
 
     const renderSection = (sectionName) => {
         const SectionComponent = sectionComponents[sectionName];
-        console.log("Rendering section:", sectionName);
         if (!SectionComponent) {
             console.warn("Unknown section:", sectionName);
             return <div style={{ color: "red" }}>❌ {sectionName} not found</div>;
@@ -106,21 +112,27 @@ export default function ResumeRenderer({ template }) {
                 ...cssVariables,
             }}
         >
-            {layoutAreas.map((area, index) => {
-                console.log("Checking area:", area.name);
-                console.log("Area.sections:", area.sections);
-                console.log("SectionOrder:", sectionOrder);
-                const visibleOrderedSections = sectionOrder
-                    .filter((sec) => area.sections.includes(sec));
+            {layoutAreas
+                .filter((area) => area.name !== "unused")
+                .map((area, index) => {
+                    const visibleOrderedSections = area.sections.filter((sec) =>
+                        sectionOrder.includes(sec)
+                    );
 
-                return (
-                    <div key={index} style={{ gridArea: area.name }}>
-                        {visibleOrderedSections.map((section) => (
-                            <div key={section}>{renderSection(section)}</div>
-                        ))}
-                    </div>
-                );
-            })}
+                    const extraSections = area.sections.filter(
+                        (sec) => !visibleOrderedSections.includes(sec) && data[sec] !== undefined
+                    );
+
+                    const allSectionsToRender = [...visibleOrderedSections, ...extraSections];
+
+                    return (
+                        <div key={index} style={{ gridArea: area.name }}>
+                            {allSectionsToRender.map((section) => (
+                                <div key={section}>{renderSection(section)}</div>
+                            ))}
+                        </div>
+                    );
+                })}
         </div>
     );
 }

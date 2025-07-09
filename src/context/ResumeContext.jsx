@@ -4,7 +4,6 @@ export const ResumeContext = createContext();
 export const useResume = () => useContext(ResumeContext);
 
 export function ResumeProvider({ children, initialData, style, editModeFromURL, templateId }) {
-    const [sectionOrder, setSectionOrder] = useState([]);
     const [data, setData] = useState(() => {
         const saved = localStorage.getItem("resumeData");
         return saved ? JSON.parse(saved) : initialData;
@@ -12,14 +11,42 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
 
     const [editMode, setEditMode] = useState(editModeFromURL || false);
     const [selectedSection, setSelectedSection] = useState(null);
-    const [customLayoutAreas,setCustomLayoutAreas] = useState(null);
 
+    const [customLayoutAreas, setCustomLayoutAreas] = useState(null);
+    const [sectionOrder, setSectionOrder] = useState([]);
+
+    // 1. Load custom layout areas from localStorage or fallback
     useEffect(() => {
         if (!templateId || !style?.layout?.grid?.areas) return;
 
+        const layoutKey = `resumeCustomAreas-${templateId}`;
+        const saved = localStorage.getItem(layoutKey);
+
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed)) {
+                    setCustomLayoutAreas(parsed);
+                    return;
+                }
+            } catch {
+                // Fall through to fallback
+            }
+        }
+
+        setCustomLayoutAreas(style.layout.grid.areas || []);
+    }, [templateId, style]);
+
+    // 2. Load section order based on layout or fallback
+    useEffect(() => {
+        if (!templateId) return;
+
         const sectionKey = `resumeSectionOrder-${templateId}`;
         const saved = localStorage.getItem(sectionKey);
-        const fallback = style.layout.grid.areas.flatMap(a => a.sections);
+
+        const fallback = (customLayoutAreas || style?.layout?.grid?.areas || []).flatMap(
+            (a) => a.sections
+        );
 
         try {
             const parsed = JSON.parse(saved);
@@ -31,24 +58,35 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
         } catch {
             setSectionOrder(fallback);
         }
-    }, [templateId, style]);
+    }, [templateId, style, customLayoutAreas]);
 
-    useEffect(() => {
-        localStorage.setItem("resumeData", JSON.stringify(data));
-    }, [data]);
-
+    // 3. Save sectionOrder to localStorage when changed
     useEffect(() => {
         if (!templateId) return;
         const sectionKey = `resumeSectionOrder-${templateId}`;
         localStorage.setItem(sectionKey, JSON.stringify(sectionOrder));
     }, [sectionOrder, templateId]);
 
+    // 4. Save layout changes when modified
+    useEffect(() => {
+        if (!templateId || !customLayoutAreas) return;
+        const layoutKey = `resumeCustomAreas-${templateId}`;
+        localStorage.setItem(layoutKey, JSON.stringify(customLayoutAreas));
+    }, [customLayoutAreas, templateId]);
+
+    // 5. Save resume data
+    useEffect(() => {
+        localStorage.setItem("resumeData", JSON.stringify(data));
+    }, [data]);
+
+    // Called manually when user clicks save
     const save = () => {
         localStorage.setItem("resumeData", JSON.stringify(data));
         setEditMode(false);
         console.log("Saved rich text data:", data);
     };
 
+    // Update any field inside any section
     const updateField = (section, key, value) => {
         console.log("Updating:", section, key, value);
         setData((prev) => {
@@ -80,30 +118,6 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
         });
     };
 
-    useEffect(()=>{
-        if(!templateId || !customLayoutAreas) return;
-        const layoutkey=`resumeCustomAreas-${templateId}`;
-        localStorage.setItem(layoutkey,JSON.stringify(customLayoutAreas));
-    },[customLayoutAreas,templateId]);
-
-    useEffect(()=>{
-        if(!templateId) return;
-        const layoutkey= `resumeCustomAreas-${templateId}`;
-        const saved=localStorage.getItem(layoutkey);
-        if(saved){
-            try{
-                const parsed=JSON.parse(saved);
-                setCustomLayoutAreas(parsed);
-            }
-            catch{
-                setCustomLayoutAreas(null);
-            }
-        }
-        else{
-            setCustomLayoutAreas(null);
-        }
-    },[templateId])
-
     return (
         <ResumeContext.Provider
             value={{
@@ -119,7 +133,7 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
                 sectionOrder,
                 setSectionOrder,
                 customLayoutAreas,
-                setCustomLayoutAreas
+                setCustomLayoutAreas,
             }}
         >
             {children}
