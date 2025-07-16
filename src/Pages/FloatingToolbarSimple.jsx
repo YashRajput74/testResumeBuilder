@@ -15,7 +15,6 @@ const defaultTemplates = {
     organizations: { ...mockUserData.organizations?.[0] },
     achievements: { ...mockUserData.achievements?.[0] },
     awards: { ...mockUserData.awards?.[0] },
-    language: "language",
 };
 
 export default function FloatingToolbarSimple({ sectionKey, position = {} }) {
