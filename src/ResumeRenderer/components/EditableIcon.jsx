@@ -5,7 +5,7 @@ import "./EditableIcon.css";
 import { useResume } from "../../context/ResumeContext";
 
 export default function EditableIcon({ currentIcon, field, iconMap, setIconMap, editMode }) {
-    const { data, style } = useResume();
+    const { style } = useResume();
     const [showPicker, setShowPicker] = useState(false);
     const pickerRef = useRef(null);
 
@@ -41,8 +41,8 @@ export default function EditableIcon({ currentIcon, field, iconMap, setIconMap, 
                 icon={currentIcon}
                 onClick={() => editMode && setShowPicker((prev) => !prev)}
                 style={{
-                    ...style?.contact?.icon,
                     cursor: editMode ? "pointer" : "default",
+                    ...style?.contact?.icon,
                 }}
             />
 
@@ -51,7 +51,7 @@ export default function EditableIcon({ currentIcon, field, iconMap, setIconMap, 
                     {availableIcons.length > 0 ? (
                         availableIcons.map((entry) => (
                             <div key={entry.key} className="icon-option" onClick={() => handleSelect(entry)}>
-                                <FontAwesomeIcon icon={entry.icon} style={style?.contact?.icon}                                />
+                                <FontAwesomeIcon icon={entry.icon} style={style?.contact?.icon} />
                             </div>
                         ))
                     ) : (
