@@ -7,7 +7,7 @@ import { templates } from "../data/templates";
 import { useNavigate } from "react-router-dom";
 import AuthModal from "./AuthModal";
 
-export default function HomePage({onLoginClick}) {
+export default function HomePage() {
   const navigate = useNavigate();
   const [authOpen, setAuthOpen] = useState(false);
 
@@ -20,7 +20,7 @@ export default function HomePage({onLoginClick}) {
 
   return (
     <>
-      <Header onLoginClick={() => setAuthOpen(true)} /> {/* ✅ pass modal opener */}
+      <Header onLoginClick={() => setAuthOpen(true)} /> 
       <Hero />
       <TemplateSection templates={templates} />
       <Footer />
