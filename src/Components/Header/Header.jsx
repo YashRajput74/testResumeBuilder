@@ -48,7 +48,9 @@ export default function Header({ onLoginClick }) {
 
     return (
         <header className="headerr">
-            <div className="logo">Heitech.</div>
+            <Link to="/" className="logo" onClick={handleNavClick} style={{textDecoration: "none"}}>
+                Heitech.
+            </Link>
 
             <button
                 ref={toggleRef}
@@ -75,7 +77,7 @@ export default function Header({ onLoginClick }) {
                                 onClick={async () => {
                                     await supabase.auth.signOut();
                                     setUser(null);
-                                    setMenuOpen(false); // Close menu after logout
+                                    setMenuOpen(false);
                                 }}
                                 className="logoutBtn"
                             >
