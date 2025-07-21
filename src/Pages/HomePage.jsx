@@ -20,7 +20,7 @@ export default function HomePage({onLoginClick}) {
 
   return (
     <>
-      <Header onLoginClick={() => setAuthOpen(true)} /> {/* ✅ pass modal opener */}
+      <Header onLoginClick={() => setAuthOpen(true)} />
       <Hero />
       <TemplateSection templates={templates} />
       <Footer />
