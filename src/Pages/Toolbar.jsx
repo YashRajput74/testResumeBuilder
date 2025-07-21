@@ -41,15 +41,13 @@ export default function Toolbar() {
         document.execCommand(command, false, value);
     };
 
-
-
     const toolbarStyle = {
         position: "fixed",
         top: "120px",
-        left: "606px",
+        left: "830px",
         right: 0,
         zIndex: 999,
-        width: "50%",
+        width: "30%",
         background: "linear-gradient(to right, #f3e5f5, #fff3e0)",
         backdropFilter: "blur(12px)",
         padding: "12px 20px",
@@ -86,8 +84,6 @@ export default function Toolbar() {
                 <button style={buttonStyle} onClick={() => exec("bold")}><b>B</b></button>
                 <button style={buttonStyle} onClick={() => exec("italic")}><i>I</i></button>
                 <button style={buttonStyle} onClick={() => exec("underline")}><u>U</u></button>
-                <button style={buttonStyle} onClick={() => exec("insertUnorderedList")}>• List</button>
-                <button style={buttonStyle} onClick={() => exec("insertOrderedList")}>1. List</button>
                 <button style={buttonStyle} onClick={() => setShowLayoutModal(true)}>
                     Layout
                 </button>
@@ -100,8 +96,6 @@ export default function Toolbar() {
                 >
                     🔗 Link
                 </button>
-                <button style={buttonStyle} onClick={() => exec("undo")}>↩️ Undo</button>
-                <button style={buttonStyle} onClick={() => exec("redo")}>↪️ Redo</button>
             </div>
             <LayoutEditorModal
                 isOpen={showLayoutModal}
