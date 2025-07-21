@@ -12,7 +12,6 @@ export default function AllTemplatesPage() {
     const navigate = useNavigate();
     const [headshotFilter, setHeadshotFilter] = useState("");
     const [columnFilter, setColumnFilter] = useState("");
-    const [previewSize, setPreviewSize] = useState("normal");
     const [viewMode, setViewMode] = useState("carousel");
     const [carouselIndex, setCarouselIndex] = useState(0);
 
@@ -43,7 +42,7 @@ export default function AllTemplatesPage() {
             <div className="templatePreview">
                 <div
                     style={{
-                        transform: previewSize === "compact" ? 'scale(0.22)' : 'scale(0.28)',
+                        transform: 'scale(0.28)',
                         transformOrigin: 'top left',
                         width: '210mm',
                         height: '297mm',
@@ -102,10 +101,6 @@ export default function AllTemplatesPage() {
                             </select>
                         </div>
                         <div className="filterRight">
-                            <select className="barBtn" value={previewSize} onChange={e => setPreviewSize(e.target.value)}>
-                                <option value="normal">Normal View</option>
-                                <option value="compact">Compact View</option>
-                            </select>
                             <select className="barBtn" value={viewMode} onChange={e => { setViewMode(e.target.value); setCarouselIndex(0); }}>
                                 <option value="grid">Grid View</option>
                                 <option value="carousel">Carousel View</option>
@@ -147,7 +142,7 @@ export default function AllTemplatesPage() {
                         <button className="carouselBtn" onClick={handleNext}>&gt;</button>
                     </div>
                 )}
-                <p style={{ textAlign: 'center', fontSize: '0.85rem', color: '#555', marginTop: '0.5rem' }}>
+                <p style={{ textAlign: 'center', fontSize: '0.85rem', color: '#555', marginBottom: '2rem' }}>
                     More templates coming soon. You can switch views to explore better.
                 </p>
             </section>

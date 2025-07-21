@@ -35,7 +35,8 @@ const sectionComponents = {
 };
 
 export default function ResumeRenderer({ template }) {
-    const { data, style, customLayoutAreas, setSelectedSection, sectionOrder } = useResume();
+    const { data, style, setSelectedSection } = useResume();
+
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -49,43 +50,25 @@ export default function ResumeRenderer({ template }) {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+    const { grid, fontFamily, fontSize, colorScheme } = template.layout;
 
-    const layout = {
-        ...style?.layout,
-        grid: {
-            ...style?.layout?.grid,
-            areas: customLayoutAreas || style?.layout?.grid?.areas || []
-        }
-    };
-
-    const grid = layout.grid || { templateRows: "", templateColumns: "", rowGap: "", columnGap: "", areas: [] };
-    const fontFamily = layout.fontFamily || "sans-serif";
-    const fontSize = layout.fontSize || "12px";
-    const colorScheme = layout.colorScheme || { background: "#fff", text: "#000" };
-
-    const layoutAreas = customLayoutAreas || grid.areas || [];
-
-    const templateId = style?.templateId || template?.id || "default";
+    const templateId = String(template.id);
     const templateStyle = templateStyles[templateId] || {};
     const cssVariables = templateStyle.vars || {};
 
     const renderSection = (sectionName) => {
         const SectionComponent = sectionComponents[sectionName];
-        if (!SectionComponent) {
-            console.warn("Unknown section:", sectionName);
-            return <div style={{ color: "red" }}>❌ {sectionName} not found</div>;
-        }
-        return <SectionComponent />;
+        return SectionComponent ? <SectionComponent /> : null;
     };
 
-    const numRows = (grid.templateRows || "").split(" ").length;
-    const numCols = (grid.templateColumns || "").split(" ").length;
+    const numRows = grid.templateRows.split(" ").length;
+    const numCols = grid.templateColumns.split(" ").length;
 
     const gridMatrix = Array.from({ length: numRows }, () =>
         Array(numCols).fill(".")
     );
 
-    layoutAreas.forEach((area) => {
+    grid.areas.forEach((area) => {
         for (let row = area.rowStart - 1; row < area.rowEnd - 1; row++) {
             for (let col = area.colStart - 1; col < area.colEnd - 1; col++) {
                 gridMatrix[row][col] = area.name;
@@ -112,27 +95,13 @@ export default function ResumeRenderer({ template }) {
                 ...cssVariables,
             }}
         >
-            {layoutAreas
-                .filter((area) => area.name !== "unused")
-                .map((area, index) => {
-                    const visibleOrderedSections = area.sections.filter((sec) =>
-                        sectionOrder.includes(sec)
-                    );
-
-                    const extraSections = area.sections.filter(
-                        (sec) => !visibleOrderedSections.includes(sec) && data[sec] !== undefined
-                    );
-
-                    const allSectionsToRender = [...visibleOrderedSections, ...extraSections];
-
-                    return (
-                        <div key={index} style={{ gridArea: area.name }}>
-                            {allSectionsToRender.map((section) => (
-                                <div key={section}>{renderSection(section)}</div>
-                            ))}
-                        </div>
-                    );
-                })}
+            {grid.areas.map((area, index) => (
+                <div key={index} style={{ gridArea: area.name }}>
+                    {area.sections.map((section) => (
+                        <div key={section}>{renderSection(section)}</div>
+                    ))}
+                </div>
+            ))}
         </div>
     );
 }

@@ -48,7 +48,7 @@ export default function Header({ onLoginClick }) {
 
     return (
         <header className="headerr">
-            <Link to="/" className="logo" onClick={handleNavClick} style={{textDecoration: "none"}}>
+            <Link to="/" className="logo" onClick={handleNavClick} style={{ textDecoration: "none" }}>
                 Heitech.
             </Link>
 
@@ -66,7 +66,7 @@ export default function Header({ onLoginClick }) {
             <div ref={navRef} className={`navWrapper ${menuOpen ? "open" : ""}`}>
                 <nav className="navBar">
                     <a href="/" className="active" onClick={handleNavClick}>Home</a>
-                    <a href="#solutions" onClick={handleNavClick}>About ▾</a>
+                    <a  href="/about" onClick={handleNavClick}>About ▾</a>
                     <a href="#features" onClick={handleNavClick}>Features ▾</a>
                     <a href="#templates" onClick={handleNavClick}>Templates</a>
 
@@ -77,7 +77,7 @@ export default function Header({ onLoginClick }) {
                                 onClick={async () => {
                                     await supabase.auth.signOut();
                                     setUser(null);
-                                    setMenuOpen(false); 
+                                    setMenuOpen(false);
                                 }}
                                 className="logoutBtn"
                             >
@@ -85,11 +85,10 @@ export default function Header({ onLoginClick }) {
                             </button>
                         </div>
                     ) : (
-                        <>
-                           <button onClick={onLoginClick} className="loginBtn">Log In</button>
-                           <button onClick={onLoginClick} className="signupBtn">Sign Up</button>
-                         
-                        </>
+                        <div className="authButtons">
+                            <button onClick={onLoginClick} className="loginBtn" style={{marginRight:"1rem"}}>Log In</button>
+                            <button onClick={onLoginClick} className="signupBtn">Sign Up</button>
+                        </div>
                     )}
                 </nav>
             </div>
