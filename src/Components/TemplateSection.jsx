@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import './Header/Header.css';
+>>>>>>> origin/main
 import { useNavigate } from 'react-router-dom';
 import { ResumeProvider } from '../context/ResumeContext';
 import ResumeRenderer from '../ResumeRenderer/ResumeRenderer';
@@ -67,6 +71,10 @@ export default function TemplateSection({ templates }) {
                                     initialData={mockUserData}
                                     style={templateStyles[template.id] || {}}
                                     editModeFromURL={false}
+<<<<<<< HEAD
+=======
+                                    templateId={template.id}
+>>>>>>> origin/main
                                 >
                                     <ResumeRenderer template={template} />
                                 </ResumeProvider>

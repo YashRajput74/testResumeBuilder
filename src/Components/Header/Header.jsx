@@ -77,7 +77,7 @@ export default function Header({ onLoginClick }) {
                                 onClick={async () => {
                                     await supabase.auth.signOut();
                                     setUser(null);
-                                    setMenuOpen(false);
+                                    setMenuOpen(false); 
                                 }}
                                 className="logoutBtn"
                             >
@@ -86,10 +86,9 @@ export default function Header({ onLoginClick }) {
                         </div>
                     ) : (
                         <>
-                            <Link to="/auth" onClick={handleNavClick}>Log in</Link>
-                            <Link to="/auth" className="signup" onClick={handleNavClick}>Sign Up</Link>
-                            {/* Optional fallback for old login handler */}
-                            {/* <div onClick={onLoginClick} style={{cursor: 'pointer' }}>Log In</div> */}
+                           <button onClick={onLoginClick} className="loginBtn">Log In</button>
+                           <button onClick={onLoginClick} className="signupBtn">Sign Up</button>
+                         
                         </>
                     )}
                 </nav>
