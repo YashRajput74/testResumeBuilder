@@ -67,8 +67,7 @@ export default function Header({ onLoginClick }) {
                 <nav className="navBar">
                     <a href="/" className="active" onClick={handleNavClick}>Home</a>
                     <a  href="/about" onClick={handleNavClick}>About ▾</a>
-                    <a href="#features" onClick={handleNavClick}>Features ▾</a>
-                    <a href="#templates" onClick={handleNavClick}>Templates</a>
+                    <a href="#templates" onClick={handleNavClick}>Templates ▾</a>
 
                     {user ? (
                         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
