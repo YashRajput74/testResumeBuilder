@@ -1,0 +1,100 @@
+.template-page {
+    text-align: center;
+    padding: 2rem;
+}
+
+.layoutControls {
+    margin: 1rem auto 2rem;
+}
+
+.layoutSelector {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+    height: 360px;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-card {
+    width: 240px;
+    margin: 0 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-card img {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.carousel-card h3 {
+    padding: 0.5rem 0;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+    color: #333;
+}
+
+.carousel-btn.left {
+    left: -20px;
+}
+
+.carousel-btn.right {
+    right: -20px;
+}
+
+.template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.template-card {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.5rem;
+    background: white;
+    transition: transform 0.2s ease;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+}
+
+.template-card img {
+    width: 100%;
+    border-radius: 4px;
+}

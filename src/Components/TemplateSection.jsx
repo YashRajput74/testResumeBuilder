@@ -1,4 +1,3 @@
-import './Header/Header.css';
 import { useNavigate } from 'react-router-dom';
 import { ResumeProvider } from '../context/ResumeContext';
 import ResumeRenderer from '../ResumeRenderer/ResumeRenderer';

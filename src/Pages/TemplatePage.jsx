@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Header from '../Components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { templates } from '../data/templates';
@@ -10,141 +10,142 @@ import mockUserData from '../data/mockUserData';
 
 export default function AllTemplatesPage() {
     const navigate = useNavigate();
-
     const [headshotFilter, setHeadshotFilter] = useState("");
     const [columnFilter, setColumnFilter] = useState("");
+    const [viewMode, setViewMode] = useState("carousel");
+    const [carouselIndex, setCarouselIndex] = useState(0);
 
-    const handleSelectTemplate = (template) => {
-        navigate(`/resume/${template.id}`);
-    };
-
-    const filteredTemplates = templates.filter(template => {
-        const matchesHeadshot =
-            headshotFilter === "" ||
+    const filtered = templates.filter(template => {
+        const mh = !headshotFilter ||
             (headshotFilter === "with" && template.isAvatar === "true") ||
             (headshotFilter === "without" && template.isAvatar === "false");
-
-        const matchesColumn =
-            columnFilter === "" ||
+        const mc = !columnFilter ||
             (columnFilter === "one" && template.filteredColumn === "1") ||
             (columnFilter === "two" && template.filteredColumn === "2");
-
-        return matchesHeadshot && matchesColumn;
+        return mh && mc;
     });
+
+    const handlePrev = () => setCarouselIndex(i =>
+        i === 0 ? filtered.length - 1 : i - 1
+    );
+    const handleNext = () => setCarouselIndex(i =>
+        i === filtered.length - 1 ? 0 : i + 1
+    );
+
+    const renderCard = (template, style = {}) => (
+        <div
+            key={template.id}
+            className="templateCard"
+            style={style}
+            onClick={() => navigate(`/resume/${template.id}`)}
+        >
+            <div className="templatePreview">
+                <div
+                    style={{
+                        transform: 'scale(0.28)',
+                        transformOrigin: 'top left',
+                        width: '210mm',
+                        height: '297mm',
+                        background: '#fff',
+                        pointerEvents: 'none',
+                        position: 'absolute',
+                        top: '0.8rem',
+                        left: viewMode === "carousel" ? "-0.1rem" : "1.5rem",
+                    }}
+                >
+                    <ResumeProvider
+                        initialData={mockUserData}
+                        style={templateStyles[template.id] || {}}
+                        editModeFromURL={false}
+                    >
+                        <ResumeRenderer template={template} />
+                    </ResumeProvider>
+                </div>
+            </div>
+            <p>{template.name}</p>
+            <button
+                className="customizeBtn"
+                onClick={e => {
+                    e.stopPropagation();
+                    navigate(`/resume/${template.id}?edit=true`);
+                }}
+            >
+                Customize
+            </button>
+        </div>
+    );
 
     return (
         <>
             <section className="allTemplatesPage">
                 <Header />
-
                 <div className="templateIntro">
                     <div className="uprpara">
                         <h1>Pick the Template That Suits You Best</h1>
                         <p>Whether you're creative or corporate — we’ve got you covered!</p>
                     </div>
                 </div>
-
                 <div className="filterWrapper">
                     <div className="filterBar">
                         <div className="filterLeft">
                             <span className="filterLabel">Filters:</span>
-
-                            <select
-                                className="barBtn"
-                                value={headshotFilter}
-                                onChange={e => setHeadshotFilter(e.target.value)}
-                            >
-                                <option value="">Headshot </option>
+                            <select className="barBtn" value={headshotFilter} onChange={e => setHeadshotFilter(e.target.value)}>
+                                <option value="">Headshot</option>
                                 <option value="with">With Photo</option>
                                 <option value="without">Without Photo</option>
                             </select>
-
-                            <select
-                                className="barBtn"
-                                value={columnFilter}
-                                onChange={e => setColumnFilter(e.target.value)}
-                            >
-                                <option value="">Columns </option>
+                            <select className="barBtn" value={columnFilter} onChange={e => setColumnFilter(e.target.value)}>
+                                <option value="">Columns</option>
                                 <option value="one">One Column</option>
                                 <option value="two">Two Column</option>
                             </select>
                         </div>
-
                         <div className="filterRight">
-                            <span className="colorLabel">Color:</span>
-                            <div className="colorOptions">
-                                {["#fff", "#1f1f1f", "#9b8c86", "#1c3d7d", "#4285f4", "#03b5c2", "#31816f", "#f89728", "#d14545"]
-                                    .map((color, i) => (
-                                        <div key={i} className="colorDot" style={{ backgroundColor: color }} />
-                                    ))}
-                            </div>
+                            <select className="barBtn" value={viewMode} onChange={e => { setViewMode(e.target.value); setCarouselIndex(0); }}>
+                                <option value="grid">Grid View</option>
+                                <option value="carousel">Carousel View</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
-                {filteredTemplates.length === 0 ? (
+                {filtered.length === 0 ? (
                     <p style={{ textAlign: 'center', marginTop: '2rem' }}>No templates available.</p>
-                ) : (
+                ) : viewMode === "grid" ? (
                     <div className="allTemplatesGrid">
-                        {filteredTemplates.map((template) => (
-                            <div
-                                key={template.id}
-                                className="templateCard"
-                                onClick={() => handleSelectTemplate(template)}
-                            >
-                                <div
-                                    className="templatePreview"
-                                    style={{
-                                        width: '100%',
-                                        height: '340px',
-                                        overflow: 'hidden',
-                                        position: 'relative',
-                                        background: '#f5f5f5',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <div
-                                        style={{
-                                            transform: 'scale(0.28)',
-                                            transformOrigin: 'top left',
-                                            width: '210mm',
-                                            height: '297mm',
-                                            background: '#fff',
-                                            pointerEvents: 'none',
-                                            position: 'absolute',
-                                            top: '0.8rem',
-                                            left: "2.5rem",
-                                        }}
-                                    >
-                                        <ResumeProvider
-                                            initialData={mockUserData}
-                                            style={{ ...templateStyles[template.id], layout: template.layout, templateId: template.id }}
-                                            editModeFromURL={false}
-                                        >
-                                            <ResumeRenderer template={template} />
-                                        </ResumeProvider>
-                                    </div>
-                                </div>
+                        {filtered.map(template => renderCard(template))}
+                    </div>
+                ) : (
+                    <div className="carouselWrapper">
+                        <button className="carouselBtn" onClick={handlePrev}>&lt;</button>
+                        <div className="carousel">
+                            {filtered.map((t, i) => {
+                                const offset = i - carouselIndex;
+                                const abs = Math.abs(offset);
+                                const scale = offset === 0 ? 1 : 0.8;
+                                const rotateY = offset * 30;
+                                const translateX = offset * 180;
+                                const z = offset === 0 ? 2 : 1;
+                                const opacity = abs > 2 ? 0 : 1;
 
-                                <p>{template.name}</p>
-
-                                <button
-                                    className="customizeBtn"
-                                    onClick={e => {
-                                        e.stopPropagation();
-                                        navigate(`/resume/${template.id}?edit=true`);
-                                    }}
-                                >
-                                    Customize
-                                </button>
-                            </div>
-                        ))}
+                                return renderCard(t, {
+                                    position: 'absolute',
+                                    left: '50%',
+                                    top: 0,
+                                    transform: `translateX(${translateX}px) translateX(-50%) scale(${scale}) rotateY(${rotateY}deg)`,
+                                    transformStyle: 'preserve-3d',
+                                    opacity,
+                                    zIndex: z
+                                });
+                            })}
+                        </div>
+                        <button className="carouselBtn" onClick={handleNext}>&gt;</button>
                     </div>
                 )}
-            </section >
-
+                <p style={{ textAlign: 'center', fontSize: '0.85rem', color: '#555', marginBottom: '2rem' }}>
+                    More templates coming soon. You can switch views to explore better.
+                </p>
+            </section>
             <Footer />
         </>
     );
