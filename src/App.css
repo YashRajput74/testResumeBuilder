@@ -416,6 +416,105 @@ html {
     color: #a277ff;
     animation: fadeColor 2s ease-in-out infinite alternate;
 }
+/* ---header buttons */
+.loginBtn,
+.signupBtn,
+.logoutBtn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.loginBtn {
+  background: transparent;
+  color:#482e56;
+  border: 2px solid #d5bbe2;
+}
+
+.loginBtn:hover {
+  background : linear-gradient(to right, #c6a9e3, #1a1a1a);
+  color: white;
+}
+
+.signupBtn {
+  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+  color: white;
+  margin-left: 0.5rem;
+  border: none;
+}
+
+.signupBtn:hover {
+  opacity: 0.9;
+}
+
+.logoutBtn {
+  background: #f87171; 
+  color: white;
+  border: none;
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 999px;
+}
+
+.logoutBtn:hover {
+  background: #ef4444; 
+}
+
+/* -----About page */
+.aboutPageMain {
+    padding: 3rem 1.5rem;
+    max-width: 960px;
+    margin: auto;
+    font-family: "Inter", sans-serif;
+    color: #1f2937;
+}
+
+.aboutHero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.aboutHero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.aboutHero p {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-top: 0.5rem;
+}
+
+.aboutContent {
+    display: grid;
+    gap: 2rem;
+}
+
+.aboutSection {
+    background: #f9fafb;
+    padding: 1.5rem 1.25rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.aboutSection h2 {
+    font-size: 1.5rem;
+    color: #1d4ed8;
+    margin-bottom: 0.5rem;
+}
+
+.aboutSection p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #374151;
+}
+
+
 
 @keyframes fadeColor {
     from {

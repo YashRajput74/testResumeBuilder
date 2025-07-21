@@ -86,7 +86,7 @@ export default function Header({ onLoginClick }) {
                         </div>
                     ) : (
                         <div className="authButtons">
-                            <button onClick={onLoginClick} className="loginBtn" style={{marginRight:"1rem"}}>Log In</button>
+                            <button onClick={onLoginClick} className="loginBtn">Log In</button>
                             <button onClick={onLoginClick} className="signupBtn">Sign Up</button>
                         </div>
                     )}

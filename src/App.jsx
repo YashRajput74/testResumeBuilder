@@ -7,6 +7,7 @@ import AuthPage from './Features/AuthPage/AuthPage'
 import { useEffect, useState } from 'react'
 import AllTemplatesPage from './Pages/TemplatePage'
 import AuthModal from './Pages/AuthModal'
+import AboutPage from './Pages/AboutPage'
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -40,6 +41,10 @@ export default function App() {
                     />
 
                     <Route path='/auth' element={<AuthPage />} />
+                    <Route path="/about" element={<AboutPage />} />
+
+                    
+
                 </Routes>
             </Router>
         </>
