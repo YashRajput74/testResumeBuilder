@@ -280,23 +280,32 @@
 }
 
 .hover-image {
-  position: relative;
+    position: relative;
 }
 
 .edit-overlay {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px;
-  border-radius: 50%;
-  display: none; 
-  cursor: pointer;
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 6px;
+    border-radius: 50%;
+    display: none;
+    cursor: pointer;
 }
 
 .hover-image:hover .edit-overlay {
-  display: flex; 
+    display: flex;
 }
+
 .resumeSection {
-  pointer-events: auto; /* ✅ required */
+    pointer-events: auto;
+}
+
+.strengths{
+    text-align: left;
+}
+
+.certificates {
+    text-align: left;
 }

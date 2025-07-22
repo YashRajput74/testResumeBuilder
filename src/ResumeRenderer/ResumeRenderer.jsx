@@ -17,6 +17,7 @@ import "./ResumeRenderer.css";
 
 import { useResume } from "../context/ResumeContext";
 import templateStyles from "../data/templateStyle";
+import Certificates from "./components/Certificates";
 
 const sectionComponents = {
     personalInfo: PersonalInfo,
@@ -31,11 +32,12 @@ const sectionComponents = {
     organizations: Organizations,
     avatar: Avatar,
     language: Language,
-    awards: Awards
+    awards: Awards,
+    certificates: Certificates
 };
 
 export default function ResumeRenderer({ template }) {
-    const { data, style, setSelectedSection } = useResume();
+    const { data, style, setSelectedSection, customLayoutAreas } = useResume();
 
 
     useEffect(() => {
@@ -67,8 +69,12 @@ export default function ResumeRenderer({ template }) {
     const gridMatrix = Array.from({ length: numRows }, () =>
         Array(numCols).fill(".")
     );
+    
+    const areasToRender = (customLayoutAreas || grid.areas).filter(
+        (area) => Array.isArray(area.sections) && area.sections.length > 0 && area.name !== "unused"
+    );
 
-    grid.areas.forEach((area) => {
+    areasToRender.forEach((area) => {
         for (let row = area.rowStart - 1; row < area.rowEnd - 1; row++) {
             for (let col = area.colStart - 1; col < area.colEnd - 1; col++) {
                 gridMatrix[row][col] = area.name;
@@ -95,7 +101,7 @@ export default function ResumeRenderer({ template }) {
                 ...cssVariables,
             }}
         >
-            {grid.areas.map((area, index) => (
+            {areasToRender.map((area, index) => (
                 <div key={index} style={{ gridArea: area.name }}>
                     {area.sections.map((section) => (
                         <div key={section}>{renderSection(section)}</div>

@@ -23,7 +23,7 @@ export const template1 = {
                     rowEnd: 3,
                     colStart: 1,
                     colEnd: 2,
-                    sections: ["contact", "skills"]
+                    sections: ["contact", "skills", "strengths"]
                 },
                 {
                     name: "rightColumn",
@@ -52,6 +52,7 @@ const template2 = {
         grid: {
             templateRows: "1fr 1fr 1fr 1fr 1fr",
             templateColumns: "1.5fr 0.5fr 1fr",
+            rowGap: "0rem",
             areas: [
                 {
                     name: "header",
@@ -315,7 +316,7 @@ const template7 = {
     isAvatar: "true",
     layout: {
         grid: {
-            templateRows: "1fr 0.2fr 12fr",
+            templateRows: "1fr 12fr",
             templateColumns: "1fr 1fr",
             areas: [
                 {
@@ -334,26 +335,19 @@ const template7 = {
                     colEnd: 3,
                     sections: ["contact"]
                 },
+               
                 {
-                    name: "summary",
+                    name: 'leftColumn',
                     rowStart: 2,
                     rowEnd: 3,
                     colStart: 1,
-                    colEnd: 3,
-                    sections: ["summary"]
-                },
-                {
-                    name: 'leftColumn',
-                    rowStart: 3,
-                    rowEnd: 4,
-                    colStart: 1,
                     colEnd: 2,
-                    sections: ["workExperience", "education"]
+                    sections: ["summary","workExperience", "education",]
                 },
                 {
                     name: 'rightColumn',
-                    rowStart: 3,
-                    rowEnd: 4,
+                    rowStart: 2,
+                    rowEnd: 3,
                     colStart: 2,
                     colEnd: 3,
                     sections: ["skills", "organizations", "awards", "language"]
@@ -371,4 +365,4 @@ const template7 = {
     }
 }
 
-export const templates = [template1, template2, template3, template4, template6, template7];
+export const templates = [template1, template3, template4, template6, template7];

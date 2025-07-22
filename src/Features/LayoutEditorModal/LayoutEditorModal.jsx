@@ -4,8 +4,8 @@ import "./LayoutEditorModal.css";
 import { useResume } from "../../context/ResumeContext";
 
 const allSections = [
-    "avatar", "contact", "summary", "education", "workExperience", "skills",
-    "projects", "organizations", "awards", "language", "strengths", "achievements"
+    "contact", "summary", "education", "workExperience", "skills",
+    "projects", "organizations", "awards", "language", "strengths", "achievements","certificates"
 ];
 
 const formatAreaName = (name) => {
