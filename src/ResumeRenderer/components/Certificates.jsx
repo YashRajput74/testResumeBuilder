@@ -14,12 +14,12 @@ export default function Certificates() {
         <div
             className="certificates resumeSection"
             style={{ ...style?.certificate?.box, position: "relative" }}
-            onClick={() => setSelectedSection("certificates")}
+            onClick={() => setSelectedSection("certifications")}
         >
             <h2 style={style?.certificate?.heading}>
                 Certificates
-                {selectedSection === "certificates" && editMode && (
-                    <FloatingToolbarSimple sectionKey="certificates" position={{ top: "-45px", right: "20px" }} />
+                {selectedSection === "certifications" && editMode && (
+                    <FloatingToolbarSimple sectionKey="certifications" position={{ top: "-45px", right: "20px" }} />
                 )}
             </h2>
 
