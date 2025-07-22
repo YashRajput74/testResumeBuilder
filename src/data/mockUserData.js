@@ -6,10 +6,10 @@ const mockUserData = {
     summary: 'Jane Doe is a very good coder no one can beat him !',
     contact: {
 
-        email: "janeDoe.profile@example.com",
+        email: "jane.doe@example.com",
         phoneNo: "+91 9876543210",
         address: "123, Park Lane, Delhi, India",
-        portfolio: "https://janeDoe-portfolio.netlify.app",
+        portfolio: "https://jane-portfolio.netlify.app",
         github: "https://github.com/janeDoe",
         linkedin: "linkedin.com/in/janeDoe",
         skype: "janeDoe.profile",

@@ -47,8 +47,29 @@ const sharedStyles = {
 
 const templateStyles = {
     "1": {
-        contact: {
-            visibleFields: ["phoneNo", "address", "email", "portfolio", "linkedin", "github"],
+        strength: {
+            heading:{
+                marginTop: "1.5rem",
+                marginBottom: '0.2rem',
+                textDecoration: "underline"
+            },
+            innerbox:{
+                marginBottom: '0.5rem'
+            }
+        },
+        certificate:{
+            heading: {
+                marginTop: "1.5rem",
+                marginBottom: "0.2rem",
+                textDecoration: "underline"
+            },
+            organiz:{
+                marginLeft: "0.7rem"
+            },
+            date:{
+                marginLeft: "0.7rem",
+                fontStyle: "italic"
+            }
         }
     },
     "2": {
@@ -156,7 +177,7 @@ const templateStyles = {
             },
             date: {
                 textAlign: "left"
-            }
+            },
         }
     },
     "3": {
@@ -289,7 +310,7 @@ const templateStyles = {
         },
         strength: {
             box: {
-                marginTop: "25px",
+                marginTop: "0px",
                 textAlign: "left",
                 marginBottom: "25px"
             },
@@ -301,6 +322,43 @@ const templateStyles = {
                 color: "var(--content-color)"
             }
         },
+        projects:{
+            box:{
+                padding : "0px",
+                borderLeft: "0px solid white"
+            },
+            heading:{
+                textDecoration: "none",
+                ...sharedStyles["3"].heading
+            },
+            title:{
+                fontSize: "18px"
+            }
+        },
+        certificate: {
+            box:{
+                marginTop: "15px"
+            },
+            heading:{
+                ...sharedStyles["3"].heading
+            },
+            eachcertificate:{
+                marginBottom: "5px"
+            },
+            title:{
+                fontSize: "18px",
+                fontWeight: "700"
+            },
+            organiz:{
+                fontSize: "16px",
+                color: "var(--secondary-heading-color)",
+            },
+            date:{
+                padding: "2px",
+                color: "var(--content-color)",
+                fontStyle: "italic"
+            }
+        }
     },
     "4": {
         vars: {
@@ -389,10 +447,46 @@ const templateStyles = {
                 color: "var(--content-color)"
             },
             dates: {
-                color: "var(--content-color)"
+                color: "var(--secondary-heading-color)"
             },
             wholeList: {
                 color: "var(--content-color)"
+            }
+        },
+        projects:{
+            box: {
+                ...sharedStyles["4"].box,
+                border: "none",
+                paddingLeft: "25px"
+            },
+            heading: {
+                ...sharedStyles["4"].heading,
+            },
+            title:{
+                color: "var(--content-color)",
+                paddingLeft: "10px"
+            },
+            list:{
+                paddingLeft: "20px"
+            }
+        },
+        certificate: {
+            heading: {
+                ...sharedStyles["4"].heading,
+                marginBottom: "5px"
+            },
+            eachcertificate: {
+                paddingLeft: "5px"
+            },
+            title: {
+                color: "var(--content-color)",
+                fontSize: "20px"
+            },
+            organiz: {
+                color: "var(--secondary-heading-color)"
+            },
+            date:{
+                fontStyle: "italic"
             }
         }
     },
@@ -628,6 +722,38 @@ const templateStyles = {
                 borderBottom: "2px solid var(--primary-color)",
                 marginBottom: "5px"
             }
+        },
+        projects:{
+            box: {
+                color: "var(--primary-color)",
+                border: "none",
+                paddingTop: "1.5rem",
+                padding: "0rem"
+            },
+            heading: {
+                color: "var(--primary-color)",
+                textDecoration: "none",
+                borderBottom: "2px solid var(--primary-color)",
+                marginBottom: "5px"
+            }
+        },
+        certificate:{
+            box: {
+                color: "var(--primary-color)",
+                border: "none",
+                paddingTop: "1.5rem",
+                padding: "0rem",
+                paddingLeft: "1rem"
+            },
+            heading: {
+                color: "var(--primary-color)",
+                textDecoration: "none",
+                borderBottom: "2px solid var(--primary-color)",
+                marginBottom: "5px"
+            },
+            innerBox: {
+                paddingLeft: "10px"
+            }
         }
     },
     "7": {
@@ -682,11 +808,17 @@ const templateStyles = {
             }
         },
         summary: {
-            box: {
-                margin: '0px 20px 0px 10px'
+            box:{
+                paddingLeft: "15px",
+                marginBottom: "15px"
             },
             heading: {
-                display: 'none'
+                ...sharedStyles["7"].heading,
+                marginBottom: "15px",
+                fontSize: "23px"
+            },
+            content:{
+                
             }
         },
         workExpe: {
@@ -751,6 +883,17 @@ const templateStyles = {
                 top: '7px',
                 left: '-20px'
             }
+        },
+        projects: {
+            box: {
+                border: 'none'
+            },
+            heading: {
+                ...sharedStyles["7"].heading
+            },
+            eachProject: {
+                paddingLeft: '10px'
+            },
         },
         skills: {
             box: {
@@ -820,7 +963,39 @@ const templateStyles = {
             wholeList: {
                 paddingLeft: '35px'
             }
-        }
+        },
+        certificate: {
+            box: {
+                border: 'none',
+                marginBottom: '1rem'
+            },
+            heading: {
+                ...sharedStyles["7"].heading,
+                textAlign: 'left',
+                marginBottom: '10px',
+                color: '#333',
+            },
+            innerBox: {
+                textAlign: 'left',
+                paddingLeft: '10px'
+            },
+            title:{
+                fontSize: "16px",
+                fontWeight: "700"
+            },
+            organiz:{
+                fontSize: "15px",
+                marginLeft: "2px",
+                color: 'var(--primary-color)'
+            },
+            date: {
+                marginLeft: "2px",
+                fontStyle: 'italic',
+            },
+            eachcertificate: {
+                marginBottom: '5px'
+            }
+        },
     }
 }
 
