@@ -20,7 +20,6 @@ export default function Contact() {
         portfolio: faGlobe,
         linkedin: faLinkedin,
         github: faGithub,
-        skype: faSkype,
     };
 
     const [iconMap, setIconMap] = useState(() => {
@@ -69,7 +68,6 @@ export default function Contact() {
         { key: "portfolio", isLink: true },
         { key: "linkedin", isLink: true },
         { key: "github", isLink: true },
-        { key: "skype", isLink: false },
     ];
 
     return (

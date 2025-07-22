@@ -1,5 +1,4 @@
-
-import { createServer } from 'miragejs';
+import { makeServer } from './Mirage/server.js'; 
 import { templates } from '../data/templates';
 import mockUserData from '../data/mockUserData';
 

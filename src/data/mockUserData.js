@@ -12,7 +12,6 @@ const mockUserData = {
         portfolio: "https://jane-portfolio.netlify.app",
         github: "https://github.com/janeDoe",
         linkedin: "linkedin.com/in/janeDoe",
-        skype: "janeDoe.profile",
     },
 
     skills: ["JavaScript", "React", "HTML5", "CSS3", "Git & GitHub"],
