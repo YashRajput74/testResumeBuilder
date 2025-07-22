@@ -93,7 +93,7 @@ export default function ResumePage({onLoginClick}) {
                     style={{
                         display: "flex",
                         minHeight: "100vh",
-                        marginTop: "4rem",
+                        marginTop: "2rem",
                         overflow: "hidden",
                     }}
                 >
@@ -101,6 +101,7 @@ export default function ResumePage({onLoginClick}) {
                         style={{
                             width: "45%",
                             padding: "1rem",
+                            paddingTop: "0.2rem",
                             overflowY: "auto",
                             display: "flex",
                             flexWrap: "wrap",
@@ -188,7 +189,7 @@ export default function ResumePage({onLoginClick}) {
                         <div
                             ref={resumeRef}
                             style={{
-                                margin: "2rem auto",
+                                margin: "2.7rem auto",
                                 width: "fit-content",
                             }}
                         >

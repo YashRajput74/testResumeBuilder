@@ -43,7 +43,7 @@ export default function Toolbar() {
 
     const toolbarStyle = {
         position: "fixed",
-        top: "120px",
+        top: "90px",
         left: "830px",
         right: 0,
         zIndex: 999,
