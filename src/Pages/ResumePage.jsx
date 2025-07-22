@@ -12,7 +12,7 @@ import { templates } from "../data/templates";
 import Footer from "../Components/Footer/Footer";
 import Navbar from "./Navbar";
 
-export default function ResumePage() {
+export default function ResumePage({onLoginClick}) {
     const [user, setUser] = useState(null);
     const [selectedTemplate, setSelectedTemplate] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -86,7 +86,7 @@ export default function ResumePage() {
                 editModeFromURL={editModeFromURL}
                 templateId={selectedTemplate.id}
             >
-                <Navbar onDownload={handleDownload} />
+                <Navbar onDownload={handleDownload}  onLoginClick={() => onLoginClick()} />
 
                 <div
                     className="templateSectionn"
