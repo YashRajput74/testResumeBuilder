@@ -1,6 +1,6 @@
 import { useResume } from "../../context/ResumeContext";
 import { useRef } from "react";
-import { FaPen } from "react-icons/fa"; 
+import { FaPen } from "react-icons/fa";
 
 export default function Avatar() {
   const { data, updateField, editMode, style } = useResume();
@@ -41,8 +41,10 @@ export default function Avatar() {
           <img
             src={data.profilePhoto}
             alt="Profile"
+            crossOrigin="anonymous"
             style={style?.avatar?.image}
           />
+
           {editMode && (
             <div className="edit-overlay">
               <FaPen size={16} color="#fff" />

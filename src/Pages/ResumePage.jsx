@@ -49,22 +49,64 @@ export default function ResumePage({onLoginClick}) {
         if (newTemplate) setSelectedTemplate(newTemplate);
     };
 
-    const handleDownload = () => {
-        if (!user) {
-            navigate("/auth");
-            return;
-        }
 
-        const input = resumeRef.current;
-        html2canvas(input).then((canvas) => {
-            const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF("p", "mm", "a4");
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-            pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-            pdf.save("my-resume.pdf");
-        });
-    };
+const handleDownload = async () => {
+  if (!user) {
+    navigate("/auth");
+    return;
+  }
+
+  const input = resumeRef.current;
+
+  // ✅ Wait for all images to load
+  const images = input.querySelectorAll("img");
+  await Promise.all(
+    Array.from(images).map(
+      (img) =>
+        new Promise((resolve) => {
+          if (img.complete) resolve();
+          else {
+            img.onload = img.onerror = resolve;
+          }
+        })
+    )
+  );
+
+  await new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 300)));
+
+  html2canvas(input, {
+    useCORS: true,
+    allowTaint: false, 
+    scale: 2,
+    backgroundColor: null,
+    logging: true,
+    windowWidth: document.body.scrollWidth,
+  }).then((canvas) => {
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("my-resume.pdf");
+  });
+};
+
+    // const handleDownload = () => {
+    //     if (!user) {
+    //         navigate("/auth");
+    //         return;
+    //     }
+
+    //     const input = resumeRef.current;
+    //     html2canvas(input).then((canvas) => {
+    //         const imgData = canvas.toDataURL("image/png");
+    //         const pdf = new jsPDF("p", "mm", "a4");
+    //         const pdfWidth = pdf.internal.pageSize.getWidth();
+    //         const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    //         pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    //         pdf.save("my-resume.pdf");
+    //     });
+    // };
 
     if (!selectedTemplate || !userData)
         return <p style={{ textAlign: "center", paddingTop: "2rem" }}>Loading template...</p>;
@@ -195,14 +237,6 @@ export default function ResumePage({onLoginClick}) {
                         >
                             <ResumeRenderer template={selectedTemplate} />
                         </div>
-
-                        <button
-                            onClick={handleDownload}
-                            className="btnPrimary"
-                            style={{ marginTop: "1rem" }}
-                        >
-                            Download PDF
-                        </button>
                     </div>
                 </div>
 
