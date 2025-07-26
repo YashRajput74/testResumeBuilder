@@ -98,8 +98,8 @@ export default function TemplateSidebar({ templates, selectedTemplate, onTemplat
 
     return (
         <>
-            <div className="template-container" style={{ maxHeight: "90vh", overflowY: "auto",background: "white", }}>
-                <h3 className="template-title">Select a Template</h3>
+            <div className="template-container" style={{ maxHeight: "90vh",scrollbarWidth: "none", overflowY: "auto",width: "auto" }}>
+                <h5 className="template-title">Select a Template</h5>
                 <div className="template-grid">
                     {templates.map((tpl) => (
                         <div
@@ -126,24 +126,7 @@ export default function TemplateSidebar({ templates, selectedTemplate, onTemplat
                 </div>
             </div>
 
-            {/* Right-side drawer */}
-            <div className={`template-drawer ${drawerOpen ? "open" : ""}`}>
-                <button className="close-drawer" onClick={() => setDrawerOpen(false)}>×</button>
-                {activeTemplate && (
-                    <div className="drawer-content">
-                        <h2>{activeTemplate.name}</h2>
-                        <ResumeProvider
-                            key={activeTemplate.id}
-                            initialData={resumeData}
-                            style={{ ...(templateStyles[activeTemplate.id] || {}), layout: activeTemplate.layout }}
-                            editModeFromURL={false}
-                            templateId={activeTemplate.id}
-                        >
-                            <ResumeRenderer template={activeTemplate} />
-                        </ResumeProvider>
-                    </div>
-                )}
-            </div>
+           
         </>
     );
 }

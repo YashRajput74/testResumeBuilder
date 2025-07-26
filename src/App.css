@@ -306,7 +306,11 @@ html {
   display: block;
 }
  */
+ /* ...Closebutton */
 
+ .close-button:hover{
+   transform: rotate(360deg)
+ }
 
 .templateCard {
     position: relative;

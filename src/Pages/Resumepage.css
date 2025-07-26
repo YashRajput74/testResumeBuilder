@@ -1,0 +1,6 @@
+.close-button:hover {
+    transform: rotate(360deg); 
+}
+.close-button {
+    transition: transform 0.5s ease;
+}

@@ -1,4 +1,4 @@
-/* Main container */
+/* Main container
 .template-container {
     padding: 1rem;
     max-width: 1000px;
@@ -11,7 +11,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* Grid */
 .template-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -38,12 +37,12 @@
     border: 2px solid #fddb60;
 }
 
-/* Scaled Preview */
 .template-preview {
     height: 254px;
     width: 100%;
     overflow: hidden;
     border-radius: 6px;
+    margin-left: 1.5rem;
   
 }
 
@@ -54,14 +53,12 @@
     pointer-events: none;
 }
 
-/* Template name */
 .template-name {
     text-align: center;
     padding: 0.5rem;
     font-size: 0.95rem;
 }
 
-/* Drawer Panel */
 .template-drawer {
     position: fixed;
     top: 0;
@@ -94,4 +91,64 @@
 .drawer-content h2 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
+} */
+
+
+.template-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border-radius: 0.5rem;
+    background: transparent;
+    background-color: #d3bae7;
+    border: 1px solid #ffffff5e;
+
+}
+
+.template-title {
+    margin-bottom: 16px;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.template-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.template-card:hover {
+    transform: scale(1.05);
+}
+
+.template-card.active {
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+.template-preview {
+    height: 200px;
+    /* Adjust as needed */
+    overflow: hidden;
+}
+
+.template-inner {
+    transform: scale(0.22);
+    transform-origin: top left;
+
+    pointer-events: none;
+}
+
+.template-name {
+    text-align: center;
+    margin-top: 8px;
 }
