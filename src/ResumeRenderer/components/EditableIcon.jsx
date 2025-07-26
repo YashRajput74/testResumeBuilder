@@ -30,7 +30,7 @@ export default function EditableIcon({ currentIcon, field, iconMap, setIconMap, 
     const handleSelect = (iconObj) => {
         setIconMap((prev) => ({
             ...prev,
-            [field]: iconObj.icon,
+            [field]: iconObj,
         }));
         setShowPicker(false);
     };

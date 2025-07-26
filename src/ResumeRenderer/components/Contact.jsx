@@ -1,120 +1,127 @@
-import { allContactIcons } from "../../utils/iconList";
-import { useResume } from '../../context/ResumeContext';
-import FloatingToolbarSimple from "../../Pages/FloatingToolbarSimple";
-import { faPhone, faEnvelope, faLocationDot, faGlobe } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faGithub, faSkype } from '@fortawesome/free-brands-svg-icons';
+import { useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EditableText from "../../Components/shared/EditableText";
 import EditableIcon from './EditableIcon';
-import { useEffect, useState } from 'react';
+import { useResume } from "../../context/ResumeContext";
+import { allContactIcons } from "../../utils/iconList";
 
 export default function Contact() {
-    const { data, style, editMode, updateField } = useResume();
-    const contact = data.contact;
-    const sharedIconMap = true;
-    const templateId = sharedIconMap ? "global" : style?.templateId || "default";
+    const { editMode, data } = useResume();
+    const [contacts, setContacts] = useState([]);
 
+    const [iconMap, setIconMap] = useState({});
 
-    const defaultIconMap = {
-        phoneNo: faPhone,
-        email: faEnvelope,
-        address: faLocationDot,
-        portfolio: faGlobe,
-        linkedin: faLinkedin,
-        github: faGithub,
-    };
-
-    const [iconMap, setIconMap] = useState(() => {
-        const saved = localStorage.getItem(`resumeIconMap-${templateId}`);
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                const rehydratedMap = {};
-                for (const key in parsed) {
-                    const { iconName } = parsed[key] || {};
-                    const match = allContactIcons.find((entry) => entry.icon.iconName === iconName);
-                    if (match) rehydratedMap[key] = match.icon;
-                }
-                return { ...defaultIconMap, ...rehydratedMap };
-            } catch {
-                console.warn("Invalid iconMap format in storage");
-            }
-        }
-        return defaultIconMap;
-    });
+    const initialized = useRef(false);
 
     useEffect(() => {
-        if (!templateId) return;
-        const toStore = {};
-        for (const key in iconMap) {
-            const icon = iconMap[key];
-            const found = allContactIcons.find(entry => entry.icon.iconName === icon.iconName);
-            if (found) {
-                toStore[key] = {
-                    iconName: icon.iconName,
-                    prefix: found.prefix,
-                };
-            }
+        if (initialized.current) {
+            console.log("Effect skipped — already initialized");
+            return;
         }
-        localStorage.setItem(`resumeIconMap-${templateId}`, JSON.stringify(toStore));
-    }, [iconMap, templateId]);
 
-    const handleBlur = (key, e) => {
-        updateField("contact", key, e.target.innerHTML.trim());
+        console.log("Effect running, initialized =", initialized.current);
+        console.log("data.contact =", data.contact);
+
+        const storedContacts = JSON.parse(localStorage.getItem("customContactData"));
+        const storedIcons = JSON.parse(localStorage.getItem("customContactIcons"));
+
+        console.log("storedContacts =", storedContacts);
+        console.log("storedIcons =", storedIcons);
+
+        // ✅ Only use localStorage if they are non-empty
+        const hasStoredData =
+            Array.isArray(storedContacts) && storedContacts.length > 0 &&
+            storedIcons && Object.keys(storedIcons).length > 0;
+
+        if (hasStoredData) {
+            console.log("✅ Using data from localStorage");
+            setContacts(storedContacts);
+            setIconMap(storedIcons);
+            initialized.current = true;
+        } else if (data.contact?.length) {
+            console.log("✅ Using data from ResumeContext");
+            const iconMapFromData = {};
+            data.contact.forEach((c, i) => (iconMapFromData[i] = c.icon || "email"));
+            setContacts(data.contact);
+            setIconMap(iconMapFromData);
+            localStorage.setItem("customContactData", JSON.stringify(data.contact));
+            localStorage.setItem("customContactIcons", JSON.stringify(iconMapFromData));
+            initialized.current = true;
+        } else {
+            console.log("⚠️ No contact data available yet");
+        }
+    }, [data.contact]);
+
+    useEffect(() => {
+        localStorage.setItem("customContactData", JSON.stringify(contacts));
+        localStorage.setItem("customContactIcons", JSON.stringify(iconMap));
+    }, [contacts, iconMap]);
+
+    const handleUpdateText = (index, field, newValue) => {
+        const updated = [...contacts];
+        updated[index][field] = newValue;
+        setContacts(updated);
     };
 
-    const contactFields = [
-        { key: "phoneNo", isLink: false },
-        { key: "email", isLink: false },
-        { key: "address", isLink: false },
-        { key: "portfolio", isLink: true },
-        { key: "linkedin", isLink: true },
-        { key: "github", isLink: true },
-    ];
+    const handleDelete = (index) => {
+        const updated = contacts.filter((_, i) => i !== index);
+        const newIconMap = { ...iconMap };
+        delete newIconMap[index];
+        setContacts(updated);
+        setIconMap(newIconMap);
+    };
+
+    const handleAdd = () => {
+        const newContact = {
+            icon: "email",
+            link: "",
+            textShown: "New Contact"
+        };
+        const updated = [...contacts, newContact];
+        const newIndex = updated.length - 1;
+        const newIconMap = { ...iconMap, [newIndex]: "email" };
+        setContacts(updated);
+        setIconMap(newIconMap);
+    };
 
     return (
-        <div className="contactList" style={{ ...style?.contact?.box, position: "relative" }}>
-            {style?.contact?.heading?.display !== "none" && (
-                <h2 style={style?.contact?.heading}>
-                    Contact
-                    {editMode && (
-                        <FloatingToolbarSimple
-                            sectionKey="contact"
-                            position={{ top: "-45px", right: "20px" }}
-                        />
-                    )}
-                </h2>
-            )}
+        <div className="section contact-section">
+            <h2 className="section-title">Contact</h2>
+            <ul className="contact-list">
+                {contacts.map((contact, index) => {
+                    const iconKey = iconMap[index];
+                    const iconObj = allContactIcons.find(i => i.key === iconKey)?.icon;
 
-            {contactFields.map(({ key, isLink }) => (
-                <div key={key} className="contactItem" style={style?.contact?.innerBox}>
-                    <EditableIcon
-                        currentIcon={iconMap[key]}
-                        field={key}
-                        iconMap={iconMap}
-                        setIconMap={setIconMap}
-                        editMode={editMode}
-                    />
-                    {isLink ? (
-                        <a
-                            href={contact[key]}
-                            target="_blank"
-                            rel="noreferrer"
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(key, e)}
-                            style={style?.contact?.anchor}
-                            dangerouslySetInnerHTML={{ __html: contact[key] || "" }}
-                        />
-                    ) : (
-                        <p
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(key, e)}
-                            style={style?.contact?.content}
-                            dangerouslySetInnerHTML={{ __html: contact[key] || "" }}
-                        />
-                    )}
-                </div>
-            ))}
+                    return (
+                        <li key={index} className="contact-item">
+                            <EditableIcon
+                                currentIcon={iconKey}
+                                field={index}
+                                iconMap={iconMap}
+                                setIconMap={setIconMap}
+                                editMode={editMode}
+                            />
+
+                            <FontAwesomeIcon icon={iconObj} className="icon-display" />
+
+                            <EditableText
+                                value={contact.textShown}
+                                onChange={(val) => handleUpdateText(index, "textShown", val)}
+                            />
+
+                            {editMode && (
+                                <button className="delete-btn" onClick={() => handleDelete(index)}>
+                                    ❌
+                                </button>
+                            )}
+                        </li>
+                    );
+                })}
+            </ul>
+
+            {editMode && (
+                <button className="add-btn" onClick={handleAdd}>➕ Add Contact</button>
+            )}
         </div>
     );
 }
