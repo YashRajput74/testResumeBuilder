@@ -1,8 +1,10 @@
 import { useState, useRef } from "react";
+import { useResume } from "../../context/ResumeContext";
 
 export default function EditableText({ value, onChange, className = "" }) {
     const [text, setText] = useState(value);
     const ref = useRef(null);
+    const {style} = useResume();
 
     const handleBlur = () => {
         const newText = ref.current?.innerText?.trim() || "";
@@ -24,6 +26,7 @@ export default function EditableText({ value, onChange, className = "" }) {
             className={`editable-text ${className}`}
             contentEditable
             suppressContentEditableWarning
+            style={style?.contact?.content}
             onInput={(e) => setText(e.currentTarget.textContent)}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}

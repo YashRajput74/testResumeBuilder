@@ -4,7 +4,7 @@ import { allContactIcons } from "../../utils/iconList";
 import "./EditableIcon.css";
 import { useResume } from "../../context/ResumeContext";
 
-export default function EditableIcon({ currentIcon, field, iconMap, setIconMap, editMode }) {
+export default function EditableIcon({ currentIconKey, field, iconMap, setIconMap, editMode }) {
     const { style } = useResume();
     const [showPicker, setShowPicker] = useState(false);
     const pickerRef = useRef(null);
@@ -22,23 +22,25 @@ export default function EditableIcon({ currentIcon, field, iconMap, setIconMap, 
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [showPicker]);
 
-    const usedKeys = Object.values(iconMap).map((icon) => icon.iconName);
+    const usedKeys = Object.values(iconMap);
     const availableIcons = allContactIcons.filter(
-        (entry) => !usedKeys.includes(entry.icon.iconName) || iconMap[field]?.iconName === entry.icon.iconName
+        (entry) => !usedKeys.includes(entry.key) || iconMap[field] === entry.key
     );
 
     const handleSelect = (iconObj) => {
         setIconMap((prev) => ({
             ...prev,
-            [field]: iconObj,
+            [field]: iconObj.key,
         }));
         setShowPicker(false);
     };
 
+    const selectedIconObj = allContactIcons.find(entry => entry.key === currentIconKey);
+
     return (
         <div className="editable-icon-wrapper" style={{ position: "relative", display: "inline-block" }}>
             <FontAwesomeIcon
-                icon={currentIcon}
+                icon={selectedIconObj?.icon}
                 onClick={() => editMode && setShowPicker((prev) => !prev)}
                 style={{
                     cursor: editMode ? "pointer" : "default",
@@ -51,7 +53,7 @@ export default function EditableIcon({ currentIcon, field, iconMap, setIconMap, 
                     {availableIcons.length > 0 ? (
                         availableIcons.map((entry) => (
                             <div key={entry.key} className="icon-option" onClick={() => handleSelect(entry)}>
-                                <FontAwesomeIcon icon={entry.icon} style={style?.contact?.icon} />
+                                <FontAwesomeIcon icon={iconObj} style={style?.contact?.icon} />
                             </div>
                         ))
                     ) : (

@@ -6,7 +6,7 @@ import { useResume } from "../../context/ResumeContext";
 import { allContactIcons } from "../../utils/iconList";
 
 export default function Contact() {
-    const { editMode, data } = useResume();
+    const { editMode, data, style } = useResume();
     const [contacts, setContacts] = useState([]);
 
     const [iconMap, setIconMap] = useState({});
@@ -15,31 +15,23 @@ export default function Contact() {
 
     useEffect(() => {
         if (initialized.current) {
-            console.log("Effect skipped — already initialized");
             return;
         }
 
-        console.log("Effect running, initialized =", initialized.current);
-        console.log("data.contact =", data.contact);
 
         const storedContacts = JSON.parse(localStorage.getItem("customContactData"));
         const storedIcons = JSON.parse(localStorage.getItem("customContactIcons"));
 
-        console.log("storedContacts =", storedContacts);
-        console.log("storedIcons =", storedIcons);
 
-        // ✅ Only use localStorage if they are non-empty
         const hasStoredData =
             Array.isArray(storedContacts) && storedContacts.length > 0 &&
             storedIcons && Object.keys(storedIcons).length > 0;
 
         if (hasStoredData) {
-            console.log("✅ Using data from localStorage");
             setContacts(storedContacts);
             setIconMap(storedIcons);
             initialized.current = true;
         } else if (data.contact?.length) {
-            console.log("✅ Using data from ResumeContext");
             const iconMapFromData = {};
             data.contact.forEach((c, i) => (iconMapFromData[i] = c.icon || "email"));
             setContacts(data.contact);
@@ -48,7 +40,6 @@ export default function Contact() {
             localStorage.setItem("customContactIcons", JSON.stringify(iconMapFromData));
             initialized.current = true;
         } else {
-            console.log("⚠️ No contact data available yet");
         }
     }, [data.contact]);
 
@@ -85,24 +76,22 @@ export default function Contact() {
     };
 
     return (
-        <div className="section contact-section">
-            <h2 className="section-title">Contact</h2>
+        <div className="contactList">
+            <h2 style={style?.contact?.heading}>Contact</h2>
             <ul className="contact-list">
                 {contacts.map((contact, index) => {
                     const iconKey = iconMap[index];
                     const iconObj = allContactIcons.find(i => i.key === iconKey)?.icon;
 
                     return (
-                        <li key={index} className="contact-item">
+                        <li key={index} className="contactItem" style={style?.contact?.innerBox}>
                             <EditableIcon
-                                currentIcon={iconKey}
+                                currentIconKey={iconMap[index]}
                                 field={index}
                                 iconMap={iconMap}
                                 setIconMap={setIconMap}
                                 editMode={editMode}
                             />
-
-                            <FontAwesomeIcon icon={iconObj} className="icon-display" />
 
                             <EditableText
                                 value={contact.textShown}
