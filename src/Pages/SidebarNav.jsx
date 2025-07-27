@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LayoutEditorModal from "../Features/LayoutEditorModal/LayoutEditorModal";
 
 const navItems = [
-  { key: "templates", label: "📄 Templates" },
+  { key: "templates", label: "📚  Templates" },
   { key: "layout", label: "📐 Layout" },
   { key: "design", label: "🎨 Design & Font" },
   { key: "profile", label: "👤 Profile" },
@@ -14,9 +14,9 @@ const SidebarNav = ({ active, onChange }) => {
   return (
     <div
       style={{
-        width: "200px",
+        width: "160px",
         padding: "1rem 0.5rem",
-        height: "100vh",
+        height: "70vh",
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
@@ -24,7 +24,8 @@ const SidebarNav = ({ active, onChange }) => {
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
         borderRadius: "12px",
         margin: "1rem",
-        border: "1px solid #ffffffbd",
+        marginTop: "1rem",
+         border: "1px solid #ffffff5e"
       }}
     >
       {navItems.map((item) => (
@@ -48,7 +49,6 @@ const SidebarNav = ({ active, onChange }) => {
         </div>
       ))}
 
-      {/* Layout Modal */}
       <LayoutEditorModal
         isOpen={showLayoutModal}
         onClose={() => setShowLayoutModal(false)}

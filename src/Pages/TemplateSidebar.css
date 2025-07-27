@@ -123,6 +123,7 @@
     border-radius: 8px;
     padding: 8px;
     cursor: pointer;
+    background-color: white;
     transition: transform 0.2s;
 }
 

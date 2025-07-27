@@ -7,7 +7,7 @@ import jsPDF from "jspdf";
 import { supabase } from "../supabaseClient";
 import { ResumeProvider } from "../context/ResumeContext";
 import ResumeRenderer from "../ResumeRenderer/ResumeRenderer";
-import Toolbar from "./Toolbar";
+// import Toolbar from "./Toolbar";
 import SaveControls from "./SaveControl";
 import templateStyles from "../data/templateStyle";
 import { templates } from "../data/templates";
@@ -153,7 +153,7 @@ export default function ResumePage({ onLoginClick }) {
                   position: "relative",
                   overflowY: "auto",
                   padding: "1rem",
-                  transition: "all 0.3s ease",
+                   transform: activeNav === "templates" ? "translateX(0)" : "translateX(-100%)"
                 }}
               >
                 <button
@@ -192,17 +192,19 @@ export default function ResumePage({ onLoginClick }) {
                 overflowY: "auto",
                 padding: "2rem",
                 textAlign: "center",
-                minWidth: 0,
+                // minWidth: 0,
               }}
               className="hide-scroll"
             >
-              <Toolbar />
+              {/* <Toolbar /> */}
               <SaveControls />
               <div
                 ref={resumeRef}
                 style={{
-                  margin: "2.7rem auto",
+                
+                  margin: "-0.9rem auto",
                   width: "fit-content",
+       
                 }}
               >
                 <ResumeRenderer template={selectedTemplate} />
