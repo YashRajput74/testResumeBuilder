@@ -151,10 +151,12 @@
 import { useEffect, useState } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import AuthModal from "./AuthModal";
 import "./AboutPage.css";
 
 export default function AboutPage() {
     const [reviews, setReviews] = useState([]);
+    const [authOpen, setAuthOpen] = useState(false);
     const [formData, setFormData] = useState({ name: "", text: "" });
 
     // Load reviews from localStorage on mount
@@ -174,7 +176,7 @@ export default function AboutPage() {
 
     return (
         <>
-            <Header />
+          <Header onLoginClick={() => setAuthOpen(true)} />
 
             <main className="about-container">
                 {/* Hero */}
@@ -259,6 +261,7 @@ export default function AboutPage() {
             </main>
 
             <Footer />
+             <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)}  />
         </>
     );
 }

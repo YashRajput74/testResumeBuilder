@@ -7,6 +7,7 @@ import { ResumeProvider } from '../context/ResumeContext';
 import ResumeRenderer from '../ResumeRenderer/ResumeRenderer';
 import templateStyles from '../data/templateStyle';
 import mockUserData from '../data/mockUserData';
+import AuthModal from './AuthModal'; 
 
 export default function AllTemplatesPage() {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function AllTemplatesPage() {
     const [columnFilter, setColumnFilter] = useState("");
     const [viewMode, setViewMode] = useState("carousel");
     const [carouselIndex, setCarouselIndex] = useState(0);
+      const [authOpen, setAuthOpen] = useState(false);
 
     const filtered = templates.filter(template => {
         const mh = !headshotFilter ||
@@ -78,7 +80,7 @@ export default function AllTemplatesPage() {
     return (
         <>
             <section className="allTemplatesPage">
-                <Header />
+                <Header onLoginClick={() => setAuthOpen(true)}  />
                 <div className="templateIntro">
                     <div className="uprpara">
                         <h1>Pick the Template That Suits You Best</h1>
@@ -147,6 +149,7 @@ export default function AllTemplatesPage() {
                 </p>
             </section>
             <Footer />
+             <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
         </>
     );
 }
