@@ -278,36 +278,6 @@ html {
     display: none;
 }
 
-/* .templateCard {
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-}
-
-.templateCard:hover {
-  transform: scale(1.02);
-}
-
-.customizeBtn {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 6px 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  display: none;
-  z-index: 1;
-  border-radius: 5px;
-}
-
-.templateCard:hover .customizeBtn {
-  display: block;
-}
- */
- /* ...Closebutton */
-
  .close-button:hover{
    transform: rotate(360deg)
  }
