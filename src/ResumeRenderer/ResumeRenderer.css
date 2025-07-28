@@ -42,10 +42,15 @@
 
 .contactItem {
     margin-bottom: 10px;
+    list-style: none;
 }
 
 .contactItem p {
     margin-left: var(--basic-font-size);
+    display: inline;
+}
+
+.editable-text{
     display: inline;
 }
 
