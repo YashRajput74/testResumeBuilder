@@ -53,7 +53,7 @@ export default function EditableIcon({ currentIconKey, field, iconMap, setIconMa
                     {availableIcons.length > 0 ? (
                         availableIcons.map((entry) => (
                             <div key={entry.key} className="icon-option" onClick={() => handleSelect(entry)}>
-                                <FontAwesomeIcon icon={iconObj} style={style?.contact?.icon} />
+                                <FontAwesomeIcon icon={entry.icon} style={style?.contact?.icon} />
                             </div>
                         ))
                     ) : (

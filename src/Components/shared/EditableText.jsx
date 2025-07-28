@@ -1,10 +1,15 @@
-import { useState, useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useResume } from "../../context/ResumeContext";
 
-export default function EditableText({ value, onChange, className = "" }) {
-    const [text, setText] = useState(value);
+export default function EditableText({ value, onChange, className = "", link = "" }) {
     const ref = useRef(null);
-    const {style} = useResume();
+    const { style, editMode } = useResume();
+
+    useEffect(() => {
+        if (ref.current && ref.current.innerText !== value) {
+            ref.current.innerText = value;
+        }
+    }, [value]);
 
     const handleBlur = () => {
         const newText = ref.current?.innerText?.trim() || "";
@@ -20,6 +25,24 @@ export default function EditableText({ value, onChange, className = "" }) {
         }
     };
 
+    if (!editMode) {
+        return link ? (
+            <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`editable-text ${className}`}
+                style={style?.contact?.anchor}
+            >
+                {value}
+            </a>
+        ) : (
+            <span className={`editable-text ${className}`} style={style?.contact?.content}>
+                {value}
+            </span>
+        );
+    }
+
     return (
         <div
             ref={ref}
@@ -27,11 +50,9 @@ export default function EditableText({ value, onChange, className = "" }) {
             contentEditable
             suppressContentEditableWarning
             style={style?.contact?.content}
-            onInput={(e) => setText(e.currentTarget.textContent)}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
-        >
-            {text}
-        </div>
+            dangerouslySetInnerHTML={{ __html: value }}
+        />
     );
 }

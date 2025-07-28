@@ -7,32 +7,26 @@ const mockUserData = {
     contact: [
         {
             icon: "email",
-            link: "jane.doe@example.com",
             textShown: "jane.doe@example.com",
         },
         {
             icon: "phone",
-            link: "",
             textShown: "+91 9876543210",
         },
         {
             icon: "address",
-            link: "",
             textShown: "123, Park Lane, Delhi, India",
         },
         {
             icon: "portfolio",
-            link: "https://jane-portfolio.netlify.app",
             textShown: "My Portfolio",
         },
         {
             icon: "github",
-            link: "https://github.com/janeDoe",
             textShown: "GitHub Profile",
         },
         {
             icon: "linkedin",
-            link: "https://linkedin.com/in/janeDoe",
             textShown: "LinkedIn Profile",
         }
     ],

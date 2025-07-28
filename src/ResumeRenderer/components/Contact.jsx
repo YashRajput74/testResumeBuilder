@@ -1,53 +1,36 @@
-import { useEffect, useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import EditableText from "../../Components/shared/EditableText";
 import EditableIcon from './EditableIcon';
 import { useResume } from "../../context/ResumeContext";
-import { allContactIcons } from "../../utils/iconList";
+import AddLinkButton from "../../Components/shared/AddLinkButton";
 
 export default function Contact() {
     const { editMode, data, style } = useResume();
-    const [contacts, setContacts] = useState([]);
 
-    const [iconMap, setIconMap] = useState({});
+    // --- Step 1: Initialize from localStorage or ResumeContext
+    const [contacts, setContacts] = useState(() => {
+        const local = localStorage.getItem("customContactData");
+        return local ? JSON.parse(local) : data.contact || [];
+    });
 
-    const initialized = useRef(false);
+    const [iconMap, setIconMap] = useState(() => {
+        const local = localStorage.getItem("customContactIcons");
+        if (local) return JSON.parse(local);
 
-    useEffect(() => {
-        if (initialized.current) {
-            return;
-        }
+        const fallbackMap = {};
+        (data.contact || []).forEach((c, i) => {
+            fallbackMap[i] = c.icon || "email";
+        });
+        return fallbackMap;
+    });
 
-
-        const storedContacts = JSON.parse(localStorage.getItem("customContactData"));
-        const storedIcons = JSON.parse(localStorage.getItem("customContactIcons"));
-
-
-        const hasStoredData =
-            Array.isArray(storedContacts) && storedContacts.length > 0 &&
-            storedIcons && Object.keys(storedIcons).length > 0;
-
-        if (hasStoredData) {
-            setContacts(storedContacts);
-            setIconMap(storedIcons);
-            initialized.current = true;
-        } else if (data.contact?.length) {
-            const iconMapFromData = {};
-            data.contact.forEach((c, i) => (iconMapFromData[i] = c.icon || "email"));
-            setContacts(data.contact);
-            setIconMap(iconMapFromData);
-            localStorage.setItem("customContactData", JSON.stringify(data.contact));
-            localStorage.setItem("customContactIcons", JSON.stringify(iconMapFromData));
-            initialized.current = true;
-        } else {
-        }
-    }, [data.contact]);
-
+    // --- Step 2: Save to localStorage on every change
     useEffect(() => {
         localStorage.setItem("customContactData", JSON.stringify(contacts));
         localStorage.setItem("customContactIcons", JSON.stringify(iconMap));
     }, [contacts, iconMap]);
 
+    // --- Step 3: Handlers
     const handleUpdateText = (index, field, newValue) => {
         const updated = [...contacts];
         updated[index][field] = newValue;
@@ -56,56 +39,64 @@ export default function Contact() {
 
     const handleDelete = (index) => {
         const updated = contacts.filter((_, i) => i !== index);
-        const newIconMap = { ...iconMap };
-        delete newIconMap[index];
+
+        const updatedMap = {};
+        updated.forEach((_, i) => {
+            updatedMap[i] = iconMap[i >= index ? i + 1 : i];
+        });
+
         setContacts(updated);
-        setIconMap(newIconMap);
+        setIconMap(updatedMap);
     };
 
     const handleAdd = () => {
         const newContact = {
+            id: Date.now(),
             icon: "email",
-            link: "",
-            textShown: "New Contact"
+            textShown: "New Contact",
+            link: ""
         };
         const updated = [...contacts, newContact];
         const newIndex = updated.length - 1;
-        const newIconMap = { ...iconMap, [newIndex]: "email" };
         setContacts(updated);
-        setIconMap(newIconMap);
+        setIconMap({ ...iconMap, [newIndex]: "email" });
     };
 
     return (
         <div className="contactList">
             <h2 style={style?.contact?.heading}>Contact</h2>
             <ul className="contact-list">
-                {contacts.map((contact, index) => {
-                    const iconKey = iconMap[index];
-                    const iconObj = allContactIcons.find(i => i.key === iconKey)?.icon;
+                {contacts.map((contact, index) => (
+                    <li key={index} className="contactItem" style={style?.contact?.innerBox}>
+                        <EditableIcon
+                            currentIconKey={iconMap[index]}
+                            field={index}
+                            iconMap={iconMap}
+                            setIconMap={setIconMap}
+                            editMode={editMode}
+                        />
 
-                    return (
-                        <li key={index} className="contactItem" style={style?.contact?.innerBox}>
-                            <EditableIcon
-                                currentIconKey={iconMap[index]}
-                                field={index}
-                                iconMap={iconMap}
-                                setIconMap={setIconMap}
-                                editMode={editMode}
+                        <EditableText
+                            value={contact.textShown}
+                            onChange={(val) => handleUpdateText(index, "textShown", val)}
+                            link={contact.link}
+                        />
+
+                        {editMode && (
+                            <AddLinkButton
+                                index={index}
+                                link={contact.link}
+                                onSetLink={(i, newLink) => handleUpdateText(i, "link", newLink)}
                             />
+                        )}
 
-                            <EditableText
-                                value={contact.textShown}
-                                onChange={(val) => handleUpdateText(index, "textShown", val)}
-                            />
-
-                            {editMode && (
-                                <button className="delete-btn" onClick={() => handleDelete(index)}>
-                                    ❌
-                                </button>
-                            )}
-                        </li>
-                    );
-                })}
+                        {editMode && (
+                            <button className="delete-btn" onClick={() => handleDelete(index)}>
+                                ❌
+                            </button>
+                        )}
+                    </li>
+                ))}
             </ul>
 
             {editMode && (
