@@ -76,7 +76,6 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
     const save = () => {
         localStorage.setItem("resumeData", JSON.stringify(data));
         setEditMode(false);
-        console.log("Saved rich text data:", data);
     };
 
     const updateField = (section, key, value) => {
