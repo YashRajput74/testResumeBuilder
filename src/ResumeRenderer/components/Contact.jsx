@@ -80,6 +80,7 @@ export default function Contact() {
                             value={contact.textShown}
                             onChange={(val) => handleUpdateText(index, "textShown", val)}
                             link={contact.link}
+                            onEnterPress={handleAdd}
                         />
 
                         {editMode && (

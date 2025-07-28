@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useResume } from "../../context/ResumeContext";
 
-export default function EditableText({ value, onChange, className = "", link = "" }) {
+export default function EditableText({ value, onChange, className = "", link = "", onEnterPress }) {
     const ref = useRef(null);
     const { style, editMode } = useResume();
 
@@ -21,7 +21,7 @@ export default function EditableText({ value, onChange, className = "", link = "
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
-            ref.current.blur();
+            if (onEnterPress) onEnterPress();
         }
     };
 
