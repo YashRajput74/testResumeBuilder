@@ -39,10 +39,12 @@ html {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    width: 50%;
 }
 
 .navBar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
@@ -276,35 +278,9 @@ html {
     display: none;
 }
 
-/* .templateCard {
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-}
-
-.templateCard:hover {
-  transform: scale(1.02);
-}
-
-.customizeBtn {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 6px 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  display: none;
-  z-index: 1;
-  border-radius: 5px;
-}
-
-.templateCard:hover .customizeBtn {
-  display: block;
-}
- */
-
+ .close-button:hover{
+   transform: rotate(360deg)
+ }
 
 .templateCard {
     position: relative;

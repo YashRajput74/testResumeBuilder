@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import UserAvatar from '../UserAvatar';
@@ -8,6 +8,7 @@ export default function Header({ onLoginClick }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const navRef = useRef();
     const toggleRef = useRef();
+    const location = useLocation(); 
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -65,9 +66,29 @@ export default function Header({ onLoginClick }) {
 
             <div ref={navRef} className={`navWrapper ${menuOpen ? "open" : ""}`}>
                 <nav className="navBar">
-                    <a href="/" className="active" onClick={handleNavClick}>Home</a>
-                    <a  href="/about" onClick={handleNavClick}>About</a>
-                    <a href="#templates" onClick={handleNavClick}>Templates</a>
+                    <Link
+                        to="/"
+                        onClick={handleNavClick}
+                        className={location.pathname === "/" ? "active" : ""}
+                    >
+                        Home
+                    </Link>
+
+                    <Link
+                        to="/about"
+                        onClick={handleNavClick}
+                        className={location.pathname === "/about" ? "active" : ""}
+                    >
+                        About
+                    </Link>
+
+                    <Link
+                        to="/templates"
+                        onClick={handleNavClick}
+                        className={location.pathname === "/templates" ? "active" : ""}
+                    >
+                        Templates
+                    </Link>
 
                     {user ? (
                         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
@@ -94,3 +115,5 @@ export default function Header({ onLoginClick }) {
         </header>
     );
 }
+
+
