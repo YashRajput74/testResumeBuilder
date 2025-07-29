@@ -6,7 +6,7 @@
 }
 
 #resume-view {
-    width: 210mm;
+    width: 195mm;
     height: 297mm;
     margin: auto;
     padding: 10mm;
@@ -15,6 +15,7 @@
     gap: 1rem;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* overflow-x: hidden; */
 }
 
 .personalInfo {

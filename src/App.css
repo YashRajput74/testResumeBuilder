@@ -113,11 +113,11 @@ html {
     font-weight: 600;
 }
 
-.heroContent button:last-child {
+/* .heroContent button:last-child {
     background-color: white;
     color: black;
     border: 1px solid #ddd;
-}
+} */
 
 .uprpara {
     display: flex;
@@ -134,15 +134,15 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid white;
+    /* border: 1px solid white; */
     color: #000;
     padding: 18px;
     margin: 20px auto;
     width: fit-content;
     border-radius: 30px;
     font-weight: 700;
-    box-shadow: 0 0 12px white;
-    background-color: rgba(255, 255, 255, 0.05);
+    /* box-shadow: 0 0 12px white; */
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 
@@ -302,7 +302,7 @@ html {
 
 .customizeBtn {
     position: absolute;
-    top: 120px;
+    top: 180px;
     left: 50%;
     transform: translateX(-50%);
     padding: 0.7rem 1.6rem;
@@ -319,7 +319,7 @@ html {
     z-index: 1;
 }
 
-.customizeBtn::before {
+/* .customizeBtn::before {
     content: '';
     position: absolute;
     top: 6px;
@@ -331,7 +331,7 @@ html {
     border-radius: 12px;
     z-index: -1;
     transition: all 0.3s ease;
-}
+} */
 
 .customizeBtn:hover {
     transform: translateX(-50%) scale(1.05);
@@ -854,4 +854,30 @@ html {
     .heroContent button {
         font-size: 0.9rem;
     }
+
+    .templateScroll {
+        display: block;
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    width: 100%;
+    gap: 1rem;
+    padding: 1rem 3.6rem;
+    }
+
+    .templateCard {
+    /* flex: 0 0 auto; */
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    padding: 1rem;
+    /* box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 5px;
+}
 }
