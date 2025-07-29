@@ -854,4 +854,10 @@ html {
     .heroContent button {
         font-size: 0.9rem;
     }
+    .templateSectionn{
+        flex-direction: column-reverse; 
+    }
+    .hide-scroll{
+        width: 50mm;
+    }
 }

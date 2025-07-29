@@ -363,6 +363,50 @@ const template7 = {
             text: "#333333"
         }
     }
-}
+};
+const template8 = {
+  id: 8,
+  name: "Professional One Column",
+  pdf: "/templates/template8.pdf",
+  filteredColumn: "1",
+  isAvatar: "false",
+  layout: {
+    grid: {
+      templateRows: "auto",
+      templateColumns: "1fr",
+      areas: [
+        {
+          name: 'mainColumn',
+          rowStart: 1,
+          rowEnd: 2,
+          colStart: 1,
+          colEnd: 2,
+          sections: [
+            "header",
+            "contact",
+            "summary",
+            "experience",
+            "education",
+            "achievements",
+            "skills",
+            "certifications"
+          ]
+        }
+      ]
+    },
+    padding: "20px",
+    fontFamily: "'Georgia', serif",
+    fontLink: "",
+    fontSize: "16px",
+    colorScheme: {
+      background: "#ffffff",
+      text: "#333333"
+    }
+  }
+};
 
-export const templates = [template1, template3, template4, template6, template7];
+
+
+
+
+export const templates = [template1, template3, template4, template6, template7, template8];
