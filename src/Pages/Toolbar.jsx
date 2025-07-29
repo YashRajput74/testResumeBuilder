@@ -84,6 +84,8 @@ export default function Toolbar() {
                 <button style={buttonStyle} onClick={() => exec("bold")}><b>B</b></button>
                 <button style={buttonStyle} onClick={() => exec("italic")}><i>I</i></button>
                 <button style={buttonStyle} onClick={() => exec("underline")}><u>U</u></button>
+                <button style={buttonStyle} onClick={() => exec("insertUnorderedList")}>• List</button>
+                <button style={buttonStyle} onClick={() => exec("insertOrderedList")}>1. List</button>
                 <button style={buttonStyle} onClick={() => setShowLayoutModal(true)}>
                     Layout
                 </button>
