@@ -419,7 +419,8 @@ html {
 }
 
 .signupBtn {
-  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+  /* background: linear-gradient(135deg, #a18cd1, #fbc2eb); */
+  background: linear-gradient(135deg, #cba7e2, #a0c4ff);
   color: white;
   margin-left: 0.5rem;
   border: none;
@@ -859,5 +860,10 @@ html {
     }
     .hide-scroll{
         width: 50mm;
+    }
+    .sidebarnav{
+        display: flex;
+        width: 100%;
+        
     }
 }

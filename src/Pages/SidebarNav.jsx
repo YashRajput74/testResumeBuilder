@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import LayoutEditorModal from "../Features/LayoutEditorModal/LayoutEditorModal";
-
 const navItems = [
   { key: "templates", label: "📚  Templates" },
   { key: "layout", label: "📐 Layout" },
@@ -13,6 +12,7 @@ const SidebarNav = ({ active, onChange }) => {
 
   return (
     <div
+    className="sidebarnav"
       style={{
         width: "160px",
         padding: "1rem 0.5rem",

@@ -15,8 +15,8 @@
     gap: 1rem;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-      width: 100%;
-  max-width: 210mm;  /* still keeps printable size on desktop */
+      width: 210mm;
+  /* max-width: 210mm;  still keeps printable size on desktop */
   height: 297mm;
   margin: auto;
   padding: 10mm;
@@ -324,10 +324,4 @@
 
 .certificates {
     text-align: left;
-}
-@media (max-width: 500px){
-    .resume-view{
-        width: 50mm;
-        background-color: black;
-    }
 }
