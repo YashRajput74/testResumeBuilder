@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ResumeProvider } from '../context/ResumeContext';
 import ResumeRenderer from '../ResumeRenderer/ResumeRenderer';
@@ -6,6 +7,33 @@ import mockUserData from '../data/mockUserData';
 
 export default function TemplateSection({ templates }) {
     const navigate = useNavigate();
+    const scrollRef = useRef(null);
+
+    useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let scrollAmount = 1; // scroll speed
+    let direction = 1; // 1 = right, -1 = left
+
+    const scrollInterval = setInterval(() => {
+        if (!scrollContainer) return;
+
+        scrollContainer.scrollLeft += scrollAmount * direction;
+
+        // Reverse scroll direction at ends
+        if (
+            scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth ||
+            scrollContainer.scrollLeft <= 0
+        ) {
+            direction *= -1;
+        }
+    }, 20); // smaller = faster scroll
+
+    // Cleanup on unmount
+    return () => clearInterval(scrollInterval);
+}, []);
+
 
     const handleSelectTemplate = (templateId) => {
         navigate(`/resume/${templateId}`);
@@ -15,7 +43,8 @@ export default function TemplateSection({ templates }) {
         <section id="templates" className="templateSection">
             <h2 className="heading">Choose a Resume Template</h2>
 
-            <div className="templateScroll">
+            <div className="templateScroll" ref={scrollRef}>
+
                 {templates.map((template, index) => (
                     <div
                         key={index}
