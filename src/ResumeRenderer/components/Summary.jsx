@@ -4,7 +4,6 @@ import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function Summary() {
     const { data, style, updateField, editMode } = useResume();
-    const containerRef = useRef();
     const summaryRef = useRef();
 
     const handleBlur = (e) => {
@@ -16,7 +15,7 @@ export default function Summary() {
         <div
             className="summary"
             ref={summaryRef}
-            style={{ ...style?.summary?.box, border: "1px solid black", position: "relative" }}
+            style={{ ...style?.summary?.box, position: "relative" }}
         >
             <h2
                style={style?.summary?.heading}

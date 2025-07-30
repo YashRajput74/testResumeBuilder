@@ -12,36 +12,43 @@ export default function InlineToolbar({ editMode, containerRef }) {
 
             const container = containerRef.current;
 
-            if (
-                !container.contains(e.target) &&
-                !toolbarRef.current?.contains(e.target)
-            ) {
+            const clickedInsideToolbar = toolbarRef.current?.contains(e.target);
+            const clickedInsideContainer = container.contains(e.target);
+
+            if (!clickedInsideContainer && !clickedInsideToolbar) {
                 setVisible(false);
                 return;
             }
 
-            if (toolbarRef.current?.contains(e.target)) {
-                return;
-            }
+            if (clickedInsideToolbar) return;
 
             const clickedP = e.target.closest("p");
-            if (!clickedP || !container.contains(clickedP)) {
+            if (!clickedP || !clickedInsideContainer) {
                 setVisible(false);
-                if (container.contains(e.target)) {
+                if (clickedInsideContainer) {
                     alert("Click inside a paragraph to edit formatting.");
                 }
                 return;
             }
 
             const sel = window.getSelection();
-            if (sel.rangeCount > 0) {
-                savedSelection.current = sel.getRangeAt(0);
+
+            let rect;
+            if (sel.rangeCount > 0 && !sel.isCollapsed) {
+                const range = sel.getRangeAt(0);
+                savedSelection.current = range;
+                rect = range.getBoundingClientRect();
+            } else {
+                // No text selected – just clicked
+                const clickedRect = clickedP.getBoundingClientRect();
+                const range = document.createRange();
+                range.selectNodeContents(clickedP);
+                range.collapse(true);
+                savedSelection.current = range;
+                rect = clickedRect;
             }
 
-            const range = sel.getRangeAt(0);
-            const rect = range.getBoundingClientRect();
             const containerRect = container.getBoundingClientRect();
-
             setPosition({
                 top: rect.top - containerRect.top,
                 left: rect.left - containerRect.left,
@@ -58,16 +65,26 @@ export default function InlineToolbar({ editMode, containerRef }) {
 
     const restoreSelection = () => {
         const sel = window.getSelection();
-        sel.removeAllRanges();
-        if (savedSelection.current) {
-            sel.addRange(savedSelection.current);
+
+        // Only restore if selection is collapsed or gone
+        if (!sel || sel.rangeCount === 0 || sel.isCollapsed) {
+            sel.removeAllRanges();
+            if (savedSelection.current) {
+                sel.addRange(savedSelection.current);
+            }
         }
     };
 
     const exec = (command, value = null) => {
-        restoreSelection();
+        restoreSelection(); // restore even if selection seems present (for safety)
         document.execCommand("styleWithCSS", false, true);
         document.execCommand(command, false, value);
+
+        // update saved selection after execution
+        const sel = window.getSelection();
+        if (sel.rangeCount > 0) {
+            savedSelection.current = sel.getRangeAt(0);
+        }
     };
 
     if (!visible || !editMode) return null;
