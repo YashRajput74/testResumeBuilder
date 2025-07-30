@@ -33,25 +33,22 @@ export default function InlineToolbar({ editMode, containerRef }) {
 
             const sel = window.getSelection();
 
-            let rect;
-            if (sel.rangeCount > 0 && !sel.isCollapsed) {
+            const clickedRect = clickedP.getBoundingClientRect();
+
+            if (sel.rangeCount > 0) {
                 const range = sel.getRangeAt(0);
                 savedSelection.current = range;
-                rect = range.getBoundingClientRect();
             } else {
-                // No text selected – just clicked
-                const clickedRect = clickedP.getBoundingClientRect();
                 const range = document.createRange();
                 range.selectNodeContents(clickedP);
                 range.collapse(true);
                 savedSelection.current = range;
-                rect = clickedRect;
             }
 
             const containerRect = container.getBoundingClientRect();
             setPosition({
-                top: rect.top - containerRect.top,
-                left: rect.left - containerRect.left,
+                top: clickedRect.top - containerRect.top - 2,
+                left: clickedRect.left - containerRect.left + clickedRect.width / 2,
             });
 
             setVisible(true);
@@ -66,7 +63,6 @@ export default function InlineToolbar({ editMode, containerRef }) {
     const restoreSelection = () => {
         const sel = window.getSelection();
 
-        // Only restore if selection is collapsed or gone
         if (!sel || sel.rangeCount === 0 || sel.isCollapsed) {
             sel.removeAllRanges();
             if (savedSelection.current) {
@@ -76,11 +72,10 @@ export default function InlineToolbar({ editMode, containerRef }) {
     };
 
     const exec = (command, value = null) => {
-        restoreSelection(); // restore even if selection seems present (for safety)
+        restoreSelection();
         document.execCommand("styleWithCSS", false, true);
         document.execCommand(command, false, value);
 
-        // update saved selection after execution
         const sel = window.getSelection();
         if (sel.rangeCount > 0) {
             savedSelection.current = sel.getRangeAt(0);
@@ -96,7 +91,7 @@ export default function InlineToolbar({ editMode, containerRef }) {
                 position: "absolute",
                 top: position.top,
                 left: position.left,
-                transform: "translateY(-100%)",
+                transform: "translate(-50%, -100%)",
                 background: "white",
                 border: "1px solid #ccc",
                 borderRadius: "8px",
