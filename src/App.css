@@ -745,7 +745,9 @@ html {
     /* consistent with your grid */
 }
 
-
+@media (max-width: 1450px) {
+    
+}
 @media (max-width: 900px) {
     .navBar a {
         font-size: 0.9rem;
@@ -855,15 +857,6 @@ html {
     .heroContent button {
         font-size: 0.9rem;
     }
-    .templateSectionn{
-        flex-direction: column-reverse; 
-    }
-    .hide-scroll{
-        width: 50mm;
-    }
-    .sidebarnav{
-        display: flex;
-        width: 100%;
-        
-    }
+   
+   
 }

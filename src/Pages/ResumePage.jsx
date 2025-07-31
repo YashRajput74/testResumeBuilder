@@ -128,7 +128,7 @@ export default function ResumePage({ onLoginClick }) {
                         {activeNav === "templates" && (
                             <div
                                 style={{
-                                    width: "40%",
+                                    width: "100%",
                                     maxWidth: "500px",
                                     minWidth: "300px",
                                     position: "relative",
