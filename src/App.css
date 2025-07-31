@@ -113,11 +113,11 @@ html {
     font-weight: 600;
 }
 
-.heroContent button:last-child {
+/* .heroContent button:last-child {
     background-color: white;
     color: black;
     border: 1px solid #ddd;
-}
+} */
 
 .uprpara {
     display: flex;
@@ -128,21 +128,23 @@ html {
     margin-top: 1.5rem;
     font-size: 25px;
     text-align: center;
+    position: sticky;
+    top: 50px;
 }
 
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid white;
+    /* border: 1px solid white; */
     color: #000;
     padding: 18px;
     margin: 20px auto;
     width: fit-content;
     border-radius: 30px;
     font-weight: 700;
-    box-shadow: 0 0 12px white;
-    background-color: rgba(255, 255, 255, 0.05);
+    /* box-shadow: 0 0 12px white; */
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 
@@ -203,7 +205,8 @@ html {
     justify-content: center;
     flex-wrap: nowrap;
     overflow-x: hidden;
-    width: 100%;
+    width: 95%;
+    margin: auto;
     gap: 1rem;
     padding: 1rem 2.6rem;
 }
@@ -286,7 +289,7 @@ html {
     position: relative;
     padding: 1rem;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); */
     transition: transform 0.3s ease;
     overflow: hidden;
 }
@@ -302,7 +305,7 @@ html {
 
 .customizeBtn {
     position: absolute;
-    top: 120px;
+    top: 180px;
     left: 50%;
     transform: translateX(-50%);
     padding: 0.7rem 1.6rem;
@@ -319,7 +322,7 @@ html {
     z-index: 1;
 }
 
-.customizeBtn::before {
+/* .customizeBtn::before {
     content: '';
     position: absolute;
     top: 6px;
@@ -331,7 +334,7 @@ html {
     border-radius: 12px;
     z-index: -1;
     transition: all 0.3s ease;
-}
+} */
 
 .customizeBtn:hover {
     transform: translateX(-50%) scale(1.05);
@@ -376,6 +379,12 @@ html {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+.allTemplatesGrid {
+    height: 460px;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 .allTemplatesGrid .templateCard {
@@ -509,8 +518,9 @@ html {
     display: flex;
     justify-content: center;
     margin: 40px 0;
-
-
+    position: sticky;
+    top: 90px;
+    z-index: 2;
 }
 
 .filterBar {
@@ -524,12 +534,8 @@ html {
     width: 90%;
     max-width: 900px;
     gap: 20px;
-}
-
-.filterBar {
     position: sticky;
     top: 120px;
-    width: 100%;
     transition: top 0.3s ease;
     z-index: 10;
 }
@@ -538,7 +544,7 @@ html {
 .filterRight {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 52px;
 }
 
 .filterLabel,
@@ -714,9 +720,10 @@ html {
 }
 
 .carousel {
-    position: relative;
+    /* position: relative; */
     width: 100%;
     height: 100%;
+    margin: auto;
 }
 
 .carouselBtn {
@@ -812,11 +819,24 @@ html {
     .allTemplatesGrid {
         margin: 0rem 3rem 3rem 3rem;
     }
+    .templateScroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .templateScroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 @media (max-width:500px) {
     .center {
-        font-size: 0.7rem;
+        font-size: 1rem;
+        border-radius: 50px;
+    }
+
+    #root {
+        overflow: hidden;
     }
 
     .navWrapper {
@@ -846,17 +866,99 @@ html {
 
     .ctaButtons {
         gap: 0rem;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
     }
 
     .btnPrimary,
     .btnSecondary {
         white-space: nowrap;
+        text-align: center;
+        width: 70%;
+        display: block;
     }
 
-    .heroContent button {
+    /* .heroContent button {
         font-size: 0.9rem;
+    } */
+
+    .templateScroll {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 84%;
+        margin: auto;
+        padding: 1rem 0rem;
+        height: 50vh;
+        scroll-behavior: smooth;
     }
+
+    .templateCard {
+    /* flex: 0 0 auto; */
+    flex-shrink: 0;
+    min-height: 100px;
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    padding: 1rem;
+    /* box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.filterBar {
+    position: sticky;
+    top: 120px;
+    width: 100%;
+    transition: top 0.3s ease;
+    z-index: 10;
+}
+
+.carouselWrapper {
+    position: relative;
+    height: 450px;
+    margin: 2rem auto;
+    perspective: 1200px;
+    overflow: visible;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carouselBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-80%);
+    background: linear-gradient(to right, #d3bae7, #fdda7c);
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.carouselBtn:first-of-type {
+    left: -185px;
+}
+
+.carouselBtn:last-of-type {
+    right: -185px;
+}
+
+.templateCard {
+    width: 280px;
+    /* consistent with your grid */
+}
    
    
 }

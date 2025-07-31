@@ -13,9 +13,7 @@ export default function AllTemplatesPage() {
     const navigate = useNavigate();
     const [headshotFilter, setHeadshotFilter] = useState("");
     const [columnFilter, setColumnFilter] = useState("");
-    const [viewMode, setViewMode] = useState("carousel");
-    const [carouselIndex, setCarouselIndex] = useState(0);
-      const [authOpen, setAuthOpen] = useState(false);
+    const [authOpen, setAuthOpen] = useState(false);
 
     const filtered = templates.filter(template => {
         const mh = !headshotFilter ||
@@ -27,18 +25,10 @@ export default function AllTemplatesPage() {
         return mh && mc;
     });
 
-    const handlePrev = () => setCarouselIndex(i =>
-        i === 0 ? filtered.length - 1 : i - 1
-    );
-    const handleNext = () => setCarouselIndex(i =>
-        i === filtered.length - 1 ? 0 : i + 1
-    );
-
-    const renderCard = (template, style = {}) => (
+    const renderCard = (template) => (
         <div
             key={template.id}
             className="templateCard"
-            style={style}
             onClick={() => navigate(`/resume/${template.id}`)}
         >
             <div className="templatePreview">
@@ -52,7 +42,7 @@ export default function AllTemplatesPage() {
                         pointerEvents: 'none',
                         position: 'absolute',
                         top: '0.8rem',
-                        left: viewMode === "carousel" ? "-0.1rem" : "1.5rem",
+                        left: '1.5rem',
                     }}
                 >
                     <ResumeProvider
@@ -80,7 +70,7 @@ export default function AllTemplatesPage() {
     return (
         <>
             <section className="allTemplatesPage">
-                <Header onLoginClick={() => setAuthOpen(true)}  />
+                <Header onLoginClick={() => setAuthOpen(true)} />
                 <div className="templateIntro">
                     <div className="uprpara">
                         <h1>Pick the Template That Suits You Best</h1>
@@ -102,54 +92,23 @@ export default function AllTemplatesPage() {
                                 <option value="two">Two Column</option>
                             </select>
                         </div>
-                        <div className="filterRight">
-                            <select className="barBtn" value={viewMode} onChange={e => { setViewMode(e.target.value); setCarouselIndex(0); }}>
-                                <option value="grid">Grid View</option>
-                                <option value="carousel">Carousel View</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
 
                 {filtered.length === 0 ? (
                     <p style={{ textAlign: 'center', marginTop: '2rem' }}>No templates available.</p>
-                ) : viewMode === "grid" ? (
+                ) : (
                     <div className="allTemplatesGrid">
                         {filtered.map(template => renderCard(template))}
                     </div>
-                ) : (
-                    <div className="carouselWrapper">
-                        <button className="carouselBtn" onClick={handlePrev}>&lt;</button>
-                        <div className="carousel">
-                            {filtered.map((t, i) => {
-                                const offset = i - carouselIndex;
-                                const abs = Math.abs(offset);
-                                const scale = offset === 0 ? 1 : 0.8;
-                                const rotateY = offset * 30;
-                                const translateX = offset * 180;
-                                const z = offset === 0 ? 2 : 1;
-                                const opacity = abs > 2 ? 0 : 1;
-
-                                return renderCard(t, {
-                                    position: 'absolute',
-                                    left: '50%',
-                                    top: 0,
-                                    transform: `translateX(${translateX}px) translateX(-50%) scale(${scale}) rotateY(${rotateY}deg)`,
-                                    transformStyle: 'preserve-3d',
-                                    opacity,
-                                    zIndex: z
-                                });
-                            })}
-                        </div>
-                        <button className="carouselBtn" onClick={handleNext}>&gt;</button>
-                    </div>
                 )}
+
                 <p style={{ textAlign: 'center', fontSize: '0.85rem', color: '#555', marginBottom: '2rem' }}>
-                    More templates coming soon. You can switch views to explore better.
+                    More templates coming soon.
                 </p>
             </section>
             <Footer />
-             <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
+            <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
         </>
     );
 }
