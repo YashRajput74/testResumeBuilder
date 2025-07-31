@@ -1,5 +1,8 @@
 
+
 import { useState } from "react";
+import { supabase } from "../../src/supabaseClient"
+
 import "./AuthModal.css";
 
 export default function AuthModal({ isOpen, onClose }) {
@@ -7,14 +10,25 @@ export default function AuthModal({ isOpen, onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleAuth = (e) => {
+  const handleAuth = async (e) => {
     e.preventDefault();
     if (isLogin) {
-      alert(`Logging in with Email: ${email}`);
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        alert(error.message);
+      } else {
+        alert("Logged in successfully!");
+        onClose();
+      }
     } else {
-      alert(`Signing up with Email: ${email}`);
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        alert(error.message);
+      } else {
+        alert("Sign-up successful! Check your email for confirmation.");
+        onClose();
+      }
     }
-    onClose(); 
   };
 
   if (!isOpen) return null;
@@ -29,10 +43,7 @@ export default function AuthModal({ isOpen, onClose }) {
 
   return (
     <div className="auth-modal-overlay" onClick={handleOverlayClick}>
-      <div
-        className={`auth-modal ${isLogin ? "" : "sign-up-mode"}`}
-        onClick={handleModalClick}
-      >
+      <div className={`auth-modal ${isLogin ? "" : "sign-up-mode"}`} onClick={handleModalClick}>
         <div className="auth-modal-left">
           <h2>{isLogin ? "Welcome Back!" : "Hello, Friend!"}</h2>
           <p>
@@ -47,7 +58,7 @@ export default function AuthModal({ isOpen, onClose }) {
 
         <div className="auth-modal-right">
           <button className="close-btn" onClick={onClose}>×</button>
-          <h2>{isLogin ? "Sign In" : "Sign Up"}</h2>
+          <h2>{isLogin ? "Log In" : "Sign Up"}</h2>
           <form onSubmit={handleAuth}>
             <input
               type="email"
@@ -72,3 +83,8 @@ export default function AuthModal({ isOpen, onClose }) {
     </div>
   );
 }
+
+
+
+
+
