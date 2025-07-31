@@ -10,30 +10,68 @@ export default function TemplateSection({ templates }) {
     const scrollRef = useRef(null);
 
     useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    let scrollAmount = 1; // scroll speed
-    let direction = 1; // 1 = right, -1 = left
-
-    const scrollInterval = setInterval(() => {
+        const scrollContainer = scrollRef.current;
         if (!scrollContainer) return;
 
-        scrollContainer.scrollLeft += scrollAmount * direction;
+        let scrollAmount = 1;
+        let scrollInterval = null;
+        let isPaused = false;
 
-        // Reverse scroll direction at ends
-        if (
-            scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth ||
-            scrollContainer.scrollLeft <= 0
-        ) {
-            direction *= -1;
-        }
-    }, 20); // smaller = faster scroll
+        const startScroll = () => {
+            if (scrollInterval) return;
+            scrollInterval = setInterval(() => {
+                if (!scrollContainer || isPaused) return;
 
-    // Cleanup on unmount
-    return () => clearInterval(scrollInterval);
-}, []);
+                scrollContainer.scrollLeft += scrollAmount;
 
+                // Loop back to start
+                if (
+                    scrollContainer.scrollLeft >=
+                    scrollContainer.scrollWidth - scrollContainer.clientWidth
+                ) {
+                    scrollContainer.scrollLeft = 0;
+                }
+            }, 15); // Adjust speed here
+        };
+
+        const stopScroll = () => {
+            clearInterval(scrollInterval);
+            scrollInterval = null;
+        };
+
+        const pauseScroll = () => {
+            isPaused = true;
+        };
+
+        const resumeScroll = () => {
+            isPaused = false;
+        };
+
+        // Start auto scroll
+        startScroll();
+
+        // Hover pause for desktop
+        scrollContainer.addEventListener('mouseenter', pauseScroll);
+        scrollContainer.addEventListener('mouseleave', resumeScroll);
+
+        // Long press pause for mobile
+        let touchTimer;
+        scrollContainer.addEventListener('touchstart', () => {
+            touchTimer = setTimeout(pauseScroll, 300);
+        });
+        scrollContainer.addEventListener('touchend', () => {
+            clearTimeout(touchTimer);
+            resumeScroll();
+        });
+
+        return () => {
+            stopScroll();
+            scrollContainer.removeEventListener('mouseenter', pauseScroll);
+            scrollContainer.removeEventListener('mouseleave', resumeScroll);
+            scrollContainer.removeEventListener('touchstart', () => {});
+            scrollContainer.removeEventListener('touchend', () => {});
+        };
+    }, []);
 
     const handleSelectTemplate = (templateId) => {
         navigate(`/resume/${templateId}`);
@@ -44,8 +82,7 @@ export default function TemplateSection({ templates }) {
             <h2 className="heading">Choose a Resume Template</h2>
 
             <div className="templateScroll" ref={scrollRef}>
-
-                {templates.map((template, index) => (
+                {[...templates, ...templates].map((template, index) => (
                     <div
                         key={index}
                         className="templateCard"
@@ -129,6 +166,7 @@ export default function TemplateSection({ templates }) {
                     </div>
                 ))}
             </div>
+
             <div className="seeAllWrapper">
                 <button className="btnPrimary" onClick={() => navigate('/all-templates')}>
                     View All Templates
