@@ -428,7 +428,8 @@ html {
 }
 
 .signupBtn {
-  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+  /* background: linear-gradient(135deg, #a18cd1, #fbc2eb); */
+  background: linear-gradient(135deg, #cba7e2, #a0c4ff);
   color: white;
   margin-left: 0.5rem;
   border: none;
@@ -751,7 +752,9 @@ html {
     /* consistent with your grid */
 }
 
-
+@media (max-width: 1450px) {
+    
+}
 @media (max-width: 900px) {
     .navBar a {
         font-size: 0.9rem;
@@ -956,4 +959,6 @@ html {
     width: 280px;
     /* consistent with your grid */
 }
+   
+   
 }

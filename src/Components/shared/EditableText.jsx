@@ -32,12 +32,12 @@ export default function EditableText({ value, onChange, className = "", link = "
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`editable-text ${className}`}
-                style={style?.contact?.anchor}
+                style={{...style?.contact?.anchor, outline:"none"}}
             >
                 {value}
             </a>
         ) : (
-            <span className={`editable-text ${className}`} style={style?.contact?.content}>
+            <span className={`editable-text ${className}`} style={{...style?.contact?.content, outline:"none"}}>
                 {value}
             </span>
         );
@@ -49,7 +49,7 @@ export default function EditableText({ value, onChange, className = "", link = "
             className={`editable-text ${className}`}
             contentEditable
             suppressContentEditableWarning
-            style={style?.contact?.content}
+            style={{...style?.contact?.content, outline:"none"}}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             dangerouslySetInnerHTML={{ __html: value }}

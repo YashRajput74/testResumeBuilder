@@ -73,7 +73,13 @@ export default function Header({ onLoginClick }) {
                     >
                         Home
                     </Link>
-
+                       <Link
+                        to="/templates"
+                        onClick={handleNavClick}
+                        className={location.pathname === "/templates" ? "active" : ""}
+                    >
+                        Templates
+                    </Link>
                     <Link
                         to="/about"
                         onClick={handleNavClick}
@@ -82,13 +88,7 @@ export default function Header({ onLoginClick }) {
                         About
                     </Link>
 
-                    <Link
-                        to="/templates"
-                        onClick={handleNavClick}
-                        className={location.pathname === "/templates" ? "active" : ""}
-                    >
-                        Templates
-                    </Link>
+                 
 
                     {user ? (
                         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>

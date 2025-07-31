@@ -996,8 +996,173 @@ const templateStyles = {
                 marginBottom: '5px'
             }
         },
+    },
+     "8": {
+     header: {
+    box: {
+      textAlign: "center",
+      marginBottom: "1.5rem"
+    },
+    name: {
+      fontSize: "24px",
+      fontWeight: "bold",
+      color: "var(--heading-color)"
+    },
+    position: {
+      fontSize: "16px",
+      margin: "5px 0",
+      color: "var(--text-color)"
+    },
+    subHeading: {
+      fontSize: "14px",
+      fontStyle: "italic",
+      color: "var(--text-color)"
     }
+  },
+  contact: {
+    box: {
+      display: "flex",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      marginBottom: "1rem"
+    },
+    icon: {
+      margin: "0 10px",
+      color: "var(--primary-color)"
+    }
+  },
+  summary: {
+    heading: {
+      fontSize: "18px",
+      fontWeight: "bold",
+      color: "var(--heading-color)",
+      marginBottom: "0.5rem",
+       textAlign: "center"
+    },
+    content: {
+      color: "var(--text-color)",
+      marginBottom: "1rem"
+    }
+  },
+  experience: {
+    heading: {
+      fontSize: "18px",
+      fontWeight: "bold",
+      color: "var(--heading-color)",
+      marginBottom: "0.5rem",
+      borderTop: "var(--heading-color)",
+       textAlign: "center"
+    },
+    eachWorkPlace: {
+      marginBottom: "1rem"
+    },
+    role: {
+      fontWeight: "bold",
+      fontSize: "16px"
+    },
+    dateLocation: {
+      fontStyle: "italic",
+      fontSize: "14px",
+      color: "var(--text-color)",
+      marginBottom: "0.3rem"
+    },
+    bulletPoints: {
+      paddingLeft: "20px",
+      listStyleType: "disc"
+    }
+  },
+  education: {
+    heading: {
+      fontSize: "18px",
+      fontWeight: "bold",
+      color: "var(--heading-color)",
+      marginBottom: "0.5rem",
+      borderTop: "var(--heading-color)",
+       textAlign: "center"
+    },
+    eachSchool: {
+      marginBottom: "1rem"
+    },
+    degree: {
+      fontWeight: "bold",
+      fontSize: "16px"
+    },
+    dateLocation: {
+      fontStyle: "italic",
+      fontSize: "14px",
+      color: "var(--text-color)"
+    },
+    bulletPoints: {
+      paddingLeft: "20px",
+      listStyleType: "disc"
+    }
+  },
+  achievements: {
+    heading: {
+      fontSize: "18px",
+      fontWeight: "bold",
+      color: "var(--heading-color)",
+      marginBottom: "0.5rem",
+      borderTop: "var(--heading-color)",
+       textAlign: "center"
+    },
+    eachAchievement: {
+      marginBottom: "0.5rem"
+    },
+    title: {
+      fontWeight: "bold",
+      fontSize: "16px"
+    },
+    description: {
+      fontSize: "14px",
+      color: "var(--text-color)"
+    }
+  },
+  skills: {
+    heading: {
+      fontSize: "18px",
+    //   fontWeight: "bold",
+      color: "var(--heading-color)",
+       textAlign: "center",
+       borderTop: "var(--heading-color)",
+
+    },
+    eachSkill: {
+      display: "inline-block",
+      backgroundColor: "var(--primary-color)",
+      color: "white",
+      padding: "6px 10px",
+      borderRadius: "5px",
+      margin: "5px"
+    }
+  },
+  certifications: {
+    heading: {
+      fontSize: "18px",
+      fontWeight: "bold",
+      color: "var(--heading-color)",
+      marginBottom: "0.5rem",
+      borderTop: "var(--heading-color)",
+       textAlign: "center"
+    },
+    eachCertificate: {
+      marginBottom: "0.5rem"
+    },
+    title: {
+      fontWeight: "bold",
+      fontSize: "16px"
+    },
+    organization: {
+      fontStyle: "italic",
+      fontSize: "14px",
+      borderTop: "var(--heading-color)",
+    },
+    date: {
+      fontSize: "14px"
+    }
+  }
 }
+};
 
 export default templateStyles;
 
