@@ -6,7 +6,6 @@
 }
 
 #resume-view {
-    width: 195mm;
     /* width: 210mm;
     height: 297mm;
     margin: auto;
@@ -18,10 +17,10 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     /* overflow-x: hidden; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-      width: 210mm;
+      width: 200mm;
   /* max-width: 210mm;  still keeps printable size on desktop */
   height: 297mm;
-  margin: auto;
+  /* margin: auto; */
   padding: 10mm;
   box-sizing: border-box;
   display: grid;

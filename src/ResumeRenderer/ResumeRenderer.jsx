@@ -123,3 +123,5 @@ export default function ResumeRenderer({ template }) {
         </div>
     );
 }
+
+
