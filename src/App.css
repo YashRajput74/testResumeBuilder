@@ -207,12 +207,15 @@ html {
     overflow-x: auto;
     width: 95%;
     margin: auto;
-    gap: 1rem;
+    gap: 2rem;
     padding: 1rem 1rem 1rem 12rem;
     scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.templateScroll::-webkit-scrollbar {
+    display: none;
 }
 
 .templateSection>.heading {
@@ -815,10 +818,11 @@ html {
         margin: 20px 0;
     }
 
+    /* 
     .filterBar {
         flex-direction: column;
         margin: 0px 15px;
-    }
+    } */
 
     .allTemplatesGrid {
         margin: 0rem 3rem 3rem 3rem;
@@ -832,7 +836,7 @@ html {
         /* -ms-overflow-style: none; */
         scrollbar-width: none;
         overflow-x: visible;
-    scroll-behavior: auto;
+        scroll-behavior: auto;
     }
 }
 
@@ -902,10 +906,10 @@ html {
     }
 
     .templateCard {
-        /* flex: 0 0 auto; */
-        flex-shrink: 0;
+        flex: 0 0 auto;
+        flex-shrink: 2;
         min-height: 100px;
-        width: 80vw;
+        /* width: 75vw; */
         background: white;
         border-radius: 16px;
         padding: 1rem;
@@ -919,12 +923,22 @@ html {
         margin-bottom: 5px;
     }
 
+    .filterWrapper {
+        position: sticky;
+        top: 0px;
+        /* width: 99%; */
+        z-index: 100;
+        padding: 0.5rem 1rem;
+    }
+
     .filterBar {
         position: sticky;
         top: 120px;
         width: 100%;
+        margin-right: 10px;
         transition: top 0.3s ease;
-        z-index: 10;
+        z-index: 100;
+        display: flex;
     }
 
     .carouselWrapper {
@@ -962,10 +976,11 @@ html {
         right: -185px;
     }
 
-    .templateCard {
-        width: 280px;
-        /* consistent with your grid */
-    }
+    /* .templateCard {
+        width: 250px;
+
+        /* consistent with your grid 
+    } */
 
 
 }
