@@ -197,7 +197,7 @@ html {
     display: flex;
     flex-wrap: wrap;
     margin: 3rem;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
     scroll-behavior: smooth;
@@ -631,7 +631,7 @@ html {
     transform: scale(1.05);
 }
 
-.filterLeft .barBtn {
+/* .filterLeft .barBtn {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -646,7 +646,7 @@ html {
     background-size: 10px 7px;
     cursor: pointer;
     transition: border-color 0.2s;
-}
+} */
 
 .filterLeft .barBtn:focus {
     border-color: #ac3ca8;
