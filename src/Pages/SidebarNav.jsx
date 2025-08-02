@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LayoutEditorModal from "../Features/LayoutEditorModal/LayoutEditorModal";
+import "./SidebarNav.css";
 const navItems = [
   { key: "templates", label: "📚  Templates" },
   { key: "layout", label: "📐 Layout" },
@@ -11,23 +12,7 @@ const SidebarNav = ({ active, onChange }) => {
   const [showLayoutModal, setShowLayoutModal] = useState(false);
 
   return (
-    <div
-    className="sidebarnav"
-      style={{
-        width: "160px",
-        padding: "1rem 0.5rem",
-        height: "70vh",
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        background: "linear-gradient(to right, #fddb7cc7, #d3bae7)",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-        borderRadius: "12px",
-        margin: "1rem",
-        marginTop: "1rem",
-         border: "1px solid #ffffff5e"
-      }}
-    >
+    <div className="sidebarnav">
       {navItems.map((item) => (
         <div
           key={item.key}

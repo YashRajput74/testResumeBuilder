@@ -189,6 +189,10 @@ html {
     transform: translateY(-2px);
 }
 
+.heading {
+    font-size: 2.1rem;
+}
+
 .allTemplatesGrid {
     display: flex;
     flex-wrap: wrap;
@@ -197,20 +201,20 @@ html {
     justify-content: center;
     align-items: center;
     scroll-behavior: smooth;
-    z-index: 1;
+    z-index: 0;
 }
 
 .templateScroll {
     display: flex;
     justify-content: center;
     flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow-x: scroll;
     width: 95%;
     margin: auto;
-    gap: 2rem;
+    gap: 1rem;
     padding: 1rem 1rem 1rem 12rem;
     scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: auto;
     scrollbar-width: none;
 }
 
@@ -387,12 +391,12 @@ html {
         transform: scale(1);
     }
 }
-
+/* 
 .allTemplatesGrid {
     height: 460px;
     overflow-y: scroll;
     scrollbar-width: none;
-}
+} */
 
 .allTemplatesGrid .templateCard {
     width: 340px;
@@ -528,7 +532,7 @@ html {
     margin: 40px 0;
     position: sticky;
     top: 90px;
-    z-index: 2;
+    z-index: 100;
 }
 
 .filterBar {
@@ -542,8 +546,8 @@ html {
     width: 90%;
     max-width: 900px;
     gap: 20px;
-    position: sticky;
-    top: 120px;
+    /* position: sticky;
+    top: 120px; */
     transition: top 0.3s ease;
     z-index: 10;
 }
@@ -774,7 +778,7 @@ html {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
     .menuToggle {
         display: block;
         position: absolute;
@@ -825,7 +829,7 @@ html {
     } */
 
     .allTemplatesGrid {
-        margin: 0rem 3rem 3rem 3rem;
+        margin: 0rem 1rem 3rem 1rem;
     }
 
     .templateScroll::-webkit-scrollbar {
@@ -835,12 +839,17 @@ html {
     .templateScroll {
         /* -ms-overflow-style: none; */
         scrollbar-width: none;
-        overflow-x: visible;
+        overflow-x: auto;
         scroll-behavior: auto;
     }
 }
 
-@media (max-width:500px) {
+@media (max-width:450px) {
+    .headerr {
+        position: sticky;
+        top: 1rem;
+    }
+
     .center {
         font-size: 1rem;
         border-radius: 50px;
@@ -932,8 +941,8 @@ html {
     }
 
     .filterBar {
-        position: sticky;
-        top: 120px;
+        /* position: sticky;
+        top: 120px; */
         width: 100%;
         margin-right: 10px;
         transition: top 0.3s ease;
