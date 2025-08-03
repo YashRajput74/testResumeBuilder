@@ -135,11 +135,6 @@ input {
     border-radius: 0 0 1rem 1rem !important;
   }
 
-  .close-btn {
-    top: -190px;
-    right: 15px;
-    font-size: 22px;
-  }
 
   .toggle-btn,
   .submit-btn {
@@ -152,8 +147,31 @@ input {
     padding: 10px;
   }
 
+.close-btn {
+    position: fixed ;
+    top: 248px ; 
+    right: 17px;
+    font-size: 24px !important;
+    background-color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 1001;
+  }
+
   .auth-modal.sign-up-mode .close-btn {
-    top: -190px;
-    right: -312px;
+    left: auto ;
+    right: 20px ;
+   top: 248px ; 
+    right: 17px
   }
 }
+
+
+
+
+
