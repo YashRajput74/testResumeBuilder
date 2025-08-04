@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import LayoutEditorModal from "../Features/LayoutEditorModal/LayoutEditorModal";
+import "./SidebarNav.css";
 import { BookOpen, Ruler, Palette, User } from "lucide-react";
 
 const navItems = [
@@ -12,7 +13,7 @@ const navItems = [
 
 const SidebarNav = ({ active, onChange }) => {
   const [showLayoutModal, setShowLayoutModal] = useState(false);
-  const [activeModalKey, setActiveModalKey] = useState(null); 
+  const [activeModalKey, setActiveModalKey] = useState(null);
 
   const handleItemClick = (itemKey) => {
     if (active === itemKey) {
@@ -20,7 +21,7 @@ const SidebarNav = ({ active, onChange }) => {
         setShowLayoutModal((prev) => !prev);
         setActiveModalKey((prev) => (prev === "layout" ? null : "layout"));
       } else if (itemKey === "templates") {
-        onChange(null); 
+        onChange(null);
       } else {
         onChange(null);
       }
@@ -36,51 +37,53 @@ const SidebarNav = ({ active, onChange }) => {
   };
 
   return (
-    <div
-      className="sidebarnav"
-      style={{
-        width: "160px",
-        padding: "1rem 0.5rem",
-        height: "70vh",
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        background: "linear-gradient(to right, #fddb7cc7, #d3bae7)",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-        borderRadius: "12px",
-        margin: "1rem",
-        marginTop: "1rem",
-        border: "1px solid #ffffff5e",
-      }}
-    >
-      {navItems.map((item) => (
-        <div
-          key={item.key}
-          onClick={() => handleItemClick(item.key)}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            padding: "0.7rem 1rem",
-            borderRadius: "8px",
-            cursor: "pointer",
-            backgroundColor:
-              active === item.key ? "#f0f0f03d" : "transparent",
-            fontWeight: active === item.key ? "700" : "400",
-          }}
-        >
-          {item.icon}
-          {item.label}
-        </div>
-      ))}
-
-      <LayoutEditorModal
-        isOpen={showLayoutModal}
-        onClose={() => {
-          setShowLayoutModal(false);
-          setActiveModalKey(null);
+    <div className="sidebarnav">
+      <div
+        className="sidebarnav"
+        style={{
+          width: "160px",
+          padding: "1rem 0.5rem",
+          height: "70vh",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          background: "linear-gradient(to right, #fddb7cc7, #d3bae7)",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+          borderRadius: "12px",
+          margin: "1rem",
+          marginTop: "1rem",
+          border: "1px solid #ffffff5e",
         }}
-      />
+      >
+        {navItems.map((item) => (
+          <div
+            key={item.key}
+            onClick={() => handleItemClick(item.key)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.7rem 1rem",
+              borderRadius: "8px",
+              cursor: "pointer",
+              backgroundColor:
+                active === item.key ? "#f0f0f03d" : "transparent",
+              fontWeight: active === item.key ? "700" : "400",
+            }}
+          >
+            {item.icon}
+            {item.label}
+          </div>
+        ))}
+
+        <LayoutEditorModal
+          isOpen={showLayoutModal}
+          onClose={() => {
+            setShowLayoutModal(false);
+            setActiveModalKey(null);
+          }}
+        />
+      </div>
     </div>
   );
 };

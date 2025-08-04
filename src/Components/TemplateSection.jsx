@@ -10,29 +10,60 @@ export default function TemplateSection({ templates }) {
     const scrollRef = useRef(null);
 
     useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
+        const container = scrollRef.current;
+        if (!container) return;
 
-    let scrollAmount = 1; // scroll speed
-    let direction = 1; // 1 = right, -1 = left
+        const scrollSpeed = 1; // pixels per frame
+        let isPaused = false;
+        let animationId;
 
-    const scrollInterval = setInterval(() => {
-        if (!scrollContainer) return;
+        // Duplicate content to create a seamless scroll illusion
+        const originalContent = container.innerHTML;
+        container.innerHTML += originalContent;
 
-        scrollContainer.scrollLeft += scrollAmount * direction;
+        const autoScroll = () => {
+            if (!isPaused) {
+                container.scrollLeft += scrollSpeed;
 
-        // Reverse scroll direction at ends
-        if (
-            scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth ||
-            scrollContainer.scrollLeft <= 0
-        ) {
-            direction *= -1;
-        }
-    }, 20); // smaller = faster scroll
+                // Reset to start when we've scrolled past the first full copy
+                if (container.scrollLeft >= container.scrollWidth / 2) {
+                    container.scrollLeft = 0;
+                }
+            }
 
-    // Cleanup on unmount
-    return () => clearInterval(scrollInterval);
-}, []);
+            animationId = requestAnimationFrame(autoScroll);
+        };
+
+        animationId = requestAnimationFrame(autoScroll);
+
+        // Pause on hover (desktop)
+        const pauseScroll = () => { isPaused = true; };
+        const resumeScroll = () => { isPaused = false; };
+
+        container.addEventListener('mouseenter', pauseScroll);
+        container.addEventListener('mouseleave', resumeScroll);
+
+        // Pause on long-press (mobile)
+        let touchTimer;
+        const handleTouchStart = () => {
+            touchTimer = setTimeout(pauseScroll, 300);
+        };
+        const handleTouchEnd = () => {
+            clearTimeout(touchTimer);
+            resumeScroll();
+        };
+
+        container.addEventListener('touchstart', handleTouchStart);
+        container.addEventListener('touchend', handleTouchEnd);
+
+        return () => {
+            cancelAnimationFrame(animationId);
+            container.removeEventListener('mouseenter', pauseScroll);
+            container.removeEventListener('mouseleave', resumeScroll);
+            container.removeEventListener('touchstart', handleTouchStart);
+            container.removeEventListener('touchend', handleTouchEnd);
+        };
+    }, []);
 
 
     const handleSelectTemplate = (templateId) => {
@@ -44,8 +75,7 @@ export default function TemplateSection({ templates }) {
             <h2 className="heading">Choose a Resume Template</h2>
 
             <div className="templateScroll" ref={scrollRef}>
-
-                {templates.map((template, index) => (
+                {[...templates, ...templates].map((template, index) => (
                     <div
                         key={index}
                         className="templateCard"
@@ -62,6 +92,7 @@ export default function TemplateSection({ templates }) {
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
+                            flex: '0 0 auto',
                         }}
                         onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
                         onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
@@ -129,6 +160,7 @@ export default function TemplateSection({ templates }) {
                     </div>
                 ))}
             </div>
+
             <div className="seeAllWrapper">
                 <button className="btnPrimary" onClick={() => navigate('/all-templates')}>
                     View All Templates

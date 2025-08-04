@@ -2,5 +2,19 @@
     transform: rotate(360deg); 
 }
 .close-button {
-    transition: transform 0.9s ease;
+    transition: transform 2s ease;
+}
+
+@media (max-width:769px) {
+    .templateSectionn {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width:500px) {
+    .templateSectionn {
+        display: flex;
+        flex-direction: column;
+    }
 }

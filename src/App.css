@@ -189,26 +189,37 @@ html {
     transform: translateY(-2px);
 }
 
+.heading {
+    font-size: 2.1rem;
+}
+
 .allTemplatesGrid {
     display: flex;
     flex-wrap: wrap;
     margin: 3rem;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
     scroll-behavior: smooth;
-    z-index: 1;
+    z-index: 0;
 }
 
 .templateScroll {
     display: flex;
     justify-content: center;
     flex-wrap: nowrap;
-    overflow-x: hidden;
+    overflow-x: scroll;
     width: 95%;
     margin: auto;
     gap: 1rem;
-    padding: 1rem 2.6rem;
+    padding: 1rem 1rem 1rem 12rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: auto;
+    scrollbar-width: none;
+}
+
+.templateScroll::-webkit-scrollbar {
+    display: none;
 }
 
 .templateSection>.heading {
@@ -217,7 +228,7 @@ html {
 
 .templateCard {
     flex: 0 0 auto;
-    width: 280px;
+    width: 80vw;
     background: white;
     border-radius: 16px;
     padding: 1rem;
@@ -281,9 +292,9 @@ html {
     display: none;
 }
 
- .close-button:hover{
-   transform: rotate(360deg)
- }
+.close-button:hover {
+    transform: rotate(360deg)
+}
 
 .templateCard {
     position: relative;
@@ -381,11 +392,12 @@ html {
     }
 }
 
+/* 
 .allTemplatesGrid {
     height: 460px;
     overflow-y: scroll;
     scrollbar-width: none;
-}
+} */
 
 .allTemplatesGrid .templateCard {
     width: 340px;
@@ -403,53 +415,63 @@ html {
     color: #a277ff;
     animation: fadeColor 2s ease-in-out infinite alternate;
 }
+
 /* ---header buttons */
+.nav-loginBtn {
+    background: transparent;
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
 .loginBtn,
 .signupBtn,
 .logoutBtn {
-  padding: 0.5rem 1.2rem;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
 }
 
 .loginBtn {
-  background: transparent;
-  color:#482e56;
-  border: 2px solid #d5bbe2;
+    background: transparent;
+    color: #482e56;
+    border: 2px solid #d5bbe2;
 }
 
 .loginBtn:hover {
-  background : linear-gradient(to right, #c6a9e3, #1a1a1a);
-  color: white;
+    background: linear-gradient(to right, #c6a9e3, #1a1a1a);
+    color: white;
 }
 
 .signupBtn {
-  /* background: linear-gradient(135deg, #a18cd1, #fbc2eb); */
-  background: linear-gradient(135deg, #cba7e2, #a0c4ff);
-  color: white;
-  margin-left: 0.5rem;
-  border: none;
+    /* background: linear-gradient(135deg, #a18cd1, #fbc2eb); */
+    background: linear-gradient(135deg, #cba7e2, #a0c4ff);
+    color: white;
+    margin-left: 0.5rem;
+    border: none;
 }
 
 .signupBtn:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 .logoutBtn {
-  background: #f87171; 
-  color: white;
-  border: none;
-  padding: 0.45rem 1rem;
-  font-size: 0.9rem;
-  border-radius: 999px;
+    background: #f87171;
+    color: white;
+    border: none;
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 999px;
 }
 
 .logoutBtn:hover {
-  background: #ef4444; 
+    background: #ef4444;
 }
 
 /* -----About page */
@@ -520,7 +542,7 @@ html {
     margin: 40px 0;
     position: sticky;
     top: 90px;
-    z-index: 2;
+    z-index: 100;
 }
 
 .filterBar {
@@ -534,8 +556,8 @@ html {
     width: 90%;
     max-width: 900px;
     gap: 20px;
-    position: sticky;
-    top: 120px;
+    /* position: sticky;
+    top: 120px; */
     transition: top 0.3s ease;
     z-index: 10;
 }
@@ -544,7 +566,7 @@ html {
 .filterRight {
     display: flex;
     align-items: center;
-    gap: 52px;
+    gap: 25px;
 }
 
 .filterLabel,
@@ -619,7 +641,7 @@ html {
     transform: scale(1.05);
 }
 
-.filterLeft .barBtn {
+/* .filterLeft .barBtn {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -634,7 +656,7 @@ html {
     background-size: 10px 7px;
     cursor: pointer;
     transition: border-color 0.2s;
-}
+} */
 
 .filterLeft .barBtn:focus {
     border-color: #ac3ca8;
@@ -752,9 +774,8 @@ html {
     /* consistent with your grid */
 }
 
-@media (max-width: 1450px) {
-    
-}
+@media (max-width: 1450px) {}
+
 @media (max-width: 900px) {
     .navBar a {
         font-size: 0.9rem;
@@ -767,7 +788,7 @@ html {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
     .menuToggle {
         display: block;
         position: absolute;
@@ -811,25 +832,44 @@ html {
         margin: 20px 0;
     }
 
+    /* 
     .filterBar {
         flex-direction: column;
         margin: 0px 15px;
-    }
+    } */
 
     .allTemplatesGrid {
-        margin: 0rem 3rem 3rem 3rem;
+        margin: 0rem 1rem 3rem 1rem;
     }
-    .templateScroll::-webkit-scrollbar {
-    display: none;
-  }
 
-  .templateScroll {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+    .templateScroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .templateScroll {
+        /* -ms-overflow-style: none; */
+        scrollbar-width: none;
+        overflow-x: auto;
+        scroll-behavior: auto;
+    }
 }
 
-@media (max-width:500px) {
+@media (max-width:450px) {
+    .headerr {
+        position: sticky;
+        top: 1rem;
+    }
+
+    .nav-loginBtn {
+        background: transparent;
+        border: 2px solid #000;
+        width: 85px;
+        border-radius: 8px;
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
     .center {
         font-size: 1rem;
         border-radius: 50px;
@@ -879,86 +919,92 @@ html {
         display: block;
     }
 
-    /* .heroContent button {
-        font-size: 0.9rem;
-    } */
+    .allTemplatesGrid {
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        height: 48vh;
+    }
 
     .templateScroll {
         display: flex;
         flex-wrap: nowrap;
         overflow-x: auto;
-        width: 84%;
+        width: 100%;
         margin: auto;
-        padding: 1rem 0rem;
+        padding: 1rem;
         height: 50vh;
         scroll-behavior: smooth;
     }
 
     .templateCard {
-    /* flex: 0 0 auto; */
-    flex-shrink: 0;
-    min-height: 100px;
-    width: 100%;
-    background: white;
-    border-radius: 16px;
-    padding: 1rem;
-    /* box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); */
-    transition: all 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    margin-bottom: 5px;
-}
+        flex: 0 0 auto;
+        flex-shrink: 2;
+        min-height: 100px;
+        /* width: 75vw; */
+        background: white;
+        border-radius: 16px;
+        padding: 1rem;
+        /* box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); */
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        margin-bottom: 5px;
+    }
 
-.filterBar {
-    position: sticky;
-    top: 120px;
-    width: 100%;
-    transition: top 0.3s ease;
-    z-index: 10;
-}
+    .filterWrapper {
+        position: sticky;
+        top: 0px;
+        /* width: 99%; */
+        z-index: 100;
+        padding: 0.5rem 1rem;
+    }
 
-.carouselWrapper {
-    position: relative;
-    height: 450px;
-    margin: 2rem auto;
-    perspective: 1200px;
-    overflow: visible;
-}
+    .filterBar {
+        /* position: sticky;
+        top: 120px; */
+        width: 100%;
+        margin-right: 10px;
+        transition: top 0.3s ease;
+        z-index: 100;
+        display: flex;
+    }
 
-.carousel {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
+    .carouselWrapper {
+        position: relative;
+        height: 450px;
+        margin: 2rem auto;
+        perspective: 1200px;
+        overflow: visible;
+    }
 
-.carouselBtn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-80%);
-    background: linear-gradient(to right, #d3bae7, #fdda7c);
-    border: none;
-    border-radius: 10px;
-    padding: 0.5rem 1rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 3;
-}
+    .carousel {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
 
-.carouselBtn:first-of-type {
-    left: -185px;
-}
+    .carouselBtn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-80%);
+        background: linear-gradient(to right, #d3bae7, #fdda7c);
+        border: none;
+        border-radius: 10px;
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 3;
+    }
 
-.carouselBtn:last-of-type {
-    right: -185px;
-}
+    .carouselBtn:first-of-type {
+        left: -185px;
+    }
 
-.templateCard {
-    width: 280px;
-    /* consistent with your grid */
-}
-   
-   
+    .carouselBtn:last-of-type {
+        right: -185px;
+    }
+
 }

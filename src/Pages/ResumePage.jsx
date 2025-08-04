@@ -124,7 +124,7 @@ export default function ResumePage({ onLoginClick }) {
                         <SidebarNav active={activeNav} onChange={setActiveNav} />
                     </div>
 
-                    <div style={{ display: "flex", flexGrow: 1, overflow: "hidden" }}>
+                    <div style={{ display: "flex", flexGrow: 1, overflow: "hidden" }} className="">
                         {activeNav === "templates" && (
                             <div
                                 style={{
