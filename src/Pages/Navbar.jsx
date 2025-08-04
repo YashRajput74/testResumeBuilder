@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
+import "../App.css"
 
 export default function Navbar({ onDownload, onLoginClick }) {
   const navigate = useNavigate();
@@ -101,17 +102,13 @@ export default function Navbar({ onDownload, onLoginClick }) {
           </div>
         ) : (
           <button
+          className="nav-loginBtn"
             onClick={() => {
               console.log("Login Clicked");
               onLoginClick();
             }}
             style={{
-              background: "transparent",
-              border: "2px solid #000",
-              borderRadius: "8px",
-              padding: "0.4rem 0.8rem",
-              cursor: "pointer",
-              fontWeight: "600",
+              
             }}
           >
             Log In

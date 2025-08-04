@@ -405,8 +405,50 @@ const template8 = {
   }
 };
 
+const template9 = {
+  id: 9,
+  name: "Modern Sidebar Resume",
+  pdf: "/templates/template9.pdf",
+  filteredColumn: "1",
+  isAvatar: "true",
+  layout: {
+    grid: {
+      templateRows: "auto",
+      templateColumns: "1.3fr 2fr",
+      columnGap: "2rem",
+      areas: [
+        {
+          name: 'leftColumn',
+          rowStart: 1,
+          rowEnd: 2,
+          colStart: 1,
+          colEnd: 2,
+          sections: ["avatar", "contact", "achievements", "skills", "certifications", "education"]
+        },
+        {
+          name: 'rightColumn',
+          rowStart: 1,
+          rowEnd: 2,
+          colStart: 2,
+          colEnd: 3,
+          sections: ["personalInfo", "summary", "workExperience"]
+        }
+      ]
+    },
+    padding: "25px",
+    fontFamily: "'Poppins', sans-serif",
+    fontLink: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap",
+    fontSize: "14px",
+    colorScheme: {
+      background: "#ffffff",
+      text: "#1c1c1c",
+      primary: "#00a66f",
+    }
+  }
+};
 
 
 
 
-export const templates = [template1, template3, template4, template6, template7, template8];
+
+export const templates = [template1, template3, template4, template6, template7, template8, template9];

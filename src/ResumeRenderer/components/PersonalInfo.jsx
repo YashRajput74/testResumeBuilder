@@ -11,7 +11,7 @@ export default function PersonalInfo() {
   };
 
   return (
-    <div className="personalInfo" style={style?.personalInfo?.box}>
+    <div className="personalInfo resumesection" style={style?.personalInfo?.box}>
       <h1
         style={style?.personalInfo?.name}
       >

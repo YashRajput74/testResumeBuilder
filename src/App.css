@@ -391,6 +391,7 @@ html {
         transform: scale(1);
     }
 }
+
 /* 
 .allTemplatesGrid {
     height: 460px;
@@ -416,6 +417,15 @@ html {
 }
 
 /* ---header buttons */
+.nav-loginBtn {
+    background: transparent;
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
 .loginBtn,
 .signupBtn,
 .logoutBtn {
@@ -556,7 +566,7 @@ html {
 .filterRight {
     display: flex;
     align-items: center;
-    gap: 52px;
+    gap: 25px;
 }
 
 .filterLabel,
@@ -850,6 +860,16 @@ html {
         top: 1rem;
     }
 
+    .nav-loginBtn {
+        background: transparent;
+        border: 2px solid #000;
+        width: 85px;
+        border-radius: 8px;
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
     .center {
         font-size: 1rem;
         border-radius: 50px;
@@ -899,9 +919,11 @@ html {
         display: block;
     }
 
-    /* .heroContent button {
-        font-size: 0.9rem;
-    } */
+    .allTemplatesGrid {
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        height: 48vh;
+    }
 
     .templateScroll {
         display: flex;
@@ -984,12 +1006,5 @@ html {
     .carouselBtn:last-of-type {
         right: -185px;
     }
-
-    /* .templateCard {
-        width: 250px;
-
-        /* consistent with your grid 
-    } */
-
 
 }
