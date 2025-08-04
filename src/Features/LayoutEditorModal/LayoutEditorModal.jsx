@@ -36,7 +36,6 @@ export default function LayoutEditorModal({ isOpen, onClose }) {
     return [...filtered, { name: "unused", sections: unused }];
   });
 
-  // Close modal on outside click or Esc key
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
