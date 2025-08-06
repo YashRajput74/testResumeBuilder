@@ -896,6 +896,7 @@ const templateStyles = {
             },
         },
         skills: {
+            viewType: "block",
             box: {
                 marginBottom: '2rem'
             },

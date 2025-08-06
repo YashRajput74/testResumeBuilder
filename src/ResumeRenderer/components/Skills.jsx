@@ -1,6 +1,4 @@
-
 import { useResume } from "../../context/ResumeContext";
-import FloatingToolbarSimple from "../../Pages/FloatingToolbarSimple";
 
 export default function Skills() {
     const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();//ye
@@ -22,10 +20,6 @@ export default function Skills() {
                 onClick={() => setSelectedSection("skills")} //ye
             >
                 <h2 style={style?.skills?.heading}>Skills</h2>
-
-                {showToolbar && (
-                    <FloatingToolbarSimple sectionKey="skills" />
-                )} {/* ye */}
 
                 <ul style={style?.skills?.wholeList}>
                     {data.skills.map((skill, index) => (
@@ -51,9 +45,6 @@ export default function Skills() {
                 onClick={() => setSelectedSection("skills")}
             >
                 <h2 style={style?.skills?.heading}>Skills
-                    {showToolbar && (
-                        <FloatingToolbarSimple sectionKey="skills" />
-                    )}
                 </h2>
 
                 <div className="individualSkill" style={style?.skills?.everySkillBox}>
