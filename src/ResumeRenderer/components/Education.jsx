@@ -1,5 +1,3 @@
-
-import FloatingToolbarPro from "../../Pages/FloatingToolbarPro";
 import { useResume } from "../../context/ResumeContext";
 
 export default function Education() {
@@ -12,15 +10,15 @@ export default function Education() {
         setSelectedSection,
     } = useResume();
 
-    const handleBlur = (index, key, e) => {
+    const handleFieldBlur = (index, key, e) => {
         const updated = [...data.education];
         updated[index][key] = e.target.innerText.trim();
         updateField("education", null, updated);
     };
 
-    const handleDescBlur = (index, i, e) => {
+    const handleDescBlur = (eduIndex, descIndex, e) => {
         const updated = [...data.education];
-        updated[index].Description[i].text = e.target.innerHTML.trim();
+        updated[eduIndex].description[descIndex].text = e.target.innerText.trim();
         updateField("education", null, updated);
     };
 
@@ -36,59 +34,54 @@ export default function Education() {
                 style={style?.education?.heading}
             >
                 Education
-                {selectedSection === "education" && (
-                    <FloatingToolbarPro sectionKey="education" />
-                )}
             </h2>
 
             {data.education.map((edu, index) => (
-                <div key={index} style={style?.education?.eachSchool}>
+                <div key={edu.id || index} style={style?.education?.eachSchool}>
                     <h3 style={style?.education?.name}>
                         <span
                             contentEditable={editMode}
                             suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "Degree", e)}
-                        >
-                            {edu.Degree}
-                        </span>{" "}
-                        -{" "}
+                            onBlur={(e) => handleFieldBlur(index, "degree", e)}
+                            dangerouslySetInnerHTML={{ __html: edu.degree }}
+                        />
+                        {" - "}
                         <span
                             contentEditable={editMode}
                             suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "School", e)}
-                        >
-                            {edu.School}
-                        </span>
+                            onBlur={(e) => handleFieldBlur(index, "school", e)}
+                            dangerouslySetInnerHTML={{ __html: edu.school }}
+                        />
                     </h3>
 
-                    <p style={style?.education?.city}>
+                    <h4 style={style?.education?.city}>
                         <span
                             contentEditable={editMode}
                             suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "City", e)}
+                            onBlur={(e) => handleFieldBlur(index, "city", e)}
                         >
-                            {edu.City}
+                            {edu.city}
                         </span>{" "}
                         |{" "}
                         <span
                             contentEditable={editMode}
                             suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "Start Date", e)}
+                            onBlur={(e) => handleFieldBlur(index, "startDate", e)}
                         >
-                            {edu["Start Date"]}
+                            {edu.startDate}
                         </span>{" "}
                         -{" "}
                         <span
                             contentEditable={editMode}
                             suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "End Date", e)}
+                            onBlur={(e) => handleFieldBlur(index, "endDate", e)}
                         >
-                            {edu["End Date"]}
+                            {edu.endDate}
                         </span>
-                    </p>
+                    </h4>
 
                     <ul style={style?.education?.list}>
-                        {edu.Description?.map((point, i) => (
+                        {edu.description?.map((point, i) => (
                             <li
                                 key={point.id}
                                 contentEditable={editMode}

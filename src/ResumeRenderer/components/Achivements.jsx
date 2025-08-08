@@ -1,12 +1,34 @@
 import { useResume } from "../../context/ResumeContext";
-import FloatingToolbarSimple from "../../Pages/FloatingToolbarSimple";
 
 export default function Achievements() {
-    const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();
+    const {
+        data,
+        style,
+        editMode,
+        updateField,
+        selectedSection,
+        setSelectedSection,
+    } = useResume();
 
-    const handleBlur = (index, key, e) => {
+    const handleTitleBlur = (index, e) => {
+        const newValue = e.target.innerHTML.trim();
         const updated = [...data.achievements];
-        updated[index][key] = e.target.innerHTML.trim();
+        updated[index] = { ...updated[index], title: newValue };
+        updateField("achievements", null, updated);
+    };
+
+    const handleDescriptionBlur = (achievementIndex, descIndex, e) => {
+        const newValue = e.target.innerHTML.trim();
+        const updated = [...data.achievements];
+        const updatedDescriptions = [...updated[achievementIndex].description];
+        updatedDescriptions[descIndex] = {
+            ...updatedDescriptions[descIndex],
+            text: newValue,
+        };
+        updated[achievementIndex] = {
+            ...updated[achievementIndex],
+            description: updatedDescriptions,
+        };
         updateField("achievements", null, updated);
     };
 
@@ -24,36 +46,32 @@ export default function Achievements() {
                 Achievements
             </h2>
 
-            {selectedSection === "achievements" && editMode && (
-                <FloatingToolbarSimple
-                    sectionKey="achievements"
-                    position={{ top: "-45px", right: "20px" }}
-                />
-            )}
-
-            {data.achievements.map((achievement, index) => (
-                <div className="achievement" key={index} style={style?.achieve?.innerbox}>
+            {data.achievements.map((achievement, achievementIndex) => (
+                <div
+                    className="achievement"
+                    key={achievement.id}
+                    style={style?.achieve?.innerbox}
+                >
                     <h3
                         contentEditable={editMode}
                         suppressContentEditableWarning
-                        onBlur={(e) => handleBlur(index, "Title", e)}
+                        onBlur={(e) => handleTitleBlur(achievementIndex, e)}
                         style={style?.achieve?.title}
-                        dangerouslySetInnerHTML={{__html: achievement.Title}}
-                    >
-                    </h3>
-                    <p
-                        contentEditable={editMode}
-                        suppressContentEditableWarning
-                        onBlur={(e) => handleBlur(index, "Description", e)}
-                        style={style?.achieve?.content}
-                        dangerouslySetInnerHTML={{__html: achievement.Description}}
-                    >
-                    </p>
+                        dangerouslySetInnerHTML={{ __html: achievement.title || "" }}
+                    />
+
+                    {achievement.description?.map((desc, descIndex) => (
+                        <p
+                            key={desc.id}
+                            contentEditable={editMode}
+                            suppressContentEditableWarning
+                            onBlur={(e) => handleDescriptionBlur(achievementIndex, descIndex, e)}
+                            style={style?.achieve?.content}
+                            dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                        />
+                    ))}
                 </div>
             ))}
         </div>
     );
 }
-
-
-

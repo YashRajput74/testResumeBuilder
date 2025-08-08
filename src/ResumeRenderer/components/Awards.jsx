@@ -1,14 +1,34 @@
 import { useResume } from "../../context/ResumeContext";
-import FloatingToolbarSimple from "../../Pages/FloatingToolbarSimple";
 
 export default function Awards() {
-    const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();
+    const {
+        data,
+        style,
+        editMode,
+        updateField,
+        selectedSection,
+        setSelectedSection,
+    } = useResume();
 
-    if (!data?.awards) return null;
-
-    const handleBlur = (index, key, e) => {
+    const handleTitleBlur = (index, e) => {
+        const newValue = e.target.innerHTML.trim();
         const updated = [...data.awards];
-        updated[index][key] = e.target.innerHTML.trim();
+        updated[index] = { ...updated[index], title: newValue };
+        updateField("awards", null, updated);
+    };
+
+    const handleDescriptionBlur = (awardIndex, descIndex, e) => {
+        const newValue = e.target.innerHTML.trim();
+        const updated = [...data.awards];
+        const updatedDescriptions = [...updated[awardIndex].description];
+        updatedDescriptions[descIndex] = {
+            ...updatedDescriptions[descIndex],
+            text: newValue,
+        };
+        updated[awardIndex] = {
+            ...updated[awardIndex],
+            description: updatedDescriptions,
+        };
         updateField("awards", null, updated);
     };
 
@@ -23,38 +43,35 @@ export default function Awards() {
                 suppressContentEditableWarning
                 style={style?.award?.heading}
             >
-                Honours & Awards
+                Honurs and awards
             </h2>
 
-            {selectedSection === "awards" && editMode && (
-                <FloatingToolbarSimple
-                    sectionKey="awards"
-                    position={{ top: "-45px", right: "20px" }}
-                />
-            )}
+            {data.awards.map((award, awardIndex) => (
+                <div
+                    className="award"
+                    key={award.id}
+                    style={style?.award?.innerbox}
+                >
+                    <h3
+                        contentEditable={editMode}
+                        suppressContentEditableWarning
+                        onBlur={(e) => handleTitleBlur(awardIndex, e)}
+                        style={style?.award?.title}
+                        dangerouslySetInnerHTML={{ __html: award.title || "" }}
+                    />
 
-            <div style={style?.award?.innerBox}>
-                {data.awards.map((awr, index) => (
-                    <div key={index} style={style?.award?.eachAward}>
+                    {award.description?.map((desc, descIndex) => (
                         <p
+                            key={desc.id}
                             contentEditable={editMode}
                             suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "Title", e)}
-                            style={style?.award?.title}
-                            dangerouslySetInnerHTML={{__html: awr.Title}}
-                        >
-                        </p>
-                        <p
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "Date", e)}
-                            style={style?.award?.date}
-                            dangerouslySetInnerHTML={{__html: awr.Date}}
-                        >
-                        </p>
-                    </div>
-                ))}
-            </div>
+                            onBlur={(e) => handleDescriptionBlur(awardIndex, descIndex, e)}
+                            style={style?.award?.content}
+                            dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                        />
+                    ))}
+                </div>
+            ))}
         </div>
     );
 }

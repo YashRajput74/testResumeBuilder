@@ -1,12 +1,34 @@
 import { useResume } from "../../context/ResumeContext";
-import FloatingToolbarSimple from "../../Pages/FloatingToolbarSimple";
 
 export default function Organizations() {
-    const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();
+    const {
+        data,
+        style,
+        editMode,
+        updateField,
+        selectedSection,
+        setSelectedSection,
+    } = useResume();
 
-    const handleBlur = (index, key, e) => {
+    const handleTitleBlur = (index, e) => {
+        const newValue = e.target.innerHTML.trim();
         const updated = [...data.organizations];
-        updated[index][key] = e.target.innerHTML.trim();
+        updated[index] = { ...updated[index], title: newValue };
+        updateField("organizations", null, updated);
+    };
+
+    const handleDescriptionBlur = (organizationIndex, descIndex, e) => {
+        const newValue = e.target.innerHTML.trim();
+        const updated = [...data.organizations];
+        const updatedDescriptions = [...updated[organizationIndex].description];
+        updatedDescriptions[descIndex] = {
+            ...updatedDescriptions[descIndex],
+            text: newValue,
+        };
+        updated[organizationIndex] = {
+            ...updated[organizationIndex],
+            description: updatedDescriptions,
+        };
         updateField("organizations", null, updated);
     };
 
@@ -16,36 +38,40 @@ export default function Organizations() {
             style={{ ...style?.organiz?.box, position: "relative" }}
             onClick={() => setSelectedSection("organizations")}
         >
-            <h2 style={style?.organiz?.heading}>
+            <h2
+                contentEditable={editMode}
+                suppressContentEditableWarning
+                style={style?.organiz?.heading}
+            >
                 Organizations
-                {selectedSection === "organizations" && editMode && (
-                    <FloatingToolbarSimple sectionKey="organizations" position={{ top: "-45px", right: "20px" }} />
-                )}
             </h2>
 
-            <div style={style?.organiz?.innerBox}>
-                {data.organizations.map((org, index) => (
-                    <div key={index} style={style?.organiz?.eachOrganiz}>
-                        <p
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "Title", e)}
-                            style={style?.organiz?.title}
-                            dangerouslySetInnerHTML={{ __html: org.Title }}
+            {data.organizations.map((organization, organizationIndex) => (
+                <div
+                    className="organization"
+                    key={organization.id}
+                    style={style?.organiz?.innerbox}
+                >
+                    <h3
+                        contentEditable={editMode}
+                        suppressContentEditableWarning
+                        onBlur={(e) => handleTitleBlur(organizationIndex, e)}
+                        style={style?.organiz?.title}
+                        dangerouslySetInnerHTML={{ __html: organization.title || "" }}
+                    />
 
-                        >
-                        </p>
+                    {organization.description?.map((desc, descIndex) => (
                         <p
+                            key={desc.id}
                             contentEditable={editMode}
                             suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "Date", e)}
-                            style={style?.organiz?.date}
-                            dangerouslySetInnerHTML={{ __html: org.Date }}
-                        >
-                        </p>
-                    </div>
-                ))}
-            </div>
+                            onBlur={(e) => handleDescriptionBlur(organizationIndex, descIndex, e)}
+                            style={style?.organiz?.content}
+                            dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                        />
+                    ))}
+                </div>
+            ))}
         </div>
     );
 }

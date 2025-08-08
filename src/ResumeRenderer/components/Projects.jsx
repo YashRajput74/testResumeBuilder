@@ -1,7 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { useResume } from '../../context/ResumeContext';
-import FloatingToolbarPro from '../../Pages/FloatingToolbarPro';
 
 export default function Projects() {
     const {
@@ -13,15 +10,15 @@ export default function Projects() {
         setSelectedSection,
     } = useResume();
 
-    const handleBlur = (index, key, e) => {
+    const handleFieldBlur = (index, key, e) => {
         const updated = [...data.projects];
-        updated[index][key] = e.target.innerHTML.trim();
+        updated[index][key] = e.target.innerText.trim();
         updateField("projects", null, updated);
     };
 
-    const handleDescBlur = (index, i, e) => {
+    const handleDescBlur = (projIndex, descIndex, e) => {
         const updated = [...data.projects];
-        updated[index].Description[i].text = e.target.innerHTML.trim();
+        updated[projIndex].description[descIndex].text = e.target.innerText.trim();
         updateField("projects", null, updated);
     };
 
@@ -39,45 +36,22 @@ export default function Projects() {
                 Projects
             </h2>
 
-            {selectedSection === "projects" && (
-                <FloatingToolbarPro
-                    sectionKey="projects"
-                    position={{ top: "-45px", right: "20px" }}
-                />
-            )}
-
             {data.projects.map((project, index) => (
                 <div
                     className="eachProject"
-                    key={index}
+                    key={project.id || index}
                     style={style?.projects?.eachProject}
                 >
                     <h3
                         contentEditable={editMode}
                         suppressContentEditableWarning
-                        onBlur={(e) => handleBlur(index, "Title", e)}
+                        onBlur={(e) => handleFieldBlur(index, "title", e)}
                         style={style?.projects?.title}
-                        dangerouslySetInnerHTML={{ __html: project.Title }}
+                        dangerouslySetInnerHTML={{ __html: project.title }}
                     />
 
-                    {/* {project.Link && (
-                        <a
-                            href={project.Link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ marginLeft: "0px" }}
-                        >
-                            <FontAwesomeIcon
-                                icon={faArrowUpRightFromSquare}
-                                className="icon"
-                                size="sm"
-                                style={style?.projects?.icon}
-                            />
-                        </a>
-                    )} */}
-
                     <ul style={style?.projects?.list}>
-                        {project.Description.map((point, i) => (
+                        {project.description?.map((point, i) => (
                             <li
                                 key={point.id}
                                 contentEditable={editMode}

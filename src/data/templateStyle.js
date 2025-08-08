@@ -957,6 +957,7 @@ const templateStyles = {
             }
         },
         language: {
+            viewType: "list",
             heading: {
                 ...sharedStyles["7"].heading,
             },
