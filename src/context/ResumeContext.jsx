@@ -18,7 +18,32 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
     const [viewTypes, setViewTypes] = useState(() => {
         const key = `resumeViewTypes-${templateId}`;
         const saved = localStorage.getItem(key);
-        return saved ? JSON.parse(saved) : {};
+
+        if (saved) return JSON.parse(saved);
+
+        const defaultViewTypes = {};
+
+        const sectionMap = {
+            workExpe: "workExperience",
+            education: "education",
+            projects: "projects",
+            skills: "skills",
+            organiz: "organizations",
+            award: "awards",
+            language: "language",
+            certificate: "certifications",
+            achieve: "achievements",
+            summary: "summary"
+        };
+
+        Object.entries(sectionMap).forEach(([styleKey, dataKey]) => {
+            if (style?.[styleKey]?.viewType) {
+                defaultViewTypes[dataKey] = style[styleKey].viewType;
+            }
+        });
+
+        localStorage.setItem(key, JSON.stringify(defaultViewTypes));
+        return defaultViewTypes;
     });
 
     useEffect(() => {
