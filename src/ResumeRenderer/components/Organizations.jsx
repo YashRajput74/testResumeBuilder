@@ -1,4 +1,6 @@
+import { useRef } from "react";
 import { useResume } from "../../context/ResumeContext";
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function Organizations() {
     const {
@@ -10,6 +12,8 @@ export default function Organizations() {
         setSelectedSection,
         viewTypes,
     } = useResume();
+
+    const orgRef = useRef();
 
     const handleTitleBlur = (index, e) => {
         const newValue = e.target.innerHTML.trim();
@@ -40,6 +44,7 @@ export default function Organizations() {
             className="organizations resumeSection"
             style={{ ...style?.organiz?.box, position: "relative" }}
             onClick={() => setSelectedSection("organizations")}
+            ref={orgRef}
         >
             <h2
                 contentEditable={editMode}
@@ -96,6 +101,8 @@ export default function Organizations() {
                     )}
                 </div>
             ))}
+
+            <InlineToolbar editMode={editMode} containerRef={orgRef} sectionName="organizations" />
         </div>
     );
 }

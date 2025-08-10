@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 import { useResume } from "../../context/ResumeContext";
 
 export default function Awards() {
@@ -10,6 +12,7 @@ export default function Awards() {
         setSelectedSection,
         viewTypes,
     } = useResume();
+    const awardsRef = useRef();
 
     const handleTitleBlur = (index, e) => {
         const newValue = e.target.innerHTML.trim();
@@ -40,6 +43,7 @@ export default function Awards() {
             className="awards resumeSection"
             style={{ ...style?.award?.box, position: "relative" }}
             onClick={() => setSelectedSection("awards")}
+            ref={awardsRef}
         >
             <h2
                 contentEditable={editMode}
@@ -96,6 +100,8 @@ export default function Awards() {
                     )}
                 </div>
             ))}
+
+            <InlineToolbar editMode={editMode} containerRef={awardsRef} sectionName="awards" />
         </div>
     );
 }

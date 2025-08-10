@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import { useResume } from '../../context/ResumeContext';
+import InlineToolbar from '../../Components/shared/InlineToolbar';
 
 export default function Projects() {
     const {
@@ -10,6 +12,7 @@ export default function Projects() {
         setSelectedSection,
         viewTypes,
     } = useResume();
+    const projectRef = useRef();
 
     const handleFieldBlur = (index, key, e) => {
         const updated = [...data.projects];
@@ -30,6 +33,7 @@ export default function Projects() {
             className="projects resumeSection"
             style={{ ...style?.projects?.box, position: "relative" }}
             onClick={() => setSelectedSection("projects")}
+            ref={projectRef}
         >
             <h2
                 contentEditable={editMode}
@@ -82,6 +86,7 @@ export default function Projects() {
                     )}
                 </div>
             ))}
+            <InlineToolbar editMode={editMode} containerRef={projectRef} sectionName="projects" />
         </div>
     );
 }

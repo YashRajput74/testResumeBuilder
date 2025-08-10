@@ -50,7 +50,7 @@ export default function Summary() {
                 </div>
             )}
 
-            <InlineToolbar editMode={editMode} containerRef={summaryRef} />
+            <InlineToolbar editMode={editMode} containerRef={summaryRef} sectionName="summary" />
         </div>
     );
 }

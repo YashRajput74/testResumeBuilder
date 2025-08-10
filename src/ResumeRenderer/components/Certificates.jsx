@@ -1,4 +1,6 @@
+import { useRef } from "react";
 import { useResume } from "../../context/ResumeContext";
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function Certificates() {
     const {
@@ -10,6 +12,7 @@ export default function Certificates() {
         setSelectedSection,
         viewTypes,
     } = useResume();
+    const certificateRef = useRef();
 
     const handleFieldBlur = (index, key, e) => {
         const updated = [...data.certifications];
@@ -30,6 +33,7 @@ export default function Certificates() {
             className="certificates resumeSection"
             style={{ ...style?.certificate?.box, position: "relative" }}
             onClick={() => setSelectedSection("certifications")}
+            ref={certificateRef}
         >
             <h2
                 contentEditable={editMode}
@@ -96,6 +100,7 @@ export default function Certificates() {
                     </div>
                 ))}
             </div>
+            <InlineToolbar editMode={editMode} containerRef={certificateRef} sectionName="certifications" />
         </div>
     );
 }

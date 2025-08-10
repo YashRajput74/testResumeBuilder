@@ -1,7 +1,10 @@
+import { useRef } from "react";
 import { useResume } from "../../context/ResumeContext";
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function Skills() {
     const { data, style, editMode, updateField, selectedSection, setSelectedSection, viewTypes } = useResume();
+    const skillsRef = useRef();
 
     const handleBlur = (index, e) => {
         const newValue = e.target.innerHTML.trim();
@@ -17,6 +20,7 @@ export default function Skills() {
             className="skills resumeSection"
             style={{ ...style?.skills?.box, position: "relative" }}
             onClick={() => setSelectedSection("skills")}
+            ref={skillsRef}
         >
             <h2 style={style?.skills?.heading}>Skills</h2>
 
@@ -47,6 +51,8 @@ export default function Skills() {
                     ))}
                 </div>
             )}
+
+            <InlineToolbar editMode={editMode} containerRef={skillsRef} sectionName="skills" />
         </div>
     );
 }

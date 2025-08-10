@@ -21,7 +21,6 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
         return saved ? JSON.parse(saved) : {};
     });
 
-    // Load layout areas
     useEffect(() => {
         if (!templateId || !style?.layout?.grid?.areas) return;
 
@@ -41,7 +40,6 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
         setCustomLayoutAreas(style.layout.grid.areas || []);
     }, [templateId, style]);
 
-    // Load or derive section order
     useEffect(() => {
         if (!templateId) return;
 
@@ -64,26 +62,22 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
         }
     }, [templateId, style, customLayoutAreas]);
 
-    // Save section order
     useEffect(() => {
         if (!templateId) return;
         const sectionKey = `resumeSectionOrder-${templateId}`;
         localStorage.setItem(sectionKey, JSON.stringify(sectionOrder));
     }, [sectionOrder, templateId]);
 
-    // Save layout areas
     useEffect(() => {
         if (!templateId || !customLayoutAreas) return;
         const layoutKey = `resumeCustomAreas-${templateId}`;
         localStorage.setItem(layoutKey, JSON.stringify(customLayoutAreas));
     }, [customLayoutAreas, templateId]);
 
-    // Save resume data
     useEffect(() => {
         localStorage.setItem("resumeData", JSON.stringify(data));
     }, [data]);
 
-    // Save viewTypes
     useEffect(() => {
         if (!templateId) return;
         const key = `resumeViewTypes-${templateId}`;

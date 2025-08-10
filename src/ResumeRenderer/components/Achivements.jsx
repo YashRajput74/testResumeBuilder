@@ -1,4 +1,6 @@
+import { useRef } from "react";
 import { useResume } from "../../context/ResumeContext";
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function Achievements() {
     const {
@@ -10,6 +12,7 @@ export default function Achievements() {
         setSelectedSection,
         viewTypes,
     } = useResume();
+    const achievementRef = useRef();
 
     const handleTitleBlur = (index, e) => {
         const newValue = e.target.innerHTML.trim();
@@ -40,6 +43,7 @@ export default function Achievements() {
             className="achievements resumeSection"
             style={{ ...style?.achieve?.box, position: "relative" }}
             onClick={() => setSelectedSection("achievements")}
+            ref={achievementRef}
         >
             <h2
                 contentEditable={editMode}
@@ -96,6 +100,7 @@ export default function Achievements() {
                     )}
                 </div>
             ))}
+            <InlineToolbar editMode={editMode} containerRef={achievementRef} sectionName="achievements" />
         </div>
     );
 }

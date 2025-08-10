@@ -1,4 +1,6 @@
+import { useRef } from "react";
 import { useResume } from "../../context/ResumeContext";
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function WorkExperience() {
     const {
@@ -11,6 +13,7 @@ export default function WorkExperience() {
         viewTypes,
     } = useResume();
 
+    const workExpRef = useRef();
     const viewType = viewTypes?.experience || "list";
 
     const handleFieldBlur = (index, key, e) => {
@@ -38,6 +41,7 @@ export default function WorkExperience() {
             className="workExperience resumeSection"
             onClick={() => setSelectedSection("experience")}
             style={{ ...style?.workExpe?.box, position: "relative" }}
+            ref={workExpRef}
         >
             <h2
                 contentEditable={editMode}
@@ -115,6 +119,8 @@ export default function WorkExperience() {
                     )}
                 </div>
             ))}
+
+            <InlineToolbar editMode={editMode} containerRef={workExpRef} sectionName="experience" />
         </div>
     );
 }

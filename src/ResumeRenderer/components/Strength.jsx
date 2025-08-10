@@ -1,4 +1,6 @@
+import { useRef } from "react";
 import { useResume } from "../../context/ResumeContext";
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function Strengths() {
     const {
@@ -10,6 +12,7 @@ export default function Strengths() {
         setSelectedSection,
         viewTypes,
     } = useResume();
+    const strengthRef = useRef();
 
     const handleTitleBlur = (index, e) => {
         const newValue = e.target.innerHTML.trim();
@@ -40,6 +43,7 @@ export default function Strengths() {
             className="strengths resumeSection"
             style={{ ...style?.strength?.box, position: "relative" }}
             onClick={() => setSelectedSection("strengths")}
+            ref={strengthRef}
         >
             <h2
                 contentEditable={editMode}
@@ -96,6 +100,7 @@ export default function Strengths() {
                     )}
                 </div>
             ))}
+            <InlineToolbar editMode={editMode} containerRef={strengthRef} sectionName="strengths" />
         </div>
     );
 }
