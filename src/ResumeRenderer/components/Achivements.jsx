@@ -8,6 +8,7 @@ export default function Achievements() {
         updateField,
         selectedSection,
         setSelectedSection,
+        viewTypes,
     } = useResume();
 
     const handleTitleBlur = (index, e) => {
@@ -31,6 +32,8 @@ export default function Achievements() {
         };
         updateField("achievements", null, updated);
     };
+
+    const viewType = viewTypes?.achievements || "list";
 
     return (
         <div
@@ -60,16 +63,37 @@ export default function Achievements() {
                         dangerouslySetInnerHTML={{ __html: achievement.title || "" }}
                     />
 
-                    {achievement.description?.map((desc, descIndex) => (
-                        <p
-                            key={desc.id}
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleDescriptionBlur(achievementIndex, descIndex, e)}
-                            style={style?.achieve?.content}
-                            dangerouslySetInnerHTML={{ __html: desc.text || "" }}
-                        />
-                    ))}
+                    {viewType === "list" ? (
+                        <ul style={style?.achieve?.list}>
+                            {achievement.description?.map((desc, descIndex) => (
+                                <li
+                                    key={desc.id}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) =>
+                                        handleDescriptionBlur(achievementIndex, descIndex, e)
+                                    }
+                                    style={style?.achieve?.listItem}
+                                    dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                                />
+                            ))}
+                        </ul>
+                    ) : (
+                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                            {achievement.description?.map((desc, descIndex) => (
+                                <p
+                                    key={desc.id}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) =>
+                                        handleDescriptionBlur(achievementIndex, descIndex, e)
+                                    }
+                                    style={style?.achieve?.content}
+                                    dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

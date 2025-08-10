@@ -822,6 +822,7 @@ const templateStyles = {
             }
         },
         workExpe: {
+            viewType: "list",
             box: {
                 border: 'none',
             },
@@ -864,6 +865,7 @@ const templateStyles = {
             }
         },
         education: {
+            viewType: "list",
             box: {
                 border: 'none'
             },
@@ -885,6 +887,7 @@ const templateStyles = {
             }
         },
         projects: {
+            viewType: "list",
             box: {
                 border: 'none'
             },
@@ -916,6 +919,7 @@ const templateStyles = {
             }
         },
         organiz: {
+            viewType: "block",
             box: {
                 border: 'none',
                 marginBottom: '1rem'
@@ -935,6 +939,7 @@ const templateStyles = {
             }
         },
         award: {
+            viewType: "block",
             box: {
                 border: 'none',
                 marginBottom: '1rem'
@@ -967,6 +972,7 @@ const templateStyles = {
             }
         },
         certificate: {
+            viewType: "list",
             box: {
                 border: 'none',
                 marginBottom: '1rem'

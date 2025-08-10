@@ -8,6 +8,7 @@ export default function Organizations() {
         updateField,
         selectedSection,
         setSelectedSection,
+        viewTypes,
     } = useResume();
 
     const handleTitleBlur = (index, e) => {
@@ -31,6 +32,8 @@ export default function Organizations() {
         };
         updateField("organizations", null, updated);
     };
+
+    const viewType = viewTypes?.organizations || "list";
 
     return (
         <div
@@ -60,16 +63,37 @@ export default function Organizations() {
                         dangerouslySetInnerHTML={{ __html: organization.title || "" }}
                     />
 
-                    {organization.description?.map((desc, descIndex) => (
-                        <p
-                            key={desc.id}
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleDescriptionBlur(organizationIndex, descIndex, e)}
-                            style={style?.organiz?.content}
-                            dangerouslySetInnerHTML={{ __html: desc.text || "" }}
-                        />
-                    ))}
+                    {viewType === "list" ? (
+                        <ul style={style?.organiz?.list}>
+                            {organization.description?.map((desc, descIndex) => (
+                                <li
+                                    key={desc.id}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) =>
+                                        handleDescriptionBlur(organizationIndex, descIndex, e)
+                                    }
+                                    style={style?.organiz?.listItem}
+                                    dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                                />
+                            ))}
+                        </ul>
+                    ) : (
+                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                            {organization.description?.map((desc, descIndex) => (
+                                <p
+                                    key={desc.id}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) =>
+                                        handleDescriptionBlur(organizationIndex, descIndex, e)
+                                    }
+                                    style={style?.organiz?.content}
+                                    dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

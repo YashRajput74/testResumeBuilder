@@ -1,7 +1,15 @@
 import { useResume } from "../../context/ResumeContext";
 
 export default function Certificates() {
-    const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();
+    const {
+        data,
+        style,
+        editMode,
+        updateField,
+        selectedSection,
+        setSelectedSection,
+        viewTypes,
+    } = useResume();
 
     const handleFieldBlur = (index, key, e) => {
         const updated = [...data.certifications];
@@ -14,6 +22,8 @@ export default function Certificates() {
         updated[certIndex].description[descIndex].text = e.target.innerText.trim();
         updateField("certifications", null, updated);
     };
+
+    const viewType = viewTypes?.certifications || "list";
 
     return (
         <div
@@ -56,18 +66,33 @@ export default function Certificates() {
                             dangerouslySetInnerHTML={{ __html: cert.date }}
                         />
 
-                        <ul style={style?.certificate?.list}>
-                            {cert.description?.map((point, i) => (
-                                <li
-                                    key={point.id}
-                                    contentEditable={editMode}
-                                    suppressContentEditableWarning
-                                    onBlur={(e) => handleDescBlur(index, i, e)}
-                                    style={style?.certificate?.listItem}
-                                    dangerouslySetInnerHTML={{ __html: point.text }}
-                                />
-                            ))}
-                        </ul>
+                        {viewType === "list" ? (
+                            <ul style={style?.certificate?.list}>
+                                {cert.description?.map((point, i) => (
+                                    <li
+                                        key={point.id || i}
+                                        contentEditable={editMode}
+                                        suppressContentEditableWarning
+                                        onBlur={(e) => handleDescBlur(index, i, e)}
+                                        style={style?.certificate?.listItem}
+                                        dangerouslySetInnerHTML={{ __html: point.text }}
+                                    />
+                                ))}
+                            </ul>
+                        ) : (
+                            <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                                {cert.description?.map((point, i) => (
+                                    <p
+                                        key={point.id || i}
+                                        contentEditable={editMode}
+                                        suppressContentEditableWarning
+                                        onBlur={(e) => handleDescBlur(index, i, e)}
+                                        style={style?.certificate?.listItem}
+                                        dangerouslySetInnerHTML={{ __html: point.text }}
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>

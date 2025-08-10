@@ -1,7 +1,7 @@
 import { useResume } from "../../context/ResumeContext";
 
 export default function Languages() {
-    const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();
+    const { data, style, editMode, updateField, selectedSection, setSelectedSection, viewTypes } = useResume();
 
     const handleBlur = (index, e) => {
         const newValue = e.target.innerHTML.trim();
@@ -10,7 +10,7 @@ export default function Languages() {
         updateField("language", null, updatedLanguages);
     };
 
-    const viewType = style.language?.viewType;
+    const viewType = viewTypes?.language || "list";
 
     return (
         <div
@@ -26,7 +26,7 @@ export default function Languages() {
                         <li
                             key={lang.id}
                             contentEditable={editMode}
-                            suppressContentEditableWarning={true}
+                            suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, e)}
                             style={style?.language?.listItem}
                             dangerouslySetInnerHTML={{ __html: lang.text || "" }}
@@ -39,7 +39,7 @@ export default function Languages() {
                         <span
                             key={lang.id}
                             contentEditable={editMode}
-                            suppressContentEditableWarning={true}
+                            suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, e)}
                             style={style?.language?.eachLanguageBox}
                             dangerouslySetInnerHTML={{ __html: lang.text || "" }}

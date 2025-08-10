@@ -8,6 +8,7 @@ export default function Projects() {
         updateField,
         selectedSection,
         setSelectedSection,
+        viewTypes,
     } = useResume();
 
     const handleFieldBlur = (index, key, e) => {
@@ -21,6 +22,8 @@ export default function Projects() {
         updated[projIndex].description[descIndex].text = e.target.innerText.trim();
         updateField("projects", null, updated);
     };
+
+    const viewType = viewTypes?.projects || "list";
 
     return (
         <div
@@ -50,18 +53,33 @@ export default function Projects() {
                         dangerouslySetInnerHTML={{ __html: project.title }}
                     />
 
-                    <ul style={style?.projects?.list}>
-                        {project.description?.map((point, i) => (
-                            <li
-                                key={point.id}
-                                contentEditable={editMode}
-                                suppressContentEditableWarning
-                                onBlur={(e) => handleDescBlur(index, i, e)}
-                                style={style?.projects?.listItem}
-                                dangerouslySetInnerHTML={{ __html: point.text }}
-                            />
-                        ))}
-                    </ul>
+                    {viewType === "list" ? (
+                        <ul style={style?.projects?.list}>
+                            {project.description?.map((point, i) => (
+                                <li
+                                    key={point.id || i}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) => handleDescBlur(index, i, e)}
+                                    style={style?.projects?.listItem}
+                                    dangerouslySetInnerHTML={{ __html: point.text }}
+                                />
+                            ))}
+                        </ul>
+                    ) : (
+                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                            {project.description?.map((point, i) => (
+                                <p
+                                    key={point.id || i}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) => handleDescBlur(index, i, e)}
+                                    style={style?.projects?.listItem}
+                                    dangerouslySetInnerHTML={{ __html: point.text }}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

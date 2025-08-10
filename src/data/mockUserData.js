@@ -3,7 +3,10 @@ const rawMockUserData = {
     lastName: "Doe",
     position: "Web Developer",
     profilePhoto: "https://media-public.canva.com/p7zgk/MAEugcp7zgk/1/t.jpg",
-    summary: 'Jane Doe is a very good coder no one can beat him !',
+    summary: [
+        { id: "summary_1", text: "Jane Doe is a very good coder no one can beat him!" },
+        { id: "summary_2", text: "She has 5+ years of experience in full-stack development." }
+    ],
     contact: [
         {
             icon: "email",

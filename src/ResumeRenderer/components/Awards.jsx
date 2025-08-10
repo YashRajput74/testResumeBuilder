@@ -8,6 +8,7 @@ export default function Awards() {
         updateField,
         selectedSection,
         setSelectedSection,
+        viewTypes,
     } = useResume();
 
     const handleTitleBlur = (index, e) => {
@@ -32,6 +33,8 @@ export default function Awards() {
         updateField("awards", null, updated);
     };
 
+    const viewType = viewTypes?.awards || "list";
+
     return (
         <div
             className="awards resumeSection"
@@ -43,7 +46,7 @@ export default function Awards() {
                 suppressContentEditableWarning
                 style={style?.award?.heading}
             >
-                Honurs and awards
+                Honours and Awards
             </h2>
 
             {data.awards.map((award, awardIndex) => (
@@ -60,16 +63,37 @@ export default function Awards() {
                         dangerouslySetInnerHTML={{ __html: award.title || "" }}
                     />
 
-                    {award.description?.map((desc, descIndex) => (
-                        <p
-                            key={desc.id}
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleDescriptionBlur(awardIndex, descIndex, e)}
-                            style={style?.award?.content}
-                            dangerouslySetInnerHTML={{ __html: desc.text || "" }}
-                        />
-                    ))}
+                    {viewType === "list" ? (
+                        <ul style={style?.award?.list}>
+                            {award.description?.map((desc, descIndex) => (
+                                <li
+                                    key={desc.id}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) =>
+                                        handleDescriptionBlur(awardIndex, descIndex, e)
+                                    }
+                                    style={style?.award?.listItem}
+                                    dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                                />
+                            ))}
+                        </ul>
+                    ) : (
+                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                            {award.description?.map((desc, descIndex) => (
+                                <p
+                                    key={desc.id}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) =>
+                                        handleDescriptionBlur(awardIndex, descIndex, e)
+                                    }
+                                    style={style?.award?.content}
+                                    dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

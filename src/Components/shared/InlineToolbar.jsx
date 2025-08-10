@@ -105,8 +105,6 @@ export default function InlineToolbar({ editMode, containerRef }) {
             <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("bold")}><b>B</b></button>
             <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("italic")}><i>I</i></button>
             <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("underline")}><u>U</u></button>
-            <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("insertUnorderedList")}>•</button>
-            <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("insertOrderedList")}>1.</button>
             <button
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => {

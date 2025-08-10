@@ -8,6 +8,7 @@ export default function Strengths() {
         updateField,
         selectedSection,
         setSelectedSection,
+        viewTypes,
     } = useResume();
 
     const handleTitleBlur = (index, e) => {
@@ -31,6 +32,8 @@ export default function Strengths() {
         };
         updateField("strengths", null, updated);
     };
+
+    const viewType = viewTypes?.strengths || "list";
 
     return (
         <div
@@ -60,16 +63,37 @@ export default function Strengths() {
                         dangerouslySetInnerHTML={{ __html: strength.title || "" }}
                     />
 
-                    {strength.description?.map((desc, descIndex) => (
-                        <p
-                            key={desc.id}
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleDescriptionBlur(strengthIndex, descIndex, e)}
-                            style={style?.strength?.content}
-                            dangerouslySetInnerHTML={{ __html: desc.text || "" }}
-                        />
-                    ))}
+                    {viewType === "list" ? (
+                        <ul style={style?.strength?.list}>
+                            {strength.description?.map((desc, descIndex) => (
+                                <li
+                                    key={desc.id}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) =>
+                                        handleDescriptionBlur(strengthIndex, descIndex, e)
+                                    }
+                                    style={style?.strength?.listItem}
+                                    dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                                />
+                            ))}
+                        </ul>
+                    ) : (
+                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                            {strength.description?.map((desc, descIndex) => (
+                                <p
+                                    key={desc.id}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) =>
+                                        handleDescriptionBlur(strengthIndex, descIndex, e)
+                                    }
+                                    style={style?.strength?.content}
+                                    dangerouslySetInnerHTML={{ __html: desc.text || "" }}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

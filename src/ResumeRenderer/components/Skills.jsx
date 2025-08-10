@@ -1,7 +1,7 @@
 import { useResume } from "../../context/ResumeContext";
 
 export default function Skills() {
-    const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();
+    const { data, style, editMode, updateField, selectedSection, setSelectedSection, viewTypes } = useResume();
 
     const handleBlur = (index, e) => {
         const newValue = e.target.innerHTML.trim();
@@ -10,8 +10,7 @@ export default function Skills() {
         updateField("skills", null, updatedSkills);
     };
 
-    const showToolbar = selectedSection === "skills";
-    const viewType = style.skills?.viewType;
+    const viewType = viewTypes?.skills || "block";
 
     return (
         <div
@@ -27,7 +26,7 @@ export default function Skills() {
                         <li
                             key={skill.id}
                             contentEditable={editMode}
-                            suppressContentEditableWarning={true}
+                            suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, e)}
                             style={style?.skills?.listItem}
                             dangerouslySetInnerHTML={{ __html: skill.text }}
@@ -40,7 +39,7 @@ export default function Skills() {
                         <span
                             key={skill.id}
                             contentEditable={editMode}
-                            suppressContentEditableWarning={true}
+                            suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, e)}
                             style={style?.skills?.eachSkillBox}
                             dangerouslySetInnerHTML={{ __html: skill.text }}

@@ -8,7 +8,10 @@ export default function WorkExperience() {
         updateField,
         selectedSection,
         setSelectedSection,
+        viewTypes,
     } = useResume();
+
+    const viewType = viewTypes?.experience || "list";
 
     const handleFieldBlur = (index, key, e) => {
         const updated = [...data.experience];
@@ -75,23 +78,41 @@ export default function WorkExperience() {
                         {exp.location} | {exp.startDate} - {exp.endDate}
                     </h6>
 
-                    <ul style={style?.workExpe?.wholeList}>
-                        {exp.description?.map((item, i) => (
-                            <li
-                                key={item.id || `desc-${i}`}
-                                contentEditable={editMode}
-                                suppressContentEditableWarning
-                                onBlur={(e) => handleDescriptionBlur(index, i, e)}
-                                style={{
-                                    ...style?.workExpe?.bullets,
-                                    listStyle: "none",
-                                    display: "flex",
-                                    alignItems: "center",
-                                }}
-                                dangerouslySetInnerHTML={{ __html: item.text }}
-                            />
-                        ))}
-                    </ul>
+                    {viewType === "list" ? (
+                        <ul style={style?.workExpe?.wholeList}>
+                            {exp.description?.map((item, i) => (
+                                <li
+                                    key={item.id || `desc-${i}`}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) => handleDescriptionBlur(index, i, e)}
+                                    style={{
+                                        ...style?.workExpe?.bullets,
+                                        listStyle: "none",
+                                        display: "flex",
+                                        alignItems: "center",
+                                    }}
+                                    dangerouslySetInnerHTML={{ __html: item.text }}
+                                />
+                            ))}
+                        </ul>
+                    ) : (
+                        <div>
+                            {exp.description?.map((item, i) => (
+                                <p
+                                    key={item.id || `desc-${i}`}
+                                    contentEditable={editMode}
+                                    suppressContentEditableWarning
+                                    onBlur={(e) => handleDescriptionBlur(index, i, e)}
+                                    style={{
+                                        marginBottom: "0.5rem",
+                                        ...style?.workExpe?.bullets,
+                                    }}
+                                    dangerouslySetInnerHTML={{ __html: item.text }}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             ))}
         </div>
