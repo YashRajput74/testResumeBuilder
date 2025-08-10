@@ -62,6 +62,7 @@ export default function Projects() {
                             {project.description?.map((point, i) => (
                                 <li
                                     key={point.id || i}
+                                    data-id={point.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) => handleDescBlur(index, i, e)}
@@ -75,6 +76,7 @@ export default function Projects() {
                             {project.description?.map((point, i) => (
                                 <p
                                     key={point.id || i}
+                                    data-id={point.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) => handleDescBlur(index, i, e)}

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useResume } from "../../context/ResumeContext";
+import EntryControls from "./EntryControls";
 
 export default function InlineToolbar({ editMode, containerRef, sectionName }) {
-    const { updateField, style, viewTypes, setViewTypes } = useResume();
+    const { style, viewTypes, setViewTypes } = useResume();
 
     const [visible, setVisible] = useState(false);
     const [position, setPosition] = useState({ top: 0, left: 0 });
@@ -85,7 +86,6 @@ export default function InlineToolbar({ editMode, containerRef, sectionName }) {
         }
     };
 
-    // Corrected toggleViewType using setViewTypes
     const toggleViewType = () => {
         if (!sectionName) return;
         setViewTypes((prev) => ({
@@ -114,7 +114,6 @@ export default function InlineToolbar({ editMode, containerRef, sectionName }) {
                 gap: "8px",
             }}
         >
-            {/* Formatting options for p, span, li only */}
             {["p", "span", "li"].includes(activeTagName) && (
                 <>
                     <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("bold")}>
@@ -132,7 +131,6 @@ export default function InlineToolbar({ editMode, containerRef, sectionName }) {
                 </>
             )}
 
-            {/* Link for everything */}
             {["p", "span", "li", "h1", "h2", "h3", "h4", "h5", "h6"].includes(activeTagName) && (
                 <button
                     onMouseDown={(e) => e.preventDefault()}
@@ -144,6 +142,7 @@ export default function InlineToolbar({ editMode, containerRef, sectionName }) {
                     🔗
                 </button>
             )}
+            <EntryControls tagName={activeTagName} savedSelection={savedSelection} sectionName={sectionName} />
         </div>
     );
 }

@@ -92,6 +92,7 @@ export default function Education() {
                             {edu.description?.map((point, i) => (
                                 <li
                                     key={point.id || i}
+                                    data-id={point.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) => handleDescBlur(index, i, e)}
@@ -105,6 +106,7 @@ export default function Education() {
                             {edu.description?.map((point, i) => (
                                 <p
                                     key={point.id || i}
+                                    data-id={point.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) => handleDescBlur(index, i, e)}

@@ -29,6 +29,7 @@ export default function Skills() {
                     {data.skills.map((skill, index) => (
                         <li
                             key={skill.id}
+                            data-id={skill.id}
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, e)}
@@ -42,6 +43,7 @@ export default function Skills() {
                     {data.skills.map((skill, index) => (
                         <span
                             key={skill.id}
+                            data-id={skill.id}
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, e)}

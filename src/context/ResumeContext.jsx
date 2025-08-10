@@ -144,6 +144,85 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
         });
     };
 
+    const isNestedSection = (section) => {
+        const nestedSections = [
+            "experience", "education", "projects", "certifications",
+            "achievements", "organizations", "strengths", "awards"
+        ];
+        return nestedSections.includes(section);
+    };
+
+    const addEntryAfter = (section, id) => {
+        setData((prev) => {
+            if (!section || !id) return prev;
+
+            if (isNestedSection(section)) {
+                const updated = prev[section].map(item => {
+                    if (!Array.isArray(item.description)) return item;
+                    const index = item.description.findIndex(desc => desc.id === id);
+                    if (index === -1) return item;
+
+                    const newDesc = {
+                        id: `${item.id}_desc_${crypto.randomUUID()}`,
+                        text: "New description entry"
+                    };
+
+                    return {
+                        ...item,
+                        description: [
+                            ...item.description.slice(0, index + 1),
+                            newDesc,
+                            ...item.description.slice(index + 1)
+                        ]
+                    };
+                });
+
+                return { ...prev, [section]: updated };
+            } else {
+                const currentSection = prev[section];
+                const index = currentSection.findIndex((entry) => entry.id === id);
+                if (index === -1) return prev;
+
+                const newEntry = { id: `${section}_${crypto.randomUUID()}`, text: "New entry" };
+
+                const updated = [
+                    ...currentSection.slice(0, index + 1),
+                    newEntry,
+                    ...currentSection.slice(index + 1),
+                ];
+
+                return { ...prev, [section]: updated };
+            }
+        });
+    };
+
+    const removeEntry = (section, id) => {
+        setData((prev) => {
+            if (!section || !id) return prev;
+
+            if (isNestedSection(section)) {
+                const updated = prev[section].map(item => {
+                    if (!Array.isArray(item.description)) return item;
+                    const index = item.description.findIndex(desc => desc.id === id);
+                    if (index === -1 || item.description.length === 1) return item;
+
+                    return {
+                        ...item,
+                        description: item.description.filter(desc => desc.id !== id)
+                    };
+                });
+
+                return { ...prev, [section]: updated };
+            } else {
+                const currentSection = prev[section];
+                if (currentSection.length === 1) return prev;
+
+                const updated = currentSection.filter((entry) => entry.id !== id);
+                return { ...prev, [section]: updated };
+            }
+        });
+    };
+
     return (
         <ResumeContext.Provider
             value={{
@@ -161,7 +240,9 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
                 customLayoutAreas,
                 setCustomLayoutAreas,
                 viewTypes,
-                setViewTypes
+                setViewTypes,
+                addEntryAfter,
+                removeEntry,
             }}
         >
             {children}

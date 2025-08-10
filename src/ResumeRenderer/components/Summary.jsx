@@ -27,6 +27,7 @@ export default function Summary() {
                     {data.summary.map((item, index) => (
                         <li
                             key={item.id || index}
+                            data-id={item.id}
                             contentEditable={editMode}
                             suppressContentEditableWarning={true}
                             onBlur={(e) => handleDescBlur(index, e)}
@@ -40,6 +41,7 @@ export default function Summary() {
                     {data.summary.map((item, index) => (
                         <p
                             key={item.id || index}
+                            data-id={item.id}
                             contentEditable={editMode}
                             suppressContentEditableWarning={true}
                             onBlur={(e) => handleDescBlur(index, e)}

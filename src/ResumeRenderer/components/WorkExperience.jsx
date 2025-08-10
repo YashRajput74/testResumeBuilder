@@ -87,6 +87,7 @@ export default function WorkExperience() {
                             {exp.description?.map((item, i) => (
                                 <li
                                     key={item.id || `desc-${i}`}
+                                    data-id={item.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) => handleDescriptionBlur(index, i, e)}
@@ -105,6 +106,7 @@ export default function WorkExperience() {
                             {exp.description?.map((item, i) => (
                                 <p
                                     key={item.id || `desc-${i}`}
+                                    data-id={item.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) => handleDescriptionBlur(index, i, e)}

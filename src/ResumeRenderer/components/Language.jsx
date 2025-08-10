@@ -29,6 +29,7 @@ export default function Languages() {
                     {data.language.map((lang, index) => (
                         <li
                             key={lang.id}
+                            data-id={lang.id}
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, e)}
@@ -42,6 +43,7 @@ export default function Languages() {
                     {data.language.map((lang, index) => (
                         <span
                             key={lang.id}
+                            data-id={lang.id}
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleBlur(index, e)}

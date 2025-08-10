@@ -72,6 +72,7 @@ export default function Strengths() {
                             {strength.description?.map((desc, descIndex) => (
                                 <li
                                     key={desc.id}
+                                    data-id={desc.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) =>
@@ -87,6 +88,7 @@ export default function Strengths() {
                             {strength.description?.map((desc, descIndex) => (
                                 <p
                                     key={desc.id}
+                                    data-id={desc.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) =>
