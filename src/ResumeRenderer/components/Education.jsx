@@ -45,15 +45,15 @@ export default function Education() {
 
             {data.education.map((edu, index) => (
                 <div key={edu.id || index} style={style?.education?.eachSchool}>
-                    <h3 style={style?.education?.name}>
-                        <span
+                    <h3 style={style?.education?.name} data-id={edu.id}>
+                        <div
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleFieldBlur(index, "degree", e)}
                             dangerouslySetInnerHTML={{ __html: edu.degree }}
                         />
                         {" - "}
-                        <span
+                        <div
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleFieldBlur(index, "school", e)}
@@ -61,30 +61,30 @@ export default function Education() {
                         />
                     </h3>
 
-                    <h4 style={style?.education?.city}>
-                        <span
+                    <h4 style={style?.education?.city} data-id={edu.id}>
+                        <div
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleFieldBlur(index, "city", e)}
                         >
                             {edu.city}
-                        </span>{" "}
+                        </div>{" "}
                         |{" "}
-                        <span
+                        <div
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleFieldBlur(index, "startDate", e)}
                         >
                             {edu.startDate}
-                        </span>{" "}
+                        </div>{" "}
                         -{" "}
-                        <span
+                        <div
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleFieldBlur(index, "endDate", e)}
                         >
                             {edu.endDate}
-                        </span>
+                        </div>
                     </h4>
 
                     {viewType === "list" ? (

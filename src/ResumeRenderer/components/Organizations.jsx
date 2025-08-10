@@ -62,6 +62,7 @@ export default function Organizations() {
                 >
                     <h3
                         contentEditable={editMode}
+                        data-id={organization.id}
                         suppressContentEditableWarning
                         onBlur={(e) => handleTitleBlur(organizationIndex, e)}
                         style={style?.organiz?.title}

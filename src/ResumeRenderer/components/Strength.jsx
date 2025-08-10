@@ -61,6 +61,7 @@ export default function Strengths() {
                 >
                     <h3
                         contentEditable={editMode}
+                        data-id={strength.id}
                         suppressContentEditableWarning
                         onBlur={(e) => handleTitleBlur(strengthIndex, e)}
                         style={style?.strength?.title}

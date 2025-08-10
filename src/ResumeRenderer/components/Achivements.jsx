@@ -61,6 +61,7 @@ export default function Achievements() {
                 >
                     <h3
                         contentEditable={editMode}
+                        data-id={achievement.id}
                         suppressContentEditableWarning
                         onBlur={(e) => handleTitleBlur(achievementIndex, e)}
                         style={style?.achieve?.title}

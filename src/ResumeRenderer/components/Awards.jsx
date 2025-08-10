@@ -61,6 +61,7 @@ export default function Awards() {
                 >
                     <h3
                         contentEditable={editMode}
+                        data-id={award.id}
                         suppressContentEditableWarning
                         onBlur={(e) => handleTitleBlur(awardIndex, e)}
                         style={style?.award?.title}

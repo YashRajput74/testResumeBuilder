@@ -59,6 +59,7 @@ export default function WorkExperience() {
                 >
                     <h3
                         contentEditable={editMode}
+                        data-id={exp.id}
                         suppressContentEditableWarning
                         onBlur={(e) => handleFieldBlur(index, "role", e)}
                         style={style?.workExpe?.role}
@@ -67,6 +68,7 @@ export default function WorkExperience() {
 
                     <h4
                         contentEditable={editMode}
+                        data-id={exp.id}
                         suppressContentEditableWarning
                         onBlur={(e) => handleFieldBlur(index, "organization", e)}
                         style={style?.workExpe?.organization}
@@ -75,6 +77,7 @@ export default function WorkExperience() {
 
                     <h6
                         contentEditable={editMode}
+                        data-id={exp.id}
                         suppressContentEditableWarning
                         onBlur={(e) => handleFieldBlur(index, "location", e)}
                         style={style?.workExpe?.dates}

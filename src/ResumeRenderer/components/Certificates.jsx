@@ -48,6 +48,7 @@ export default function Certificates() {
                     <div key={cert.id || index} style={style?.certificate?.eachcertificate}>
                         <h3
                             contentEditable={editMode}
+                            data-id={cert.id}
                             suppressContentEditableWarning
                             onBlur={(e) => handleFieldBlur(index, "title", e)}
                             style={style?.certificate?.title}
@@ -56,6 +57,7 @@ export default function Certificates() {
 
                         <h4
                             contentEditable={editMode}
+                            data-id={cert.id}
                             suppressContentEditableWarning
                             onBlur={(e) => handleFieldBlur(index, "organization", e)}
                             style={style?.certificate?.organiz}
@@ -64,6 +66,7 @@ export default function Certificates() {
 
                         <h5
                             contentEditable={editMode}
+                            data-id={cert.id}
                             suppressContentEditableWarning
                             onBlur={(e) => handleFieldBlur(index, "date", e)}
                             style={style?.certificate?.date}

@@ -51,6 +51,7 @@ export default function Projects() {
                 >
                     <h3
                         contentEditable={editMode}
+                        data-id={project.id}
                         suppressContentEditableWarning
                         onBlur={(e) => handleFieldBlur(index, "title", e)}
                         style={style?.projects?.title}

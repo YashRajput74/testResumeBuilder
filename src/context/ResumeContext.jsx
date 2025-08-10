@@ -223,6 +223,117 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
         });
     };
 
+    const templates = {
+        experience: () => ({
+            id: `exp_${crypto.randomUUID()}`,
+            role: "New Role",
+            organization: "New Organization",
+            location: "Location",
+            startDate: "Start",
+            endDate: "End",
+            description: [
+                { id: `desc_${crypto.randomUUID()}`, text: "New bullet point" }
+            ]
+        }),
+        education: () => ({
+            id: `edu_${crypto.randomUUID()}`,
+            school: "New School",
+            degree: "New Degree",
+            city: "City",
+            startDate: "Start",
+            endDate: "End",
+            description: [
+                { id: `desc_${crypto.randomUUID()}`, text: "New achievement" }
+            ]
+        }),
+        projects: () => ({
+            id: `proj_${crypto.randomUUID()}`,
+            title: "New Project",
+            link: "https://your-project-link.com",
+            githubLink: "https://github.com/your-repo",
+            description: [
+                { id: `desc_${crypto.randomUUID()}`, text: "Project detail goes here..." }
+            ]
+        }),
+
+        certifications: () => ({
+            id: `cer_${crypto.randomUUID()}`,
+            title: "New Certification",
+            organization: "Certifying Body",
+            date: "Year",
+            description: [
+                { id: `desc_${crypto.randomUUID()}`, text: "Certification detail goes here..." }
+            ]
+        }),
+
+        strengths: () => ({
+            id: `str_${crypto.randomUUID()}`,
+            title: "New Strength",
+            description: [
+                { id: `desc_${crypto.randomUUID()}`, text: "Strength detail goes here..." }
+            ]
+        }),
+
+        awards: () => ({
+            id: `awr_${crypto.randomUUID()}`,
+            title: "New Award Title",
+            description: [
+                { id: `desc_${crypto.randomUUID()}`, text: "Award description goes here..." }
+            ]
+        }),
+
+        organizations: () => ({
+            id: `org_${crypto.randomUUID()}`,
+            title: "New Organization",
+            description: [
+                { id: `desc_${crypto.randomUUID()}`, text: "Contribution details go here..." }
+            ]
+        }),
+
+        achievements: () => ({
+            id: `ach_${crypto.randomUUID()}`,
+            title: "New Achievement",
+            description: [
+                { id: `desc_${crypto.randomUUID()}`, text: "Achievement details go here..." }
+            ]
+        }),
+    };
+
+    const addFullEntryAfter = (section, id) => {
+        setData((prev) => {
+            const currentSection = prev[section];
+            if (!Array.isArray(currentSection)) return prev;
+
+            const index = currentSection.findIndex((entry) => entry.id === id);
+            if (index === -1) return prev;
+
+            const template = templates[section];
+            if (!template) return prev;
+
+            const newEntry = template();
+
+            const updated = [
+                ...currentSection.slice(0, index + 1),
+                newEntry,
+                ...currentSection.slice(index + 1),
+            ];
+
+            return { ...prev, [section]: updated };
+        });
+    };
+
+    const removeFullEntry = (section, id) => {
+        setData((prev) => {
+            const currentSection = prev[section];
+            if (!Array.isArray(currentSection)) return prev;
+
+            if (currentSection.length === 1) return prev;
+
+            const updated = currentSection.filter((entry) => entry.id !== id);
+            return { ...prev, [section]: updated };
+        });
+    };
+
     return (
         <ResumeContext.Provider
             value={{
@@ -243,6 +354,8 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
                 setViewTypes,
                 addEntryAfter,
                 removeEntry,
+                addFullEntryAfter,
+                removeFullEntry
             }}
         >
             {children}
