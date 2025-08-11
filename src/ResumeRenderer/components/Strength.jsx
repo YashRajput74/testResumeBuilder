@@ -45,17 +45,13 @@ export default function Strengths() {
             onClick={() => setSelectedSection("strengths")}
             ref={strengthRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.strength?.heading}
-            >
+            <h2 style={style?.strength?.heading}>
                 Strengths
             </h2>
 
             {data.strengths.map((strength, strengthIndex) => (
                 <div
-                    className="strength"
+                    className="eachStrength"
                     key={strength.id}
                     style={style?.strength?.innerbox}
                 >
@@ -85,7 +81,7 @@ export default function Strengths() {
                             ))}
                         </ul>
                     ) : (
-                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                        <div style={style?.strength?.eachStrength}>
                             {strength.description?.map((desc, descIndex) => (
                                 <p
                                     key={desc.id}

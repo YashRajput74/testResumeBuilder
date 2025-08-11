@@ -35,11 +35,7 @@ export default function Projects() {
             onClick={() => setSelectedSection("projects")}
             ref={projectRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.projects?.heading}
-            >
+            <h2 style={style?.projects?.heading}>
                 Projects
             </h2>
 
@@ -73,7 +69,7 @@ export default function Projects() {
                             ))}
                         </ul>
                     ) : (
-                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                        <div style={style?.projects?.bullets}>
                             {project.description?.map((point, i) => (
                                 <p
                                     key={point.id || i}
@@ -81,7 +77,7 @@ export default function Projects() {
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) => handleDescBlur(index, i, e)}
-                                    style={style?.projects?.listItem}
+                                    style={style?.projects?.content}
                                     dangerouslySetInnerHTML={{ __html: point.text }}
                                 />
                             ))}

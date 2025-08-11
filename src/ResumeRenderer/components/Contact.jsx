@@ -7,7 +7,6 @@ import AddLinkButton from "../../Components/shared/AddLinkButton";
 export default function Contact() {
     const { editMode, data, style } = useResume();
 
-    // --- Step 1: Initialize from localStorage or ResumeContext
     const [contacts, setContacts] = useState(() => {
         const local = localStorage.getItem("customContactData");
         return local ? JSON.parse(local) : data.contact || [];
@@ -24,13 +23,11 @@ export default function Contact() {
         return fallbackMap;
     });
 
-    // --- Step 2: Save to localStorage on every change
     useEffect(() => {
         localStorage.setItem("customContactData", JSON.stringify(contacts));
         localStorage.setItem("customContactIcons", JSON.stringify(iconMap));
     }, [contacts, iconMap]);
 
-    // --- Step 3: Handlers
     const handleUpdateText = (index, field, newValue) => {
         const updated = [...contacts];
         updated[index][field] = newValue;
@@ -63,11 +60,11 @@ export default function Contact() {
     };
 
     return (
-        <div className="contactList">
+        <div className="contact" style={style?.contact?.box}>
             <h2 style={style?.contact?.heading}>Contact</h2>
-            <ul className="contact-list">
+            <ul className="contactList" style={style?.contact?.list}>
                 {contacts.map((contact, index) => (
-                    <li key={index} className="contactItem" style={style?.contact?.innerBox}>
+                    <li key={index} className="contactItem" style={style?.contact?.listItem}>
                         <EditableIcon
                             currentIconKey={iconMap[index]}
                             field={index}
@@ -92,8 +89,8 @@ export default function Contact() {
                         )}
 
                         {editMode && (
-                            <button className="delete-btn" onClick={() => handleDelete(index)}>
-                                ❌
+                            <button className="delete-btn" style={style?.contact?.deleteIcon} onClick={() => handleDelete(index)}>
+                                🗑️
                             </button>
                         )}
                     </li>
@@ -101,7 +98,7 @@ export default function Contact() {
             </ul>
 
             {editMode && (
-                <button className="add-btn" onClick={handleAdd}>➕ Add Contact</button>
+                <button className="add-btn" style={style?.contact?.addIcon} onClick={handleAdd}>➕ Add Contact</button>
             )}
         </div>
     );

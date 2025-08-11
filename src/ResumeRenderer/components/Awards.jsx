@@ -45,17 +45,13 @@ export default function Awards() {
             onClick={() => setSelectedSection("awards")}
             ref={awardsRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.award?.heading}
-            >
+            <h2 style={style?.award?.heading} >
                 Honours and Awards
             </h2>
 
             {data.awards.map((award, awardIndex) => (
                 <div
-                    className="award"
+                    className="eachAward"
                     key={award.id}
                     style={style?.award?.innerbox}
                 >
@@ -85,7 +81,7 @@ export default function Awards() {
                             ))}
                         </ul>
                     ) : (
-                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                        <div style={style?.award?.awardWrapper}>
                             {award.description?.map((desc, descIndex) => (
                                 <p
                                     key={desc.id}

@@ -6,8 +6,9 @@ export const template1 = {
     isAvatar: "false",
     layout: {
         grid: {
-            templateColumns: "2fr 3fr",
+            templateColumns: "1fr 1fr",
             templateRows: "auto 1fr",
+            columnGap: "2rem",
             areas: [
                 {
                     name: "header",

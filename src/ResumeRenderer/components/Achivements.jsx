@@ -41,21 +41,17 @@ export default function Achievements() {
     return (
         <div
             className="achievements resumeSection"
-            style={{ ...style?.achieve?.box, position: "relative" }}
+            style={{ ...style?.achieve?.box,position:"relative"}}
             onClick={() => setSelectedSection("achievements")}
             ref={achievementRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.achieve?.heading}
-            >
+            <h2 style={style?.achieve?.heading} >
                 Achievements
             </h2>
 
             {data.achievements.map((achievement, achievementIndex) => (
                 <div
-                    className="achievement"
+                    className="eachAchievement"
                     key={achievement.id}
                     style={style?.achieve?.innerbox}
                 >
@@ -85,7 +81,7 @@ export default function Achievements() {
                             ))}
                         </ul>
                     ) : (
-                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                        <div style={style?.achieve?.eachAchieve}>
                             {achievement.description?.map((desc, descIndex) => (
                                 <p
                                     key={desc.id}

@@ -16,24 +16,26 @@ export default function PersonalInfo() {
         const newText = e.target.innerHTML.trim();
         const updated = [...data.summary];
         updated[index] = { ...updated[index], text: newText };
-        updateField("summary", null, updated); // updating shared summary array
+        updateField("summary", null, updated);
     };
 
     return (
         <div
             className="personalInfo resumeSection"
             ref={personalRef}
-            style={{ ...style?.personalInfo?.box, position: "relative" }}
+            style={style?.personalInfo?.box}
         >
             <div style={style?.personalInfo?.name}>
                 <div
                     contentEditable={editMode}
+                    style={style?.personalInfo?.firstName}
                     suppressContentEditableWarning
                     onBlur={(e) => handleFieldBlur("firstName", e)}
                     dangerouslySetInnerHTML={{ __html: data.firstName }}
                 />{" "}
                 <div
                     contentEditable={editMode}
+                    style={style?.personalInfo?.lastName}
                     suppressContentEditableWarning
                     onBlur={(e) => handleFieldBlur("lastName", e)}
                     dangerouslySetInnerHTML={{ __html: data.lastName }}
@@ -63,7 +65,7 @@ export default function PersonalInfo() {
                     ))}
                 </ul>
             ) : (
-                <div>
+                <div style={style?.personalInfo?.summaryBox}>
                     {data.summary.map((item, index) => (
                         <p
                             key={item.id || index}
@@ -71,7 +73,7 @@ export default function PersonalInfo() {
                             contentEditable={editMode}
                             suppressContentEditableWarning
                             onBlur={(e) => handleSummaryBlur(index, e)}
-                            style={{ ...style?.personalInfo?.summary, outline: "none" }}
+                            style={style?.personalInfo?.summaryContent}
                             dangerouslySetInnerHTML={{ __html: item.text }}
                         />
                     ))}
