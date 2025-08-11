@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import { useResume } from "../../context/ResumeContext";
+import EntryControls from "./EntryControls";
 
-export default function InlineToolbar({ editMode, containerRef }) {
+export default function InlineToolbar({ editMode, containerRef, sectionName }) {
+    const { style, viewTypes, setViewTypes } = useResume();
+
     const [visible, setVisible] = useState(false);
     const [position, setPosition] = useState({ top: 0, left: 0 });
+    const [activeTagName, setActiveTagName] = useState(null);
     const toolbarRef = useRef(null);
     const savedSelection = useRef(null);
 
@@ -17,30 +22,28 @@ export default function InlineToolbar({ editMode, containerRef }) {
 
             if (!clickedInsideContainer && !clickedInsideToolbar) {
                 setVisible(false);
+                setActiveTagName(null);
                 return;
             }
 
             if (clickedInsideToolbar) return;
 
-            const clickedP = e.target.closest("p");
-            if (!clickedP || !clickedInsideContainer) {
+            const clickedTag = e.target.closest("p, span, li, h1, h2, h3, h4, h5, h6");
+            if (!clickedTag || !clickedInsideContainer) {
                 setVisible(false);
-                if (clickedInsideContainer) {
-                    alert("Click inside a paragraph to edit formatting.");
-                }
+                setActiveTagName(null);
                 return;
             }
 
             const sel = window.getSelection();
-
-            const clickedRect = clickedP.getBoundingClientRect();
+            const clickedRect = clickedTag.getBoundingClientRect();
 
             if (sel.rangeCount > 0) {
                 const range = sel.getRangeAt(0);
                 savedSelection.current = range;
             } else {
                 const range = document.createRange();
-                range.selectNodeContents(clickedP);
+                range.selectNodeContents(clickedTag);
                 range.collapse(true);
                 savedSelection.current = range;
             }
@@ -51,6 +54,7 @@ export default function InlineToolbar({ editMode, containerRef }) {
                 left: clickedRect.left - containerRect.left + clickedRect.width / 2,
             });
 
+            setActiveTagName(clickedTag.tagName.toLowerCase());
             setVisible(true);
         };
 
@@ -82,6 +86,14 @@ export default function InlineToolbar({ editMode, containerRef }) {
         }
     };
 
+    const toggleViewType = () => {
+        if (!sectionName) return;
+        setViewTypes((prev) => ({
+            ...prev,
+            [sectionName]: prev[sectionName] === "list" ? "block" : "list",
+        }));
+    };
+
     if (!visible || !editMode) return null;
 
     return (
@@ -102,18 +114,35 @@ export default function InlineToolbar({ editMode, containerRef }) {
                 gap: "8px",
             }}
         >
-            <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("bold")}><b>B</b></button>
-            <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("italic")}><i>I</i></button>
-            <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("underline")}><u>U</u></button>
-            <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("insertUnorderedList")}>•</button>
-            <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("insertOrderedList")}>1.</button>
-            <button
-                onMouseDown={(e) => e.preventDefault()}
-                onClick={() => {
-                    const url = prompt("Enter URL:");
-                    if (url) exec("createLink", url);
-                }}
-            >🔗</button>
+            {["p", "span", "li"].includes(activeTagName) && (
+                <>
+                    <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("bold")}>
+                        <b>B</b>
+                    </button>
+                    <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("italic")}>
+                        <i>I</i>
+                    </button>
+                    <button onMouseDown={(e) => e.preventDefault()} onClick={() => exec("underline")}>
+                        <u>U</u>
+                    </button>
+                    <button onMouseDown={(e) => e.preventDefault()} onClick={toggleViewType}>
+                        🔁
+                    </button>
+                </>
+            )}
+
+            {["p", "span", "li", "h1", "h2", "h3", "h4", "h5", "h6"].includes(activeTagName) && (
+                <button
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={() => {
+                        const url = prompt("Enter URL:");
+                        if (url) exec("createLink", url);
+                    }}
+                >
+                    🔗
+                </button>
+            )}
+            <EntryControls tagName={activeTagName} savedSelection={savedSelection} sectionName={sectionName} />
         </div>
     );
 }

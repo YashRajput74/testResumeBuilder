@@ -1,165 +1,131 @@
-
+import { useRef } from "react";
 import { useResume } from "../../context/ResumeContext";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWindowMinimize } from '@fortawesome/free-regular-svg-icons';
-import FloatingToolbarPro from "../../Pages/FloatingToolbarPro";
-
-const iconMap = {
-    faWindowMinimize: faWindowMinimize,
-};
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function WorkExperience() {
-    const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();//ye
+    const {
+        data,
+        style,
+        editMode,
+        updateField,
+        selectedSection,
+        setSelectedSection,
+        viewTypes,
+    } = useResume();
 
-    const handleBlur = (index, key, e) => {
+    const workExpRef = useRef();
+    const viewType = viewTypes?.experience || "list";
+
+    const handleFieldBlur = (index, key, e) => {
         const updated = [...data.experience];
-        updated[index][key] = e.target.innerText.trim();
-        updateField('experience', null, updated);
+        updated[index] = { ...updated[index], [key]: e.target.innerText.trim() };
+        updateField("experience", null, updated);
     };
 
-    if (!style.workExpe?.sideline) {
-        return (
-            <div
-                className="workExperience resumeSection"
-                onClick={() => setSelectedSection("experience")}//ye
-                style={{ ...style?.workExpe?.box, position: "relative" }}
+    const handleDescriptionBlur = (expIndex, descIndex, e) => {
+        const updated = [...data.experience];
+        const updatedDescription = [...updated[expIndex].description];
+        updatedDescription[descIndex] = {
+            ...updatedDescription[descIndex],
+            text: e.target.innerText.trim(),
+        };
+        updated[expIndex] = {
+            ...updated[expIndex],
+            description: updatedDescription,
+        };
+        updateField("experience", null, updated);
+    };
+
+    return (
+        <div
+            className="workExperience resumeSection"
+            onClick={() => setSelectedSection("experience")}
+            style={{ ...style?.workExpe?.box, position: "relative" }}
+            ref={workExpRef}
+        >
+            <h2
+                contentEditable={editMode}
+                suppressContentEditableWarning
+                style={style?.workExpe?.heading}
             >
-                <h2 contentEditable={editMode} style={style?.workExpe?.heading}>
-                    Work Experience
-                    {selectedSection === "experience" && (
-                        <FloatingToolbarPro sectionKey="experience" />
-                    )} {/* ye */}
-                </h2>
+                Work Experience
+            </h2>
 
+            {data.experience.map((exp, index) => (
+                <div
+                    className="workPlace"
+                    key={exp.id || index}
+                    style={style?.workExpe?.eachWorkPlace}
+                >
+                    <h3
+                        contentEditable={editMode}
+                        data-id={exp.id}
+                        suppressContentEditableWarning
+                        onBlur={(e) => handleFieldBlur(index, "role", e)}
+                        style={style?.workExpe?.role}
+                        dangerouslySetInnerHTML={{ __html: exp.role }}
+                    />
 
-                {data.experience.map((exp, index) => (
-                    <div className="workPlace" key={index} style={style?.workExpe?.eachWorkPlace}>
-                        <h3
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "Role", e)}
-                            style={style?.workExpe?.role}
-                        >
-                            {exp.Role}
-                        </h3>
-                        <h4
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "Organization", e)}
-                            style={style?.workExpe?.organization}
-                        >
-                            {exp.Organization}
-                        </h4>
-                        <p
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleBlur(index, "Dates", e)}
-                            style={style?.workExpe?.dates}
-                        >
-                            {exp.Location} | {exp["Start Date"]} - {exp["End Date"]}
-                        </p>
+                    <h4
+                        contentEditable={editMode}
+                        data-id={exp.id}
+                        suppressContentEditableWarning
+                        onBlur={(e) => handleFieldBlur(index, "organization", e)}
+                        style={style?.workExpe?.organization}
+                        dangerouslySetInnerHTML={{ __html: exp.organization }}
+                    />
+
+                    <h6
+                        contentEditable={editMode}
+                        data-id={exp.id}
+                        suppressContentEditableWarning
+                        onBlur={(e) => handleFieldBlur(index, "location", e)}
+                        style={style?.workExpe?.dates}
+                    >
+                        {exp.location} | {exp.startDate} - {exp.endDate}
+                    </h6>
+
+                    {viewType === "list" ? (
                         <ul style={style?.workExpe?.wholeList}>
-                            {exp.Description.map((item, i) => (
+                            {exp.description?.map((item, i) => (
                                 <li
-                                    key={`exp${index}-${item.id}`}
+                                    key={item.id || `desc-${i}`}
+                                    data-id={item.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
-                                    onBlur={(e) => {
-                                        const updated = [...data.experience];
-                                        updated[index].Description[i].text = e.target.innerText.trim();
-                                        updateField("experience", null, updated);
-                                    }}
+                                    onBlur={(e) => handleDescriptionBlur(index, i, e)}
                                     style={{
                                         ...style?.workExpe?.bullets,
                                         listStyle: "none",
                                         display: "flex",
                                         alignItems: "center",
                                     }}
-                                >
-                                    {item.text}
-                                </li>
+                                    dangerouslySetInnerHTML={{ __html: item.text }}
+                                />
                             ))}
                         </ul>
-                    </div>
-                ))}
-            </div>
-        );
-    }
-
-    else {
-        return (
-            <div
-                className="workExperience resumeSection"
-                onClick={() => setSelectedSection("experience")}
-                style={{ ...style?.workExpe?.box, position: "relative" }}
-            >
-                <h2 contentEditable={editMode} style={style?.workExpe?.heading}>
-                    Work Experience
-                    {selectedSection === "experience" && (
-                        <FloatingToolbarPro sectionKey="experience" />
-                    )}
-                </h2>
-
-                <div className="timeline" style={style?.workExpe?.timeline}>
-                    {data.experience.map((exp, index) => (
-                        <div className="timeline-item" key={index}>
-                            <div className="dot" style={style?.workExpe?.dot}></div>
-
-                            <div className="workPlace" style={style?.workExpe?.eachWorkPlace}>
-                                <h3
-                                    contentEditable={editMode}
-                                    suppressContentEditableWarning
-                                    onBlur={(e) => handleBlur(index, "Role", e)}
-                                    style={style?.workExpe?.role}
-                                >
-                                    {exp.Role}
-                                </h3>
-
-                                <h4
-                                    contentEditable={editMode}
-                                    suppressContentEditableWarning
-                                    onBlur={(e) => handleBlur(index, "Organization", e)}
-                                    style={style?.workExpe?.organization}
-                                >
-                                    {exp.Organization}
-                                </h4>
-
+                    ) : (
+                        <div>
+                            {exp.description?.map((item, i) => (
                                 <p
+                                    key={item.id || `desc-${i}`}
+                                    data-id={item.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
-                                    onBlur={(e) => handleBlur(index, "Dates", e)}
-                                    style={style?.workExpe?.dates}
-                                >
-                                    {exp.Location} | {exp["Start Date"]} - {exp["End Date"]}
-                                </p>
-
-                                <ul style={style?.workExpe?.wholeList}>
-                                    {exp.Description.map((item, i) => (
-                                        <li
-                                            key={`exp${index}-${item.id}`}
-                                            contentEditable={editMode}
-                                            suppressContentEditableWarning
-                                            onBlur={(e) => {
-                                                const updated = [...data.experience];
-                                                updated[index].Description[i].text = e.target.innerText.trim();
-                                                updateField("experience", null, updated);
-                                            }}
-                                            style={{
-                                                ...style?.workExpe?.bullets,
-                                                listStyle: "none",
-                                                display: "flex",
-                                                alignItems: "center",
-                                            }}
-                                        >
-                                            {item.text}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                                    onBlur={(e) => handleDescriptionBlur(index, i, e)}
+                                    style={{
+                                        marginBottom: "0.5rem",
+                                        ...style?.workExpe?.bullets,
+                                    }}
+                                    dangerouslySetInnerHTML={{ __html: item.text }}
+                                />
+                            ))}
                         </div>
-                    ))}
+                    )}
                 </div>
-            </div>
-        );
-    }
+            ))}
+
+            <InlineToolbar editMode={editMode} containerRef={workExpRef} sectionName="experience" />
+        </div>
+    );
 }

@@ -1,62 +1,59 @@
+import { useRef } from "react";
 import { useResume } from "../../context/ResumeContext";
-import FloatingToolbarSimple from "../../Pages/FloatingToolbarSimple";
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 
-export default function Language() {
-    const { data, style, editMode, updateField, selectedSection, setSelectedSection } = useResume();
-
-    if (!data?.language) return null;
+export default function Languages() {
+    const { data, style, editMode, updateField, selectedSection, setSelectedSection, viewTypes } = useResume();
+    const languagesRef = useRef();
 
     const handleBlur = (index, e) => {
         const newValue = e.target.innerHTML.trim();
         const updatedLanguages = [...data.language];
-        updatedLanguages[index] = newValue;
+        updatedLanguages[index] = { ...updatedLanguages[index], text: newValue };
         updateField("language", null, updatedLanguages);
     };
 
-    const Wrapper = style.language?.list ? "ul" : "div";
-    const ItemWrapper = style.language?.list ? "li" : "div";
-    const itemStyle = style.language?.list ? style?.language?.listItem : style?.language?.eachLanguageBox;
+    const viewType = viewTypes?.language || "list";
 
     return (
         <div
             className="languages resumeSection"
             style={{ ...style?.language?.box, position: "relative" }}
             onClick={() => setSelectedSection("language")}
+            ref={languagesRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.language?.heading}
-            >
-                Languages
-            </h2>
+            <h2 style={style?.language?.heading}>Languages</h2>
 
-            {selectedSection === "language" && editMode && (
-                <FloatingToolbarSimple
-                    sectionKey="language"
-                    position={{ top: "-45px", right: "20px" }}
-                />
+            {viewType === "list" ? (
+                <ul style={style?.language?.wholeList}>
+                    {data.language.map((lang, index) => (
+                        <li
+                            key={lang.id}
+                            data-id={lang.id}
+                            contentEditable={editMode}
+                            suppressContentEditableWarning
+                            onBlur={(e) => handleBlur(index, e)}
+                            style={style?.language?.listItem}
+                            dangerouslySetInnerHTML={{ __html: lang.text || "" }}
+                        />
+                    ))}
+                </ul>
+            ) : (
+                <div className="individualLanguage" style={style?.language?.everyLanguageBox}>
+                    {data.language.map((lang, index) => (
+                        <span
+                            key={lang.id}
+                            data-id={lang.id}
+                            contentEditable={editMode}
+                            suppressContentEditableWarning
+                            onBlur={(e) => handleBlur(index, e)}
+                            style={style?.language?.eachLanguageBox}
+                            dangerouslySetInnerHTML={{ __html: lang.text || "" }}
+                        />
+                    ))}
+                </div>
             )}
-
-            <Wrapper
-                style={
-                    style.language?.list
-                        ? style?.language?.wholeList
-                        : style?.language?.everylanguageBox
-                }
-            >
-                {data.language.map((lang, index) => (
-                    <ItemWrapper
-                        key={index}
-                        contentEditable={editMode}
-                        suppressContentEditableWarning
-                        onBlur={(e) => handleBlur(index, e)}
-                        style={itemStyle}
-                        dangerouslySetInnerHTML={ {__html: lang}}
-                    >
-                    </ItemWrapper>
-                ))}
-            </Wrapper>
+            <InlineToolbar editMode={editMode} containerRef={languagesRef} sectionName="language" />
         </div>
     );
 }
