@@ -38,7 +38,7 @@ export default function EditableIcon({ currentIconKey, field, iconMap, setIconMa
     const selectedIconObj = allContactIcons.find(entry => entry.key === currentIconKey);
 
     return (
-        <div className="editable-icon-wrapper" style={{ position: "relative", display: "inline-block" }}>
+        <div className="editable-icon-wrapper" style={{ ...style?.contact?.iconWrapper, position: "relative", display: "inline-block" }}>
             <FontAwesomeIcon
                 icon={selectedIconObj?.icon}
                 onClick={() => editMode && setShowPicker((prev) => !prev)}
@@ -49,15 +49,15 @@ export default function EditableIcon({ currentIconKey, field, iconMap, setIconMa
             />
 
             {showPicker && (
-                <div ref={pickerRef} className="icon-picker-popup">
+                <div ref={pickerRef} className="icon-picker-popup" style={style?.contact?.pickerWrapper}>
                     {availableIcons.length > 0 ? (
                         availableIcons.map((entry) => (
-                            <div key={entry.key} className="icon-option" onClick={() => handleSelect(entry)}>
+                            <div key={entry.key} className="icon-option" style={style?.contact?.iconPickWrapper} onClick={() => handleSelect(entry)}>
                                 <FontAwesomeIcon icon={entry.icon} style={style?.contact?.icon} />
                             </div>
                         ))
                     ) : (
-                        <div className="icon-option none">All icons used</div>
+                        <div className="icon-option none" style={style?.contact?.noIcon} >All icons used</div>
                     )}
                 </div>
             )}

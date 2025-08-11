@@ -1,6 +1,8 @@
 import { FaLink } from "react-icons/fa";
+import { useResume } from "../../context/ResumeContext";
 
 export default function AddLinkButton({ index, link, onSetLink }) {
+    const { style } = useResume();
     const handleClick = () => {
         const newLink = prompt("Enter URL:", link || "");
         if (newLink !== null) {
@@ -13,6 +15,7 @@ export default function AddLinkButton({ index, link, onSetLink }) {
             onClick={handleClick}
             title={link ? "Edit Link" : "Add Link"}
             style={{
+                ...style?.contact?.linkIcon,
                 margin: "0 8px",
                 background: "none",
                 border: "none",
