@@ -43,11 +43,7 @@ export default function WorkExperience() {
             style={{ ...style?.workExpe?.box, position: "relative" }}
             ref={workExpRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.workExpe?.heading}
-            >
+            <h2 style={style?.workExpe?.heading}>
                 Work Experience
             </h2>
 
@@ -94,18 +90,13 @@ export default function WorkExperience() {
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) => handleDescriptionBlur(index, i, e)}
-                                    style={{
-                                        ...style?.workExpe?.bullets,
-                                        listStyle: "none",
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
+                                    style={style?.workExpe?.listItem}
                                     dangerouslySetInnerHTML={{ __html: item.text }}
                                 />
                             ))}
                         </ul>
                     ) : (
-                        <div>
+                        <div style={style?.workExpe?.eachExperience}>
                             {exp.description?.map((item, i) => (
                                 <p
                                     key={item.id || `desc-${i}`}
@@ -113,10 +104,7 @@ export default function WorkExperience() {
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
                                     onBlur={(e) => handleDescriptionBlur(index, i, e)}
-                                    style={{
-                                        marginBottom: "0.5rem",
-                                        ...style?.workExpe?.bullets,
-                                    }}
+                                    style={style?.workExpe?.content}
                                     dangerouslySetInnerHTML={{ __html: item.text }}
                                 />
                             ))}

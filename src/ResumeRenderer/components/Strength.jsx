@@ -45,11 +45,7 @@ export default function Strengths() {
             onClick={() => setSelectedSection("strengths")}
             ref={strengthRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.strength?.heading}
-            >
+            <h2 style={style?.strength?.heading}>
                 Strengths
             </h2>
 

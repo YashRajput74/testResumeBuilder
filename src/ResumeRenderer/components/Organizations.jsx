@@ -46,17 +46,13 @@ export default function Organizations() {
             onClick={() => setSelectedSection("organizations")}
             ref={orgRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.organiz?.heading}
-            >
+            <h2 style={style?.organiz?.heading} >
                 Organizations
             </h2>
 
             {data.organizations.map((organization, organizationIndex) => (
                 <div
-                    className="organization"
+                    className="eachOrganization"
                     key={organization.id}
                     style={style?.organiz?.innerbox}
                 >
@@ -86,7 +82,7 @@ export default function Organizations() {
                             ))}
                         </ul>
                     ) : (
-                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                        <div style={style?.organiz?.organizWrapper}>
                             {organization.description?.map((desc, descIndex) => (
                                 <p
                                     key={desc.id}

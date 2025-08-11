@@ -35,17 +35,13 @@ export default function Certificates() {
             onClick={() => setSelectedSection("certifications")}
             ref={certificateRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.certificate?.heading}
-            >
+            <h2 style={style?.certificate?.heading} >
                 Certificates
             </h2>
 
             <div style={style?.certificate?.innerBox}>
                 {data.certifications.map((cert, index) => (
-                    <div key={cert.id || index} style={style?.certificate?.eachcertificate}>
+                    <div key={cert.id || index} style={style?.certificate?.eachcertificate} className="eachCertificate">
                         <h3
                             contentEditable={editMode}
                             data-id={cert.id}
@@ -88,7 +84,7 @@ export default function Certificates() {
                                 ))}
                             </ul>
                         ) : (
-                            <div style={{ paddingLeft: "0.75rem", color: "red" }}>
+                            <div style={style?.certificate?.certWrapper}>
                                 {cert.description?.map((point, i) => (
                                     <p
                                         key={point.id || i}
@@ -96,7 +92,7 @@ export default function Certificates() {
                                         contentEditable={editMode}
                                         suppressContentEditableWarning
                                         onBlur={(e) => handleDescBlur(index, i, e)}
-                                        style={style?.certificate?.listItem}
+                                        style={style?.certificate?.content}
                                         dangerouslySetInnerHTML={{ __html: point.text }}
                                     />
                                 ))}

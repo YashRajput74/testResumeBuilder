@@ -45,17 +45,13 @@ export default function Achievements() {
             onClick={() => setSelectedSection("achievements")}
             ref={achievementRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.achieve?.heading}
-            >
+            <h2 style={style?.achieve?.heading} >
                 Achievements
             </h2>
 
             {data.achievements.map((achievement, achievementIndex) => (
                 <div
-                    className="achievement"
+                    className="eachAchievement"
                     key={achievement.id}
                     style={style?.achieve?.innerbox}
                 >

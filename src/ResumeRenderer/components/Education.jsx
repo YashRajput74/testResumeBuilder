@@ -12,112 +12,120 @@ export default function Education() {
         setSelectedSection,
         viewTypes,
     } = useResume();
+
     const educationRef = useRef();
+    const viewType = viewTypes?.education || "list";
 
     const handleFieldBlur = (index, key, e) => {
         const updated = [...data.education];
-        updated[index][key] = e.target.innerText.trim();
+
+        if (key === "cityLine") {
+            const text = e.target.innerText.trim();
+
+            const [cityPart = "", dateRange = ""] = text.split("|").map(str => str.trim());
+            const [startDate = "", endDate = ""] = dateRange.split("-").map(str => str.trim());
+
+            updated[index].city = cityPart;
+            updated[index].startDate = startDate;
+            updated[index].endDate = endDate;
+        } else {
+            updated[index][key] = e.target.innerText.trim();
+        }
+
         updateField("education", null, updated);
     };
 
-    const handleDescBlur = (eduIndex, descIndex, e) => {
+    const handleDescriptionBlur = (eduIndex, descIndex, e) => {
         const updated = [...data.education];
-        updated[eduIndex].description[descIndex].text = e.target.innerText.trim();
+        const updatedDescription = [...updated[eduIndex].description];
+        updatedDescription[descIndex] = {
+            ...updatedDescription[descIndex],
+            text: e.target.innerText.trim(),
+        };
+        updated[eduIndex] = {
+            ...updated[eduIndex],
+            description: updatedDescription,
+        };
         updateField("education", null, updated);
     };
-
-    const viewType = viewTypes?.education || "list";
 
     return (
         <div
             className="education resumeSection"
-            style={{ ...style?.education?.box, position: "relative" }}
             onClick={() => setSelectedSection("education")}
+            style={{ ...style?.education?.box, position: "relative" }}
             ref={educationRef}
         >
-            <h2
-                contentEditable={editMode}
-                suppressContentEditableWarning
-                style={style?.education?.heading}
-            >
+            <h2 style={style?.education?.heading}>
                 Education
             </h2>
 
             {data.education.map((edu, index) => (
-                <div key={edu.id || index} style={style?.education?.eachSchool}>
-                    <h3 style={style?.education?.name} data-id={edu.id}>
-                        <div
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleFieldBlur(index, "degree", e)}
-                            dangerouslySetInnerHTML={{ __html: edu.degree }}
-                        />
-                        {" - "}
-                        <div
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleFieldBlur(index, "school", e)}
-                            dangerouslySetInnerHTML={{ __html: edu.school }}
-                        />
-                    </h3>
+                <div
+                    className="educationItem"
+                    key={edu.id || index}
+                    style={style?.education?.eachEducation}
+                >
+                    <h3
+                        contentEditable={editMode}
+                        data-id={edu.id}
+                        suppressContentEditableWarning
+                        onBlur={(e) => handleFieldBlur(index, "degree", e)}
+                        style={style?.education?.degree}
+                        dangerouslySetInnerHTML={{ __html: edu.degree }}
+                    />
 
-                    <h4 style={style?.education?.city} data-id={edu.id}>
-                        <div
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleFieldBlur(index, "city", e)}
-                        >
-                            {edu.city}
-                        </div>{" "}
-                        |{" "}
-                        <div
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleFieldBlur(index, "startDate", e)}
-                        >
-                            {edu.startDate}
-                        </div>{" "}
-                        -{" "}
-                        <div
-                            contentEditable={editMode}
-                            suppressContentEditableWarning
-                            onBlur={(e) => handleFieldBlur(index, "endDate", e)}
-                        >
-                            {edu.endDate}
-                        </div>
-                    </h4>
+                    <h4
+                        contentEditable={editMode}
+                        data-id={edu.id}
+                        suppressContentEditableWarning
+                        onBlur={(e) => handleFieldBlur(index, "school", e)}
+                        style={style?.education?.school}
+                        dangerouslySetInnerHTML={{ __html: edu.school }}
+                    />
+
+                    <h6
+                        contentEditable={editMode}
+                        data-id={edu.id}
+                        suppressContentEditableWarning
+                        onBlur={(e) => handleFieldBlur(index, "cityLine", e)}
+                        style={style?.education?.dates}
+                    >
+                        {edu.city} | {edu.startDate} - {edu.endDate}
+                    </h6>
 
                     {viewType === "list" ? (
                         <ul style={style?.education?.list}>
-                            {edu.description?.map((point, i) => (
+                            {edu.description?.map((item, i) => (
                                 <li
-                                    key={point.id || i}
-                                    data-id={point.id}
+                                    key={item.id || i}
+                                    data-id={item.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
-                                    onBlur={(e) => handleDescBlur(index, i, e)}
+                                    onBlur={(e) => handleDescriptionBlur(index, i, e)}
                                     style={style?.education?.listItem}
-                                    dangerouslySetInnerHTML={{ __html: point.text }}
+                                    dangerouslySetInnerHTML={{ __html: item.text }}
                                 />
                             ))}
                         </ul>
                     ) : (
-                        <div style={{ paddingLeft: "0.75rem", color: "red" }}>
-                            {edu.description?.map((point, i) => (
+                        <div style={style?.education?.paragraphWrapper}>
+                            {edu.description?.map((item, i) => (
                                 <p
-                                    key={point.id || i}
-                                    data-id={point.id}
+                                    key={item.id || i}
+                                    data-id={item.id}
                                     contentEditable={editMode}
                                     suppressContentEditableWarning
-                                    onBlur={(e) => handleDescBlur(index, i, e)}
-                                    style={style?.education?.listItem}
-                                    dangerouslySetInnerHTML={{ __html: point.text }}
+                                    onBlur={(e) => handleDescriptionBlur(index, i, e)}
+                                    style={style?.education?.content}
+                                    dangerouslySetInnerHTML={{ __html: item.text }}
                                 />
                             ))}
                         </div>
                     )}
                 </div>
             ))}
+
             <InlineToolbar editMode={editMode} containerRef={educationRef} sectionName="education" />
         </div>
     );

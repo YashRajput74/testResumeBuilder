@@ -37,7 +37,7 @@ export default function Summary() {
                     ))}
                 </ul>
             ) : (
-                <div>
+                <div style={style?.summary?.eachSummary}>
                     {data.summary.map((item, index) => (
                         <p
                             key={item.id || index}
@@ -45,7 +45,7 @@ export default function Summary() {
                             contentEditable={editMode}
                             suppressContentEditableWarning={true}
                             onBlur={(e) => handleDescBlur(index, e)}
-                            style={{ ...style?.summary?.content, outline: "none" }}
+                            style={style?.summary?.content}
                             dangerouslySetInnerHTML={{ __html: item.text }}
                         />
                     ))}
