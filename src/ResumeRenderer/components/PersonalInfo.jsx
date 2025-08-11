@@ -1,53 +1,88 @@
-
-
+import { useRef } from "react";
 import { useResume } from "../../context/ResumeContext";
+import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function PersonalInfo() {
-  const { data, style, editMode, updateField } = useResume();
+    const { data, style, editMode, updateField, viewTypes } = useResume();
+    const personalRef = useRef();
+    const viewType = viewTypes?.personalInfo || "block";
 
-  const handleBlur = (field, e) => {
-    const value = e.target.innerHTML.trim();
-    updateField(null, field, value); 
-  };
+    const handleFieldBlur = (field, e) => {
+        const value = e.target.innerHTML.trim();
+        updateField(null, field, value);
+    };
 
-  return (
-    <div className="personalInfo resumesection" style={style?.personalInfo?.box}>
-      <h1
-        style={style?.personalInfo?.name}
-      >
-        <span
-          contentEditable={editMode}
-          suppressContentEditableWarning
-          onBlur={(e) => handleBlur("firstName", e)}
-          dangerouslySetInnerHTML={{__html : data.firstName}}
+    const handleSummaryBlur = (index, e) => {
+        const newText = e.target.innerHTML.trim();
+        const updated = [...data.summary];
+        updated[index] = { ...updated[index], text: newText };
+        updateField("summary", null, updated); // updating shared summary array
+    };
+
+    return (
+        <div
+            className="personalInfo resumeSection"
+            ref={personalRef}
+            style={{ ...style?.personalInfo?.box, position: "relative" }}
         >
-        </span>{" "}
-        <span
-          contentEditable={editMode}
-          suppressContentEditableWarning
-          onBlur={(e) => handleBlur("lastName", e)}
-           dangerouslySetInnerHTML={{__html : data.lastName}}
-        >
-        </span>
-      </h1>
+            <div style={style?.personalInfo?.name}>
+                <div
+                    contentEditable={editMode}
+                    suppressContentEditableWarning
+                    onBlur={(e) => handleFieldBlur("firstName", e)}
+                    dangerouslySetInnerHTML={{ __html: data.firstName }}
+                />{" "}
+                <div
+                    contentEditable={editMode}
+                    suppressContentEditableWarning
+                    onBlur={(e) => handleFieldBlur("lastName", e)}
+                    dangerouslySetInnerHTML={{ __html: data.lastName }}
+                />
+            </div>
 
-      <h3
-        contentEditable={editMode}
-        suppressContentEditableWarning
-        onBlur={(e) => handleBlur("position", e)}
-        style={style?.personalInfo?.position}
-         dangerouslySetInnerHTML={{__html : data.position}}
-      >
-      </h3>
+            <div
+                contentEditable={editMode}
+                suppressContentEditableWarning
+                onBlur={(e) => handleFieldBlur("position", e)}
+                style={style?.personalInfo?.position}
+                dangerouslySetInnerHTML={{ __html: data.position }}
+            />
 
-      <p
-        contentEditable={editMode}
-        suppressContentEditableWarning
-        onBlur={(e) => handleBlur("summary", e)}
-        style={style?.personalInfo?.summary}
-         dangerouslySetInnerHTML={{__html : data.summary}}
-      >
-      </p>
-    </div>
-  );
+            {viewType === "list" ? (
+                <ul style={style?.personalInfo?.list}>
+                    {data.summary.map((item, index) => (
+                        <li
+                            key={item.id || index}
+                            data-id={item.id}
+                            contentEditable={editMode}
+                            suppressContentEditableWarning
+                            onBlur={(e) => handleSummaryBlur(index, e)}
+                            style={style?.personalInfo?.listItem}
+                            dangerouslySetInnerHTML={{ __html: item.text }}
+                        />
+                    ))}
+                </ul>
+            ) : (
+                <div>
+                    {data.summary.map((item, index) => (
+                        <p
+                            key={item.id || index}
+                            data-id={item.id}
+                            contentEditable={editMode}
+                            suppressContentEditableWarning
+                            onBlur={(e) => handleSummaryBlur(index, e)}
+                            style={{ ...style?.personalInfo?.summary, outline: "none" }}
+                            dangerouslySetInnerHTML={{ __html: item.text }}
+                        />
+                    ))}
+                </div>
+            )}
+
+            <InlineToolbar
+                editMode={editMode}
+                containerRef={personalRef}
+                sectionName="personalInfo"
+            />
+        </div>
+    );
 }
