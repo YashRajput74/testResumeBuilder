@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../supabaseClient";
+import ProfilePage from "../../Pages/Profilepage";
 
 export default function AuthPage() {
     const [email, setEmail] = useState("");
