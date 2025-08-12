@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { useResume } from "../../context/ResumeContext";
 import EntryControls from "./EntryControls";
 
+const SECTION_TO_VIEW_KEY_MAP = {
+    summary: "personalInfo",
+};
+
 export default function InlineToolbar({ editMode, containerRef, sectionName }) {
     const { style, viewTypes, setViewTypes } = useResume();
 
@@ -88,11 +92,15 @@ export default function InlineToolbar({ editMode, containerRef, sectionName }) {
 
     const toggleViewType = () => {
         if (!sectionName) return;
+
+        const viewKey = SECTION_TO_VIEW_KEY_MAP[sectionName] || sectionName;
+
         setViewTypes((prev) => ({
             ...prev,
-            [sectionName]: prev[sectionName] === "list" ? "block" : "list",
+            [viewKey]: prev[viewKey] === "list" ? "block" : "list",
         }));
     };
+
 
     if (!visible || !editMode) return null;
 
