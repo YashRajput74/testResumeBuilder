@@ -61,17 +61,21 @@ export default function LayoutEditorModal({ isOpen, onClose }) {
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    if (isOpen) {
-      const copy = JSON.parse(JSON.stringify(originalGridAreas));
-      const allowedNames = ["leftColumn", "rightColumn"];
-      const filtered = copy.filter((a) => allowedNames.includes(a.name));
+    if (!isOpen) return;
 
-      const used = filtered.flatMap((a) => a.sections);
-      const unused = allSections.filter((s) => !used.includes(s));
+    const copy = JSON.parse(JSON.stringify(originalGridAreas));
+    const allowedNames = ["leftColumn", "rightColumn"];
+    const filtered = copy.filter((a) => allowedNames.includes(a.name));
 
-      setGridAreas([...filtered, { name: "unused", sections: unused }]);
-    }
+    const used = filtered.flatMap((a) => a.sections);
+    const unused = allSections.filter((s) => !used.includes(s));
+
+    setGridAreas((prev) => {
+      const newGrid = [...filtered, { name: "unused", sections: unused }];
+      return JSON.stringify(prev) !== JSON.stringify(newGrid) ? newGrid : prev;
+    });
   }, [isOpen]);
+
 
   if (!isOpen || !style?.layout?.grid) return null;
 
