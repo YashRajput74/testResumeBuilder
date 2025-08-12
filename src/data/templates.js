@@ -471,7 +471,7 @@ const template10 = {
           rowEnd: 2,
           colStart: 2,
           colEnd: 3,
-          sections: ["personalInfo", "education", "workExperience", "organization", "certifications", "achievements",]
+          sections: ["personalInfo", "education", "workExperience", "organizations", "certificates", "achievements",]
         }
       ]
     },

@@ -1,3 +1,4 @@
+import Organizations from "../ResumeRenderer/components/Organizations";
 import WorkExperience from "../ResumeRenderer/components/WorkExperience";
 
 const sharedStyles = {
@@ -1080,6 +1081,10 @@ const templateStyles = {
             box:{
                 display:"block"
             },
+            heading:{
+                marginBottom:"10px",
+                borderBottom:"1px solid #142c45ff"
+            }
         },
         award:{
             heading:{
@@ -1156,6 +1161,33 @@ const templateStyles = {
             },
             dates:{
                 margin:"5px"
+            }
+        },
+        organiz:{
+            heading:{
+                marginBottom:"10px",
+                borderBottom:"1px solid #142c45ff" 
+            },
+            title:{
+                marginBottom:"5px",
+            },
+            innerbox:{
+                marginBottom:"10px",
+            },
+        },
+        certificate:{
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px" 
+            },
+            title:{
+                marginBottom:"5px"
+            },
+            organiz:{
+                marginBottom:"3px"
+            },
+            eachcertificate:{
+                marginBottom:"10px"
             }
         }
     }
