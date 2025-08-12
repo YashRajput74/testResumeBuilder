@@ -3,33 +3,56 @@ import { useResume } from "../../context/ResumeContext";
 import InlineToolbar from "../../Components/shared/InlineToolbar";
 
 export default function Summary() {
-    const { data, style, updateField, editMode } = useResume();
+    const { data, style, updateField, editMode, viewTypes } = useResume();
     const summaryRef = useRef();
+    const viewType = viewTypes?.summary || "block";
 
-    const handleBlur = (e) => {
-        const newValue = e.target.innerHTML;
-        updateField("summary", null, newValue);
+    const handleDescBlur = (index, e) => {
+        const newText = e.target.innerHTML.trim();
+        const updated = [...data.summary];
+        updated[index] = { ...updated[index], text: newText };
+        updateField("summary", null, updated);
     };
 
     return (
         <div
-            className="summary"
+            className="summary resumeSection"
             ref={summaryRef}
             style={{ ...style?.summary?.box, position: "relative" }}
         >
-            <h2
-               style={style?.summary?.heading}
-            >
-                Summary
-            </h2>
-            <p
-                contentEditable={editMode}
-                suppressContentEditableWarning={true}
-                onBlur={handleBlur}
-                style={{ ...style?.summary?.content, outline: "none" }}
-                dangerouslySetInnerHTML={{ __html: data.summary }}
-            />
-            <InlineToolbar editMode={editMode} containerRef={summaryRef} />
+            <h2 style={style?.summary?.heading}>Summary</h2>
+
+            {viewType === "list" ? (
+                <ul style={style?.summary?.list}>
+                    {data.summary.map((item, index) => (
+                        <li
+                            key={item.id || index}
+                            data-id={item.id}
+                            contentEditable={editMode}
+                            suppressContentEditableWarning={true}
+                            onBlur={(e) => handleDescBlur(index, e)}
+                            style={style?.summary?.listItem}
+                            dangerouslySetInnerHTML={{ __html: item.text }}
+                        />
+                    ))}
+                </ul>
+            ) : (
+                <div style={style?.summary?.eachSummary}>
+                    {data.summary.map((item, index) => (
+                        <p
+                            key={item.id || index}
+                            data-id={item.id}
+                            contentEditable={editMode}
+                            suppressContentEditableWarning={true}
+                            onBlur={(e) => handleDescBlur(index, e)}
+                            style={style?.summary?.content}
+                            dangerouslySetInnerHTML={{ __html: item.text }}
+                        />
+                    ))}
+                </div>
+            )}
+
+            <InlineToolbar editMode={editMode} containerRef={summaryRef} sectionName="summary" />
         </div>
     );
 }

@@ -3,208 +3,393 @@
     --left-align: left;
     --basic-pixel-margin: 5px;
     --basic-black-border: 1px solid black;
+    --rel-position: relative;
+    --none: none;
 }
 
 #resume-view {
-    /* width: 210mm;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 210mm;
     height: 297mm;
-    margin: auto;
+    /* margin: auto; */
     padding: 10mm;
     box-sizing: border-box;
     display: grid;
     gap: 1rem;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* overflow-x: hidden; */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-      width: 200mm;
-  /* max-width: 210mm;  still keeps printable size on desktop */
-  height: 297mm;
-  /* margin: auto; */
-  padding: 10mm;
-  box-sizing: border-box;
-  display: grid;
-  gap: 1rem;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background: white;
+    background: white;
 }
 
 .personalInfo {
     border-bottom: var(--basic-black-border);
     text-align: var(--left-align);
+    position: var(--rel-position);
 }
 
-.personalInfo>h1 {
-    margin-bottom: var(--basic-pixel-margin);
+.personalInfo>div:nth-child(1) {
+    display: flex;
 }
 
-.personalInfo>p {
-    margin-bottom: var(--basic-pixel-margin);
+.personalInfo>div:nth-child(1)>div {
+    outline: var(--none);
+    padding-right: 2px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.personalInfo>div:nth-child(2) {
+    outline: var(--none);
+    font-size: 18px;
+}
+
+.personalInfo>div:nth-child(3)>p {
+    outline: var(--none);
+    display: inline-block;
+}
+
+.personalInfo>ul {
+    padding-left: 1.2rem;
+    display: inline-block;
+}
+
+.personalInfo>ul>li {
+    outline: var(--none);
+}
+
+.contact {
+    text-align: var(--left-align);
+    margin-bottom: var(--basic-font-size);
 }
 
 .contactList {
-    text-align: var(--left-align);
-    margin-bottom: 30px;
-}
-
-.contactList h2 {
-    text-decoration: underline;
-    margin-bottom: 10px;
+    list-style: var(--none);
 }
 
 .contactItem {
-    margin-bottom: 10px;
-    list-style: none;
+    padding-left: var(--basic-pixel-margin);
+    padding-bottom: var(--basic-pixel-margin);
 }
 
-.contactItem p {
-    margin-left: var(--basic-font-size);
-    display: inline;
+.icon-picker-popup {
+    border: var(--basic-black-border);
 }
 
-.editable-text{
-    display: inline;
+.icon-option {
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.contactItem a {
-    color: #333333;
-    margin-left: var(--basic-font-size);
+.editable-text {
     display: inline;
+    padding-left: var(--basic-pixel-margin);
+    outline: var(--none);
 }
 
 .skills {
     text-align: var(--left-align);
+    margin-bottom: var(--basic-font-size);
 }
 
-.skills h2 {
-    text-decoration: underline;
-    margin-bottom: 10px;
+.skills>h2 {
+    padding-bottom: var(--basic-pixel-margin);
+}
+
+.skills>ul {
+    display: inline-block;
+}
+
+.skills>ul>li {
+    outline: var(--none);
 }
 
 .individualSkill {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--basic-font-size);
+    justify-content: space-between;
 }
 
-.individualSkill div {
-    padding: 0.5rem;
+.individualSkill>span {
     border: var(--basic-black-border);
+    outline: var(--none);
+    padding: var(--basic-pixel-margin);
+    margin-bottom: 12px;
 }
 
-.skills ul {
-    padding-left: var(--basic-font-size);
+.strengths {
+    text-align: var(--left-align);
+    margin-bottom: var(--basic-font-size);
 }
 
-.skills ul li {
-    padding-bottom: 0.5rem;
+.eachStrength {
+    margin-bottom: var(--basic-pixel-margin);
+}
+
+.eachStrength>h3 {
+    outline: var(--none);
+}
+
+.eachStrength>ul {
+    padding-left: 1.2rem;
+}
+
+.eachStrength>ul>li {
+    outline: var(--none);
+}
+
+.eachStrength>div>p {
+    outline: var(--none);
 }
 
 .workExperience {
-    border-left: var(--basic-black-border);
-    padding-left: var(--basic-font-size);
+    margin-bottom: var(--basic-font-size);
     text-align: var(--left-align);
-    margin-bottom: 20px;
 }
 
-.workExperience h2 {
-    text-decoration: underline;
+.workExperience>h2 {
+    outline: var(--none);
 }
 
 .workPlace {
-    margin-top: var(--basic-pixel-margin);
-    margin-bottom: 10px;
+    margin-bottom: var(--basic-pixel-margin);
+    margin-left: var(--basic-pixel-margin);
 }
 
-.workExperience h4 {
-    font-weight: 600;
+.workPlace>h3 {
+    outline: var(--none);
 }
 
-.workExperience p {
-    font-style: italic;
+.workPlace>h4 {
+    outline: var(--none);
 }
 
-.workExperience ul {
+.workPlace>h6 {
+    font-size: 14px;
+    outline: var(--none);
+}
+
+.workPlace>div>p {
+    margin-left: var(--basic-pixel-margin);
+    outline: var(--none);
+}
+
+.workPlace>ul {
     padding-left: var(--basic-font-size);
-    list-style: inside;
 }
 
-.projects h2 {
-    text-decoration: underline;
+.workPlace>ul>li {
+    outline: var(--none);
 }
 
 .projects {
-    border-left: var(--basic-black-border);
-    padding-left: var(--basic-font-size);
+    margin-bottom: var(--basic-font-size);
     text-align: var(--left-align);
-    margin-bottom: 20px;
 }
 
-.icon {
-    font-size: 0.65rem;
-    margin-left: 0.5rem;
-    margin-bottom: 0.3rem;
-    vertical-align: middle;
+.projects>h2 {
+    outline: var(--none);
 }
 
 .eachProject {
-    margin-top: var(--basic-pixel-margin);
-    margin-bottom: 10px;
+    padding-left: var(--basic-pixel-margin);
 }
 
-.projects h4 {
-    font-weight: 600;
+.eachProject>h3 {
+    outline: var(--none);
 }
 
-.projects p {
-    font-style: italic;
+.eachProject>div>p {
+    outline: var(--none);
 }
 
-.projects ul {
+.eachProject>ul {
     padding-left: var(--basic-font-size);
-    list-style: inside;
 }
 
-.education h2 {
-    text-decoration: underline;
+.eachProject>ul>li {
+    outline: var(--none);
 }
 
 .education {
-    border-left: var(--basic-black-border);
-    padding-left: var(--basic-font-size);
     text-align: var(--left-align);
-    margin-bottom: 20px;
+    margin-bottom: var(--basic-font-size);
 }
 
-.school {
-    margin-top: var(--basic-pixel-margin);
-    margin-bottom: 10px;
+.education>h2 {
+    outline: var(--none);
 }
 
-.education h4 {
-    font-weight: 600;
+.educationItem>h3 {
+    outline: var(--none);
 }
 
-.education p {
-    font-style: italic;
+.educationItem>h4 {
+    outline: var(--none);
 }
 
-.education ul {
+.educationItem>h6 {
+    font-size: 14px;
+    outline: var(--none);
+}
+
+.educationItem>div>p {
+    padding-left: var(--basic-pixel-margin);
+    outline: var(--none);
+}
+
+.educationItem>ul {
     padding-left: var(--basic-font-size);
-    list-style: inside;
 }
 
-.organizations {
-    color: black;
-}
-
-.organizations h2 {
-    color: black;
+.educationItem>ul>li {
+    outline: var(--none);
 }
 
 .summary {
-    text-align: left;
+    text-align: var(--left-align);
+    margin-bottom: var(--basic-font-size);
+}
+
+.summary>ul {
+    padding-left: var(--basic-font-size);
+}
+
+.summary>ul>li {
+    outline: var(--none);
+}
+
+.summary>div>p {
+    outline: var(--none);
+    padding-left: var(--basic-pixel-margin);
+}
+
+.organizations {
+    margin-bottom: var(--basic-font-size);
+    text-align: var(--left-align);
+}
+
+.eachOrganization>h3 {
+    outline: var(--none);
+}
+
+.eachOrganization>ul {
+    padding-left: var(--basic-font-size);
+}
+
+.eachOrganization>ul>li {
+    outline: var(--none);
+}
+
+.eachOrganization>div>p {
+    outline: var(--none);
+    padding-left: var(--basic-pixel-margin);
+}
+
+.awards {
+    margin-bottom: var(--basic-font-size);
+    text-align: var(--left-align);
+}
+
+.eachAward>h3{
+    outline: var(--none);
+}
+
+.eachAward>ul{
+    padding-left: var(--basic-font-size);
+}
+
+.eachAward>ul>li{
+    outline: var(--none);
+}
+
+.eachAward>div>p{
+    outline: var(--none);
+    padding-left: var(--basic-pixel-margin);
+}
+
+.certificates{
+    text-align: var(--left-align);
+    margin-bottom: var(--basic-font-size);
+}
+
+.eachCertificate>h3{
+    outline: var(--none);
+}
+
+.eachCertificate>h4{
+    outline: var(--none);
+}
+
+.eachCertificate>h5{
+    outline: var(--none);
+    font-size: 15px;
+}
+
+.eachCertificate>ul{
+    padding-left: var(--basic-font-size);
+}
+
+.eachCertificate>ul>li{
+    outline: var(--none);
+}
+
+.eachCertificate>div>p{
+    padding-left: var(--basic-pixel-margin);
+    outline: var(--none);
+}
+
+.languages{
+    text-align: var(--left-align);
+    margin-bottom: var(--basic-font-size);
+}
+
+.languages>h2{
+    margin-bottom: var(--basic-pixel-margin);
+}
+
+.languages>ul{
+    padding-left: var(--basic-font-size);
+}
+
+.languages>ul>li{
+    outline: var(--none);
+}
+
+.languages>div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.languages>div>span {
+    border: var(--basic-black-border);
+    outline: var(--none);
+    padding: var(--basic-pixel-margin);
+    margin-bottom: 12px;
+    margin-right: 20px;
+}
+
+.achievements{
+    text-align: var(--left-align);
+    margin-bottom: var(--basic-font-size);
+}
+
+.eachAchievement>h3{
+    outline: var(--none);
+}
+
+.eachAchievement>ul{
+    padding-left: var(--basic-font-size);
+}
+
+.eachAchievement>ul>li{
+    outline: var(--none);
+}
+
+.eachAchievement>div>p{
+    outline: var(--none);
+    padding-left: var(--basic-pixel-margin);
 }
 
 .profile-card {
@@ -266,64 +451,4 @@
     border-radius: 50%;
     position: absolute;
     left: -37px;
-}
-
-
-.languages {
-    text-align: var(--left-align);
-}
-
-.languages h2 {
-    text-decoration: underline;
-    margin-bottom: 10px;
-}
-
-.individualLanguage {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--basic-font-size);
-}
-
-.individualLanguage div {
-    padding: 0.5rem;
-    border: var(--basic-black-border);
-}
-
-.languages ul {
-    padding-left: var(--basic-font-size);
-}
-
-.languages ul li {
-    padding-bottom: 0.5rem;
-}
-
-.hover-image {
-    position: relative;
-}
-
-.edit-overlay {
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 6px;
-    border-radius: 50%;
-    display: none;
-    cursor: pointer;
-}
-
-.hover-image:hover .edit-overlay {
-    display: flex;
-}
-
-.resumeSection {
-    pointer-events: auto;
-}
-
-.strengths{
-    text-align: left;
-}
-
-.certificates {
-    text-align: left;
 }
