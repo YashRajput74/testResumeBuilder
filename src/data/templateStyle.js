@@ -1,3 +1,5 @@
+import WorkExperience from "../ResumeRenderer/components/WorkExperience";
+
 const sharedStyles = {
     "2": {
         heading: {
@@ -999,18 +1001,164 @@ const templateStyles = {
             },
         }
     },
+
+    "10":{
+        avatar:{
+            card: {
+                background: "none"
+            },
+            heading:{
+                color:"#cb78f2ff",
+                display:"none"
+            },
+            position:{
+                color:"#cb78f2ff",
+                display:"none"
+            },
+            imageDiv:{
+                marginTop:"-30px",
+                marginLeft:"-20px"
+            }
+        },
+        skills:{
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px",
+                marginTop:"20px",
+                paddingBottom:"0px" 
+            },
+            eachSkillBox:{
+                border:"none",
+                background:"lightgray",
+                borderRadius:"5px",
+                color:"white"
+            }
+        },
+        achieve:{
+            box:{
+                marginTop:"20px" 
+            },
+            heading:{
+                marginBottom:"10px",
+                borderBottom:"1px solid #142c45ff"
+            },
+            innerbox:{
+                marginLeft:"5px"
+            },
+            title:{
+                marginTop:"10px",
+                marginBottom:"5px"
+            },
+        },
+        contact:{
+            box:{
+                paddingBottom:"5px", 
+            },
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px"
+            }
+        },
+        personalInfo:{
+            box:{
+                padding:"15px",
+                marginBottom:"10px", 
+                background:"#142c45ff",
+                color:"white" 
+            },
+            name:{
+                paddingBottom:"5px"
+            },
+            position:{
+                marginBottom:"8px",
+                borderBottom:"1px solid white",
+                width:"fit-content",
+                paddingRight:"10px"
+            },
+        },
+        language:{
+            box:{
+                display:"block"
+            },
+        },
+        award:{
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px"
+            },
+            innerbox:{
+                marginBottom:"10px"
+            },
+            title:{
+                marginBottom:"5px"
+            }
+        },
+        projects:{
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px"
+            },
+            title:{
+                marginBottom:"5px"
+            },
+            eachProject:{
+                marginBottom:"10px"
+            }
+        },
+        summary:{
+            box:{
+                marginTop:"10px",
+                paddingBottom:"5px" 
+            },
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px"
+            }
+        },
+        workExpe:{
+            box:{
+                marginTop:"20px" 
+            },
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px"
+            },
+            eachWorkPlace:{
+                marginBottom:"15px"
+            },
+            role:{
+                margin:"5px"
+            },
+            organization:{
+                margin:"5px 10px"
+            },
+            dates:{
+                margin:"5px 10px" 
+            },
+        },
+        education:{
+            box:{
+                marginTop:"20px" 
+            },
+            heading:{
+                marginBottom:"10px",
+                borderBottom:"1px solid #142c45ff" 
+            },
+            eachEducation:{
+                marginBottom:"15px",
+                marginLeft:"5px"
+            },
+            degree:{
+                marginBottom:"5px"
+            },
+            school:{
+                margin:"5px"
+            },
+            dates:{
+                margin:"5px"
+            }
+        }
+    }
 }
 
 export default templateStyles;
-
-
-
-
-
-
-
-
-
-
-
-
