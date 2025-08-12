@@ -13,6 +13,7 @@
     border: 1px solid #ffffff5e;
 }
 
+
 @media (max-width:769px) {
     .sidebarnav {
         display: flex;

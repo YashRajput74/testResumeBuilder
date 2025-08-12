@@ -100,7 +100,7 @@ const navItems = [
   { key: "templates", label: "Templates", icon: <BookOpen size={18} /> },
   { key: "layout", label: "Layout", icon: <Ruler size={18} /> },
   { key: "design", label: "Design & Font", icon: <Palette size={18} /> },
-  { key: "profile", label: "Profile", icon: <User size={18} /> },
+  // { key: "profile", label: "Profile", icon: <User size={18} /> },
 ];
 
 const SidebarNav = ({ active, onChange }) => {
@@ -114,7 +114,7 @@ const SidebarNav = ({ active, onChange }) => {
         setShowLayoutModal((prev) => !prev);
         setActiveModalKey((prev) => (prev === "layout" ? null : "layout"));
       } else if (itemKey === "profile") {
-        setShowProfile((prev) => !prev); // toggle profile drawer
+        setShowProfile((prev) => !prev);
         setActiveModalKey((prev) => (prev === "profile" ? null : "profile"));
       } else {
         onChange(null);
@@ -178,7 +178,6 @@ const SidebarNav = ({ active, onChange }) => {
           </div>
         ))}
 
-        {/* Layout Modal */}
         <LayoutEditorModal
           isOpen={showLayoutModal}
           onClose={() => {
@@ -188,7 +187,6 @@ const SidebarNav = ({ active, onChange }) => {
         />
       </div>
 
-      {/* ✅ Profile Drawer */}
       {showProfile && (
         <div
           style={{
