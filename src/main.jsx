@@ -6,9 +6,7 @@ import { makeServer } from './Mirage/server.js';
 
 import App from './App.jsx';
 
-if (process.env.NODE_ENV === 'development') {
   makeServer();
-}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
