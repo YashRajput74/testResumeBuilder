@@ -15,7 +15,7 @@ import Footer from "../Components/Footer/Footer";
 import Navbar from "./Navbar";
 import TemplateSidebar from "./TemplateSidebar";
 import SidebarNav from "./SidebarNav";
-import './ResumePage.css';
+import './Resumepage.css';
 import { toPng } from "html-to-image";
 
 export default function ResumePage({ onLoginClick }) {
