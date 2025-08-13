@@ -31,10 +31,10 @@ export default function Avatar() {
                 <div
                     className="profile-image hover-image"
                     style={{
-                        ...style?.avatar?.imageDiv,
                         position: "relative",
                         cursor: editMode ? "pointer" : "default",
                         border: editMode ? "2px solid white" : "none",
+                        ...style?.avatar?.imageDiv,
                     }}
                     onClick={handleImageClick}
                 >

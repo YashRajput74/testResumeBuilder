@@ -115,7 +115,10 @@ export default function ResumeRenderer({ template }) {
                 <div
                     key={area.name}
                     className={`resumeSection area-${area.name}`}
-                    style={{ gridArea: area.name }}
+                    style={{
+            gridArea: area.name,
+            ...(area.style || {}) 
+        }}
                 >
                     {area.sections.map((sectionName) => renderSection(sectionName))}
                 </div>
