@@ -113,7 +113,7 @@ const template2 = {
 
 const template3 = {
     id: 3,
-    name: "Basic Two Columns",
+    name: "Simple Tactical",
     filteredColumn: "2",
     isAvatar: "false",
     layout: {
@@ -447,7 +447,7 @@ const template9 = {
 
 const template10 = {
     id: 10,
-    name: "Example 10",
+    name: "Premium Two Columns",
     pdf: "/templates/template10.pdf",
     filteredColumn: "2",
     isAvatar: "true",
@@ -488,7 +488,7 @@ const template10 = {
 };
 const template11 = {
     id: 11,
-    name: 'Example11',
+    name: 'Executive Professional',
     pdf: "/templates/template11.pdf",
     filteredColumn: "2",
     isAvatar: "true",
@@ -546,4 +546,4 @@ const template11 = {
     }
 };
 
-export const templates = [template1, template3, template4, template6, template7, template8, template9, template10, template11];
+export const templates = [template1, template3, template7, template9, template10, template11];
