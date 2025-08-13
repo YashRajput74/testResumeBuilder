@@ -16,6 +16,7 @@ import Navbar from "./Navbar";
 import TemplateSidebar from "./TemplateSidebar";
 import SidebarNav from "./SidebarNav";
 import './ResumePage.css';
+import { toPng } from "html-to-image";
 
 export default function ResumePage({ onLoginClick }) {
     const [user, setUser] = useState(null);
@@ -62,6 +63,11 @@ export default function ResumePage({ onLoginClick }) {
 
 
     const handleDownload = async () => {
+        if (editModeFromURL) {
+            alert("Please save your resume before downloading.");
+            return;
+        }
+        
         if (!user) {
             navigate("/auth");
             return;
@@ -75,30 +81,33 @@ export default function ResumePage({ onLoginClick }) {
                 (img) =>
                     new Promise((resolve) => {
                         if (img.complete) resolve();
-                        else {
-                            img.onload = img.onerror = resolve;
-                        }
+                        else img.onload = img.onerror = resolve;
                     })
             )
         );
 
-        await new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 300)));
+        await new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 100)));
 
-        html2canvas(input, {
-            useCORS: true,
-            allowTaint: false,
-            scale: 2,
-            backgroundColor: null,
-            logging: true,
-            windowWidth: document.body.scrollWidth,
-        }).then((canvas) => {
-            const imgData = canvas.toDataURL("image/png");
+        try {
+            const dataUrl = await toPng(input, {
+                cacheBust: true,
+                backgroundColor: "#ffffff",
+                pixelRatio: 2,
+                style: {
+                    margin: 0,
+                    padding: 0,
+                    transform: 'none'
+                }
+            });
+
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-            pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+            const pdfHeight = (input.offsetHeight * pdfWidth) / input.offsetWidth;
+            pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
             pdf.save("my-resume.pdf");
-        });
+        } catch (err) {
+            console.error("Error generating PDF", err);
+        }
     };
 
 
@@ -179,7 +188,7 @@ export default function ResumePage({ onLoginClick }) {
                                 textAlign: "center",
                                 minWidth: 0,
                                 height: "120vh",
-                                position: "relative", 
+                                position: "relative",
                                 margin: "1rem 0rem 1rem 0rem"
                             }}
                             className="hide-scroll"
@@ -206,179 +215,3 @@ export default function ResumePage({ onLoginClick }) {
         </>
     );
 }
-
-// import { useParams, useNavigate, useSearchParams } from "react-router-dom";
-// import { useRef, useState, useEffect } from "react";
-// import html2canvas from "html2canvas";
-// import jsPDF from "jspdf";
-// import { supabase } from "../supabaseClient";
-// import { ResumeProvider } from "../context/ResumeContext";
-// import ResumeRenderer from "../ResumeRenderer/ResumeRenderer";
-// import SaveControls from "./SaveControl";
-// import templateStyles from "../data/templateStyle";
-// import { templates } from "../data/templates";
-// import Footer from "../Components/Footer/Footer";
-// import Navbar from "./Navbar";
-// import TemplateSidebar from "./TemplateSidebar";
-// import SidebarNav from "./SidebarNav";
-// import './ResumePage.css';
-
-// // ✅ New imports for real backend
-// // import { fetchTemplates, fetchUserData } from "../../src/api/api";
-// import { fetchTemplates, fetchUserData } from '../../src/api/api';
-
-
-// export default function ResumePage({ onLoginClick }) {
-//     const [user, setUser] = useState(null);
-//     const [selectedTemplate, setSelectedTemplate] = useState(null);
-//     const [userData, setUserData] = useState(null);
-//     const [activeNav, setActiveNav] = useState(null);
-//     const [searchParams] = useSearchParams();
-//     const { templateId } = useParams();
-//     const navigate = useNavigate();
-//     const resumeRef = useRef();
-
-//     const editModeFromURL = searchParams.get("edit") === "true";
-
-//     // ✅ Get logged-in user
-//     useEffect(() => {
-//         supabase.auth.getUser().then(({ data: { user } }) => {
-//             setUser(user);
-//         });
-//     }, []);
-
-//     // ✅ Fetch templates + user data from backend
-//     useEffect(() => {
-//         async function loadData() {
-//             const templatesData = await fetchTemplates();
-//             const found = templatesData.find((t) => t.id === Number(templateId));
-//             setSelectedTemplate(found);
-
-//             const userDataFromAPI = await fetchUserData();
-//             setUserData(userDataFromAPI);
-//         }
-//         loadData();
-//     }, [templateId]);
-
-//     const handleTemplateSwitch = (newId) => {
-//         const newTemplate = templates.find((t) => t.id === newId);
-//         if (newTemplate) setSelectedTemplate(newTemplate);
-//     };
-
-//     const handleDownload = async () => {
-//         if (!user) {
-//             navigate("/auth");
-//             return;
-//         }
-
-//         const input = resumeRef.current;
-
-//         const images = input.querySelectorAll("img");
-//         await Promise.all(
-//             Array.from(images).map(
-//                 (img) =>
-//                     new Promise((resolve) => {
-//                         if (img.complete) resolve();
-//                         else img.onload = img.onerror = resolve;
-//                     })
-//             )
-//         );
-
-//         await new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 300)));
-
-//         html2canvas(input, {
-//             useCORS: true,
-//             allowTaint: false,
-//             scale: 2,
-//             backgroundColor: null,
-//             logging: true,
-//             windowWidth: document.body.scrollWidth,
-//         }).then((canvas) => {
-//             const imgData = canvas.toDataURL("image/png");
-//             const pdf = new jsPDF("p", "mm", "a4");
-//             const pdfWidth = pdf.internal.pageSize.getWidth();
-//             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-//             pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-//             pdf.save("my-resume.pdf");
-//         });
-//     };
-
-//     if (!selectedTemplate || !userData)
-//         return <p style={{ textAlign: "center", paddingTop: "2rem" }}>Loading template...</p>;
-
-//     const dynamicStyle = {
-//         ...(templateStyles[selectedTemplate.id] || {}),
-//         layout: selectedTemplate.layout
-//     };
-
-//     const savedData = JSON.parse(localStorage.getItem("resumeData"));
-//     const resumeData = savedData || userData;
-
-//     return (
-//         <ResumeProvider
-//             key={selectedTemplate.id}
-//             initialData={resumeData}
-//             style={dynamicStyle}
-//             editModeFromURL={editModeFromURL}
-//             templateId={selectedTemplate.id}
-//         >
-//             <Navbar onDownload={handleDownload} onLoginClick={() => onLoginClick()} />
-//             <div className="templateSectionn" style={{ display: "flex", minHeight: "100vh" }}>
-//                 <div style={{ width: "220px", flexShrink: 0 }}>
-//                     <SidebarNav active={activeNav} onChange={setActiveNav} />
-//                 </div>
-
-//                 <div style={{ display: "flex", flexGrow: 1, overflow: "hidden" }}>
-//                     {activeNav === "templates" && (
-//                         <div style={{
-//                             width: "100%",
-//                             maxWidth: "500px",
-//                             minWidth: "300px",
-//                             position: "relative",
-//                             overflowY: "auto",
-//                             padding: "1rem",
-//                         }}>
-//                             <button
-//                                 onClick={() => setActiveNav(null)}
-//                                 className="close-button"
-//                                 style={{
-//                                     position: "absolute",
-//                                     top: "26px",
-//                                     right: "27px",
-//                                     background: "transparent",
-//                                     border: "none",
-//                                     fontSize: "20px",
-//                                     cursor: "pointer",
-//                                 }}
-//                             >
-//                                 ✖
-//                             </button>
-
-//                             <TemplateSidebar
-//                                 templates={templates}
-//                                 selectedTemplate={selectedTemplate}
-//                                 onTemplateSelect={handleTemplateSwitch}
-//                                 resumeData={resumeData}
-//                             />
-//                         </div>
-//                     )}
-
-//                     <div style={{
-//                         flexGrow: 1,
-//                         overflowY: "auto",
-//                         padding: "2rem",
-//                         textAlign: "center",
-//                         height: "120vh",
-//                     }}>
-//                         <SaveControls />
-//                         <div ref={resumeRef} style={{ margin: "-0.9rem auto", width: "fit-content" }}>
-//                             <ResumeRenderer template={selectedTemplate} />
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-
-//             <Footer />
-//         </ResumeProvider>
-//     );
-// }
