@@ -83,7 +83,7 @@ export default function PersonalInfo() {
             <InlineToolbar
                 editMode={editMode}
                 containerRef={personalRef}
-                sectionName="personalInfo"
+                sectionName="summary"
             />
         </div>
     );

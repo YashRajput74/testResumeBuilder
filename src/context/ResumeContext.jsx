@@ -178,7 +178,7 @@ export function ResumeProvider({ children, initialData, style, editModeFromURL, 
                 });
 
                 return { ...prev, [section]: updated };
-            } 
+            }
             else {
                 const currentSection = prev[section];
                 const index = currentSection.findIndex((entry) => entry.id === id);
