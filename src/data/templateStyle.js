@@ -1028,11 +1028,15 @@ const templateStyles = {
                 marginTop:"20px",
                 paddingBottom:"0px" 
             },
+            everySkillBox:{
+                justifyContent:"flex-start",
+            },
             eachSkillBox:{
                 border:"none",
                 background:"lightgray",
                 borderRadius:"5px",
-                color:"white"
+                color:"white",
+                marginRight:"5px"
             }
         },
         achieve:{
@@ -1176,6 +1180,242 @@ const templateStyles = {
             },
         },
         certificate:{
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px" 
+            },
+            title:{
+                marginBottom:"5px"
+            },
+            organiz:{
+                marginBottom:"3px"
+            },
+            eachcertificate:{
+                marginBottom:"10px"
+            }
+        }
+    },
+
+    "11":{
+        avatar:{
+            card: {
+                background: "none",
+            },
+            heading:{
+                color:"#142c45ff",
+                marginTop:"-120px",
+                marginLeft:"60px",
+                display:"none"
+            },
+            position:{
+                color:"#142c45ff",
+                marginTop:"0px",
+                marginLeft:"60px",
+                display:"none"
+            },
+            imageDiv:{
+                marginTop:"-30px",
+                marginLeft:"-30px",
+                // border:"4px solid #142c45ff",
+                border: "3px solid white",
+                boxShadow: "0 0 0 3px #142c45ff",
+            },
+            image:{
+                borderBottom:"0px solid white",
+                borderTop:"0px solid white",
+                borderLeft:"0px solid white",
+                borderRight:"0px solid white",
+            }
+        },
+        skills:{
+            box:{
+                backgroundColor:"inherit",
+                 marginTop:"40px" 
+            },
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px",
+                marginTop:"20px",
+                paddingBottom:"0px" 
+            },
+            everySkillBox:{
+                justifyContent:"flex-start"
+            },
+            eachSkillBox:{
+                border:"none",
+                background:"gray",
+                borderRadius:"5px",
+                color:"white",
+                marginRight:"10px"
+            }
+        },
+        achieve:{
+            box:{
+                marginTop:"40px" 
+            },
+            heading:{
+                marginBottom:"10px",
+                borderBottom:"1px solid #142c45ff"
+            },
+            innerbox:{
+                marginLeft:"5px"
+            },
+            title:{
+                marginTop:"10px",
+                marginBottom:"5px"
+            },
+        },
+        contact:{
+            box:{
+                padding:"10px",
+                background:"#142c45ff",
+                color:"white",
+                borderRadius:"8px",  
+            },
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px",
+                display:"none"
+            },
+            listItem:{
+                padding:"5px"
+            }
+        },
+        personalInfo:{
+            box:{
+                // padding:"15px",
+                marginBottom:"10px", 
+                // background:"#142c45ff",
+                color:"#142c45ff",
+                marginTop:"-140px",
+                marginLeft:"120px"
+                // position:"absolute",
+                // top:"7.4%",
+                // left:"25%"  
+            },
+            name:{
+                paddingBottom:"5px"
+            },
+            position:{
+                marginBottom:"8px",
+                borderBottom:"1px solid white",
+                width:"fit-content",
+                paddingRight:"10px",
+                overFlow:"auto"
+            },
+        },
+        language:{
+            box:{
+                display:"block",
+                marginTop:"40px" 
+            },
+            heading:{
+                marginBottom:"10px",
+                borderBottom:"1px solid #142c45ff"
+            }
+        },
+        award:{
+            box:{
+                 marginTop:"40px" 
+            },
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px"
+            },
+            innerbox:{
+                marginBottom:"10px"
+            },
+            title:{
+                marginBottom:"5px"
+            }
+        },
+        projects:{
+            box:{
+                 marginTop:"40px" 
+            },
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px"
+            },
+            title:{
+                marginBottom:"5px"
+            },
+            eachProject:{
+                marginBottom:"10px"
+            }
+        },
+        summary:{
+            box:{
+                marginTop:"40px" ,
+                paddingBottom:"5px" 
+            },
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px"
+            }
+        },
+        workExpe:{
+            box:{
+                marginTop:"40px" 
+            },
+            heading:{
+                borderBottom:"1px solid #142c45ff",
+                marginBottom:"10px"
+            },
+            eachWorkPlace:{
+                marginBottom:"15px"
+            },
+            role:{
+                margin:"5px"
+            },
+            organization:{
+                margin:"5px 10px"
+            },
+            dates:{
+                margin:"5px 10px" 
+            },
+        },
+        education:{
+            box:{
+                marginTop:"40px" 
+            },
+            heading:{
+                marginBottom:"10px",
+                borderBottom:"1px solid #142c45ff" 
+            },
+            eachEducation:{
+                marginBottom:"15px",
+                marginLeft:"5px"
+            },
+            degree:{
+                marginBottom:"5px"
+            },
+            school:{
+                margin:"5px"
+            },
+            dates:{
+                margin:"5px"
+            }
+        },
+        organiz:{
+            box:{
+                 marginTop:"40px" 
+            },
+            heading:{
+                marginBottom:"10px",
+                borderBottom:"1px solid #142c45ff" 
+            },
+            title:{
+                marginBottom:"5px",
+            },
+            innerbox:{
+                marginBottom:"10px",
+            },
+        },
+        certificate:{
+            box:{
+                 marginTop:"40px" 
+            },
             heading:{
                 borderBottom:"1px solid #142c45ff",
                 marginBottom:"10px" 
