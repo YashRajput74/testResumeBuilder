@@ -1,6 +1,3 @@
-import Organizations from "../ResumeRenderer/components/Organizations";
-import WorkExperience from "../ResumeRenderer/components/WorkExperience";
-
 const sharedStyles = {
     "2": {
         heading: {
@@ -203,6 +200,9 @@ const templateStyles = {
             anchor: {
                 marginLeft: "5px",
                 color: "var(--content-color)"
+            },
+            addIcon:{
+                height: "40px"
             }
         },
         summary: {
@@ -769,7 +769,6 @@ const templateStyles = {
             }
         },
         contact: {
-            visibleFields: ["email", "phoneNo", "address", "linkedin"],
             box: {
                 marginTop: '2rem',
             },
@@ -884,11 +883,11 @@ const templateStyles = {
                 marginBottom: '2rem'
             },
             heading: {
-                ...sharedStyles["7"].heading
+                ...sharedStyles["7"].heading,
+                marginBottom: "15px"
             },
             everySkillBox: {
                 paddingLeft: '10px',
-                rowGap: '10px'
             },
             eachSkillBox: {
                 color: 'white',

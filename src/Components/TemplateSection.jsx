@@ -18,8 +18,8 @@ export default function TemplateSection({ templates }) {
         let animationId;
 
         // Duplicate content to create a seamless scroll illusion
-        const originalContent = container.innerHTML;
-        container.innerHTML += originalContent;
+        // const originalContent = container.innerHTML;
+        // container.innerHTML += originalContent;
 
         const autoScroll = () => {
             if (!isPaused) {
@@ -137,26 +137,6 @@ export default function TemplateSection({ templates }) {
                         <p style={{ textAlign: 'center', fontWeight: '500', padding: '0.5rem 0' }}>
                             {template.name}
                         </p>
-
-                        <button
-                            className="customizeBtn"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                navigate(`/resume/${template.id}?edit=true`);
-                            }}
-                            style={{
-                                backgroundColor: '#007bff',
-                                color: '#fff',
-                                border: 'none',
-                                padding: '0.5rem 1rem',
-                                borderRadius: '6px',
-                                margin: '0 auto 1rem',
-                                display: 'block',
-                                cursor: 'pointer',
-                            }}
-                        >
-                            Customize
-                        </button>
                     </div>
                 ))}
             </div>

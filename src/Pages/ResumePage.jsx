@@ -67,8 +67,12 @@ export default function ResumePage({ onLoginClick }) {
             alert("Please save your resume before downloading.");
             return;
         }
-        
-        if (!user) {
+
+        const {
+            data: { user: currentUser },
+        } = await supabase.auth.getUser();
+
+        if (!currentUser) {
             navigate("/auth");
             return;
         }
@@ -183,11 +187,9 @@ export default function ResumePage({ onLoginClick }) {
                         <div
                             style={{
                                 flexGrow: 1,
-                                overflowY: "auto",
                                 padding: "2rem",
                                 textAlign: "center",
                                 minWidth: 0,
-                                height: "120vh",
                                 position: "relative",
                                 margin: "1rem 0rem 1rem 0rem"
                             }}

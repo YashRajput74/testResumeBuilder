@@ -471,7 +471,7 @@ const template10 = {
                     rowEnd: 2,
                     colStart: 2,
                     colEnd: 3,
-                    sections: ["personalInfo", "education", "workExperience", "organizations", "certificates", "achievements",]
+                    sections: ["personalInfo", "education", "workExperience", "certificates",]
                 }
             ]
         },
@@ -531,7 +531,7 @@ const template11 = {
                     colStart: 2,
                     colEnd: 3,
                     style: { backgroundColor: "#142c45ff", borderRadius:"10px", color:"white", padding:"10px" },
-                    sections: ["skills", "organizations", "awards", "language"]
+                    sections: ["skills", "organizations", "awards"]
                 }
             ]
         },

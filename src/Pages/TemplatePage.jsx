@@ -55,7 +55,7 @@ export default function AllTemplatesPage() {
                 </div>
             </div>
             <p>{template.name}</p>
-            <button
+            {/* <button
                 className="customizeBtn"
                 onClick={e => {
                     e.stopPropagation();
@@ -63,7 +63,7 @@ export default function AllTemplatesPage() {
                 }}
             >
                 Customize
-            </button>
+            </button> */}
         </div>
     );
 

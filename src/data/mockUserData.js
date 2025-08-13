@@ -4,7 +4,7 @@ const rawMockUserData = {
     position: "Web Developer",
     profilePhoto: "https://media-public.canva.com/p7zgk/MAEugcp7zgk/1/t.jpg",
     summary: [
-        { id: "summary_1", text: "Jane Doe is a very good coder no one can beat him!" },
+        { id: "summary_1", text: "Web developer with five year of industry experience and a part time freelancer." },
     ],
     contact: [
         {
@@ -14,10 +14,6 @@ const rawMockUserData = {
         {
             icon: "phone",
             textShown: "+91 9876543210",
-        },
-        {
-            icon: "address",
-            textShown: "123, Park Lane, Delhi, India",
         },
         {
             icon: "portfolio",
