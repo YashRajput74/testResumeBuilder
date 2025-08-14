@@ -50,7 +50,7 @@ export default function Header({ onLoginClick }) {
     return (
         <header className="headerr">
             <Link to="/" className="logo" onClick={handleNavClick} style={{ textDecoration: "none" }}>
-                Heitech.
+                NextStepCV.
             </Link>
 
             <button

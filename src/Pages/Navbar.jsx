@@ -55,7 +55,7 @@ export default function Navbar({ onDownload, onLoginClick }) {
           onClick={() => navigate("/")}
           style={{ cursor: "pointer", fontWeight: "bold", fontSize: "1.2rem" }}
         >
-          Heitech.
+          NextStepCV.
         </div>
       </div>
 
