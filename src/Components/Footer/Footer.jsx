@@ -37,7 +37,7 @@ export default function Footer() {
                 </div>
                 <div className="link-col contact-box">
                     <h4>Contact Us</h4>
-                    <p>Email: <a href="mailto:hello@NextStepCVresume.com">hello@NextStepCVresume.com</a></p>
+                    <p>Email: <a href="mailto:hello@NextStepCVresume.com">hello@nextstepcvresume.com</a></p>
                 </div>
             </div>
 
